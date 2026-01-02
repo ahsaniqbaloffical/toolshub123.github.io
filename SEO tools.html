@@ -2,45 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Toolshub123 - Free Online Tools</title>
-  <meta name="description" content="Toolshub123 offers free SEO, finance, utility, and health tools. Optimize your content, manage finances, and track health easily.">
-  <meta name="keywords" content="SEO tools, finance calculators, utility tools, health calculators, free online tools">
+  <title>SEO Tools - Toolshub123</title>
+  <meta name="description" content="Free SEO tools including Meta Tag Analyzer, Heading Structure Checker, Robots.txt & Sitemap Tester, Alt Text Checker, and Readability & Content Score Tool.">
+  <meta name="keywords" content="SEO tools, meta tag analyzer, heading checker, sitemap tester, alt text checker, readability score">
   <meta name="author" content="Ahsan Iqbal">
-  <meta name="robots" content="index, follow">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Favicon -->
-  <link rel="icon" href="favicon.png" type="image/png">
-
-  <!-- Open Graph for social sharing -->
-  <meta property="og:title" content="Toolshub123 - Free Online Tools">
-  <meta property="og:description" content="Discover free SEO, finance, utility, and health tools. Built for professionals and everyday users.">
-  <meta property="og:url" content="https://toolshub123.com/index.html">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://toolshub123.com/logo.png">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Toolshub123 - Free Online Tools">
-  <meta name="twitter:description" content="Free SEO, finance, utility, and health tools.">
-  <meta name="twitter:image" content="https://toolshub123.com/logo.png">
-
-  <!-- Structured Data (JSON-LD) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Toolshub123",
-    "url": "https://toolshub123.com",
-    "logo": "https://toolshub123.com/logo.png",
-    "sameAs": [
-      "https://www.facebook.com/toolshub123",
-      "https://www.twitter.com/toolshub123"
-    ]
-  }
-  </script>
-
-  <!-- Fonts & Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Syne', sans-serif; margin:0; background:#F4F6F8; }
@@ -49,19 +14,12 @@
     nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:600; }
     nav a.active { color:#00BFA6; }
     .hero { text-align:center; padding:40px; }
-    .cards { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px; }
-    .card { background:#fff; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:30px; width:250px; text-align:center; }
-    .card h2 { color:#0A192F; }
-    .card a { display:inline-block; margin-top:10px; background:#00BFA6; color:#fff; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:600; }
-    .card a:hover { background:#008f7a; }
+    .container { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:30px; }
+    .tool-card { background:#fff; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:25px; width:280px; text-align:center; }
+    .tool-card h2 { color:#0A192F; margin-top:0; }
+    .tool-card a { display:inline-block; margin-top:10px; background:#00BFA6; color:#fff; padding:8px 15px; border-radius:5px; text-decoration:none; font-weight:600; }
+    .tool-card a:hover { background:#008f7a; }
     .section { max-width:900px; margin:40px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
-    .cta { text-align:center; background:#00BFA6; color:#fff; padding:40px; border-radius:10px; margin:40px auto; max-width:900px; }
-    .cta a { background:#fff; color:#00BFA6; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:600; }
-    .faq p { margin:10px 0; }
-    .newsletter input { padding:10px; width:250px; border-radius:5px; border:1px solid #ccc; margin-right:10px; }
-    .newsletter button { background:#00BFA6; color:#fff; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; }
-    .trust { display:flex; justify-content:center; gap:20px; margin-top:20px; }
-    .trust div { background:#F4F6F8; padding:15px 25px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1); font-weight:600; }
     footer { background:#0A192F; color:#fff; text-align:center; padding:20px; }
     footer a { color:#00BFA6; text-decoration:none; margin:0 10px; }
   </style>
@@ -72,8 +30,8 @@
   <header>
     <img src="logo.png" alt="Toolshub123 Logo">
     <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="SEO tools.html">SEO Tools</a>
+      <a href="index.html">Home</a>
+      <a href="SEO tools.html" class="active">SEO Tools</a>
       <a href="finance tools.html">Finance Tools</a>
       <a href="utilitytools.html">Utility Tools</a>
       <a href="health tools.html">Health Tools</a>
@@ -82,82 +40,69 @@
 
   <!-- Hero Section -->
   <div class="hero">
-    <h2>Explore Tools</h2>
-    <p>Optimize content, manage finances, improve health, and simplify tasks.</p>
+    <h1>SEO Tools</h1>
+    <p>Boost your website’s performance with free, reliable SEO tools.</p>
   </div>
 
-  <!-- Category Cards -->
-  <div class="cards">
-    <div class="card">
-      <h2>SEO Tools</h2>
-      <p>Boost rankings with free SEO tools.</p>
-      <a href="SEO tools.html">Explore SEO Tools</a>
+  <!-- Tool Cards -->
+  <div class="container">
+    <div class="tool-card">
+      <h2>Meta Tag Analyzer</h2>
+      <p>Analyze meta tags for SEO optimization.</p>
+      <a href="metatag-analyzer.html">Open Tool</a>
     </div>
-    <div class="card">
-      <h2>Finance Tools</h2>
-      <p>Simplify your finances online.</p>
-      <a href="finance tools.html">Explore Finance Tools</a>
+
+    <div class="tool-card">
+      <h2>Heading Structure Checker</h2>
+      <p>Ensure proper heading hierarchy in your HTML.</p>
+      <a href="heading-checker.html">Open Tool</a>
     </div>
-    <div class="card">
-      <h2>Utility Tools</h2>
-      <p>Everyday tools for productivity.</p>
-      <a href="utilitytools.html">Explore Utility Tools</a>
+
+    <div class="tool-card">
+      <h2>Robots.txt & Sitemap Tester</h2>
+      <p>Validate robots.txt and sitemap files.</p>
+      <a href="robots-sitemap-tester.html">Open Tool</a>
     </div>
-    <div class="card">
-      <h2>Health Tools</h2>
-      <p>Track and improve your health.</p>
-      <a href="health tools.html">Explore Health Tools</a>
+
+    <div class="tool-card">
+      <h2>Alt Text Checker</h2>
+      <p>Verify alt text usage for images.</p>
+      <a href="alttext-checker.html">Open Tool</a>
+    </div>
+
+    <div class="tool-card">
+      <h2>Readability & Content Score</h2>
+      <p>Measure readability and content quality.</p>
+      <a href="readability-score.html">Open Tool</a>
     </div>
   </div>
 
   <!-- About Section -->
   <div class="section">
-    <h2>About Toolshub123</h2>
-    <p>Toolshub123 is a free platform offering practical tools for SEO, finance, productivity, and health. Our mission is to make everyday tasks easier, faster, and more reliable for professionals, students, and individuals worldwide.</p>
+    <h2>About Our SEO Tools</h2>
+    <p>Our SEO tools are designed to help you optimize your website for search engines. From meta tags to readability scores, each tool provides instant insights to improve your site’s visibility and performance.</p>
   </div>
 
   <!-- Features Section -->
   <div class="section">
-    <h2>Why Choose Toolshub123?</h2>
+    <h2>Why Use Toolshub123 SEO Tools?</h2>
     <ul>
-      <li>✔ Free and easy-to-use tools</li>
+      <li>✔ Free and easy-to-use</li>
+      <li>✔ Instant results in your browser</li>
+      <li>✔ Covers all essential SEO checks</li>
       <li>✔ No sign-up required</li>
-      <li>✔ Covers SEO, finance, utility, and health needs</li>
-      <li>✔ Clean, modern design for quick access</li>
     </ul>
-    <div class="trust">
-      <div>100% Free</div>
-      <div>No Sign-Up</div>
-      <div>Secure & Reliable</div>
-    </div>
   </div>
 
   <!-- Testimonials Section -->
   <div class="section">
     <h2>What Users Say</h2>
-    <p>"Toolshub123 helped me analyze my website’s SEO in seconds!" — Digital Marketer</p>
-    <p>"The savings calculator keeps me motivated to reach my financial goals." — Student</p>
-    <p>"Simple, fast, and reliable tools I use every day." — Freelancer</p>
+    <p>"The Meta Tag Analyzer gave me quick insights to improve my site." — Blogger</p>
+    <p>"Heading Structure Checker helped me fix accessibility issues." — Web Developer</p>
+    <p>"Simple, fast, and reliable SEO tools I use daily." — SEO Specialist</p>
   </div>
 
-  <!-- Call to Action Section -->
-  <div class="cta">
-    <h2>Start Using Free Tools Today</h2>
-    <p>No sign-up required — just click and go!</p>
-    <a href="SEO tools.html">Get Started</a>
-  </div>
-
-  <!-- FAQ Section -->
-  <div class="section faq">
-    <h2>Frequently Asked Questions</h2>
-    <p><strong>Do I need to register?</strong> No, all tools are free and open.</p>
-    <p><strong>Are these tools safe?</strong> Yes, they run directly in your browser.</p>
-    <p><strong>Can I suggest a new tool?</strong> Absolutely — contact us via the About page.</p>
-    <p><strong>Do the tools store my data?</strong> No, everything runs client-side and we don’t save inputs.</p>
-    <p><strong>Will more tools be added?</strong> Yes, we’re actively adding new tools across SEO, finance, utility, and health.</p>
-  </div>
-
-  <!-- Footer (exact block you want on every page) -->
+  <!-- Footer -->
   <footer>
     <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
     <p>
