@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://toolshub123.com/sitemap.xml
