@@ -6,24 +6,34 @@
   <meta name="description" content="Read articles and guides on SEO, finance, productivity, and health.">
   <meta name="author" content="Ahsan Iqbal">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
   <link rel="icon" href="favicon.png" type="image/png">
+
+  <!-- Fonts & Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body { font-family:'Syne',sans-serif; margin:0; background:#F4F6F8; }
-    header, footer { background:#0A192F; color:#fff; padding:20px 40px; text-align:center; }
+    header { background:#0A192F; color:#fff; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; }
+    header img { max-height:80px; }
     nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:600; }
     nav a.active { color:#00BFA6; }
     .hero { text-align:center; padding:40px; }
     .section { max-width:900px; margin:40px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
-    .post { margin-bottom:20px; }
+    .post { margin-bottom:30px; }
     .post h2 { margin:0; color:#0A192F; }
     .post p { margin:10px 0; }
+    .readmore { display:inline-block; margin-top:10px; background:#00BFA6; color:#fff; padding:8px 16px; border-radius:5px; text-decoration:none; font-weight:600; }
+    .readmore:hover { background:#008f7a; }
+    footer { background:#0A192F; color:#fff; text-align:center; padding:20px; }
     footer a { color:#00BFA6; text-decoration:none; margin:0 10px; }
   </style>
 </head>
 <body>
+
+  <!-- Header -->
   <header>
-    <img src="logo.png" alt="Toolshub123 Logo" style="max-height:80px;">
+    <img src="logo.png" alt="Toolshub123 Logo">
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
@@ -31,3 +41,50 @@
       <a href="blog.html" class="active">Blog</a>
       <a href="faq.html">FAQ</a>
     </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>Toolshub123 Blog</h1>
+    <p>Insights, tips, and guides on SEO, finance, productivity, and health.</p>
+  </div>
+
+  <!-- Blog Posts Section -->
+  <div class="section">
+    <div class="post">
+      <h2>Top 5 SEO Mistakes to Avoid</h2>
+      <p>Learn the most common SEO mistakes beginners make and how to fix them for better rankings.</p>
+      <a href="#" class="readmore">Read More</a>
+    </div>
+
+    <div class="post">
+      <h2>Simple Finance Hacks for Students</h2>
+      <p>Discover easy ways to manage your money, save smarter, and plan for the future.</p>
+      <a href="#" class="readmore">Read More</a>
+    </div>
+
+    <div class="post">
+      <h2>Boost Productivity with Utility Tools</h2>
+      <p>Explore how everyday online tools can save time and make your workflow smoother.</p>
+      <a href="#" class="readmore">Read More</a>
+    </div>
+
+    <div class="post">
+      <h2>Health Tracking Made Easy</h2>
+      <p>See how simple calculators can help you stay on top of your health goals.</p>
+      <a href="#" class="readmore">Read More</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
+    <p>
+      <a href="#">Privacy Policy</a> | 
+      <a href="#">Terms of Service</a> | 
+      <a href="about.html">About</a>
+    </p>
+  </footer>
+
+</body>
+</html>
