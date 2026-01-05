@@ -117,18 +117,19 @@
   <h2>Didn't find what you were looking for?</h2>
   <p>Suggest a tool and we’ll make it for you!</p>
   
-  <form style="max-width:600px; margin:20px auto; text-align:left;">
+  <!-- Formspree integration -->
+  <form action="https://formspree.io/f/mzdzoyok" method="POST" style="max-width:600px; margin:20px auto; text-align:left;">
     <label for="name">Your Name:</label><br>
     <input type="text" id="name" name="name" placeholder="Enter your name" 
-           style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:1px solid #ccc;"><br>
+           style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:1px solid #ccc;" required><br>
     
     <label for="email">Your Email:</label><br>
     <input type="email" id="email" name="email" placeholder="Enter your email" 
-           style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:1px solid #ccc;"><br>
+           style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:1px solid #ccc;" required><br>
     
     <label for="suggestion">Tool Suggestion:</label><br>
     <textarea id="suggestion" name="suggestion" rows="4" placeholder="Describe the tool you need" 
-              style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:1px solid #ccc;"></textarea><br>
+              style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:1px solid #ccc;" required></textarea><br>
     
     <button type="submit" 
             style="background:#00BFA6; color:#fff; border:none; padding:12px 25px; border-radius:5px; cursor:pointer; font-weight:600;">
@@ -196,6 +197,7 @@
 
 </body>
 </html>
+
 
 
 
