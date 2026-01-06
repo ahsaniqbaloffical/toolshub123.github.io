@@ -66,6 +66,37 @@
     <div><strong>Duplicate Tags:</strong> <span id="duplicateResult"></span></div>
     <div><strong>Heading Structure:</strong> <span id="headingResult"></span></div>
 
+    <h3>Open Graph</h3>
+    <div><strong>OG Title:</strong> <span id="ogTitleResult"></span></div>
+    <div><strong>OG Description:</strong> <span id="ogDescriptionResult"></span></div>
+    <div><strong>OG Image:</strong> <span id="ogImageResult"></span></div>
+    <div><strong>OG URL:</strong> <span id="ogUrlResult"></span></div>
+    <div><strong>OG Type:</strong> <span id="ogTypeResult"></span></div>
+    <div><strong>OG Site Name:</strong> <span id="ogSiteNameResult"></span></div>
+
+    <h3>Twitter</h3>
+    <div><strong>Twitter Card:</strong> <span id="twitterCardResult"></span></div>
+    <div><strong>Twitter Title:</strong> <span id="twitterTitleResult"></span></div>
+    <div><strong>Twitter Description:</strong> <span id="twitterDescriptionResult"></span></div>
+    <div><strong>Twitter Image:</strong> <span id="twitterImageResult"></span></div>
+    <div><strong>Twitter Site:</strong> <span id="twitterSiteResult"></span></div>
+    <div><strong>Twitter Creator:</strong> <span id="twitterCreatorResult"></span></div>
+
+    <h3>Mobile / UX</h3>
+    <div><strong>Apple Touch Icon:</strong> <span id="appleTouchIconResult"></span></div>
+    <div><strong>Theme Color:</strong> <span id="themeColorResult"></span></div>
+    <div><strong>Favicon:</strong> <span id="faviconResult"></span></div>
+
+    <h3>Technical / Security</h3>
+    <div><strong>Charset:</strong> <span id="charsetResult"></span></div>
+    <div><strong>Lang Attribute:</strong> <span id="langAttrResult"></span></div>
+    <div><strong>CSP:</strong> <span id="cspResult"></span></div>
+    <div><strong>Referrer Policy:</strong> <span id="referrerPolicyResult"></span></div>
+    <div><strong>X-UA-Compatible:</strong> <span id="xUaCompatibleResult"></span></div>
+
+    <h3>Structured Data</h3>
+    <div><strong>JSON-LD:</strong> <span id="jsonLdResult"></span></div>
+
     <h3 style="margin-top:20px;">Recommendations</h3>
     <ul id="recommendations"></ul>
   </div>
@@ -134,10 +165,8 @@ function analyzeMetaTags() {
   const h3 = doc.querySelectorAll("h3").length;
   const headingMsg = `H1: ${h1}, H2: ${h2}, H3: ${h3}`;
 
-  // Declare recs before pushing
+  // Recommendations
   let recs = [];
-
-  // Recommendations: SEO basics
   if (title === "Not found") recs.push("❌ No title tag found — add one for SEO.");
   else if (titleLength < 30) recs.push("⚠️ Title too short — aim for 30–60 characters.");
   else if (titleLength > 60) recs.push("⚠️ Title too long — keep under 60 characters.");
@@ -156,7 +185,7 @@ function analyzeMetaTags() {
   if (h1 === 0) recs.push("❌ No H1 tag found.");
   if (h1 > 1) recs.push("⚠️ Multiple H1 tags detected.");
 
-  // Recommendations: Social (OG + Twitter)
+  // Social recommendations
   if (ogTitle === "Not found") recs.push("⚠️ No Open Graph title found.");
   if (ogDescription === "Not found") recs.push("⚠️ No Open Graph description found.");
   if (ogImage === "Not found") recs.push("⚠️ No Open Graph image found.");
@@ -171,22 +200,22 @@ function analyzeMetaTags() {
   if (twitterSite === "Not found") recs.push("⚠️ No Twitter site handle found.");
   if (twitterCreator === "Not found") recs.push("⚠️ No Twitter creator handle found.");
 
-  // Recommendations: Mobile / UX
+  // Mobile / UX recommendations
   if (appleTouchIcon === "Not found") recs.push("⚠️ No Apple Touch Icon found.");
   if (themeColor === "Not found") recs.push("⚠️ No theme-color meta tag found.");
   if (favicon === "Not found") recs.push("⚠️ No favicon found.");
 
-  // Recommendations: Technical / Security
+  // Technical / Security recommendations
   if (charset === "Not found") recs.push("⚠️ No charset meta tag found.");
   if (langAttr === "Not found") recs.push("⚠️ No lang attribute on <html>.");
   if (csp === "Not found") recs.push("⚠️ No Content-Security-Policy meta tag found.");
   if (referrerPolicy === "Not found") recs.push("⚠️ No referrer policy meta tag found.");
   if (xUaCompatible === "Not found") recs.push("⚠️ No X-UA-Compatible meta tag found.");
 
-  // Recommendations: Structured data
+  // Structured data recommendations
   if (jsonLd === "Not found") recs.push("⚠️ No JSON-LD structured data found.");
 
-  // Display results
+  // Display values
   document.getElementById("titleResult").innerText = title;
   document.getElementById("titleLength").innerText = titleLength + " characters";
   document.getElementById("descriptionResult").innerText = description;
@@ -196,10 +225,36 @@ function analyzeMetaTags() {
   document.getElementById("canonicalResult").innerText = canonical;
   document.getElementById("viewportResult").innerText = viewport;
   document.getElementById("authorResult").innerText = author;
-  document.getElementById("duplicateResult").innerText = duplicateMsg;
+  document.getElementById("duplicateResult").innerText = duplicates.length ? duplicates.join("; ") : "No duplicates detected";
   document.getElementById("headingResult").innerText = headingMsg;
 
-  // Recommendations list
+  document.getElementById("ogTitleResult").innerText = ogTitle;
+  document.getElementById("ogDescriptionResult").innerText = ogDescription;
+  document.getElementById("ogImageResult").innerText = ogImage;
+  document.getElementById("ogUrlResult").innerText = ogUrl;
+  document.getElementById("ogTypeResult").innerText = ogType;
+  document.getElementById("ogSiteNameResult").innerText = ogSiteName;
+
+  document.getElementById("twitterCardResult").innerText = twitterCard;
+  document.getElementById("twitterTitleResult").innerText = twitterTitle;
+  document.getElementById("twitterDescriptionResult").innerText = twitterDescription;
+  document.getElementById("twitterImageResult").innerText = twitterImage;
+  document.getElementById("twitterSiteResult").innerText = twitterSite;
+  document.getElementById("twitterCreatorResult").innerText = twitterCreator;
+
+  document.getElementById("appleTouchIconResult").innerText = appleTouchIcon;
+  document.getElementById("themeColorResult").innerText = themeColor;
+  document.getElementById("faviconResult").innerText = favicon;
+
+  document.getElementById("charsetResult").innerText = charset;
+  document.getElementById("langAttrResult").innerText = langAttr;
+  document.getElementById("cspResult").innerText = csp;
+  document.getElementById("referrerPolicyResult").innerText = referrerPolicy;
+  document.getElementById("xUaCompatibleResult").innerText = xUaCompatible;
+
+  document.getElementById("jsonLdResult").innerText = jsonLd;
+
+  // Display recommendations
   const recList = document.getElementById("recommendations");
   recList.innerHTML = "";
   recs.forEach(r => {
@@ -282,6 +337,7 @@ function analyzeMetaTags() {
 
 </body>
 </html>
+
 
 
 
