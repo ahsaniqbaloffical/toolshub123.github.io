@@ -150,66 +150,7 @@ function analyzeMetaTags() {
   document.getElementById("results").style.display = "block";
 }
 </script>
-  <!-- download Section: Analyzer -->
-<!-- Download Report Button -->
-<button onclick="exportResults()" id="exportBtn" 
-        style="background:#0A192F; color:#fff; padding:12px 25px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px; display:none;">
-  Download Report
-</button>
-
-<script>
-function analyzeMetaTags() {
-  const input = document.getElementById("htmlInput").value;
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(input, "text/html");
-
-  // ... your existing parsing logic for title, description, etc. ...
-
-  // Show results
-  document.getElementById("results").style.display = "block";
-
-  // ✅ Make the download button appear
-  document.getElementById("exportBtn").style.display = "inline-block";
-}
-
-function exportResults() {
-  let content = "Meta Tag Analyzer Report\n\n";
-  content += "Title: " + document.getElementById("titleResult").innerText + "\n";
-  content += "Title Length: " + document.getElementById("titleLength").innerText + "\n";
-  content += "Meta Description: " + document.getElementById("descriptionResult").innerText + "\n";
-  content += "Description Length: " + document.getElementById("descriptionLength").innerText + "\n";
-  content += "Meta Keywords: " + document.getElementById("keywordsResult").innerText + "\n";
-  content += "Meta Robots: " + document.getElementById("robotsResult").innerText + "\n";
-  content += "Canonical URL: " + document.getElementById("canonicalResult").innerText + "\n";
-  content += "Viewport: " + document.getElementById("viewportResult").innerText + "\n";
-  content += "Author: " + document.getElementById("authorResult").innerText + "\n";
-  content += "Duplicate Tags: " + document.getElementById("duplicateResult").innerText + "\n";
-  content += "Heading Structure: " + document.getElementById("headingResult").innerText + "\n\n";
-
-  content += "Recommendations:\n";
-  const recItems = document.querySelectorAll("#recommendations li");
-  if (recItems.length === 0) {
-    content += "None — no issues detected.\n";
-  } else {
-    recItems.forEach((li, i) => {
-      content += (i + 1) + ". " + li.innerText + "\n";
-    });
-  }
-
-  // Create file and trigger download
-  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "meta-tag-analyzer-report.txt";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-</script>
-
-
+  
 <!-- features -->
   <div class="section">
     <h2>How It Works</h2>
@@ -247,6 +188,7 @@ function exportResults() {
 
 </body>
 </html>
+
 
 
 
