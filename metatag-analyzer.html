@@ -77,40 +77,52 @@ function analyzeMetaTags() {
   const parser = new DOMParser();
   const doc = parser.parseFromString(input, "text/html");
 
-  // Basic tags
-  const titles = doc.querySelectorAll("title");
-  const title = titles.length > 0 ? titles[0].innerText : "Not found";
-  const descriptionTags = doc.querySelectorAll("meta[name='description']");
-  const description = descriptionTags.length > 0 ? descriptionTags[0].getAttribute("content") : "Not found";
-  const keywordsTags = doc.querySelectorAll("meta[name='keywords']");
-  const keywords = keywordsTags.length > 0 ? keywordsTags[0].getAttribute("content") : "Not found";
-  const robots = doc.querySelector("meta[name='robots']") ? doc.querySelector("meta[name='robots']").getAttribute("content") : "Not found";
-  const canonical = doc.querySelector("link[rel='canonical']") ? doc.querySelector("link[rel='canonical']").getAttribute("href") : "Not found";
-  const viewport = doc.querySelector("meta[name='viewport']") ? doc.querySelector("meta[name='viewport']").getAttribute("content") : "Not found";
-  const author = doc.querySelector("meta[name='author']") ? doc.querySelector("meta[name='author']").getAttribute("content") : "Not found";
-  
-  // Extra missing tag checks
-if (keywords === "Not found") recs.push("⚠️ No meta keywords tag found — consider adding relevant keywords.");
-if (robots === "Not found") recs.push("⚠️ No robots tag found — add one to control indexing and crawling.");
-if (author === "Not found") recs.push("⚠️ No author meta tag found — useful for attribution.");
-  const ogTitle = doc.querySelector("meta[property='og:title']") ? doc.querySelector("meta[property='og:title']").getAttribute("content") : "Not found";
-const ogDescription = doc.querySelector("meta[property='og:description']") ? doc.querySelector("meta[property='og:description']").getAttribute("content") : "Not found";
-const twitterCard = doc.querySelector("meta[name='twitter:card']") ? doc.querySelector("meta[name='twitter:card']").getAttribute("content") : "Not found";
+  // Basic SEO tags
+  const title = doc.querySelector("title") ? doc.querySelector("title").innerText : "Not found";
+  const description = doc.querySelector("meta[name='description']")?.getAttribute("content") || "Not found";
+  const keywords = doc.querySelector("meta[name='keywords']")?.getAttribute("content") || "Not found";
+  const robots = doc.querySelector("meta[name='robots']")?.getAttribute("content") || "Not found";
+  const canonical = doc.querySelector("link[rel='canonical']")?.getAttribute("href") || "Not found";
+  const viewport = doc.querySelector("meta[name='viewport']")?.getAttribute("content") || "Not found";
+  const author = doc.querySelector("meta[name='author']")?.getAttribute("content") || "Not found";
 
-if (ogTitle === "Not found") recs.push("⚠️ No Open Graph title found — add for better social sharing.");
-if (ogDescription === "Not found") recs.push("⚠️ No Open Graph description found — add for better social previews.");
-if (twitterCard === "Not found") recs.push("⚠️ No Twitter Card tag found — add for optimized Twitter sharing.");
+  // Social / Open Graph tags
+  const ogTitle = doc.querySelector("meta[property='og:title']")?.getAttribute("content") || "Not found";
+  const ogDescription = doc.querySelector("meta[property='og:description']")?.getAttribute("content") || "Not found";
+  const ogImage = doc.querySelector("meta[property='og:image']")?.getAttribute("content") || "Not found";
+  const ogUrl = doc.querySelector("meta[property='og:url']")?.getAttribute("content") || "Not found";
+
+  // Twitter tags
+  const twitterCard = doc.querySelector("meta[name='twitter:card']")?.getAttribute("content") || "Not found";
+  const twitterTitle = doc.querySelector("meta[name='twitter:title']")?.getAttribute("content") || "Not found";
+  const twitterDescription = doc.querySelector("meta[name='twitter:description']")?.getAttribute("content") || "Not found";
+  const twitterImage = doc.querySelector("meta[name='twitter:image']")?.getAttribute("content") || "Not found";
+
+  // Mobile / UX tags
+  const appleTouchIcon = doc.querySelector("link[rel='apple-touch-icon']")?.getAttribute("href") || "Not found";
+  const themeColor = doc.querySelector("meta[name='theme-color']")?.getAttribute("content") || "Not found";
+  const favicon = doc.querySelector("link[rel='icon']")?.getAttribute("href") || "Not found";
+
+  // Technical / Security tags
+  const charset = doc.querySelector("meta[charset]")?.getAttribute("charset") || "Not found";
+  const langAttr = doc.documentElement.getAttribute("lang") || "Not found";
+  const csp = doc.querySelector("meta[http-equiv='Content-Security-Policy']")?.getAttribute("content") || "Not found";
+  const referrerPolicy = doc.querySelector("meta[name='referrer']")?.getAttribute("content") || "Not found";
+  const xUaCompatible = doc.querySelector("meta[http-equiv='X-UA-Compatible']")?.getAttribute("content") || "Not found";
+
+  // Structured Data
+  const jsonLd = doc.querySelector("script[type='application/ld+json']") ? "Found" : "Not found";
 
   // Length checks
   const titleLength = title !== "Not found" ? title.length : 0;
   const descriptionLength = description !== "Not found" ? description.length : 0;
 
   // Duplicate detection
-  let duplicates = [];
-  if (titles.length > 1) duplicates.push("Multiple <title> tags found");
-  if (descriptionTags.length > 1) duplicates.push("Multiple meta descriptions found");
-  if (keywordsTags.length > 1) duplicates.push("Multiple meta keywords tags found");
-  const duplicateMsg = duplicates.length > 0 ? duplicates.join("; ") : "No duplicates detected";
+  const duplicates = [];
+  if (doc.querySelectorAll("title").length > 1) duplicates.push("Multiple <title> tags found");
+  if (doc.querySelectorAll("meta[name='description']").length > 1) duplicates.push("Multiple meta descriptions found");
+  if (doc.querySelectorAll("meta[name='keywords']").length > 1) duplicates.push("Multiple meta keywords tags found");
+  const duplicateMsg = duplicates.length ? duplicates.join("; ") : "No duplicates detected";
 
   // Heading analysis
   const h1 = doc.querySelectorAll("h1").length;
@@ -128,11 +140,41 @@ if (twitterCard === "Not found") recs.push("⚠️ No Twitter Card tag found —
   else if (descriptionLength < 90) recs.push("⚠️ Description too short — aim for 90–160 characters.");
   else if (descriptionLength > 160) recs.push("⚠️ Description too long — keep under 160 characters.");
 
-  if (robots.toLowerCase().includes("noindex")) recs.push("⚠️ Robots tag set to 'noindex' — page will not appear in search results.");
-  if (canonical === "Not found") recs.push("⚠️ No canonical tag found — add one to avoid duplicate content issues.");
-  if (viewport === "Not found") recs.push("⚠️ No viewport tag — site may not be mobile-friendly.");
-  if (h1 === 0) recs.push("❌ No H1 tag found — add a primary heading.");
-  if (h1 > 1) recs.push("⚠️ Multiple H1 tags detected — use only one main heading.");
+  if (keywords === "Not found") recs.push("⚠️ No meta keywords tag found.");
+  if (robots === "Not found") recs.push("⚠️ No robots tag found.");
+  if (author === "Not found") recs.push("⚠️ No author meta tag found.");
+
+  if (robots.toLowerCase().includes("noindex")) recs.push("⚠️ Robots tag set to 'noindex'.");
+  if (canonical === "Not found") recs.push("⚠️ No canonical tag found.");
+  if (viewport === "Not found") recs.push("⚠️ No viewport tag found.");
+  if (h1 === 0) recs.push("❌ No H1 tag found.");
+  if (h1 > 1) recs.push("⚠️ Multiple H1 tags detected.");
+
+  // Social
+  if (ogTitle === "Not found") recs.push("⚠️ No Open Graph title found.");
+  if (ogDescription === "Not found") recs.push("⚠️ No Open Graph description found.");
+  if (ogImage === "Not found") recs.push("⚠️ No Open Graph image found.");
+  if (ogUrl === "Not found") recs.push("⚠️ No Open Graph URL found.");
+
+  if (twitterCard === "Not found") recs.push("⚠️ No Twitter Card tag found.");
+  if (twitterTitle === "Not found") recs.push("⚠️ No Twitter title tag found.");
+  if (twitterDescription === "Not found") recs.push("⚠️ No Twitter description tag found.");
+  if (twitterImage === "Not found") recs.push("⚠️ No Twitter image tag found.");
+
+  // Mobile / UX
+  if (appleTouchIcon === "Not found") recs.push("⚠️ No Apple Touch Icon found.");
+  if (themeColor === "Not found") recs.push("⚠️ No theme-color meta tag found.");
+  if (favicon === "Not found") recs.push("⚠️ No favicon found.");
+
+  // Technical / Security
+  if (charset === "Not found") recs.push("⚠️ No charset meta tag found.");
+  if (langAttr === "Not found") recs.push("⚠️ No lang attribute on <html>.");
+  if (csp === "Not found") recs.push("⚠️ No Content-Security-Policy meta tag found.");
+  if (referrerPolicy === "Not found") recs.push("⚠️ No referrer policy meta tag found.");
+  if (xUaCompatible === "Not found") recs.push("⚠️ No X-UA-Compatible meta tag found.");
+
+  // Structured data
+  if (jsonLd === "Not found") recs.push("⚠️ No JSON-LD structured data found.");
 
   // Display results
   document.getElementById("titleResult").innerText = title;
@@ -159,17 +201,6 @@ if (twitterCard === "Not found") recs.push("⚠️ No Twitter Card tag found —
   document.getElementById("results").style.display = "block";
 }
 </script>
-  
-<!-- features -->
-  <div class="section">
-    <h2>How It Works</h2>
-    <ul>
-      <li>✔ Paste your HTML code into the analyzer</li>
-      <li>✔ Review meta tags like title, description, keywords</li>
-      <li>✔ Identify missing or duplicate tags</li>
-      <li>✔ Improve your site’s SEO visibility</li>
-    </ul>
-  </div>
   
   <!-- FAQ Section -->
 <div class="section">
@@ -241,5 +272,6 @@ if (twitterCard === "Not found") recs.push("⚠️ No Twitter Card tag found —
 
 </body>
 </html>
+
 
 
