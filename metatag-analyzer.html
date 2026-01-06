@@ -91,12 +91,16 @@ function analyzeMetaTags() {
   const ogDescription = doc.querySelector("meta[property='og:description']")?.getAttribute("content") || "Not found";
   const ogImage = doc.querySelector("meta[property='og:image']")?.getAttribute("content") || "Not found";
   const ogUrl = doc.querySelector("meta[property='og:url']")?.getAttribute("content") || "Not found";
+  const ogType = doc.querySelector("meta[property='og:type']")?.getAttribute("content") || "Not found";
+  const ogSiteName = doc.querySelector("meta[property='og:site_name']")?.getAttribute("content") || "Not found";
 
   // Twitter tags
   const twitterCard = doc.querySelector("meta[name='twitter:card']")?.getAttribute("content") || "Not found";
   const twitterTitle = doc.querySelector("meta[name='twitter:title']")?.getAttribute("content") || "Not found";
   const twitterDescription = doc.querySelector("meta[name='twitter:description']")?.getAttribute("content") || "Not found";
   const twitterImage = doc.querySelector("meta[name='twitter:image']")?.getAttribute("content") || "Not found";
+  const twitterSite = doc.querySelector("meta[name='twitter:site']")?.getAttribute("content") || "Not found";
+  const twitterCreator = doc.querySelector("meta[name='twitter:creator']")?.getAttribute("content") || "Not found";
 
   // Mobile / UX tags
   const appleTouchIcon = doc.querySelector("link[rel='apple-touch-icon']")?.getAttribute("href") || "Not found";
@@ -130,8 +134,10 @@ function analyzeMetaTags() {
   const h3 = doc.querySelectorAll("h3").length;
   const headingMsg = `H1: ${h1}, H2: ${h2}, H3: ${h3}`;
 
-  // Recommendations
+  // Declare recs before pushing
   let recs = [];
+
+  // Recommendations: SEO basics
   if (title === "Not found") recs.push("❌ No title tag found — add one for SEO.");
   else if (titleLength < 30) recs.push("⚠️ Title too short — aim for 30–60 characters.");
   else if (titleLength > 60) recs.push("⚠️ Title too long — keep under 60 characters.");
@@ -150,30 +156,34 @@ function analyzeMetaTags() {
   if (h1 === 0) recs.push("❌ No H1 tag found.");
   if (h1 > 1) recs.push("⚠️ Multiple H1 tags detected.");
 
-  // Social
+  // Recommendations: Social (OG + Twitter)
   if (ogTitle === "Not found") recs.push("⚠️ No Open Graph title found.");
   if (ogDescription === "Not found") recs.push("⚠️ No Open Graph description found.");
   if (ogImage === "Not found") recs.push("⚠️ No Open Graph image found.");
   if (ogUrl === "Not found") recs.push("⚠️ No Open Graph URL found.");
+  if (ogType === "Not found") recs.push("⚠️ No Open Graph type found.");
+  if (ogSiteName === "Not found") recs.push("⚠️ No Open Graph site_name found.");
 
   if (twitterCard === "Not found") recs.push("⚠️ No Twitter Card tag found.");
   if (twitterTitle === "Not found") recs.push("⚠️ No Twitter title tag found.");
   if (twitterDescription === "Not found") recs.push("⚠️ No Twitter description tag found.");
   if (twitterImage === "Not found") recs.push("⚠️ No Twitter image tag found.");
+  if (twitterSite === "Not found") recs.push("⚠️ No Twitter site handle found.");
+  if (twitterCreator === "Not found") recs.push("⚠️ No Twitter creator handle found.");
 
-  // Mobile / UX
+  // Recommendations: Mobile / UX
   if (appleTouchIcon === "Not found") recs.push("⚠️ No Apple Touch Icon found.");
   if (themeColor === "Not found") recs.push("⚠️ No theme-color meta tag found.");
   if (favicon === "Not found") recs.push("⚠️ No favicon found.");
 
-  // Technical / Security
+  // Recommendations: Technical / Security
   if (charset === "Not found") recs.push("⚠️ No charset meta tag found.");
   if (langAttr === "Not found") recs.push("⚠️ No lang attribute on <html>.");
   if (csp === "Not found") recs.push("⚠️ No Content-Security-Policy meta tag found.");
   if (referrerPolicy === "Not found") recs.push("⚠️ No referrer policy meta tag found.");
   if (xUaCompatible === "Not found") recs.push("⚠️ No X-UA-Compatible meta tag found.");
 
-  // Structured data
+  // Recommendations: Structured data
   if (jsonLd === "Not found") recs.push("⚠️ No JSON-LD structured data found.");
 
   // Display results
@@ -272,6 +282,7 @@ function analyzeMetaTags() {
 
 </body>
 </html>
+
 
 
 
