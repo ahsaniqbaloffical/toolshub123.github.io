@@ -77,6 +77,8 @@ function analyzeMetaTags() {
   const input = document.getElementById("htmlInput").value;
   const parser = new DOMParser();
   const doc = parser.parseFromString(input, "text/html");
+  document.getElementById("exportBtn").style.display = "inline-block";
+
 
   // Basic tags
   const titles = doc.querySelectorAll("title");
@@ -149,13 +151,27 @@ function analyzeMetaTags() {
 }
 </script>
   <!-- download Section: Analyzer -->
-  <!-- Download Button + Script -->
+<!-- Download Report Button -->
 <button onclick="exportResults()" id="exportBtn" 
         style="background:#0A192F; color:#fff; padding:12px 25px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px; display:none;">
   Download Report
 </button>
 
 <script>
+function analyzeMetaTags() {
+  const input = document.getElementById("htmlInput").value;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(input, "text/html");
+
+  // ... your existing parsing logic for title, description, etc. ...
+
+  // Show results
+  document.getElementById("results").style.display = "block";
+
+  // ✅ Make the download button appear
+  document.getElementById("exportBtn").style.display = "inline-block";
+}
+
 function exportResults() {
   let content = "Meta Tag Analyzer Report\n\n";
   content += "Title: " + document.getElementById("titleResult").innerText + "\n";
@@ -192,6 +208,7 @@ function exportResults() {
   URL.revokeObjectURL(url);
 }
 </script>
+
 
 <!-- features -->
   <div class="section">
@@ -230,6 +247,7 @@ function exportResults() {
 
 </body>
 </html>
+
 
 
 
