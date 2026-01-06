@@ -46,6 +46,7 @@
     <p>Analyze meta tags for SEO optimization.</p>
   </div>
 <!-- Tool Section: Analyzer -->
+<!-- Tool Section: Analyzer -->
 <div class="section">
   <h2>Meta Tag Analyzer Tool</h2>
   <p>Paste your HTML code below and click "Analyze" to extract and review meta tags.</p>
@@ -54,6 +55,7 @@
 
   <div id="results" style="display:none; margin-top:20px; background:#f9f9f9; padding:20px; border-radius:10px;">
     <h3>Analysis Results</h3>
+    <!-- SEO Basics -->
     <div><strong>Title:</strong> <span id="titleResult"></span></div>
     <div><strong>Title Length:</strong> <span id="titleLength"></span></div>
     <div><strong>Meta Description:</strong> <span id="descriptionResult"></span></div>
@@ -66,6 +68,7 @@
     <div><strong>Duplicate Tags:</strong> <span id="duplicateResult"></span></div>
     <div><strong>Heading Structure:</strong> <span id="headingResult"></span></div>
 
+    <!-- Open Graph -->
     <h3>Open Graph</h3>
     <div><strong>OG Title:</strong> <span id="ogTitleResult"></span></div>
     <div><strong>OG Description:</strong> <span id="ogDescriptionResult"></span></div>
@@ -74,6 +77,7 @@
     <div><strong>OG Type:</strong> <span id="ogTypeResult"></span></div>
     <div><strong>OG Site Name:</strong> <span id="ogSiteNameResult"></span></div>
 
+    <!-- Twitter -->
     <h3>Twitter</h3>
     <div><strong>Twitter Card:</strong> <span id="twitterCardResult"></span></div>
     <div><strong>Twitter Title:</strong> <span id="twitterTitleResult"></span></div>
@@ -82,11 +86,13 @@
     <div><strong>Twitter Site:</strong> <span id="twitterSiteResult"></span></div>
     <div><strong>Twitter Creator:</strong> <span id="twitterCreatorResult"></span></div>
 
+    <!-- Mobile / UX -->
     <h3>Mobile / UX</h3>
     <div><strong>Apple Touch Icon:</strong> <span id="appleTouchIconResult"></span></div>
     <div><strong>Theme Color:</strong> <span id="themeColorResult"></span></div>
     <div><strong>Favicon:</strong> <span id="faviconResult"></span></div>
 
+    <!-- Technical / Security -->
     <h3>Technical / Security</h3>
     <div><strong>Charset:</strong> <span id="charsetResult"></span></div>
     <div><strong>Lang Attribute:</strong> <span id="langAttrResult"></span></div>
@@ -94,11 +100,15 @@
     <div><strong>Referrer Policy:</strong> <span id="referrerPolicyResult"></span></div>
     <div><strong>X-UA-Compatible:</strong> <span id="xUaCompatibleResult"></span></div>
 
+    <!-- Structured Data -->
     <h3>Structured Data</h3>
     <div><strong>JSON-LD:</strong> <span id="jsonLdResult"></span></div>
 
     <h3 style="margin-top:20px;">Recommendations</h3>
     <ul id="recommendations"></ul>
+
+    <!-- Download Button -->
+    <button onclick="downloadReport()" style="background:#007BFF; color:#fff; padding:10px 20px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Download Report (CSV)</button>
   </div>
 </div>
 
@@ -157,7 +167,6 @@ function analyzeMetaTags() {
   if (doc.querySelectorAll("title").length > 1) duplicates.push("Multiple <title> tags found");
   if (doc.querySelectorAll("meta[name='description']").length > 1) duplicates.push("Multiple meta descriptions found");
   if (doc.querySelectorAll("meta[name='keywords']").length > 1) duplicates.push("Multiple meta keywords tags found");
-  const duplicateMsg = duplicates.length ? duplicates.join("; ") : "No duplicates detected";
 
   // Heading analysis
   const h1 = doc.querySelectorAll("h1").length;
@@ -185,7 +194,7 @@ function analyzeMetaTags() {
   if (h1 === 0) recs.push("❌ No H1 tag found.");
   if (h1 > 1) recs.push("⚠️ Multiple H1 tags detected.");
 
-  // Social recommendations
+  // Social
   if (ogTitle === "Not found") recs.push("⚠️ No Open Graph title found.");
   if (ogDescription === "Not found") recs.push("⚠️ No Open Graph description found.");
   if (ogImage === "Not found") recs.push("⚠️ No Open Graph image found.");
@@ -200,19 +209,19 @@ function analyzeMetaTags() {
   if (twitterSite === "Not found") recs.push("⚠️ No Twitter site handle found.");
   if (twitterCreator === "Not found") recs.push("⚠️ No Twitter creator handle found.");
 
-  // Mobile / UX recommendations
+  // Mobile / UX
   if (appleTouchIcon === "Not found") recs.push("⚠️ No Apple Touch Icon found.");
   if (themeColor === "Not found") recs.push("⚠️ No theme-color meta tag found.");
   if (favicon === "Not found") recs.push("⚠️ No favicon found.");
 
-  // Technical / Security recommendations
+  // Technical / Security
   if (charset === "Not found") recs.push("⚠️ No charset meta tag found.");
   if (langAttr === "Not found") recs.push("⚠️ No lang attribute on <html>.");
   if (csp === "Not found") recs.push("⚠️ No Content-Security-Policy meta tag found.");
   if (referrerPolicy === "Not found") recs.push("⚠️ No referrer policy meta tag found.");
   if (xUaCompatible === "Not found") recs.push("⚠️ No X-UA-Compatible meta tag found.");
 
-  // Structured data recommendations
+  // Structured data
   if (jsonLd === "Not found") recs.push("⚠️ No JSON-LD structured data found.");
 
   // Display values
@@ -264,6 +273,77 @@ function analyzeMetaTags() {
   });
 
   document.getElementById("results").style.display = "block";
+  // Store for export
+  window.__metaReport = {
+    title, titleLength, description, descriptionLength, keywords, robots, canonical, viewport, author,
+    duplicates: duplicates.length ? duplicates.join("; ") : "No duplicates detected",
+    headingMsg,
+    ogTitle, ogDescription, ogImage, ogUrl, ogType, ogSiteName,
+    twitterCard, twitterTitle, twitterDescription, twitterImage, twitterSite, twitterCreator,
+    appleTouchIcon, themeColor, favicon,
+    charset, langAttr, csp, referrerPolicy, xUaCompatible,
+    jsonLd,
+    recommendations: recs
+  };
+}
+
+function downloadReport() {
+  const data = window.__metaReport;
+  if (!data) return alert("Analyze a page first.");
+
+  // Flatten to key, value rows
+  const rows = [
+    ["Title", data.title],
+    ["Title Length", data.titleLength],
+    ["Meta Description", data.description],
+    ["Description Length", data.descriptionLength],
+    ["Meta Keywords", data.keywords],
+    ["Meta Robots", data.robots],
+    ["Canonical URL", data.canonical],
+    ["Viewport", data.viewport],
+    ["Author", data.author],
+    ["Duplicate Tags", data.duplicates],
+    ["Heading Structure", data.headingMsg],
+    ["OG Title", data.ogTitle],
+    ["OG Description", data.ogDescription],
+    ["OG Image", data.ogImage],
+    ["OG URL", data.ogUrl],
+    ["OG Type", data.ogType],
+    ["OG Site Name", data.ogSiteName],
+    ["Twitter Card", data.twitterCard],
+    ["Twitter Title", data.twitterTitle],
+    ["Twitter Description", data.twitterDescription],
+    ["Twitter Image", data.twitterImage],
+    ["Twitter Site", data.twitterSite],
+    ["Twitter Creator", data.twitterCreator],
+    ["Apple Touch Icon", data.appleTouchIcon],
+    ["Theme Color", data.themeColor],
+    ["Favicon", data.favicon],
+    ["Charset", data.charset],
+    ["Lang Attribute", data.langAttr],
+    ["CSP", data.csp],
+    ["Referrer Policy", data.referrerPolicy],
+    ["X-UA-Compatible", data.xUaCompatible],
+    ["JSON-LD", data.jsonLd],
+    ["Recommendations", (data.recommendations || []).join(" | ")]
+  ];
+
+  const csv = "Field,Value\n" + rows.map(r =>
+    r.map(v => {
+      const s = String(v ?? "");
+      return `"${s.replace(/"/g, '""')}"`;
+    }).join(",")
+  ).join("\n");
+
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "meta-tag-analyzer-report.csv";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 </script>
   
@@ -337,6 +417,7 @@ function analyzeMetaTags() {
 
 </body>
 </html>
+
 
 
 
