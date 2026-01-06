@@ -47,6 +47,7 @@
   </div>
   
  <!-- Tool Section: Analyzer -->
+<!-- Tool Section: Analyzer -->
 <div class="section">
   <h2>Meta Tag Analyzer Tool</h2>
   <p>Paste your HTML code below and click "Analyze" to extract and review meta tags.</p>
@@ -66,6 +67,9 @@
     <div><strong>Author:</strong> <span id="authorResult"></span></div>
     <div><strong>Duplicate Tags:</strong> <span id="duplicateResult"></span></div>
     <div><strong>Heading Structure:</strong> <span id="headingResult"></span></div>
+
+    <h3 style="margin-top:20px;">Recommendations</h3>
+    <ul id="recommendations"></ul>
   </div>
 </div>
 
@@ -104,6 +108,22 @@ function analyzeMetaTags() {
   const h3 = doc.querySelectorAll("h3").length;
   const headingMsg = `H1: ${h1}, H2: ${h2}, H3: ${h3}`;
 
+  // Recommendations
+  let recs = [];
+  if (title === "Not found") recs.push("❌ No title tag found — add one for SEO.");
+  else if (titleLength < 30) recs.push("⚠️ Title too short — aim for 30–60 characters.");
+  else if (titleLength > 60) recs.push("⚠️ Title too long — keep under 60 characters.");
+
+  if (description === "Not found") recs.push("❌ No meta description found — add one for better CTR.");
+  else if (descriptionLength < 90) recs.push("⚠️ Description too short — aim for 90–160 characters.");
+  else if (descriptionLength > 160) recs.push("⚠️ Description too long — keep under 160 characters.");
+
+  if (robots.toLowerCase().includes("noindex")) recs.push("⚠️ Robots tag set to 'noindex' — page will not appear in search results.");
+  if (canonical === "Not found") recs.push("⚠️ No canonical tag found — add one to avoid duplicate content issues.");
+  if (viewport === "Not found") recs.push("⚠️ No viewport tag — site may not be mobile-friendly.");
+  if (h1 === 0) recs.push("❌ No H1 tag found — add a primary heading.");
+  if (h1 > 1) recs.push("⚠️ Multiple H1 tags detected — use only one main heading.");
+
   // Display results
   document.getElementById("titleResult").innerText = title;
   document.getElementById("titleLength").innerText = titleLength + " characters";
@@ -116,6 +136,15 @@ function analyzeMetaTags() {
   document.getElementById("authorResult").innerText = author;
   document.getElementById("duplicateResult").innerText = duplicateMsg;
   document.getElementById("headingResult").innerText = headingMsg;
+
+  // Recommendations list
+  const recList = document.getElementById("recommendations");
+  recList.innerHTML = "";
+  recs.forEach(r => {
+    const li = document.createElement("li");
+    li.innerText = r;
+    recList.appendChild(li);
+  });
 
   document.getElementById("results").style.display = "block";
 }
@@ -154,6 +183,7 @@ function analyzeMetaTags() {
 
 </body>
 </html>
+
 
 
 
