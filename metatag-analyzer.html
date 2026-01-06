@@ -45,7 +45,76 @@
     <h1>Meta Tag Analyzer</h1>
     <p>Analyze meta tags for SEO optimization.</p>
   </div>
-   <!-- Disclaimer Section --> <div class="section" style="text-align:center; background:#fff3cd; border:1px solid #ffeeba; border-radius:10px; padding:20px; margin:40px auto; max-width:900px;"> <h2 style="color:#856404;">🚀 Stay Tuned!</h2> <p>We’re constantly adding new tools to Toolshub123. Check back often for updates and fresh features!</p> </div>
+  
+     <!-- Tool Section: Analyzer -->
+  <div class="section">
+    <h2>Meta Tag Analyzer Tool</h2>
+    <p>Paste your HTML code below and click "Analyze" to extract and review meta tags.</p>
+    <textarea id="htmlInput" placeholder="Paste your HTML code here..." style="width:100%; height:200px; padding:10px; border:1px solid #ccc; border-radius:5px;"></textarea>
+    <button onclick="analyzeMetaTags()" style="background:#00BFA6; color:#fff; padding:12px 25px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Analyze</button>
+
+    <div id="results" style="display:none; margin-top:20px; background:#f9f9f9; padding:20px; border-radius:10px;">
+      <h3>Analysis Results</h3>
+      <div><strong>Title:</strong> <span id="titleResult"></span></div>
+      <div><strong>Meta Description:</strong> <span id="descriptionResult"></span></div>
+      <div><strong>Meta Keywords:</strong> <span id="keywordsResult"></span></div>
+      <div><strong>Meta Robots:</strong> <span id="robotsResult"></span></div>
+      <div><strong>Canonical URL:</strong> <span id="canonicalResult"></span></div>
+      <div><strong>Viewport:</strong> <span id="viewportResult"></span></div>
+      <div><strong>Author:</strong> <span id="authorResult"></span></div>
+      <div><strong>Open Graph Title (og:title):</strong> <span id="ogTitleResult"></span></div>
+      <div><strong>Open Graph Description (og:description):</strong> <span id="ogDescriptionResult"></span></div>
+      <div><strong>Open Graph Image (og:image):</strong> <span id="ogImageResult"></span></div>
+      <div><strong>Twitter Card:</strong> <span id="twitterCardResult"></span></div>
+      <div><strong>Twitter Title:</strong> <span id="twitterTitleResult"></span></div>
+      <div><strong>Twitter Description:</strong> <span id="twitterDescriptionResult"></span></div>
+    </div>
+  </div>
+
+  <script>
+    function analyzeMetaTags() {
+      const input = document.getElementById("htmlInput").value;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(input, "text/html");
+
+      // Basic tags
+      const title = doc.querySelector("title") ? doc.querySelector("title").innerText : "Not found";
+      const description = doc.querySelector("meta[name='description']") ? doc.querySelector("meta[name='description']").getAttribute("content") : "Not found";
+      const keywords = doc.querySelector("meta[name='keywords']") ? doc.querySelector("meta[name='keywords']").getAttribute("content") : "Not found";
+      const robots = doc.querySelector("meta[name='robots']") ? doc.querySelector("meta[name='robots']").getAttribute("content") : "Not found";
+      const canonical = doc.querySelector("link[rel='canonical']") ? doc.querySelector("link[rel='canonical']").getAttribute("href") : "Not found";
+      const viewport = doc.querySelector("meta[name='viewport']") ? doc.querySelector("meta[name='viewport']").getAttribute("content") : "Not found";
+      const author = doc.querySelector("meta[name='author']") ? doc.querySelector("meta[name='author']").getAttribute("content") : "Not found";
+
+      // Open Graph tags
+      const ogTitle = doc.querySelector("meta[property='og:title']") ? doc.querySelector("meta[property='og:title']").getAttribute("content") : "Not found";
+      const ogDescription = doc.querySelector("meta[property='og:description']") ? doc.querySelector("meta[property='og:description']").getAttribute("content") : "Not found";
+      const ogImage = doc.querySelector("meta[property='og:image']") ? doc.querySelector("meta[property='og:image']").getAttribute("content") : "Not found";
+
+      // Twitter tags
+      const twitterCard = doc.querySelector("meta[name='twitter:card']") ? doc.querySelector("meta[name='twitter:card']").getAttribute("content") : "Not found";
+      const twitterTitle = doc.querySelector("meta[name='twitter:title']") ? doc.querySelector("meta[name='twitter:title']").getAttribute("content") : "Not found";
+      const twitterDescription = doc.querySelector("meta[name='twitter:description']") ? doc.querySelector("meta[name='twitter:description']").getAttribute("content") : "Not found";
+
+      // Display results
+      document.getElementById("titleResult").innerText = title;
+      document.getElementById("descriptionResult").innerText = description;
+      document.getElementById("keywordsResult").innerText = keywords;
+      document.getElementById("robotsResult").innerText = robots;
+      document.getElementById("canonicalResult").innerText = canonical;
+      document.getElementById("viewportResult").innerText = viewport;
+      document.getElementById("authorResult").innerText = author;
+      document.getElementById("ogTitleResult").innerText = ogTitle;
+      document.getElementById("ogDescriptionResult").innerText = ogDescription;
+      document.getElementById("ogImageResult").innerText = ogImage;
+      document.getElementById("twitterCardResult").innerText = twitterCard;
+      document.getElementById("twitterTitleResult").innerText = twitterTitle;
+      document.getElementById("twitterDescriptionResult").innerText = twitterDescription;
+
+      document.getElementById("results").style.display = "block";
+    }
+  </script>
+
 
   <!-- Tool Section -->
   <div class="section">
@@ -80,6 +149,7 @@
 
 </body>
 </html>
+
 
 
 
