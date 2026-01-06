@@ -45,7 +45,6 @@
     <h1>Meta Tag Analyzer</h1>
     <p>Analyze meta tags for SEO optimization.</p>
   </div>
-  
 <!-- Tool Section: Analyzer -->
 <div class="section">
   <h2>Meta Tag Analyzer Tool</h2>
@@ -77,8 +76,6 @@ function analyzeMetaTags() {
   const input = document.getElementById("htmlInput").value;
   const parser = new DOMParser();
   const doc = parser.parseFromString(input, "text/html");
-  document.getElementById("exportBtn").style.display = "inline-block";
-
 
   // Basic tags
   const titles = doc.querySelectorAll("title");
@@ -188,22 +185,3 @@ function analyzeMetaTags() {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
