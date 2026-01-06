@@ -88,6 +88,18 @@ function analyzeMetaTags() {
   const canonical = doc.querySelector("link[rel='canonical']") ? doc.querySelector("link[rel='canonical']").getAttribute("href") : "Not found";
   const viewport = doc.querySelector("meta[name='viewport']") ? doc.querySelector("meta[name='viewport']").getAttribute("content") : "Not found";
   const author = doc.querySelector("meta[name='author']") ? doc.querySelector("meta[name='author']").getAttribute("content") : "Not found";
+  
+  // Extra missing tag checks
+if (keywords === "Not found") recs.push("⚠️ No meta keywords tag found — consider adding relevant keywords.");
+if (robots === "Not found") recs.push("⚠️ No robots tag found — add one to control indexing and crawling.");
+if (author === "Not found") recs.push("⚠️ No author meta tag found — useful for attribution.");
+  const ogTitle = doc.querySelector("meta[property='og:title']") ? doc.querySelector("meta[property='og:title']").getAttribute("content") : "Not found";
+const ogDescription = doc.querySelector("meta[property='og:description']") ? doc.querySelector("meta[property='og:description']").getAttribute("content") : "Not found";
+const twitterCard = doc.querySelector("meta[name='twitter:card']") ? doc.querySelector("meta[name='twitter:card']").getAttribute("content") : "Not found";
+
+if (ogTitle === "Not found") recs.push("⚠️ No Open Graph title found — add for better social sharing.");
+if (ogDescription === "Not found") recs.push("⚠️ No Open Graph description found — add for better social previews.");
+if (twitterCard === "Not found") recs.push("⚠️ No Twitter Card tag found — add for optimized Twitter sharing.");
 
   // Length checks
   const titleLength = title !== "Not found" ? title.length : 0;
@@ -229,4 +241,5 @@ function analyzeMetaTags() {
 
 </body>
 </html>
+
 
