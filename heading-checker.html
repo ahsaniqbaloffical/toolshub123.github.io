@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Heading Structure Checker - Toolshub123</title>
+  <title>Free Heading Structure Checker | Toolshub123</title>
   <meta name="description" content="Check heading hierarchy in your HTML for SEO and accessibility.">
-  <meta name="keywords" content="heading checker, SEO tool, Toolshub123">
+  <meta name="keywords" content="free heading checker, heading checker,free SEO tools, SEO tool,online tools, free online tools, Toolshub123">
   <meta name="author" content="Ahsan Iqbal">
   <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,13 +45,136 @@
     <h1>Heading Structure Checker</h1>
     <p>Ensure proper heading hierarchy in your HTML.</p>
   </div>
-     <!-- Disclaimer Section --> <div class="section" style="text-align:center; background:#fff3cd; border:1px solid #ffeeba; border-radius:10px; padding:20px; margin:40px auto; max-width:900px;"> <h2 style="color:#856404;">🚀 Stay Tuned!</h2> <p>We’re constantly adding new tools to Toolshub123. Check back often for updates and fresh features!</p> </div>
-  <!-- Tool Section -->
-  <div class="section">
-    <h2>About This Tool</h2>
-    <p>The Heading Structure Checker helps you verify that your HTML headings (H1–H6) are properly structured. Correct heading hierarchy improves SEO and accessibility for your website.</p>
-  </div>
+  
+ <!-- Tool Section: Heading Structure Checker -->
+<div class="section">
+  <h2>Heading Structure Checker Tool</h2>
+  <p>Paste your HTML code below and click "Check Headings" to analyze the heading hierarchy.</p>
+  <textarea id="headingInput" placeholder="Paste your HTML code here..." style="width:100%; height:200px; padding:10px; border:1px solid #ccc; border-radius:5px;"></textarea>
+  <button onclick="checkHeadings()" style="background:#00BFA6; color:#fff; padding:12px 25px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Check Headings</button>
 
+  <div id="headingResults" style="display:none; margin-top:20px; background:#f9f9f9; padding:20px; border-radius:10px;">
+    <h3>Heading Analysis Results</h3>
+    <div><strong>H1 Count:</strong> <span id="h1Count"></span></div>
+    <div><strong>H2 Count:</strong> <span id="h2Count"></span></div>
+    <div><strong>H3 Count:</strong> <span id="h3Count"></span></div>
+    <div><strong>H4 Count:</strong> <span id="h4Count"></span></div>
+    <div><strong>H5 Count:</strong> <span id="h5Count"></span></div>
+    <div><strong>H6 Count:</strong> <span id="h6Count"></span></div>
+
+    <h3 style="margin-top:20px;">Heading Outline</h3>
+    <ul id="headingOutline"></ul>
+
+    <h3 style="margin-top:20px;">Recommendations</h3>
+    <ul id="headingRecommendations"></ul>
+
+    <!-- Download Button -->
+    <button onclick="downloadHeadingReport()" style="background:#007BFF; color:#fff; padding:10px 20px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Download Report (CSV)</button>
+  </div>
+</div>
+
+<script>
+function checkHeadings() {
+  const input = document.getElementById("headingInput").value;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(input, "text/html");
+
+  // Collect headings
+  const headings = Array.from(doc.querySelectorAll("h1,h2,h3,h4,h5,h6"));
+  const counts = {h1:0,h2:0,h3:0,h4:0,h5:0,h6:0};
+  let recs = [];
+  let outlineHTML = "";
+  let seenTexts = new Set();
+
+  headings.forEach(el => {
+    const level = parseInt(el.tagName[1]);
+    const text = el.innerText.trim();
+    counts["h"+level]++;
+    outlineHTML += `<li>H${level}: ${text}</li>`;
+
+    // Duplicate detection
+    if (seenTexts.has(text.toLowerCase())) {
+      recs.push(`⚠️ Duplicate heading text found: "${text}"`);
+    }
+    seenTexts.add(text.toLowerCase());
+
+    // Length checks
+    if (text.length < 3) recs.push(`⚠️ Heading "${text}" is too short.`);
+    if (text.length > 70) recs.push(`⚠️ Heading "${text}" is too long (${text.length} characters).`);
+  });
+
+  // Skipped levels check
+  for (let i = 1; i < headings.length; i++) {
+    const prev = parseInt(headings[i-1].tagName[1]);
+    const curr = parseInt(headings[i].tagName[1]);
+    if (curr - prev > 1) {
+      recs.push(`⚠️ Skipped heading level between H${prev} and H${curr}.`);
+    }
+  }
+
+  // Basic recommendations
+  if (counts.h1 === 0) recs.push("❌ No H1 tag found — add a main heading.");
+  if (counts.h1 > 1) recs.push("⚠️ Multiple H1 tags detected — use only one main heading.");
+  if (counts.h2 === 0) recs.push("⚠️ No H2 tags found — add subheadings for structure.");
+
+  // Display counts
+  document.getElementById("h1Count").innerText = counts.h1;
+  document.getElementById("h2Count").innerText = counts.h2;
+  document.getElementById("h3Count").innerText = counts.h3;
+  document.getElementById("h4Count").innerText = counts.h4;
+  document.getElementById("h5Count").innerText = counts.h5;
+  document.getElementById("h6Count").innerText = counts.h6;
+
+  // Display outline
+  document.getElementById("headingOutline").innerHTML = outlineHTML || "<li>No headings found</li>";
+
+  // Display recommendations
+  const recList = document.getElementById("headingRecommendations");
+  recList.innerHTML = "";
+  recs.forEach(r => {
+    const li = document.createElement("li");
+    li.innerText = r;
+    recList.appendChild(li);
+  });
+
+  document.getElementById("headingResults").style.display = "block";
+
+  // Store for export
+  window.__headingReport = { counts, outline: headings.map(h => h.tagName+': '+h.innerText.trim()), recommendations: recs };
+}
+
+function downloadHeadingReport() {
+  const data = window.__headingReport;
+  if (!data) return alert("Run the checker first.");
+
+  const rows = [
+    ["H1 Count", data.counts.h1],
+    ["H2 Count", data.counts.h2],
+    ["H3 Count", data.counts.h3],
+    ["H4 Count", data.counts.h4],
+    ["H5 Count", data.counts.h5],
+    ["H6 Count", data.counts.h6],
+    ["Outline", data.outline.join(" | ")],
+    ["Recommendations", (data.recommendations || []).join(" | ")]
+  ];
+
+  const csv = "Field,Value\n" + rows.map(r =>
+    r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")
+  ).join("\n");
+
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "heading-structure-report.csv";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+
+<!-- features Section -->
   <div class="section">
     <h2>How It Works</h2>
     <ul>
@@ -61,10 +184,11 @@
       <li>✔ Improve accessibility and SEO ranking</li>
     </ul>
   </div>
-
-  <div class="section">
-    <h2>Disclaimer</h2>
-    <p>We are continuously adding new features to this tool. Stay tuned for updates!</p>
+  
+   <!-- about Section -->
+   <div class="section">
+    <h2>About This Tool</h2>
+    <p>The Heading Structure Checker helps you verify that your HTML headings (H1–H6) are properly structured. Correct heading hierarchy improves SEO and accessibility for your website.</p>
   </div>
 
   <!-- Footer -->
@@ -79,4 +203,5 @@
 
 </body>
 </html>
+
 
