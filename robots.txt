@@ -1,3 +1,15 @@
+# Toolshub123 Robots.txt
+# Allow all major search engines to crawl and index public content
+
 User-agent: *
 Allow: /
+
+# Block non-public or irrelevant directories
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /test/
+Disallow: /beta/
+
+# Point crawlers to your sitemap for full coverage
 Sitemap: https://toolshub123.com/sitemap.xml
