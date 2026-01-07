@@ -51,6 +51,11 @@
   <h2>Heading Structure Checker Tool</h2>
   <p>Paste your HTML code below and click "Check Headings" to analyze the heading hierarchy.</p>
   <textarea id="headingInput" placeholder="Paste your HTML code here..." style="width:100%; height:200px; padding:10px; border:1px solid #ccc; border-radius:5px;"></textarea>
+  
+  <!-- Keyword input -->
+  <p style="margin-top:10px;">Optional: Enter target keywords (comma separated) to check optimization:</p>
+  <input id="keywordInput" placeholder="e.g. SEO, Meta Tags, Optimization" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:5px;">
+  
   <button onclick="checkHeadings()" style="background:#00BFA6; color:#fff; padding:12px 25px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Check Headings</button>
 
   <div id="headingResults" style="display:none; margin-top:20px; background:#f9f9f9; padding:20px; border-radius:10px;">
@@ -76,6 +81,11 @@
 <script>
 function checkHeadings() {
   const input = document.getElementById("headingInput").value;
+  const keywords = document.getElementById("keywordInput").value
+    .split(",")
+    .map(k => k.trim().toLowerCase())
+    .filter(k => k.length > 0);
+
   const parser = new DOMParser();
   const doc = parser.parseFromString(input, "text/html");
 
@@ -90,17 +100,28 @@ function checkHeadings() {
     const level = parseInt(el.tagName[1]);
     const text = el.innerText.trim();
     counts["h"+level]++;
-    outlineHTML += `<li>H${level}: ${text}</li>`;
+    outlineHTML += `<li>H${level}: ${text || "(empty)"}</li>`;
+
+    // Empty heading detection
+    if (!text) recs.push(`❌ Empty heading detected (H${level}).`);
 
     // Duplicate detection
-    if (seenTexts.has(text.toLowerCase())) {
+    if (text && seenTexts.has(text.toLowerCase())) {
       recs.push(`⚠️ Duplicate heading text found: "${text}"`);
     }
-    seenTexts.add(text.toLowerCase());
+    if (text) seenTexts.add(text.toLowerCase());
 
     // Length checks
-    if (text.length < 3) recs.push(`⚠️ Heading "${text}" is too short.`);
-    if (text.length > 70) recs.push(`⚠️ Heading "${text}" is too long (${text.length} characters).`);
+    if (text && text.length < 3) recs.push(`⚠️ Heading "${text}" is too short.`);
+    if (text && text.length > 70) recs.push(`⚠️ Heading "${text}" is too long (${text.length} characters).`);
+
+    // Keyword optimization check
+    if (keywords.length > 0 && text) {
+      const containsKeyword = keywords.some(k => text.toLowerCase().includes(k));
+      if (!containsKeyword) {
+        recs.push(`⚠️ Heading "${text}" does not contain any target keywords.`);
+      }
+    }
   });
 
   // Skipped levels check
@@ -203,6 +224,7 @@ function downloadHeadingReport() {
 
 </body>
 </html>
+
 
 
 
