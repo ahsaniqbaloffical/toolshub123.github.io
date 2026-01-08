@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Robots.txt & Sitemap Tester | Toolshub123</title>
+  <meta name="description" content="Free Robots.txt & Sitemap Tester tool to validate your site's crawlability and sitemap health.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {font-family:'Syne',sans-serif;margin:0;background:#f4f6f8;color:#333;}
-    .container {max-width:900px;margin:40px auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1);}
-    h1 {text-align:center;color:#0A192F;}
+    header,footer {background:#0A192F;color:#fff;padding:15px;text-align:center;}
+    nav a {color:#fff;margin:0 10px;text-decoration:none;font-weight:600;}
+    nav a.active {color:#00BFA6;}
+    .hero {text-align:center;padding:30px;}
+    .container {max-width:900px;margin:20px auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1);}
     textarea {width:100%;height:200px;padding:10px;border:1px solid #ccc;border-radius:6px;}
-    button {margin-top:10px;padding:10px 16px;border:none;border-radius:6px;font-weight:600;cursor:pointer;}
+    button {margin:8px 5px;padding:10px 16px;border:none;border-radius:6px;font-weight:600;cursor:pointer;}
     .btn-primary {background:#00BFA6;color:#fff;}
     .btn-secondary {background:#007BFF;color:#fff;}
     table {width:100%;border-collapse:collapse;margin-top:15px;}
@@ -23,13 +27,29 @@
   </style>
 </head>
 <body>
+<header>
+  <h1>Toolshub123</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="SEO-tools.html" class="active">SEO Tools</a>
+    <a href="finance-tools.html">Finance Tools</a>
+    <a href="utility-tools.html">Utility Tools</a>
+    <a href="health-tools.html">Health Tools</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h2>Robots.txt & Sitemap Tester</h2>
+  <p>Paste your robots.txt or sitemap.xml content below to validate directives, URLs, and compliance.</p>
+</div>
+
 <div class="container">
-  <h1>Robots.txt & Sitemap Tester</h1>
-  <p>Paste your <code>robots.txt</code> or <code>sitemap.xml</code> content below:</p>
   <textarea id="inputText" placeholder="Paste robots.txt or sitemap.xml here..."></textarea>
-  <button class="btn-primary" onclick="analyzeInput()">Analyze</button>
-  <button class="btn-secondary" onclick="downloadCSV()">Download Report (CSV)</button>
-  <button onclick="copySummary()">Copy Summary</button>
+  <div>
+    <button class="btn-primary" onclick="analyzeInput()">Analyze</button>
+    <button class="btn-secondary" onclick="downloadCSV()">Download Report (CSV)</button>
+    <button onclick="copySummary()">Copy Summary</button>
+  </div>
 
   <div id="results" style="display:none;">
     <div class="summary" id="summary"></div>
@@ -40,13 +60,41 @@
   </div>
 </div>
 
+<div class="container">
+  <h2>How This Tool Works</h2>
+  <p>✔ Paste robots.txt or sitemap.xml content into the box.</p>
+  <p>✔ The tool auto‑detects type and analyzes directives or URLs.</p>
+  <p>✔ Compliance score starts at 100 and deducts for errors/warnings.</p>
+  <p>✔ Results show a summary and detailed table with status badges.</p>
+  <p>✔ Export results to CSV or copy summary for quick sharing.</p>
+</div>
+
+<div class="container">
+  <h2>FAQs</h2>
+  <ul>
+    <li><strong>Do I need both robots.txt and sitemap?</strong> Yes, robots.txt controls crawler access, sitemaps help discovery.</li>
+    <li><strong>Can I have multiple sitemaps?</strong> Yes, use a sitemap index and multiple “Sitemap:” lines.</li>
+    <li><strong>Why avoid blocking CSS/JS?</strong> Search engines render pages; blocking assets can hurt rankings.</li>
+  </ul>
+</div>
+
+<footer>
+  <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
+  <p>
+    <a href="PrivacyPolicy.html">Privacy Policy</a> | 
+    <a href="terms-of-service.html">Terms of Service</a> | 
+    <a href="about.html">About</a> | 
+    <a href="contact.html">Contact Us</a>
+  </p>
+</footer>
+
 <script>
 function analyzeInput(){
   const text=document.getElementById("inputText").value.trim();
   if(!text){alert("Paste robots.txt or sitemap.xml content.");return;}
   let errors=0,warnings=0,valid=0,urls=0,directives=0;
   const rows=[];
-  if(text.startsWith("<")){ // assume sitemap XML
+  if(text.startsWith("<")){ // sitemap XML
     const xml=new DOMParser().parseFromString(text,"application/xml");
     const locs=[...xml.getElementsByTagName("loc")];
     const lastmods=[...xml.getElementsByTagName("lastmod")];
@@ -57,7 +105,7 @@ function analyzeInput(){
       if(url){valid++;rows.push([url,"URL","Valid","valid"]);} else {errors++;rows.push(["Empty <loc>","URL","❌","error"]);}
       if(!lastmods[i]) warnings++;
     });
-  } else { // assume robots.txt
+  } else { // robots.txt
     const lines=text.split(/\r?\n/);
     lines.forEach(line=>{
       const l=line.trim(); if(!l) return;
