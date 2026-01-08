@@ -94,8 +94,8 @@ async function testRobotsSitemap() {
       const robotsText = await robotsResp.text();
       robotsStatus = "Found";
 
-      // Case-insensitive check for sitemap directive
-      if (!/sitemap:/i.test(robotsText)) {
+      // Improved case-insensitive check for sitemap directive
+      if (!robotsText.match(/sitemap\s*:/i)) {
         recs.push("⚠️ Add Sitemap directive to robots.txt.");
       }
       if (robotsText.toLowerCase().includes("crawl-delay")) {
@@ -257,6 +257,7 @@ function downloadReport() {
   </footer>
 </body>
 </html>
+
 
 
 
