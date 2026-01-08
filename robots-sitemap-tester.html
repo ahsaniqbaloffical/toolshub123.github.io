@@ -2,373 +2,128 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Free Robots.txt & Sitemap Tester | Toolshub123</title>
+  <title>Robots.txt & Sitemap Tester | Toolshub123</title>
   <meta name="description" content="Validate robots.txt and sitemap files for SEO optimization.">
-  <meta name="keywords" content="free robots.txt tester, robots.txt tester, free sitemap tester, sitemap tester, free SEO tools, SEO tools, online tools, free online tools, Toolshub123">
-  <meta name="author" content="Ahsan Iqbal">
-  <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="favicon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
-    :root {
-      --bg:#F4F6F8; --card:#FFFFFF; --primary:#00BFA6; --dark:#0A192F;
-      --text:#1f2937; --muted:#6b7280; --ok:#28a745; --warn:#ffc107; --err:#dc3545;
-    }
-    * { box-sizing:border-box; }
-    body { font-family:'Syne',sans-serif; margin:0; background:var(--bg); color:var(--text); }
-    header { background:var(--dark); color:#fff; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; }
-    header img { max-height:60px; }
-    nav a { color:#fff; margin:0 12px; text-decoration:none; font-weight:600; }
-    nav a.active { color:var(--primary); }
-    .hero { text-align:center; padding:40px 20px; }
-    .hero h1 { margin:0 0 10px; }
-    .hero p { color:var(--muted); margin:0; }
-    .section { max-width:1000px; margin:30px auto; background:var(--card); padding:28px; border-radius:12px; box-shadow:0 6px 16px rgba(0,0,0,0.08); }
-    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-    .btn { background:var(--primary); color:#fff; padding:12px 18px; border:none; border-radius:8px; font-weight:700; cursor:pointer; }
-    .btn-secondary { background:#007BFF; }
-    .input { width:100%; padding:12px; border:1px solid #ccc; border-radius:8px; }
-    .card { background:#fff; border:1px solid #e5e7eb; padding:16px; border-radius:10px; margin-top:16px; }
-    .note { background:#f9fafb; border:1px solid #e5e7eb; padding:12px; border-radius:8px; margin-top:10px; }
-    ul { list-style:none; padding-left:0; }
-    ul li { margin:6px 0; }
-    ul.checklist li::before { content:"✔ "; color:var(--primary); }
-    footer { background:var(--dark); color:#fff; text-align:center; padding:24px; margin-top:40px; }
-    footer a { color:var(--primary); text-decoration:none; margin:0 10px; }
+    body {font-family:'Syne',sans-serif;margin:0;background:#f4f6f8;color:#333;}
+    header,footer {background:#0A192F;color:#fff;padding:15px;text-align:center;}
+    nav a {color:#fff;margin:0 10px;text-decoration:none;font-weight:600;}
+    nav a.active {color:#00BFA6;}
+    .hero {text-align:center;padding:30px;}
+    .section {max-width:800px;margin:20px auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.1);}
+    input,button {padding:10px;border-radius:6px;border:1px solid #ccc;}
+    button {background:#00BFA6;color:#fff;border:none;cursor:pointer;font-weight:600;}
+    ul {padding-left:20px;}
+    canvas {margin-top:15px;}
   </style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Toolshub123 Logo">
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="SEO tools.html" class="active">SEO Tools</a>
-      <a href="finance tools.html">Finance Tools</a>
-      <a href="utilitytools.html">Utility Tools</a>
-      <a href="health tools.html">Health Tools</a>
-    </nav>
-  </header>
-  
-  <div class="hero">
-    <h1>Robots.txt & Sitemap Tester</h1>
-    <p>Validate robots.txt and sitemap files for clean crawlability and faster indexing.</p>
-    <div style="margin-top:14px;">
-      <span style="background:#eef2f7; padding:4px 10px; border-radius:999px; margin-right:6px; font-size:12px;">Free</span>
-      <span style="background:#eef2f7; padding:4px 10px; border-radius:999px; margin-right:6px; font-size:12px;">No login</span>
-      <span style="background:#eef2f7; padding:4px 10px; border-radius:999px; margin-right:6px; font-size:12px;">CSV export</span>
-    </div>
+<header>
+  <h1>Toolshub123</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="SEO tools.html" class="active">SEO Tools</a>
+    <a href="finance tools.html">Finance Tools</a>
+    <a href="utilitytools.html">Utility Tools</a>
+    <a href="health tools.html">Health Tools</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h2>Robots.txt & Sitemap Tester</h2>
+  <p>Quickly check your robots.txt and sitemap for SEO issues.</p>
+</div>
+
+<div class="section">
+  <input id="siteUrl" placeholder="https://example.com" style="width:70%">
+  <button onclick="testRobotsSitemap()">Test</button>
+
+  <div id="testResults" style="display:none;margin-top:20px;">
+    <p><strong>Robots.txt:</strong> <span id="robotsStatus"></span></p>
+    <p><strong>Sitemap:</strong> <span id="sitemapStatus"></span></p>
+    <h3>Recommendations</h3><ul id="recommendations"></ul>
+    <h3>Sitemap URL Checks</h3><ul id="urlChecks"></ul>
+    <canvas id="statusChart"></canvas>
+    <button onclick="downloadReport()">Download CSV</button>
   </div>
-  
-  <div class="section">
-    <h2>Run the test</h2>
-    <p class="muted">Enter your site URL and we’ll fetch and analyze /robots.txt and /sitemap.xml using a proxy for universal access.</p>
-    <div class="grid-2">
-      <input id="siteUrl" class="input" placeholder="https://example.com">
-      <button class="btn" onclick="testRobotsSitemap()">Test configuration</button>
-    </div>
+</div>
 
-    <div id="testResults" style="display:none; margin-top:20px;">
-      <div class="grid-2">
-        <div class="card">
-          <h3>Results</h3>
-          <div><strong>Robots.txt status:</strong> <span id="robotsStatus"></span></div>
-          <div><strong>Sitemap status:</strong> <span id="sitemapStatus"></span></div>
-        </div>
-        <div class="card">
-          <h3>Actions</h3>
-          <button class="btn btn-secondary" onclick="downloadReport()">Download report (CSV)</button>
-          <p style="color:#6b7280; margin-top:8px;">Report includes statuses, recommendations, and first 10 URL checks.</p>
-        </div>
-      </div>
+<footer>
+  <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
+</footer>
 
-      <div class="card">
-        <h3>Recommendations</h3>
-        <ul id="recommendations"></ul>
-      </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+async function testRobotsSitemap(){
+  const site=document.getElementById("siteUrl").value.trim().replace(/\/+$/,'');
+  if(!site) return alert("Enter a site URL");
+  const proxy="https://toolshub123.com/proxy.php?url=";
+  let recs=[],robotsStatus="Not found",sitemapStatus="Not found",urlChecks=[],counts={ok:0,redirect:0,error:0};
 
-      <div class="card">
-        <h3>Sitemap URL checks</h3>
-        <ul id="urlChecks"></ul>
-      </div>
-
-      <div class="card">
-        <h3>Visual dashboard</h3>
-        <canvas id="statusChart" width="400" height="200"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>What this tool checks</h2>
-    <ul class="checklist">
-      <li><strong>Robots.txt presence:</strong> Accessible and valid file returned</li>
-      <li><strong>Sitemap directive:</strong> Flexible detection of “Sitemap:” anywhere in robots.txt</li>
-      <li><strong>Blocked assets:</strong> Flags common resources like CSS/JS/images blocked by Disallow</li>
-      <li><strong>Sitemap presence:</strong> Accessible XML returned via proxy</li>
-      <li><strong>URL parsing:</strong> Namespace-safe detection of <code>&lt;loc&gt;</code> entries</li>
-      <li><strong>Quality checks:</strong> Duplicates, mixed-case URLs, redirect chains, and error statuses</li>
-      <li><strong>Export:</strong> Download a CSV report for stakeholders or audits</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Best practices</h2>
-    <div class="grid-2">
-      <div class="card">
-        <h3>Robots.txt essentials</h3>
-        <ul>
-          <li><strong>Keep it simple:</strong> Only disallow areas you truly don’t want crawled</li>
-          <li><strong>Include sitemap:</strong> Add a direct “Sitemap:” line with absolute URL</li>
-          <li><strong>Avoid crawl-delay:</strong> Rarely needed and can slow discovery</li>
-          <li><strong>Don’t block assets:</strong> CSS/JS/images are needed to render pages</li>
-        </ul>
-        <div class="note">
-          <strong>Sample robots.txt</strong>
-<pre>Sitemap: https://example.com/sitemap.xml
-
-User-agent: *
-Disallow:</pre>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Sitemap essentials</h3>
-        <ul>
-          <li><strong>Canonical URLs:</strong> Use lowercase, absolute, 200-OK URLs</li>
-          <li><strong>Keep clean:</strong> Remove redirects and non-indexable pages</li>
-          <li><strong>Split large sites:</strong> Use a sitemap index with multiple child sitemaps</li>
-          <li><strong>Update frequently:</strong> Regenerate when content changes</li>
-        </ul>
-        <div class="note">
-          <strong>Sample sitemap entry</strong>
-<pre>&lt;url&gt;
-  &lt;loc&gt;https://example.com/blog/guide&lt;/loc&gt;
-  &lt;lastmod&gt;2026-01-08&lt;/lastmod&gt;
-  &lt;changefreq&gt;weekly&lt;/changefreq&gt;
-  &lt;priority&gt;0.8&lt;/priority&gt;
-&lt;/url&gt;</pre>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>FAQs</h2>
-    <div class="grid-2">
-      <div class="card">
-        <h3>Do I need both robots.txt and sitemap?</h3>
-        <p style="color:#6b7280;">Robots.txt helps control crawler access; sitemaps help discovery. You should have both, even for small sites.</p>
-      </div>
-      <div class="card">
-        <h3>Where should I host my sitemap?</h3>
-        <p style="color:#6b7280;">At a stable public URL, usually /sitemap.xml. Add the sitemap directive in robots.txt and submit in Search Console.</p>
-      </div>
-      <div class="card">
-        <h3>Can I have multiple sitemaps?</h3>
-        <p style="color:#6b7280;">Yes. Use a sitemap index file to list child sitemaps. You can also include multiple “Sitemap:” lines in robots.txt.</p>
-      </div>
-      <div class="card">
-        <h3>Why avoid blocking CSS/JS?</h3>
-        <p style="color:#6b7280;">Search engines render pages. Blocking assets can lead to layout misinterpretation and ranking issues.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="section" style="text-align:center;">
-    <h2>Ready to validate your site?</h2>
-    <p style="color:#6b7280;">Run the tester and download the CSV report to share with your team.</p>
-    <a class="btn" href="#siteUrl" onclick="document.getElementById('siteUrl').focus()">Start testing now</a>
-  </div>
-
-  <footer>
-    <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
-    <p>
-      <a href="PrivacyPolicy.html">Privacy Policy</a> | 
-      <a href="terms of service.html">Terms of Service</a> | 
-      <a href="about.html">About</a> | 
-      <a href="contact.html">Contact us</a>
-    </p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-  async function testRobotsSitemap() {
-    const site = document.getElementById("siteUrl").value.trim();
-    if (!site) return alert("Please enter a website URL.");
-    const normalized = site.replace(/\/+$/,'');
-    const proxy = "https://toolshub123.com/proxy.php?url=";
-
-    let recs = [];
-    let robotsStatus = "Not found";
-    let sitemapStatus = "Not found";
-    let urlCheckResults = [];
-    let statusCounts = {ok:0, redirect:0, error:0};
-
-    // ROBOTS.TXT
-    try {
-      const robotsResp = await fetch(proxy + encodeURIComponent(normalized + "/robots.txt"));
-      if (robotsResp.ok) {
-        const robotsText = await robotsResp.text();
-        robotsStatus = "Found";
-
-        // Robust directive detection anywhere in file (case-insensitive)
-        if (!/sitemap\s*:/i.test(robotsText)) {
-          recs.push("⚠️ Add Sitemap directive to robots.txt.");
-        }
-
-        if (robotsText.toLowerCase().includes("crawl-delay")) {
-          recs.push("⚠️ Crawl-delay directive found — may slow indexing.");
-        }
-
-        ["favicon.ico",".css",".js",".png",".jpg",".jpeg"].forEach(res => {
-          if (robotsText.includes("Disallow: /" + res)) {
-            recs.push(`⚠️ Important resource blocked in robots.txt: ${res}`);
-          }
-        });
-      }
-    } catch {
-      recs.push("❌ Could not fetch robots.txt.");
-    }
-
-    // SITEMAP.XML
-    try {
-      const sitemapResp = await fetch(proxy + encodeURIComponent(normalized + "/sitemap.xml"));
-      if (sitemapResp.ok) {
-        const sitemapText = await sitemapResp.text();
-        sitemapStatus = "Found";
-
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(sitemapText, "application/xml");
-
-        // Namespace-safe <loc> selection with fallback
-        let urls = Array.from(xmlDoc.getElementsByTagNameNS("*","loc")).map(el => (el.textContent || "").trim());
-        if (urls.length === 0) {
-          urls = Array.from(xmlDoc.getElementsByTagName("loc")).map(el => (el.textContent || "").trim());
-        }
-
-        if (urls.length === 0) {
-          recs.push("⚠️ No <loc> entries found in sitemap.");
-        } else {
-          const seen = new Set();
-          urls.forEach(u => {
-            const key = u.toLowerCase();
-            if (seen.has(key)) recs.push(`⚠️ Duplicate URL in sitemap: ${u}`);
-            seen.add(key);
-            if (/[A-Z]/.test(u)) recs.push(`⚠️ Mixed-case URL in sitemap: ${u}`);
-          });
-
-          // Check first 10 URLs
-          for (let u of urls.slice(0,10)) {
-            try {
-              const resp = await fetch(proxy + encodeURIComponent(u), { method:"GET" });
-              urlCheckResults.push(`${u} → ${resp.status}`);
-              if (resp.status === 200) statusCounts.ok++;
-              else if (resp.status >= 300 && resp.status < 400) {
-                statusCounts.redirect++;
-                recs.push(`⚠️ Sitemap URL redirects: ${u}`);
-              } else {
-                statusCounts.error++;
-                recs.push(`❌ Sitemap URL error: ${u}`);
-              }
-            } catch {
-              statusCounts.error++;
-              recs.push(`❌ Could not fetch sitemap URL: ${u}`);
-            }
-          }
-        }
-      }
-    } catch {
-      recs.push("❌ Could not fetch sitemap.xml.");
-    }
-
-    // DISPLAY
-    document.getElementById("robotsStatus").innerText = robotsStatus;
-    document.getElementById("sitemapStatus").innerText = sitemapStatus;
-
-    const recList = document.getElementById("recommendations");
-    recList.innerHTML = "";
-    if (recs.length === 0) {
-      const li = document.createElement("li");
-      li.innerText = "No recommendations. Configuration looks good!";
-      recList.appendChild(li);
-    } else {
-      recs.forEach(r => {
-        const li = document.createElement("li");
-        li.innerText = r;
-        recList.appendChild(li);
+  // Robots.txt
+  try{
+    const r=await fetch(proxy+encodeURIComponent(site+"/robots.txt"));
+    if(r.ok){
+      const txt=await r.text(); robotsStatus="Found";
+      if(!/sitemap\s*:/i.test(txt)) recs.push("⚠️ Add Sitemap directive.");
+      if(/crawl-delay/i.test(txt)) recs.push("⚠️ Crawl-delay may slow indexing.");
+      ["favicon.ico",".css",".js",".png",".jpg",".jpeg"].forEach(res=>{
+        if(txt.includes("Disallow: /"+res)) recs.push("⚠️ Blocked resource: "+res);
       });
     }
+  }catch{recs.push("❌ Could not fetch robots.txt.");}
 
-    const urlList = document.getElementById("urlChecks");
-    urlList.innerHTML = "";
-    if (urlCheckResults.length === 0) {
-      const li = document.createElement("li");
-      li.innerText = "No sitemap URLs checked.";
-      urlList.appendChild(li);
-    } else {
-      urlCheckResults.forEach(r => {
-        const li = document.createElement("li");
-        li.innerText = r;
-        urlList.appendChild(li);
-      });
-    }
-
-    document.getElementById("testResults").style.display = "block";
-
-    // CHART
-    const ctx = document.getElementById("statusChart").getContext("2d");
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["200 OK", "Redirects", "Errors"],
-        datasets: [{
-          label: "Sitemap URL Status",
-          data: [statusCounts.ok, statusCounts.redirect, statusCounts.error],
-          backgroundColor: ["#28a745","#ffc107","#dc3545"]
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false },
-          title: { display: true, text: "Sitemap URL Status Breakdown" }
+  // Sitemap.xml
+  try{
+    const s=await fetch(proxy+encodeURIComponent(site+"/sitemap.xml"));
+    if(s.ok){
+      const txt=await s.text(); sitemapStatus="Found";
+      const xml=new DOMParser().parseFromString(txt,"application/xml");
+      let urls=[...xml.getElementsByTagNameNS("*","loc"),...xml.getElementsByTagName("loc")].map(el=>el.textContent.trim());
+      if(urls.length===0) recs.push("⚠️ No <loc> entries found.");
+      else{
+        const seen=new Set();
+        for(let u of urls.slice(0,10)){
+          if(seen.has(u.toLowerCase())) recs.push("⚠️ Duplicate URL: "+u);
+          seen.add(u.toLowerCase());
+          if(/[A-Z]/.test(u)) recs.push("⚠️ Mixed-case URL: "+u);
+          try{
+            const resp=await fetch(proxy+encodeURIComponent(u));
+            urlChecks.push(u+" → "+resp.status);
+            if(resp.status===200) counts.ok++;
+            else if(resp.status>=300&&resp.status<400){counts.redirect++; recs.push("⚠️ Redirect: "+u);}
+            else{counts.error++; recs.push("❌ Error URL: "+u);}
+          }catch{counts.error++; recs.push("❌ Could not fetch: "+u);}
         }
       }
-    });
+    }
+  }catch{recs.push("❌ Could not fetch sitemap.xml.");}
 
-    // EXPORT
-    window.__testReport = { robotsStatus, sitemapStatus, recommendations: recs, urlChecks: urlCheckResults, statusCounts };
-  }
+  // Display
+  document.getElementById("robotsStatus").textContent=robotsStatus;
+  document.getElementById("sitemapStatus").textContent=sitemapStatus;
+  document.getElementById("recommendations").innerHTML=recs.map(r=>"<li>"+r+"</li>").join("")||"<li>No issues found.</li>";
+  document.getElementById("urlChecks").innerHTML=urlChecks.map(r=>"<li>"+r+"</li>").join("")||"<li>No URLs checked.</li>";
+  document.getElementById("testResults").style.display="block";
 
-  function downloadReport() {
-    const data = window.__testReport;
-    if (!data) return alert("Run the tester first.");
+  new Chart(document.getElementById("statusChart"),{
+    type:'bar',
+    data:{labels:['200 OK','Redirects','Errors'],datasets:[{data:[counts.ok,counts.redirect,counts.error],backgroundColor:['#28a745','#ffc107','#dc3545']}]},
+    options:{plugins:{legend:{display:false},title:{display:true,text:'Sitemap URL Status'}}}
+  });
 
-    const rows = [
-      ["Robots.txt Status", data.robotsStatus],
-      ["Sitemap Status", data.sitemapStatus],
-      ["Recommendations", (data.recommendations || []).join(" | ")],
-      ["URL Checks", (data.urlChecks || []).join(" | ")],
-      ["200 OK", data.statusCounts.ok],
-      ["Redirects", data.statusCounts.redirect],
-      ["Errors", data.statusCounts.error]
-    ];
+  window.__report={robotsStatus,sitemapStatus,recs,urlChecks,counts};
+}
 
-    const csv = "Field,Value\n" + rows.map(r =>
-      r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")
-    ).join("\n");
-
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "robots-sitemap-report.csv";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }
-  </script>
+function downloadReport(){
+  const d=window.__report; if(!d) return alert("Run the test first.");
+  const rows=[["Robots.txt",d.robotsStatus],["Sitemap",d.sitemapStatus],["Recommendations",d.recs.join(" | ")],["URL Checks",d.urlChecks.join(" | ")],["200 OK",d.counts.ok],["Redirects",d.counts.redirect],["Errors",d.counts.error]];
+  const csv="Field,Value\n"+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const blob=new Blob([csv],{type:"text/csv"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="robots-sitemap-report.csv";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
+</script>
 </body>
 </html>
