@@ -19,6 +19,15 @@
     .hero { text-align:center; padding:60px 20px; }
     .hero h2 { margin:0; color:#0A192F; font-size:32px; }
     .hero p { color:#555; font-size:18px; }
+   
+    /* url method */
+    <div class="container">
+  <input type="text" id="inputUrl" placeholder="Enter robots.txt or sitemap.xml URL..." style="width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:16px;">
+  <div>
+    <button class="btn-primary" onclick="fetchAndAnalyze()">Fetch & Analyze</button>
+  </div>
+</div>
+
     
     /* Tool container */
     .container {
@@ -140,6 +149,20 @@
 </footer>
 
 <script>
+async function fetchAndAnalyze(){
+  const url=document.getElementById("inputUrl").value.trim();
+  if(!url){alert("Enter a valid URL.");return;}
+  try{
+    const res=await fetch(url);
+    if(!res.ok){alert("Failed to fetch file. Check the URL.");return;}
+    const text=await res.text();
+    document.getElementById("inputText").value=text; // show content in textarea
+    analyzeInput(); // reuse existing logic
+  }catch(err){
+    alert("Error fetching file: "+err.message);
+  }
+}
+
 function analyzeInput(){
   const text=document.getElementById("inputText").value.trim();
   if(!text){alert("Paste robots.txt or sitemap.xml content.");return;}
@@ -266,4 +289,6 @@ function calculateSitemapScore(valid,errors,warnings,urls){
   return score;
 }
 </script>
+
+
 
