@@ -146,22 +146,36 @@ function analyzeInput(){
   let rows=[];
   let summary="";
   let metrics={};
-  let type="";
+  let errorsList=[];
+  let warningsList=[];
 
   if(text.startsWith("<")){ 
     // sitemap XML mode
-    type="Sitemap";
     const xml=new DOMParser().parseFromString(text,"application/xml");
     const locs=[...xml.getElementsByTagName("loc")];
     const lastmods=[...xml.getElementsByTagName("lastmod")];
     const urls=locs.length;
     let errors=0,warnings=0,valid=0;
 
-    if(urls===0){errors++;rows.push(["No <loc> entries","Sitemap","❌","error"]);} 
+    if(urls===0){
+      errors++;
+      rows.push(["No <loc> entries","Sitemap","❌","error"]);
+      errorsList.push("Sitemap contains no <loc> entries.");
+    } 
     locs.forEach((loc,i)=>{
       const url=loc.textContent.trim();
-      if(url){valid++;rows.push([url,"URL","Valid","valid"]);} else {errors++;rows.push(["Empty <loc>","URL","❌","error"]);}
-      if(!lastmods[i]) warnings++;
+      if(url){
+        valid++;
+        rows.push([url,"URL","Valid","valid"]);
+      } else {
+        errors++;
+        rows.push(["Empty <loc>","URL","❌","error"]);
+        errorsList.push("Empty <loc> tag found in sitemap.");
+      }
+      if(!lastmods[i]){
+        warnings++;
+        warningsList.push(`URL ${url} has no <lastmod> tag.`);
+      }
     });
 
     const score=calculateSitemapScore(valid,errors,warnings,urls);
@@ -170,19 +184,26 @@ function analyzeInput(){
 
   } else { 
     // robots.txt mode
-    type="Robots.txt";
     const lines=text.split(/\r?\n/);
     let errors=0,warnings=0,valid=0,directives=0;
     lines.forEach(line=>{
       const l=line.trim(); if(!l) return;
       const parts=l.split(":");
-      if(parts.length<2){warnings++;rows.push([l,"Directive","Unknown","warning"]);return;}
+      if(parts.length<2){
+        warnings++;
+        rows.push([l,"Directive","Unknown","warning"]);
+        warningsList.push(`Line "${l}" is not a valid directive format.`);
+        return;
+      }
       const key=parts[0].toLowerCase();
       directives++;
       if(["user-agent","disallow","allow","sitemap"].includes(key)){
-        valid++;rows.push([l,"Directive","Valid","valid"]);
+        valid++;
+        rows.push([l,"Directive","Valid","valid"]);
       } else {
-        warnings++;rows.push([l,"Directive","Unknown","warning"]);
+        warnings++;
+        rows.push([l,"Directive","Unknown","warning"]);
+        warningsList.push(`Directive "${key}" is not recognized.`);
       }
     });
 
@@ -194,31 +215,28 @@ function analyzeInput(){
   // Show summary
   document.getElementById("summary").innerHTML="<h3>"+summary+"</h3>";
 
-  // Show metrics table with bars
-  let metricsHTML="<table><thead><tr><th>Metric</th><th>Value</th><th>Visual</th></tr></thead><tbody>";
+  // Metrics table
+  let metricsHTML="<table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody>";
   for(const key in metrics){
-    const val=metrics[key];
-    let color="#00BFA6"; // default green
-    if(key==="errors") color="#dc3545"; // red
-    if(key==="warnings") color="#ffc107"; // yellow
-    if(key==="score" && val<50) color="#dc3545"; 
-    if(key==="score" && val>=50 && val<80) color="#ffc107"; 
-    if(key==="score" && val>=80) color="#28a745"; 
-    metricsHTML+=`
-      <tr>
-        <td>${key.charAt(0).toUpperCase()+key.slice(1)}</td>
-        <td>${val}</td>
-        <td>
-          <div style="background:#eee;border-radius:6px;width:100%;height:12px;">
-            <div style="background:${color};width:${Math.min(val,100)}%;height:12px;border-radius:6px;"></div>
-          </div>
-        </td>
-      </tr>`;
+    metricsHTML+=`<tr><td>${key.charAt(0).toUpperCase()+key.slice(1)}</td><td>${metrics[key]}</td></tr>`;
   }
   metricsHTML+="</tbody></table>";
+
+  // Detailed errors and warnings
+  if(errorsList.length>0){
+    metricsHTML+="<h4 style='color:#dc3545;'>Errors:</h4><ul>";
+    errorsList.forEach(e=>{metricsHTML+=`<li style='color:#dc3545;'>${e}</li>`;});
+    metricsHTML+="</ul>";
+  }
+  if(warningsList.length>0){
+    metricsHTML+="<h4 style='color:#ffc107;'>Warnings:</h4><ul>";
+    warningsList.forEach(w=>{metricsHTML+=`<li style='color:#856404;'>${w}</li>`;});
+    metricsHTML+="</ul>";
+  }
+
   document.getElementById("summary").innerHTML+="<br>"+metricsHTML;
 
-  // Show detailed rows
+  // Detailed rows table
   const tbody=document.querySelector("#resultsTable tbody");
   tbody.innerHTML="";
   rows.forEach(r=>{
@@ -242,32 +260,5 @@ function calculateSitemapScore(valid,errors,warnings,urls){
   if(urls===0) score=0;
   if(score<0) score=0;
   return score;
-}
-
-function downloadCSV(){
-  const d=window.__report; 
-  if(!d){alert("Run analysis first.");return;}
-  let csv="Entry,Type,Status\n";
-  d.rows.forEach(r=>{
-    csv+=`"${r[0]}","${r[1]}","${r[2]}"\n`;
-  });
-  csv+="\nSummary,"+d.summary.replace(/\|/g,",");
-  const blob=new Blob([csv],{type:"text/csv"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download="report.csv";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-}
-
-function copySummary(){
-  const d=window.__report; 
-  if(!d){alert("Run analysis first.");return;}
-  navigator.clipboard.writeText(d.summary).then(()=>{
-    alert("Summary copied to clipboard!");
-  });
 }
 </script>
