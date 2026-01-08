@@ -120,31 +120,36 @@ async function testRobotsSitemap() {
 
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(sitemapText, "application/xml");
-      const urls = Array.from(xmlDoc.getElementsByTagName("loc")).map(el => el.textContent.trim());
+      // Handle namespaces robustly
+      const urls = Array.from(xmlDoc.getElementsByTagNameNS("*","loc")).map(el => el.textContent.trim());
 
-      const seen = new Set();
-      urls.forEach(u => {
-        if (seen.has(u.toLowerCase())) recs.push(`⚠️ Duplicate URL in sitemap: ${u}`);
-        seen.add(u.toLowerCase());
-        if (/[A-Z]/.test(u)) recs.push(`⚠️ Mixed-case URL in sitemap: ${u}`);
-      });
+      if (urls.length === 0) {
+        recs.push("⚠️ No <loc> entries found in sitemap.");
+      } else {
+        const seen = new Set();
+        urls.forEach(u => {
+          if (seen.has(u.toLowerCase())) recs.push(`⚠️ Duplicate URL in sitemap: ${u}`);
+          seen.add(u.toLowerCase());
+          if (/[A-Z]/.test(u)) recs.push(`⚠️ Mixed-case URL in sitemap: ${u}`);
+        });
 
-      // Check first 10 URLs
-      for (let u of urls.slice(0,10)) {
-        try {
-          const resp = await fetch(proxy + encodeURIComponent(u), {method:"GET"});
-          urlCheckResults.push(`${u} → ${resp.status}`);
-          if (resp.status === 200) statusCounts.ok++;
-          else if (resp.status >= 300 && resp.status < 400) {
-            statusCounts.redirect++;
-            recs.push(`⚠️ Sitemap URL redirects: ${u}`);
-          } else {
+        // Check first 10 URLs
+        for (let u of urls.slice(0,10)) {
+          try {
+            const resp = await fetch(proxy + encodeURIComponent(u), {method:"GET"});
+            urlCheckResults.push(`${u} → ${resp.status}`);
+            if (resp.status === 200) statusCounts.ok++;
+            else if (resp.status >= 300 && resp.status < 400) {
+              statusCounts.redirect++;
+              recs.push(`⚠️ Sitemap URL redirects: ${u}`);
+            } else {
+              statusCounts.error++;
+              recs.push(`❌ Sitemap URL error: ${u}`);
+            }
+          } catch {
             statusCounts.error++;
-            recs.push(`❌ Sitemap URL error: ${u}`);
+            recs.push(`❌ Could not fetch sitemap URL: ${u}`);
           }
-        } catch {
-          statusCounts.error++;
-          recs.push(`❌ Could not fetch sitemap URL: ${u}`);
         }
       }
     }
@@ -158,19 +163,31 @@ async function testRobotsSitemap() {
 
   const recList = document.getElementById("recommendations");
   recList.innerHTML = "";
-  recs.forEach(r => {
+  if (recs.length === 0) {
     const li = document.createElement("li");
-    li.innerText = r;
+    li.innerText = "No recommendations. Configuration looks good!";
     recList.appendChild(li);
-  });
+  } else {
+    recs.forEach(r => {
+      const li = document.createElement("li");
+      li.innerText = r;
+      recList.appendChild(li);
+    });
+  }
 
   const urlList = document.getElementById("urlChecks");
   urlList.innerHTML = "";
-  urlCheckResults.forEach(r => {
+  if (urlCheckResults.length === 0) {
     const li = document.createElement("li");
-    li.innerText = r;
+    li.innerText = "No sitemap URLs checked.";
     urlList.appendChild(li);
-  });
+  } else {
+    urlCheckResults.forEach(r => {
+      const li = document.createElement("li");
+      li.innerText = r;
+      urlList.appendChild(li);
+    });
+  }
 
   document.getElementById("testResults").style.display = "block";
 
@@ -257,6 +274,7 @@ function downloadReport() {
   </footer>
 </body>
 </html>
+
 
 
 
