@@ -94,10 +94,13 @@ async function testRobotsSitemap() {
       const robotsText = await robotsResp.text();
       robotsStatus = "Found";
 
+      // Case-insensitive check for sitemap directive
       if (!/sitemap:/i.test(robotsText)) {
-  recs.push("⚠️ Add Sitemap directive to robots.txt.");
-}
-      if (robotsText.toLowerCase().includes("crawl-delay")) recs.push("⚠️ Crawl-delay directive found — may slow indexing.");
+        recs.push("⚠️ Add Sitemap directive to robots.txt.");
+      }
+      if (robotsText.toLowerCase().includes("crawl-delay")) {
+        recs.push("⚠️ Crawl-delay directive found — may slow indexing.");
+      }
       ["favicon.ico",".css",".js",".png",".jpg",".jpeg"].forEach(res => {
         if (robotsText.includes("Disallow: /" + res)) {
           recs.push(`⚠️ Important resource blocked in robots.txt: ${res}`);
@@ -254,6 +257,7 @@ function downloadReport() {
   </footer>
 </body>
 </html>
+
 
 
 
