@@ -160,7 +160,7 @@ function analyzeInput(){
     if(urls===0){
       errors++;
       rows.push(["No <loc> entries","Sitemap","❌","error"]);
-      errorsList.push("Sitemap contains no <loc> entries.");
+      errorsList.push({msg:"Sitemap contains no <loc> entries.",fix:"Add valid <loc> tags for each page URL."});
     } 
     locs.forEach((loc,i)=>{
       const url=loc.textContent.trim();
@@ -170,11 +170,11 @@ function analyzeInput(){
       } else {
         errors++;
         rows.push(["Empty <loc>","URL","❌","error"]);
-        errorsList.push("Empty <loc> tag found in sitemap.");
+        errorsList.push({msg:"Empty <loc> tag found in sitemap.",fix:"Ensure each <url> has a valid <loc> with a full URL."});
       }
       if(!lastmods[i]){
         warnings++;
-        warningsList.push(`URL ${url} has no <lastmod> tag.`);
+        warningsList.push({msg:`URL ${url} has no <lastmod> tag.`,fix:"Add <lastmod> to indicate when the page was last updated."});
       }
     });
 
@@ -192,7 +192,7 @@ function analyzeInput(){
       if(parts.length<2){
         warnings++;
         rows.push([l,"Directive","Unknown","warning"]);
-        warningsList.push(`Line "${l}" is not a valid directive format.`);
+        warningsList.push({msg:`Line "${l}" is not a valid directive format.`,fix:"Use proper syntax: Directive: value (e.g., Disallow: /path)."});
         return;
       }
       const key=parts[0].toLowerCase();
@@ -203,7 +203,7 @@ function analyzeInput(){
       } else {
         warnings++;
         rows.push([l,"Directive","Unknown","warning"]);
-        warningsList.push(`Directive "${key}" is not recognized.`);
+        warningsList.push({msg:`Directive "${key}" is not recognized.`,fix:"Use only supported directives: User-agent, Disallow, Allow, Sitemap."});
       }
     });
 
@@ -222,15 +222,19 @@ function analyzeInput(){
   }
   metricsHTML+="</tbody></table>";
 
-  // Detailed errors and warnings
+  // Detailed errors and warnings with fixes
   if(errorsList.length>0){
     metricsHTML+="<h4 style='color:#dc3545;'>Errors:</h4><ul>";
-    errorsList.forEach(e=>{metricsHTML+=`<li style='color:#dc3545;'>${e}</li>`;});
+    errorsList.forEach(e=>{
+      metricsHTML+=`<li style='color:#dc3545;'>${e.msg}<br><em>Fix: ${e.fix}</em></li>`;
+    });
     metricsHTML+="</ul>";
   }
   if(warningsList.length>0){
     metricsHTML+="<h4 style='color:#ffc107;'>Warnings:</h4><ul>";
-    warningsList.forEach(w=>{metricsHTML+=`<li style='color:#856404;'>${w}</li>`;});
+    warningsList.forEach(w=>{
+      metricsHTML+=`<li style='color:#856404;'>${w.msg}<br><em>Fix: ${w.fix}</em></li>`;
+    });
     metricsHTML+="</ul>";
   }
 
@@ -262,3 +266,4 @@ function calculateSitemapScore(valid,errors,warnings,urls){
   return score;
 }
 </script>
+
