@@ -143,21 +143,32 @@
 function analyzeInput(){
   const text=document.getElementById("inputText").value.trim();
   if(!text){alert("Paste robots.txt or sitemap.xml content.");return;}
-  let errors=0,warnings=0,valid=0,urls=0,directives=0;
-  const rows=[];
-  if(text.startsWith("<")){ // sitemap XML
+  let rows=[];
+  let summary="";
+
+  if(text.startsWith("<")){ 
+    // sitemap XML mode
     const xml=new DOMParser().parseFromString(text,"application/xml");
     const locs=[...xml.getElementsByTagName("loc")];
     const lastmods=[...xml.getElementsByTagName("lastmod")];
-    urls=locs.length;
+    const urls=locs.length;
+    let errors=0,warnings=0,valid=0;
+
     if(urls===0){errors++;rows.push(["No <loc> entries","Sitemap","❌","error"]);} 
     locs.forEach((loc,i)=>{
       const url=loc.textContent.trim();
       if(url){valid++;rows.push([url,"URL","Valid","valid"]);} else {errors++;rows.push(["Empty <loc>","URL","❌","error"]);}
       if(!lastmods[i]) warnings++;
     });
-  } else { // robots.txt
+
+    const score=calculateSitemapScore(valid,errors,warnings,urls);
+    summary=`[Sitemap] URLs: ${urls} | Valid: ${valid} | Errors: ${errors} | Warnings: ${warnings} | Compliance Score: ${score}`;
+    window.__report={summary,rows};
+
+  } else { 
+    // robots.txt mode
     const lines=text.split(/\r?\n/);
+    let errors=0,warnings=0,valid=0,directives=0;
     lines.forEach(line=>{
       const l=line.trim(); if(!l) return;
       const parts=l.split(":");
@@ -170,11 +181,12 @@ function analyzeInput(){
         warnings++;rows.push([l,"Directive","Unknown","warning"]);
       }
     });
+
+    const score=calculateRobotsScore(valid,errors,warnings,directives);
+    summary=`[Robots.txt] Directives: ${directives} | Valid: ${valid} | Errors: ${errors} | Warnings: ${warnings} | Compliance Score: ${score}`;
+    window.__report={summary,rows};
   }
-  let score=100-errors*10-warnings*5;
-  if(valid===0) score-=20;
-  if(score<0) score=0;
-  const summary=`URLs: ${urls} | Directives: ${directives} | Errors: ${errors} | Warnings: ${warnings} | Compliance Score: ${score}`;
+
   document.getElementById("summary").textContent=summary;
   const tbody=document.querySelector("#resultsTable tbody");
   tbody.innerHTML="";
@@ -184,7 +196,22 @@ function analyzeInput(){
     tbody.appendChild(tr);
   });
   document.getElementById("results").style.display="block";
-  window.__report={summary,rows};
+}
+
+// Separate scoring functions
+function calculateRobotsScore(valid,errors,warnings,directives){
+  let score=100-errors*10-warnings*5;
+  if(valid===0) score-=20;
+  if(score<0) score=0;
+  return score;
+}
+
+function calculateSitemapScore(valid,errors,warnings,urls){
+  let score=100-errors*10-warnings*3;
+  if(valid===0) score-=30;
+  if(urls===0) score=0;
+  if(score<0) score=0;
+  return score;
 }
 
 function downloadCSV(){
@@ -214,9 +241,3 @@ function copySummary(){
   });
 }
 </script>
-
-
-
-
-
-
