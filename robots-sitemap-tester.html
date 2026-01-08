@@ -145,9 +145,12 @@ function analyzeInput(){
   if(!text){alert("Paste robots.txt or sitemap.xml content.");return;}
   let rows=[];
   let summary="";
+  let metrics={};
+  let type="";
 
   if(text.startsWith("<")){ 
     // sitemap XML mode
+    type="Sitemap";
     const xml=new DOMParser().parseFromString(text,"application/xml");
     const locs=[...xml.getElementsByTagName("loc")];
     const lastmods=[...xml.getElementsByTagName("lastmod")];
@@ -162,11 +165,12 @@ function analyzeInput(){
     });
 
     const score=calculateSitemapScore(valid,errors,warnings,urls);
-    summary=`[Sitemap] URLs: ${urls} | Valid: ${valid} | Errors: ${errors} | Warnings: ${warnings} | Compliance Score: ${score}`;
-    window.__report={summary,rows};
+    summary=`[Sitemap] Compliance Score: ${score}`;
+    metrics={urls,valid,errors,warnings,score};
 
   } else { 
     // robots.txt mode
+    type="Robots.txt";
     const lines=text.split(/\r?\n/);
     let errors=0,warnings=0,valid=0,directives=0;
     lines.forEach(line=>{
@@ -183,11 +187,38 @@ function analyzeInput(){
     });
 
     const score=calculateRobotsScore(valid,errors,warnings,directives);
-    summary=`[Robots.txt] Directives: ${directives} | Valid: ${valid} | Errors: ${errors} | Warnings: ${warnings} | Compliance Score: ${score}`;
-    window.__report={summary,rows};
+    summary=`[Robots.txt] Compliance Score: ${score}`;
+    metrics={directives,valid,errors,warnings,score};
   }
 
-  document.getElementById("summary").textContent=summary;
+  // Show summary
+  document.getElementById("summary").innerHTML="<h3>"+summary+"</h3>";
+
+  // Show metrics table with bars
+  let metricsHTML="<table><thead><tr><th>Metric</th><th>Value</th><th>Visual</th></tr></thead><tbody>";
+  for(const key in metrics){
+    const val=metrics[key];
+    let color="#00BFA6"; // default green
+    if(key==="errors") color="#dc3545"; // red
+    if(key==="warnings") color="#ffc107"; // yellow
+    if(key==="score" && val<50) color="#dc3545"; 
+    if(key==="score" && val>=50 && val<80) color="#ffc107"; 
+    if(key==="score" && val>=80) color="#28a745"; 
+    metricsHTML+=`
+      <tr>
+        <td>${key.charAt(0).toUpperCase()+key.slice(1)}</td>
+        <td>${val}</td>
+        <td>
+          <div style="background:#eee;border-radius:6px;width:100%;height:12px;">
+            <div style="background:${color};width:${Math.min(val,100)}%;height:12px;border-radius:6px;"></div>
+          </div>
+        </td>
+      </tr>`;
+  }
+  metricsHTML+="</tbody></table>";
+  document.getElementById("summary").innerHTML+="<br>"+metricsHTML;
+
+  // Show detailed rows
   const tbody=document.querySelector("#resultsTable tbody");
   tbody.innerHTML="";
   rows.forEach(r=>{
@@ -198,7 +229,6 @@ function analyzeInput(){
   document.getElementById("results").style.display="block";
 }
 
-// Separate scoring functions
 function calculateRobotsScore(valid,errors,warnings,directives){
   let score=100-errors*10-warnings*5;
   if(valid===0) score-=20;
