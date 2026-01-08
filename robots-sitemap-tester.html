@@ -19,14 +19,7 @@
     .hero { text-align:center; padding:60px 20px; }
     .hero h2 { margin:0; color:#0A192F; font-size:32px; }
     .hero p { color:#555; font-size:18px; }
-</div>
-    /* url method */
-    <div class="container">
-  <input type="text" id="inputUrl" placeholder="Enter robots.txt or sitemap.xml URL..." style="width:100%;padding:12px;border:1px solid #ccc;border-radius:8px;font-size:16px;">
-  <div>
-    <button class="btn-primary" onclick="fetchAndAnalyze()">Fetch & Analyze</button>
-  </div>
-    
+
     /* Tool container */
     .container {
       max-width:1000px;
@@ -35,13 +28,13 @@
       padding:30px;
       border-radius:12px;
       box-shadow:0 6px 16px rgba(0,0,0,0.08);
-      text-align:left; /* force left alignment for filler content */
+      text-align:left;
     }
-    textarea {
-      width:100%; height:200px; padding:12px;
-      border:1px solid #ccc; border-radius:8px;
+    textarea, input[type="text"] {
+      width:100%; padding:12px; border:1px solid #ccc; border-radius:8px;
       font-family:'Syne',sans-serif; font-size:16px;
     }
+    textarea { height:200px; }
     button {
       margin:10px 6px; padding:12px 20px;
       border:none; border-radius:8px;
@@ -58,11 +51,9 @@
     .warning { background:#ffc107; color:#000; }
     .error { background:#dc3545; }
     .summary { margin-top:15px; padding:12px; background:#f9f9f9; border-radius:8px; }
-    /* Footer same as homepage */
     footer { background:#0A192F; color:#fff; text-align:center; padding:25px; }
     footer a { color:#00BFA6; text-decoration:none; margin:0 12px; font-weight:600; }
     footer a:hover { text-decoration:underline; }
-    /* Ensure filler content headings, paragraphs, lists are left aligned */
     .container h2, .container p, .container ul, .container li { text-align:left; }
     .container ul li { margin-bottom:10px; }
   </style>
@@ -81,9 +72,18 @@
 
 <div class="hero">
   <h2>Robots.txt & Sitemap Tester</h2>
-  <p>Paste your robots.txt or sitemap.xml content below to validate directives, URLs, and compliance.</p>
+  <p>Paste your robots.txt or sitemap.xml content below or fetch directly via URL.</p>
 </div>
 
+<!-- URL method -->
+<div class="container">
+  <input type="text" id="inputUrl" placeholder="Enter robots.txt or sitemap.xml URL...">
+  <div>
+    <button class="btn-primary" onclick="fetchAndAnalyze()">Fetch & Analyze</button>
+  </div>
+</div>
+
+<!-- Manual paste method -->
 <div class="container">
   <textarea id="inputText" placeholder="Paste robots.txt or sitemap.xml here..."></textarea>
   <div>
@@ -100,17 +100,17 @@
     </table>
   </div>
 </div>
-  
+
 <!-- features-->
 <div class="container">
   <h2>How This Tool Works</h2>
-  <p>✔ Paste robots.txt or sitemap.xml content into the box.</p>
+  <p>✔ Paste robots.txt or sitemap.xml content into the box or fetch via URL.</p>
   <p>✔ The tool auto‑detects type and analyzes directives or URLs.</p>
   <p>✔ Compliance score starts at 100 and deducts for errors/warnings.</p>
   <p>✔ Results show a summary and detailed table with status badges.</p>
   <p>✔ Export results to CSV or copy summary for quick sharing.</p>
 </div>
-  
+
 <!-- faqs-->
 <div class="container">
   <h2>FAQs</h2>
@@ -120,9 +120,9 @@
     <li><strong>Why avoid blocking CSS/JS?</strong> Search engines render pages; blocking assets can hurt rankings.</li>
   </ul>
 </div>
-  
-   <!-- About-->
-  <div class="container">
+
+<!-- About-->
+<div class="container">
   <h2>About This Tool</h2>
   <p>The Robots.txt & Sitemap Tester is designed to help webmasters, SEO specialists, and developers quickly validate two of the most important files for search engine optimization. These files guide search engines on how to crawl and index your site.</p>
   <p>With this tool, you can:</p>
@@ -135,7 +135,6 @@
   <p>By simplifying technical checks, this tool ensures your site remains crawlable, indexable, and optimized for better visibility in search engines.</p>
 </div>
 
-
 <footer>
   <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
   <p>
@@ -145,6 +144,8 @@
     <a href="contact.html">Contact Us</a>
   </p>
 </footer>
+</body>
+</html>
 
 <script>
 async function fetchAndAnalyze(){
@@ -287,6 +288,7 @@ function calculateSitemapScore(valid,errors,warnings,urls){
   return score;
 }
 </script>
+
 
 
 
