@@ -56,6 +56,16 @@
     footer a:hover { text-decoration:underline; }
     .container h2, .container p, .container ul, .container li { text-align:left; }
     .container ul li { margin-bottom:10px; }
+      /* Mobile Optimizations */
+    @media (max-width: 600px) {
+      nav { display:block; text-align:center; }
+      nav a { display:block; margin:10px 0; }
+      .tool-card { width:100%; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size:24px; }
+      .hero p { font-size:16px; }
+      .section { padding:20px; }
   </style>
 </head>
 <body>
@@ -288,6 +298,7 @@ function calculateSitemapScore(valid,errors,warnings,urls){
   return score;
 }
 </script>
+
 
 
 
