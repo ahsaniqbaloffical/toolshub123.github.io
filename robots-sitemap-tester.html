@@ -94,7 +94,9 @@ async function testRobotsSitemap() {
       const robotsText = await robotsResp.text();
       robotsStatus = "Found";
 
-      if (!robotsText.match(/Sitemap:/i)) recs.push("⚠️ Add Sitemap directive to robots.txt.");
+      if (!/sitemap:/i.test(robotsText)) {
+  recs.push("⚠️ Add Sitemap directive to robots.txt.");
+}
       if (robotsText.toLowerCase().includes("crawl-delay")) recs.push("⚠️ Crawl-delay directive found — may slow indexing.");
       ["favicon.ico",".css",".js",".png",".jpg",".jpeg"].forEach(res => {
         if (robotsText.includes("Disallow: /" + res)) {
@@ -252,6 +254,7 @@ function downloadReport() {
   </footer>
 </body>
 </html>
+
 
 
 
