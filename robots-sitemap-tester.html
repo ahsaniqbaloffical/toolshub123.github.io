@@ -8,25 +8,21 @@
   <!-- Import Syne font -->
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {font-family:'Syne',sans-serif;margin:0;background:#f4f6f8;color:#333;}
+    body { font-family: 'Syne', sans-serif; margin:0; background:#F4F6F8; }
     /* Header same as homepage */
-    .site-header {
-      background:#0A192F;
-      color:#fff;
-      padding:25px 40px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-    }
-    .site-header img {height:60px;}
-    .site-header nav a {
-      color:#fff;
-      margin:0 15px;
-      text-decoration:none;
-      font-weight:600;
-      font-size:18px;
-    }
-    .site-header nav a.active {color:#00BFA6;}
+    header { background:#0A192F; color:#fff; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; }
+    header img { max-height:100px; }
+     nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:600; }
+    nav a.active { color:#00BFA6; }
+    .hero { text-align:center; padding:40px; }
+    .container { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:30px; }
+    .tool-card { background:#fff; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:25px; width:280px; text-align:center; }
+    .tool-card h2 { color:#0A192F; margin-top:0; }
+    .tool-card a { display:inline-block; margin-top:10px; background:#00BFA6; color:#fff; padding:8px 15px; border-radius:5px; text-decoration:none; font-weight:600; }
+    .tool-card a:hover { background:#008f7a; }
+    .section { max-width:900px; margin:40px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
+    footer { background:#0A192F; color:#fff; text-align:center; padding:20px; }
+    footer a { color:#00BFA6; text-decoration:none; margin:0 10px; }
     /* Hero section */
     .hero {text-align:center;padding:60px 20px;}
     .hero h2 {margin:0;color:#0A192F;font-size:32px;}
@@ -208,3 +204,4 @@ function copySummary(){
   });
 }
 </script>
+
