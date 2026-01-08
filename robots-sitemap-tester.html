@@ -42,6 +42,7 @@
   </div>
   
        <!-- Robots.txt & Sitemap Tester -->
+<!-- Robots.txt & Sitemap Tester -->
 <div class="section">
   <h2>Robots.txt & Sitemap Tester</h2>
   <p>Enter your website URL below to check robots.txt and sitemap configuration.</p>
@@ -74,23 +75,25 @@
 
 <script>
 async function testRobotsSitemap() {
-  const url = document.getElementById("siteUrl").value.trim();
-  if (!url) return alert("Please enter a website URL.");
-  
+  const site = document.getElementById("siteUrl").value.trim();
+  if (!site) return alert("Please enter a website URL.");
+
+  // Use your PHP proxy
+  const proxy = "https://toolshub123.com/proxy.php?url=";
+
   let recs = [];
   let robotsStatus = "Not found";
   let sitemapStatus = "Not found";
   let urlCheckResults = [];
   let statusCounts = {ok:0, redirect:0, error:0};
-  
+
   try {
-    // Check robots.txt
-    const robotsUrl = url.replace(/\/$/, "") + "/robots.txt";
-    const robotsResp = await fetch(robotsUrl);
+    // Robots.txt via proxy
+    const robotsResp = await fetch(proxy + encodeURIComponent(site.replace(/\/$/, "") + "/robots.txt"));
     if (robotsResp.ok) {
       const robotsText = await robotsResp.text();
       robotsStatus = "Found";
-      
+
       if (!robotsText.match(/Sitemap:/i)) recs.push("⚠️ Add Sitemap directive to robots.txt.");
       if (robotsText.toLowerCase().includes("crawl-delay")) recs.push("⚠️ Crawl-delay directive found — may slow indexing.");
       ["favicon.ico",".css",".js",".png",".jpg",".jpeg"].forEach(res => {
@@ -102,29 +105,29 @@ async function testRobotsSitemap() {
   } catch {
     recs.push("❌ Could not fetch robots.txt.");
   }
-  
+
   try {
-    // Check sitemap.xml
-    const sitemapUrl = url.replace(/\/$/, "") + "/sitemap.xml";
-    const sitemapResp = await fetch(sitemapUrl);
+    // Sitemap.xml via proxy
+    const sitemapResp = await fetch(proxy + encodeURIComponent(site.replace(/\/$/, "") + "/sitemap.xml"));
     if (sitemapResp.ok) {
       const sitemapText = await sitemapResp.text();
       sitemapStatus = "Found";
-      
+
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(sitemapText, "application/xml");
       const urls = Array.from(xmlDoc.getElementsByTagName("loc")).map(el => el.textContent.trim());
-      
+
       const seen = new Set();
       urls.forEach(u => {
         if (seen.has(u.toLowerCase())) recs.push(`⚠️ Duplicate URL in sitemap: ${u}`);
         seen.add(u.toLowerCase());
         if (/[A-Z]/.test(u)) recs.push(`⚠️ Mixed-case URL in sitemap: ${u}`);
       });
-      
-      for (let u of urls.slice(0,10)) { // limit to first 10 for demo
+
+      // Check first 10 URLs
+      for (let u of urls.slice(0,10)) {
         try {
-          const resp = await fetch(u, {method:"HEAD"});
+          const resp = await fetch(proxy + encodeURIComponent(u), {method:"GET"});
           urlCheckResults.push(`${u} → ${resp.status}`);
           if (resp.status === 200) statusCounts.ok++;
           else if (resp.status >= 300 && resp.status < 400) {
@@ -143,11 +146,11 @@ async function testRobotsSitemap() {
   } catch {
     recs.push("❌ Could not fetch sitemap.xml.");
   }
-  
+
   // Display results
   document.getElementById("robotsStatus").innerText = robotsStatus;
   document.getElementById("sitemapStatus").innerText = sitemapStatus;
-  
+
   const recList = document.getElementById("recommendations");
   recList.innerHTML = "";
   recs.forEach(r => {
@@ -155,7 +158,7 @@ async function testRobotsSitemap() {
     li.innerText = r;
     recList.appendChild(li);
   });
-  
+
   const urlList = document.getElementById("urlChecks");
   urlList.innerHTML = "";
   urlCheckResults.forEach(r => {
@@ -163,9 +166,9 @@ async function testRobotsSitemap() {
     li.innerText = r;
     urlList.appendChild(li);
   });
-  
+
   document.getElementById("testResults").style.display = "block";
-  
+
   // Chart visualization
   const ctx = document.getElementById("statusChart").getContext("2d");
   new Chart(ctx, {
@@ -186,7 +189,7 @@ async function testRobotsSitemap() {
       }
     }
   });
-  
+
   // Store for export
   window.__testReport = { robotsStatus, sitemapStatus, recommendations: recs, urlChecks: urlCheckResults, statusCounts };
 }
@@ -194,7 +197,7 @@ async function testRobotsSitemap() {
 function downloadReport() {
   const data = window.__testReport;
   if (!data) return alert("Run the tester first.");
-  
+
   const rows = [
     ["Robots.txt Status", data.robotsStatus],
     ["Sitemap Status", data.sitemapStatus],
@@ -204,11 +207,11 @@ function downloadReport() {
     ["Redirects", data.statusCounts.redirect],
     ["Errors", data.statusCounts.error]
   ];
-  
+
   const csv = "Field,Value\n" + rows.map(r =>
     r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(",")
   ).join("\n");
-  
+
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -220,8 +223,6 @@ function downloadReport() {
   URL.revokeObjectURL(url);
 }
 </script>
-  
-
   
 <!-- features section-->
   <div class="section">
@@ -251,6 +252,7 @@ function downloadReport() {
   </footer>
 </body>
 </html>
+
 
 
 
