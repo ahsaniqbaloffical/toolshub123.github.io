@@ -12,15 +12,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
-    body { font-family: 'Syne', sans-serif; margin:0; background:#F4F6F8; }
-    header { background:#0A192F; color:#fff; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; }
-    header img { max-height:100px; }
-    nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:600; }
-    nav a.active { color:#00BFA6; }
-    .hero { text-align:center; padding:40px; }
-    .section { max-width:900px; margin:40px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
-    footer { background:#0A192F; color:#fff; text-align:center; padding:20px; }
-    footer a { color:#00BFA6; text-decoration:none; margin:0 10px; }
+    :root {
+      --bg:#F4F6F8; --card:#FFFFFF; --primary:#00BFA6; --dark:#0A192F;
+      --text:#1f2937; --muted:#6b7280; --ok:#28a745; --warn:#ffc107; --err:#dc3545;
+    }
+    * { box-sizing:border-box; }
+    body { font-family:'Syne',sans-serif; margin:0; background:var(--bg); color:var(--text); }
+    header { background:var(--dark); color:#fff; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; }
+    header img { max-height:60px; }
+    nav a { color:#fff; margin:0 12px; text-decoration:none; font-weight:600; }
+    nav a.active { color:var(--primary); }
+    .hero { text-align:center; padding:40px 20px; }
+    .hero h1 { margin:0 0 10px; }
+    .hero p { color:var(--muted); margin:0; }
+    .section { max-width:1000px; margin:30px auto; background:var(--card); padding:28px; border-radius:12px; box-shadow:0 6px 16px rgba(0,0,0,0.08); }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .cta { display:inline-block; background:var(--primary); color:#fff; padding:12px 22px; border-radius:8px; font-weight:700; text-decoration:none; }
+    .muted { color:var(--muted); }
+    .kbd { background:#eef2f7; padding:2px 6px; border-radius:6px; font-family:monospace; }
+    ul.checklist { list-style:none; padding-left:0; }
+    ul.checklist li { margin:6px 0; }
+    ul.checklist li::before { content:"✔"; color:var(--primary); margin-right:8px; }
+    footer { background:var(--dark); color:#fff; text-align:center; padding:24px; margin-top:40px; }
+    footer a { color:var(--primary); text-decoration:none; margin:0 10px; }
+    code, pre { font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .note { background:#f9fafb; border:1px solid #e5e7eb; padding:12px; border-radius:8px; }
+    .pill { display:inline-block; padding:4px 10px; border-radius:999px; background:#eef2f7; color:#374151; font-size:12px; margin-right:6px; }
+    .status-ok { color:var(--ok); }
+    .status-redirect { color:var(--warn); }
+    .status-error { color:var(--err); }
+    .btn { background:var(--primary); color:#fff; padding:12px 18px; border:none; border-radius:8px; font-weight:700; cursor:pointer; }
+    .btn-secondary { background:#007BFF; }
+    .input { width:100%; padding:12px; border:1px solid #d1d5db; border-radius:8px; }
+    .card { background:#fff; border:1px solid #e5e7eb; padding:16px; border-radius:10px; }
+    .list { list-style:none; padding-left:0; }
+    .list li { margin:6px 0; }
   </style>
 </head>
 <body>
@@ -37,34 +63,155 @@
   
   <div class="hero">
     <h1>Robots.txt & Sitemap Tester</h1>
-    <p>Validate robots.txt and sitemap files for SEO optimization.</p>
+    <p>Validate robots.txt and sitemap files for clean crawlability and faster indexing.</p>
+    <div style="margin-top:14px;">
+      <span class="pill">Free</span>
+      <span class="pill">No login</span>
+      <span class="pill">CSV export</span>
+    </div>
   </div>
   
   <div class="section">
-    <h2>Robots.txt & Sitemap Tester</h2>
-    <p>Enter your website URL below to check robots.txt and sitemap configuration.</p>
+    <h2>Run the test</h2>
+    <p class="muted">Enter your site URL and we’ll fetch and analyze <span class="kbd">/robots.txt</span> and <span class="kbd">/sitemap.xml</span> using a proxy for universal access.</p>
     
-    <input id="siteUrl" placeholder="https://example.com" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;">
-    
-    <button onclick="testRobotsSitemap()" style="background:#00BFA6; color:#fff; padding:12px 25px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Test Configuration</button>
-    
-    <div id="testResults" style="display:none; margin-top:20px; background:#f9f9f9; padding:20px; border-radius:10px;">
-      <h3>Results</h3>
-      <div><strong>Robots.txt Status:</strong> <span id="robotsStatus"></span></div>
-      <div><strong>Sitemap Status:</strong> <span id="sitemapStatus"></span></div>
-      
-      <h3 style="margin-top:20px;">Recommendations</h3>
-      <ul id="recommendations"></ul>
-      
-      <h3 style="margin-top:20px;">Sitemap URL Checks</h3>
-      <ul id="urlChecks"></ul>
-      
-      <h3 style="margin-top:20px;">Visual Dashboard</h3>
-      <canvas id="statusChart" width="400" height="200"></canvas>
-      
-      <button onclick="downloadReport()" style="background:#007BFF; color:#fff; padding:10px 20px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Download Report (CSV)</button>
+    <div class="grid-2">
+      <input id="siteUrl" class="input" placeholder="https://example.com">
+      <button class="btn" onclick="testRobotsSitemap()">Test configuration</button>
+    </div>
+
+    <div id="testResults" style="display:none; margin-top:20px;">
+      <div class="grid-2">
+        <div class="card">
+          <h3>Results</h3>
+          <div><strong>Robots.txt status:</strong> <span id="robotsStatus"></span></div>
+          <div><strong>Sitemap status:</strong> <span id="sitemapStatus"></span></div>
+        </div>
+        <div class="card">
+          <h3>Actions</h3>
+          <button class="btn btn-secondary" onclick="downloadReport()">Download report (CSV)</button>
+          <p class="muted" style="margin-top:8px;">Report includes statuses, recommendations, and first 10 URL checks.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h3>Recommendations</h3>
+        <ul id="recommendations" class="list"></ul>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h3>Sitemap URL checks</h3>
+        <ul id="urlChecks" class="list"></ul>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h3>Visual dashboard</h3>
+        <canvas id="statusChart" width="400" height="200"></canvas>
+      </div>
     </div>
   </div>
+
+  <div class="section">
+    <h2>What this tool checks</h2>
+    <ul class="checklist">
+      <li><strong>Robots.txt presence:</strong> Accessible and valid file returned</li>
+      <li><strong>Sitemap directive:</strong> Flexible detection of “Sitemap:” anywhere in robots.txt</li>
+      <li><strong>Blocked assets:</strong> Flags common resources like CSS/JS/images blocked by Disallow</li>
+      <li><strong>Sitemap presence:</strong> Accessible XML returned via proxy</li>
+      <li><strong>URL parsing:</strong> Namespace-safe detection of <code>&lt;loc&gt;</code> entries</li>
+      <li><strong>Quality checks:</strong> Duplicates, mixed-case URLs, redirect chains, and error statuses</li>
+      <li><strong>Export:</strong> Download a CSV report for stakeholders or audits</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Best practices for robots.txt & sitemap</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Robots.txt essentials</h3>
+        <ul class="list">
+          <li><strong>Keep it simple:</strong> Only disallow areas you truly don’t want crawled</li>
+          <li><strong>Include sitemap:</strong> Add a direct “Sitemap:” line with absolute URL</li>
+          <li><strong>Avoid crawl-delay:</strong> Rarely needed and can slow discovery</li>
+          <li><strong>Don’t block assets:</strong> CSS/JS/images are needed to render pages</li>
+        </ul>
+        <div class="note" style="margin-top:10px;">
+          <strong>Sample robots.txt</strong>
+          <pre>Sitemap: https://example.com/sitemap.xml
+
+User-agent: *
+Disallow:</pre>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Sitemap essentials</h3>
+        <ul class="list">
+          <li><strong>Canonical URLs:</strong> Use lowercase, absolute, 200-OK URLs</li>
+          <li><strong>Keep clean:</strong> Remove redirects and non-indexable pages</li>
+          <li><strong>Split large sites:</strong> Use a sitemap index with multiple child sitemaps</li>
+          <li><strong>Update frequently:</strong> Regenerate when content changes</li>
+        </ul>
+        <div class="note" style="margin-top:10px;">
+          <strong>Sample sitemap entry</strong>
+          <pre>&lt;url&gt;
+  &lt;loc&gt;https://example.com/blog/guide&lt;/loc&gt;
+  &lt;lastmod&gt;2026-01-08&lt;/lastmod&gt;
+  &lt;changefreq&gt;weekly&lt;/changefreq&gt;
+  &lt;priority&gt;0.8&lt;/priority&gt;
+&lt;/url&gt;</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Troubleshooting</h2>
+    <ul class="list">
+      <li><strong>“Add Sitemap directive” warning persists:</strong> Ensure the line exists exactly as “Sitemap: https://yourdomain.com/sitemap.xml”. The tool detects it case-insensitively anywhere in the file.</li>
+      <li><strong>No &lt;loc&gt; entries found:</strong> Your sitemap may be HTML, a custom format, or empty. Make sure it’s valid XML following the sitemaps.org schema.</li>
+      <li><strong>Mixed-case URLs:</strong> Normalize to lowercase for consistency and avoid duplicate crawl paths.</li>
+      <li><strong>Redirects in sitemap:</strong> Replace with final 200-OK targets to speed discovery.</li>
+      <li><strong>Proxy errors:</strong> If a domain blocks the proxy, try again or verify your server’s proxy configuration.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>FAQs</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Do I need both robots.txt and sitemap?</h3>
+        <p class="muted">Robots.txt helps control crawler access; sitemaps help discovery. You should have both, even for small sites.</p>
+      </div>
+      <div class="card">
+        <h3>Where should I host my sitemap?</h3>
+        <p class="muted">At a stable public URL, usually <span class="kbd">/sitemap.xml</span>. Add the sitemap directive in robots.txt and submit in Search Console.</p>
+      </div>
+      <div class="card">
+        <h3>Can I have multiple sitemaps?</h3>
+        <p class="muted">Yes. Use a sitemap index file to list child sitemaps. You can also include multiple “Sitemap:” lines in robots.txt.</p>
+      </div>
+      <div class="card">
+        <h3>Why avoid blocking CSS/JS?</h3>
+        <p class="muted">Search engines render pages. Blocking assets can lead to layout misinterpretation and ranking issues.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="text-align:center;">
+    <h2>Ready to validate your site?</h2>
+    <p class="muted">Run the tester and download the CSV report to share with your team.</p>
+    <a class="cta" href="#siteUrl" onclick="document.getElementById('siteUrl').focus()">Start testing now</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
+    <p>
+      <a href="PrivacyPolicy.html">Privacy Policy</a> | 
+      <a href="terms of service.html">Terms of Service</a> | 
+      <a href="about.html">About</a> | 
+      <a href="contact.html">Contact us</a>
+    </p>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -72,6 +219,7 @@
   async function testRobotsSitemap() {
     const site = document.getElementById("siteUrl").value.trim();
     if (!site) return alert("Please enter a website URL.");
+    const normalized = site.replace(/\/+$/,''); // remove trailing slash
 
     const proxy = "https://toolshub123.com/proxy.php?url=";
 
@@ -81,19 +229,22 @@
     let urlCheckResults = [];
     let statusCounts = {ok:0, redirect:0, error:0};
 
+    // ROBOTS.TXT
     try {
-      const robotsResp = await fetch(proxy + encodeURIComponent(site.replace(/\/$/, "") + "/robots.txt"));
+      const robotsResp = await fetch(proxy + encodeURIComponent(normalized + "/robots.txt"));
       if (robotsResp.ok) {
         const robotsText = await robotsResp.text();
         robotsStatus = "Found";
 
-        // Flexible case-insensitive check for the directive anywhere in file
-        if (!robotsText.match(/sitemap\s*:/i)) {
+        // Flexible case-insensitive sitemap directive detection anywhere in file
+        if (!/sitemap\s*:/i.test(robotsText)) {
           recs.push("⚠️ Add Sitemap directive to robots.txt.");
         }
+
         if (robotsText.toLowerCase().includes("crawl-delay")) {
           recs.push("⚠️ Crawl-delay directive found — may slow indexing.");
         }
+
         ["favicon.ico",".css",".js",".png",".jpg",".jpeg"].forEach(res => {
           if (robotsText.includes("Disallow: /" + res)) {
             recs.push(`⚠️ Important resource blocked in robots.txt: ${res}`);
@@ -104,8 +255,9 @@
       recs.push("❌ Could not fetch robots.txt.");
     }
 
+    // SITEMAP.XML
     try {
-      const sitemapResp = await fetch(proxy + encodeURIComponent(site.replace(/\/$/, "") + "/sitemap.xml"));
+      const sitemapResp = await fetch(proxy + encodeURIComponent(normalized + "/sitemap.xml"));
       if (sitemapResp.ok) {
         const sitemapText = await sitemapResp.text();
         sitemapStatus = "Found";
@@ -113,10 +265,8 @@
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(sitemapText, "application/xml");
 
-        // Namespace-safe <loc> selection
+        // Namespace-safe <loc> selection with fallback
         let urls = Array.from(xmlDoc.getElementsByTagNameNS("*","loc")).map(el => (el.textContent || "").trim());
-
-        // Fallback: plain tag search if namespace method yields nothing
         if (urls.length === 0) {
           urls = Array.from(xmlDoc.getElementsByTagName("loc")).map(el => (el.textContent || "").trim());
         }
@@ -132,9 +282,10 @@
             if (/[A-Z]/.test(u)) recs.push(`⚠️ Mixed-case URL in sitemap: ${u}`);
           });
 
+          // Check first 10 URLs
           for (let u of urls.slice(0,10)) {
             try {
-              const resp = await fetch(proxy + encodeURIComponent(u), {method:"GET"});
+              const resp = await fetch(proxy + encodeURIComponent(u), { method:"GET" });
               urlCheckResults.push(`${u} → ${resp.status}`);
               if (resp.status === 200) statusCounts.ok++;
               else if (resp.status >= 300 && resp.status < 400) {
@@ -155,7 +306,7 @@
       recs.push("❌ Could not fetch sitemap.xml.");
     }
 
-    // Display results
+    // DISPLAY
     document.getElementById("robotsStatus").innerText = robotsStatus;
     document.getElementById("sitemapStatus").innerText = sitemapStatus;
 
@@ -189,27 +340,28 @@
 
     document.getElementById("testResults").style.display = "block";
 
-    // Chart visualization
+    // CHART
     const ctx = document.getElementById("statusChart").getContext("2d");
     new Chart(ctx, {
-      type: 'bar',
+      type: "bar",
       data: {
-        labels: ['200 OK', 'Redirects', 'Errors'],
+        labels: ["200 OK", "Redirects", "Errors"],
         datasets: [{
-          label: 'Sitemap URL Status',
+          label: "Sitemap URL Status",
           data: [statusCounts.ok, statusCounts.redirect, statusCounts.error],
-          backgroundColor: ['#28a745','#ffc107','#dc3545']
+          backgroundColor: ["#28a745","#ffc107","#dc3545"]
         }]
       },
       options: {
         responsive: true,
         plugins: {
           legend: { display: false },
-          title: { display: true, text: 'Sitemap URL Status Breakdown' }
+          title: { display: true, text: "Sitemap URL Status Breakdown" }
         }
       }
     });
 
+    // EXPORT
     window.__testReport = { robotsStatus, sitemapStatus, recommendations: recs, urlChecks: urlCheckResults, statusCounts };
   }
 
@@ -242,30 +394,5 @@
     URL.revokeObjectURL(url);
   }
   </script>
-
-  <div class="section">
-    <h2>How It Works</h2>
-    <ul>
-      <li>✔ Enter your site URL and run the tester</li>
-      <li>✔ We fetch robots.txt and sitemap via proxy</li>
-      <li>✔ See recommendations and URL status checks</li>
-      <li>✔ Download a CSV report for your records</li>
-    </ul>
-  </div>
-  
-  <div class="section">
-    <h2>About This Tool</h2>
-    <p>This tool helps ensure search engines can crawl your site correctly by validating robots.txt and sitemap configuration, highlighting issues that impact indexing and crawl efficiency.</p>
-  </div>
-
-  <footer>
-    <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
-    <p>
-      <a href="PrivacyPolicy.html">Privacy Policy</a> | 
-      <a href="terms of service.html">Terms of Service</a> | 
-      <a href="about.html">About</a> | 
-      <a href="contact.html">Contact us</a>
-    </p>
-  </footer>
 </body>
 </html>
