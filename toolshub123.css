@@ -28,20 +28,17 @@ header .logo {
   max-height: 80px; /* ✅ preferred logo height */
 }
 
-.header-nav ul {
-  list-style: none;
+/* Navigation */
+.header-nav {
   display: flex;
-  gap: 20px;
-}
-
-.header-nav li {
-  display: inline-block;
+  gap: 25px; /* ✅ consistent spacing between links */
 }
 
 .header-nav a {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
+  padding: 8px 12px; /* ✅ breathing room inside each link */
   transition: color 0.3s ease;
 }
 
@@ -115,6 +112,7 @@ a.btn:hover {
 .hero {
   text-align: center;
   padding: 60px 20px;
+  background: #F4F6F8;
 }
 
 .hero h1 {
@@ -189,13 +187,10 @@ a.btn:hover {
   .header-nav {
     display: none;
     width: 100%;
-  }
-
-  .header-nav ul {
     flex-direction: column;
+    gap: 15px; /* ✅ vertical spacing between stacked links */
+    margin-top: 15px;
     text-align: center;
-    gap: 10px;
-    padding: 20px 0;
   }
 
   .menu-toggle {
@@ -203,10 +198,8 @@ a.btn:hover {
   }
 
   .header-nav.active {
-    display: block;
+    display: flex;
   }
-
-  nav { margin-top: 10px; }
 
   .card,
   .tool-card {
