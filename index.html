@@ -62,6 +62,90 @@
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#00BFA6">
+  
+  <!-- header css -->
+  <style>
+/* Base Header */
+header {
+  background:#0A192F;
+  color:#fff;
+  padding:15px 30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.logo {
+  max-height:60px;
+}
+
+/* Navigation */
+.header-nav ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  gap:20px;
+}
+
+.header-nav li {
+  display:inline-block;
+}
+
+.header-nav a {
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  transition:color 0.3s ease;
+}
+
+.header-nav a:hover {
+  color:#00BFA6;
+}
+
+.header-nav a.active {
+  color:#00BFA6;
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+  display:none;
+  flex-direction:column;
+  cursor:pointer;
+}
+
+.menu-toggle span {
+  height:3px;
+  width:25px;
+  background:#fff;
+  margin:4px 0;
+  border-radius:2px;
+}
+
+/* Mobile Styles */
+@media (max-width:768px) {
+  .header-nav {
+    display:none;
+    width:100%;
+  }
+
+  .header-nav ul {
+    flex-direction:column;
+    text-align:center;
+    gap:10px;
+    padding:20px 0;
+  }
+
+  .menu-toggle {
+    display:flex;
+  }
+
+  .header-nav.active {
+    display:block;
+  }
+}
+</style>
   <style>
   body { font-family: 'Syne', sans-serif; margin:0; background:#F4F6F8; }
   header { background:#0A192F; color:#fff; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; }
@@ -124,16 +208,27 @@
 </head>
 <body>
 
-  <!-- Header with Logo + Navigation -->
-<header>
-  <img src="logo.png" alt="Toolshub123 Logo" class="logo">
+  <header>
+  <a href="https://toolshub123.com/" class="logo-link">
+    <img src="logo.png" alt="Toolshub123 – Free Online Tools" class="logo">
+  </a>
 
-  <nav class="header-nav">
-    <a href="https://toolshub123.com/">Home</a>
-    <a href="https://toolshub123.com/SEO%20tools.html">SEO Tools</a>
-    <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
-    <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
-    <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
+  <!-- Hamburger Menu -->
+  <div class="menu-toggle" onclick="document.querySelector('.header-nav').classList.toggle('active')">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="header-nav" aria-label="Main Navigation">
+    <ul>
+      <li><a href="https://toolshub123.com/" class="active">Home</a></li>
+      <li><a href="https://toolshub123.com/seo-tools.html">SEO Tools</a></li>
+      <li><a href="https://toolshub123.com/finance-tools.html">Finance Tools</a></li>
+      <li><a href="https://toolshub123.com/utility-tools.html">Utility Tools</a></li>
+      <li><a href="https://toolshub123.com/health-tools.html">Health Tools</a></li>
+    </ul>
   </nav>
 </header>
 
@@ -279,6 +374,7 @@ document.getElementById("suggestForm").addEventListener("submit", function(e) {
 </footer>
 </body>
 </html>
+
 
 
 
