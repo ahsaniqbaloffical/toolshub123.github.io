@@ -59,211 +59,187 @@
   </div>
 <!-- Tool Section: Analyzer -->
 <!-- Tool Section: Analyzer -->
-<div class="section">
+<div class="section" style="max-width:800px; margin:40px auto; background:#fff; padding:25px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
   <h2>Meta Tag Analyzer Tool</h2>
   <p>Paste your HTML code below and click "Analyze" to extract and review meta tags.</p>
-  <textarea id="htmlInput" placeholder="Paste your HTML code here..." style="width:100%; height:200px; padding:10px; border:1px solid #ccc; border-radius:5px;"></textarea>
-  <button onclick="analyzeMetaTags()" style="background:#00BFA6; color:#fff; padding:12px 25px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Analyze</button>
+
+  <textarea id="htmlInput" placeholder="Paste your HTML code here..."
+    style="width:100%; height:200px; padding:10px; border:1px solid #ccc; border-radius:5px; font-family:monospace;"></textarea>
+
+  <button onclick="analyzeMetaTags()" style="background:#00BFA6; color:#fff; padding:12px 25px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">
+    Analyze
+  </button>
 
   <div id="results" style="display:none; margin-top:20px; background:#f9f9f9; padding:20px; border-radius:10px;">
     <h3>Analysis Results</h3>
 
     <!-- SERP Previews -->
-    <h3 style="margin-top:20px; color:#0073e6;">Search Engine Preview</h3>
+    <h3 style="margin-top:10px; color:#0073e6;">Search Engine Preview</h3>
 
-    <div style="margin-bottom:20px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
+    <div style="margin-bottom:12px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
       <h4 style="color:#1a0dab; margin:0;">Google Preview</h4>
-      <p id="googleTitle" style="font-size:18px; color:#1a0dab; margin:5px 0;">Example Title</p>
-      <p id="googleUrl" style="font-size:14px; color:#006621; margin:5px 0;">https://example.com/</p>
-      <p id="googleDescription" style="font-size:14px; color:#545454; margin:5px 0;">This is how your meta description may appear in Google search results.</p>
+      <p id="googleTitle" style="font-size:18px; color:#1a0dab; margin:5px 0;">—</p>
+      <p id="googleUrl" style="font-size:14px; color:#006621; margin:5px 0;">—</p>
+      <p id="googleDescription" style="font-size:14px; color:#545454; margin:5px 0;">—</p>
     </div>
 
-    <div style="margin-bottom:20px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
+    <div style="margin-bottom:12px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
       <h4 style="color:#008373; margin:0;">Bing Preview</h4>
-      <p id="bingTitle" style="font-size:18px; color:#008373; margin:5px 0;">Example Title</p>
-      <p id="bingUrl" style="font-size:14px; color:#006621; margin:5px 0;">https://example.com/</p>
-      <p id="bingDescription" style="font-size:14px; color:#545454; margin:5px 0;">This is how your meta description may appear in Bing search results.</p>
+      <p id="bingTitle" style="font-size:18px; color:#008373; margin:5px 0;">—</p>
+      <p id="bingUrl" style="font-size:14px; color:#006621; margin:5px 0;">—</p>
+      <p id="bingDescription" style="font-size:14px; color:#545454; margin:5px 0;">—</p>
     </div>
 
-    <div style="margin-bottom:20px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
+    <div style="margin-bottom:12px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
       <h4 style="color:#600090; margin:0;">Yahoo Preview</h4>
-      <p id="yahooTitle" style="font-size:18px; color:#600090; margin:5px 0;">Example Title</p>
-      <p id="yahooUrl" style="font-size:14px; color:#006621; margin:5px 0;">https://example.com/</p>
-      <p id="yahooDescription" style="font-size:14px; color:#545454; margin:5px 0;">This is how your meta description may appear in Yahoo search results.</p>
+      <p id="yahooTitle" style="font-size:18px; color:#600090; margin:5px 0;">—</p>
+      <p id="yahooUrl" style="font-size:14px; color:#006621; margin:5px 0;">—</p>
+      <p id="yahooDescription" style="font-size:14px; color:#545454; margin:5px 0;">—</p>
     </div>
 
     <!-- SEO Basics -->
-    <div><strong>Title:</strong> <span id="titleResult"></span></div>
-    <div><strong>Title Length:</strong> <span id="titleLength"></span></div>
-    <div><strong>Meta Description:</strong> <span id="descriptionResult"></span></div>
-    <div><strong>Description Length:</strong> <span id="descriptionLength"></span></div>
-    <div><strong>Meta Keywords:</strong> <span id="keywordsResult"></span></div>
-    <div><strong>Meta Robots:</strong> <span id="robotsResult"></span></div>
-    <div><strong>Canonical URL:</strong> <span id="canonicalResult"></span></div>
-    <div><strong>Viewport:</strong> <span id="viewportResult"></span></div>
-    <div><strong>Author:</strong> <span id="authorResult"></span></div>
-    <div><strong>Duplicate Tags:</strong> <span id="duplicateResult"></span></div>
-    <div><strong>Heading Structure:</strong> <span id="headingResult"></span></div>
+    <div><strong>Title:</strong> <span id="titleResult">—</span></div>
+    <div><strong>Title Length:</strong> <span id="titleLength">—</span></div>
+    <div><strong>Meta Description:</strong> <span id="descriptionResult">—</span></div>
+    <div><strong>Description Length:</strong> <span id="descriptionLength">—</span></div>
+    <div><strong>Meta Keywords:</strong> <span id="keywordsResult">—</span></div>
+    <div><strong>Meta Robots:</strong> <span id="robotsResult">—</span></div>
+    <div><strong>Canonical URL:</strong> <span id="canonicalResult">—</span></div>
+    <div><strong>Viewport:</strong> <span id="viewportResult">—</span></div>
+    <div><strong>Author:</strong> <span id="authorResult">—</span></div>
+    <div><strong>Duplicate Tags:</strong> <span id="duplicateResult">—</span></div>
+    <div><strong>Heading Structure:</strong> <span id="headingResult">—</span></div>
 
     <!-- Open Graph -->
     <h3>Open Graph</h3>
-    <div><strong>OG Title:</strong> <span id="ogTitleResult"></span></div>
-    <div><strong>OG Description:</strong> <span id="ogDescriptionResult"></span></div>
-    <div><strong>OG Image:</strong> <span id="ogImageResult"></span></div>
-    <div><strong>OG URL:</strong> <span id="ogUrlResult"></span></div>
-    <div><strong>OG Type:</strong> <span id="ogTypeResult"></span></div>
-    <div><strong>OG Site Name:</strong> <span id="ogSiteNameResult"></span></div>
+    <div><strong>OG Title:</strong> <span id="ogTitleResult">—</span></div>
+    <div><strong>OG Description:</strong> <span id="ogDescriptionResult">—</span></div>
+    <div><strong>OG Image:</strong> <span id="ogImageResult">—</span></div>
+    <div><strong>OG URL:</strong> <span id="ogUrlResult">—</span></div>
+    <div><strong>OG Type:</strong> <span id="ogTypeResult">—</span></div>
+    <div><strong>OG Site Name:</strong> <span id="ogSiteNameResult">—</span></div>
 
     <!-- Twitter -->
     <h3>Twitter</h3>
-    <div><strong>Twitter Card:</strong> <span id="twitterCardResult"></span></div>
-    <div><strong>Twitter Title:</strong> <span id="twitterTitleResult"></span></div>
-    <div><strong>Twitter Description:</strong> <span id="twitterDescriptionResult"></span></div>
-    <div><strong>Twitter Image:</strong> <span id="twitterImageResult"></span></div>
-    <div><strong>Twitter Site:</strong> <span id="twitterSiteResult"></span></div>
-    <div><strong>Twitter Creator:</strong> <span id="twitterCreatorResult"></span></div>
+    <div><strong>Twitter Card:</strong> <span id="twitterCardResult">—</span></div>
+    <div><strong>Twitter Title:</strong> <span id="twitterTitleResult">—</span></div>
+    <div><strong>Twitter Description:</strong> <span id="twitterDescriptionResult">—</span></div>
+    <div><strong>Twitter Image:</strong> <span id="twitterImageResult">—</span></div>
+    <div><strong>Twitter Site:</strong> <span id="twitterSiteResult">—</span></div>
+    <div><strong>Twitter Creator:</strong> <span id="twitterCreatorResult">—</span></div>
 
     <!-- Mobile / UX -->
     <h3>Mobile / UX</h3>
-    <div><strong>Apple Touch Icon:</strong> <span id="appleTouchIconResult"></span></div>
-    <div><strong>Theme Color:</strong> <span id="themeColorResult"></span></div>
-    <div><strong>Favicon:</strong> <span id="faviconResult"></span></div>
+    <div><strong>Apple Touch Icon:</strong> <span id="appleTouchIconResult">—</span></div>
+    <div><strong>Theme Color:</strong> <span id="themeColorResult">—</span></div>
+    <div><strong>Favicon:</strong> <span id="faviconResult">—</span></div>
 
     <!-- Technical / Security -->
     <h3>Technical / Security</h3>
-    <div><strong>Charset:</strong> <span id="charsetResult"></span></div>
-    <div><strong>Lang Attribute:</strong> <span id="langAttrResult"></span></div>
-    <div><strong>CSP:</strong> <span id="cspResult"></span></div>
-    <div><strong>Referrer Policy:</strong> <span id="referrerPolicyResult"></span></div>
-    <div><strong>X-UA-Compatible:</strong> <span id="xUaCompatibleResult"></span></div>
+    <div><strong>Charset:</strong> <span id="charsetResult">—</span></div>
+    <div><strong>Lang Attribute:</strong> <span id="langAttrResult">—</span></div>
+    <div><strong>CSP:</strong> <span id="cspResult">—</span></div>
+    <div><strong>Referrer Policy:</strong> <span id="referrerPolicyResult">—</span></div>
+    <div><strong>X-UA-Compatible:</strong> <span id="xUaCompatibleResult">—</span></div>
 
     <!-- Structured Data -->
     <h3>Structured Data</h3>
-    <div><strong>JSON-LD:</strong> <span id="jsonLdResult"></span></div>
+    <div><strong>JSON-LD:</strong> <span id="jsonLdResult">—</span></div>
 
     <h3 style="margin-top:20px;">Recommendations</h3>
     <ul id="recommendations"></ul>
 
-    <!-- Download Button -->
-    <button onclick="downloadReport()" style="background:#007BFF; color:#fff; padding:10px 20px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Download Report (CSV)</button>
+    <button onclick="downloadReport()" style="background:#007BFF; color:#fff; padding:10px 20px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">
+      Download Report (CSV)
+    </button>
   </div>
 </div>
-  
-<script>
-  <script>
-function analyzeMetaTags() {
-  const html = document.getElementById("htmlInput").value;
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
 
-  // Extract meta tags
-  const title = doc.querySelector("title") ? doc.querySelector("title").innerText : "No title found";
-  const description = doc.querySelector("meta[name='description']") ? doc.querySelector("meta[name='description']").getAttribute("content") : "No description found";
-  const canonical = doc.querySelector("link[rel='canonical']") ? doc.querySelector("link[rel='canonical']").getAttribute("href") : "https://example.com/";
-
-  // Fill analysis results
-  document.getElementById("titleResult").innerText = title;
-  document.getElementById("titleLength").innerText = title.length + " characters";
-  document.getElementById("descriptionResult").innerText = description;
-  document.getElementById("descriptionLength").innerText = description.length + " characters";
-  document.getElementById("canonicalResult").innerText = canonical;
-
-  // Fill SERP previews
-  document.getElementById("googleTitle").innerText = title;
-  document.getElementById("googleUrl").innerText = canonical;
-  document.getElementById("googleDescription").innerText = description;
-
-  document.getElementById("bingTitle").innerText = title;
-  document.getElementById("bingUrl").innerText = canonical;
-  document.getElementById("bingDescription").innerText = description;
-
-  document.getElementById("yahooTitle").innerText = title;
-  document.getElementById("yahooUrl").innerText = canonical;
-  document.getElementById("yahooDescription").innerText = description;
-
-  // Recommendations
-  const recs = [];
-  if (title.length > 60) recs.push("⚠️ Title is too long. Keep under 60 characters.");
-  if (description.length < 50) recs.push("⚠️ Meta description is too short. Aim for 150–160 characters.");
-  if (description === "No description found") recs.push("❌ Missing meta description. Add one for better CTR.");
-
-  const recList = document.getElementById("recommendations");
-  recList.innerHTML = "";
-  recs.forEach(r => {
-    const li = document.createElement("li");
-    li.innerText = r;
-    recList.appendChild(li);
-  });
-
-  // Show results
-  document.getElementById("results").style.display = "block";
-}
 <script>
 function analyzeMetaTags() {
   const input = document.getElementById("htmlInput").value.trim();
-  if (!input) {
-    alert("Please paste HTML code first.");
-    return;
-  }
+  if (!input) { alert("Please paste HTML code first."); return; }
 
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(input, "text/html");
+  const doc = new DOMParser().parseFromString(input, "text/html");
 
-  // Basic SEO tags
+  // Basics
   const title = doc.querySelector("title")?.innerText || "Not found";
-  const description = doc.querySelector("meta[name='description']")?.getAttribute("content") || "Not found";
-  const keywords = doc.querySelector("meta[name='keywords']")?.getAttribute("content") || "Not found";
-  const robots = doc.querySelector("meta[name='robots']")?.getAttribute("content") || "Not found";
-  const canonical = doc.querySelector("link[rel='canonical']")?.getAttribute("href") || "Not found";
-  const viewport = doc.querySelector("meta[name='viewport']")?.getAttribute("content") || "Not found";
-  const author = doc.querySelector("meta[name='author']")?.getAttribute("content") || "Not found";
+  const description = doc.querySelector("meta[name='description']")?.content || "Not found";
+  const keywords = doc.querySelector("meta[name='keywords']")?.content || "Not found";
+  const robots = doc.querySelector("meta[name='robots']")?.content || "Not found";
+  const canonical = doc.querySelector("link[rel='canonical']")?.href || "Not found";
+  const viewport = doc.querySelector("meta[name='viewport']")?.content || "Not found";
+  const author = doc.querySelector("meta[name='author']")?.content || "Not found";
 
-  // Social / Open Graph
-  const ogTitle = doc.querySelector("meta[property='og:title']")?.getAttribute("content") || "Not found";
-  const ogDescription = doc.querySelector("meta[property='og:description']")?.getAttribute("content") || "Not found";
-  const ogImage = doc.querySelector("meta[property='og:image']")?.getAttribute("content") || "Not found";
-  const ogUrl = doc.querySelector("meta[property='og:url']")?.getAttribute("content") || "Not found";
-  const ogType = doc.querySelector("meta[property='og:type']")?.getAttribute("content") || "Not found";
-  const ogSiteName = doc.querySelector("meta[property='og:site_name']")?.getAttribute("content") || "Not found";
+  // Open Graph
+  const ogTitle = doc.querySelector("meta[property='og:title']")?.content || "Not found";
+  const ogDescription = doc.querySelector("meta[property='og:description']")?.content || "Not found";
+  const ogImage = doc.querySelector("meta[property='og:image']")?.content || "Not found";
+  const ogUrl = doc.querySelector("meta[property='og:url']")?.content || "Not found";
+  const ogType = doc.querySelector("meta[property='og:type']")?.content || "Not found";
+  const ogSiteName = doc.querySelector("meta[property='og:site_name']")?.content || "Not found";
 
   // Twitter
-  const twitterCard = doc.querySelector("meta[name='twitter:card']")?.getAttribute("content") || "Not found";
-  const twitterTitle = doc.querySelector("meta[name='twitter:title']")?.getAttribute("content") || "Not found";
-  const twitterDescription = doc.querySelector("meta[name='twitter:description']")?.getAttribute("content") || "Not found";
-  const twitterImage = doc.querySelector("meta[name='twitter:image']")?.getAttribute("content") || "Not found";
-  const twitterSite = doc.querySelector("meta[name='twitter:site']")?.getAttribute("content") || "Not found";
-  const twitterCreator = doc.querySelector("meta[name='twitter:creator']")?.getAttribute("content") || "Not found";
+  const twitterCard = doc.querySelector("meta[name='twitter:card']")?.content || "Not found";
+  const twitterTitle = doc.querySelector("meta[name='twitter:title']")?.content || "Not found";
+  const twitterDescription = doc.querySelector("meta[name='twitter:description']")?.content || "Not found";
+  const twitterImage = doc.querySelector("meta[name='twitter:image']")?.content || "Not found";
+  const twitterSite = doc.querySelector("meta[name='twitter:site']")?.content || "Not found";
+  const twitterCreator = doc.querySelector("meta[name='twitter:creator']")?.content || "Not found";
 
   // Mobile / UX
-  const appleTouchIcon = doc.querySelector("link[rel='apple-touch-icon']")?.getAttribute("href") || "Not found";
-  const themeColor = doc.querySelector("meta[name='theme-color']")?.getAttribute("content") || "Not found";
-  const favicon = doc.querySelector("link[rel='icon']")?.getAttribute("href") || "Not found";
+  const appleTouchIcon = doc.querySelector("link[rel='apple-touch-icon']")?.href || "Not found";
+  const themeColor = doc.querySelector("meta[name='theme-color']")?.content || "Not found";
+  const favicon = doc.querySelector("link[rel='icon']")?.href || "Not found";
 
   // Technical / Security
   const charset = doc.querySelector("meta[charset]")?.getAttribute("charset") || "Not found";
   const langAttr = doc.documentElement.getAttribute("lang") || "Not found";
-  const csp = doc.querySelector("meta[http-equiv='Content-Security-Policy']")?.getAttribute("content") || "Not found";
-  const referrerPolicy = doc.querySelector("meta[name='referrer']")?.getAttribute("content") || "Not found";
-  const xUaCompatible = doc.querySelector("meta[http-equiv='X-UA-Compatible']")?.getAttribute("content") || "Not found";
+  const csp = doc.querySelector("meta[http-equiv='Content-Security-Policy']")?.content || "Not found";
+  const referrerPolicy = doc.querySelector("meta[name='referrer']")?.content || "Not found";
+  const xUaCompatible = doc.querySelector("meta[http-equiv='X-UA-Compatible']")?.content || "Not found";
 
-  // Structured Data
+  // Structured data
   const jsonLd = doc.querySelector("script[type='application/ld+json']") ? "Found" : "Not found";
 
-  // Length checks
-  const titleLength = title !== "Not found" ? title.length : 0;
-  const descriptionLength = description !== "Not found" ? description.length : 0;
-
-  // Duplicate detection
+  // Lengths, duplicates, headings
+  const titleLength = title === "Not found" ? 0 : title.length;
+  const descriptionLength = description === "Not found" ? 0 : description.length;
   const duplicates = [];
   if (doc.querySelectorAll("title").length > 1) duplicates.push("Multiple <title> tags found");
   if (doc.querySelectorAll("meta[name='description']").length > 1) duplicates.push("Multiple meta descriptions found");
   if (doc.querySelectorAll("meta[name='keywords']").length > 1) duplicates.push("Multiple meta keywords tags found");
-
-  // Heading analysis
   const h1 = doc.querySelectorAll("h1").length;
   const h2 = doc.querySelectorAll("h2").length;
   const h3 = doc.querySelectorAll("h3").length;
   const headingMsg = `H1: ${h1}, H2: ${h2}, H3: ${h3}`;
+
+  // Fill results
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+  set("titleResult", title); set("titleLength", `${titleLength} characters`);
+  set("descriptionResult", description); set("descriptionLength", `${descriptionLength} characters`);
+  set("keywordsResult", keywords); set("robotsResult", robots); set("canonicalResult", canonical);
+  set("viewportResult", viewport); set("authorResult", author);
+  set("duplicateResult", duplicates.length ? duplicates.join("; ") : "No duplicates detected");
+  set("headingResult", headingMsg);
+
+  set("ogTitleResult", ogTitle); set("ogDescriptionResult", ogDescription); set("ogImageResult", ogImage);
+  set("ogUrlResult", ogUrl); set("ogTypeResult", ogType); set("ogSiteNameResult", ogSiteName);
+
+  set("twitterCardResult", twitterCard); set("twitterTitleResult", twitterTitle);
+  set("twitterDescriptionResult", twitterDescription); set("twitterImageResult", twitterImage);
+  set("twitterSiteResult", twitterSite); set("twitterCreatorResult", twitterCreator);
+
+  set("appleTouchIconResult", appleTouchIcon); set("themeColorResult", themeColor); set("faviconResult", favicon);
+  set("charsetResult", charset); set("langAttrResult", langAttr); set("cspResult", csp);
+  set("referrerPolicyResult", referrerPolicy); set("xUaCompatibleResult", xUaCompatible);
+  set("jsonLdResult", jsonLd);
+
+  // SERP previews
+  const safeCanonical = canonical === "Not found" ? "https://example.com/" : canonical;
+  set("googleTitle", title); set("googleUrl", safeCanonical); set("googleDescription", description);
+  set("bingTitle", title);   set("bingUrl", safeCanonical);   set("bingDescription", description);
+  set("yahooTitle", title);  set("yahooUrl", safeCanonical);  set("yahooDescription", description);
 
   // Recommendations
   const recs = [];
@@ -279,150 +255,46 @@ function analyzeMetaTags() {
   if (h1 === 0) recs.push("❌ No H1 tag found.");
   if (h1 > 1) recs.push("⚠️ Multiple H1 tags detected.");
 
-  // Display values
-  document.getElementById("titleResult").innerText = title;
-  document.getElementById("titleLength").innerText = titleLength + " characters";
-  document.getElementById("descriptionResult").innerText = description;
-  document.getElementById("descriptionLength").innerText = descriptionLength + " characters";
-  document.getElementById("keywordsResult").innerText = keywords;
-  document.getElementById("robotsResult").innerText = robots;
-  document.getElementById("canonicalResult").innerText = canonical;
-  document.getElementById("viewportResult").innerText = viewport;
-  document.getElementById("authorResult").innerText = author;
-  document.getElementById("duplicateResult").innerText = duplicates.length ? duplicates.join("; ") : "No duplicates detected";
-  document.getElementById("headingResult").innerText = headingMsg;
-
-  document.getElementById("ogTitleResult").innerText = ogTitle;
-  document.getElementById("ogDescriptionResult").innerText = ogDescription;
-  document.getElementById("ogImageResult").innerText = ogImage;
-  document.getElementById("ogUrlResult").innerText = ogUrl;
-  document.getElementById("ogTypeResult").innerText = ogType;
-  document.getElementById("ogSiteNameResult").innerText = ogSiteName;
-
-  document.getElementById("twitterCardResult").innerText = twitterCard;
-  document.getElementById("twitterTitleResult").innerText = twitterTitle;
-  document.getElementById("twitterDescriptionResult").innerText = twitterDescription;
-  document.getElementById("twitterImageResult").innerText = twitterImage;
-  document.getElementById("twitterSiteResult").innerText = twitterSite;
-  document.getElementById("twitterCreatorResult").innerText = twitterCreator;
-
-  document.getElementById("appleTouchIconResult").innerText = appleTouchIcon;
-  document.getElementById("themeColorResult").innerText = themeColor;
-  document.getElementById("faviconResult").innerText = favicon;
-
-  document.getElementById("charsetResult").innerText = charset;
-  document.getElementById("langAttrResult").innerText = langAttr;
-  document.getElementById("cspResult").innerText = csp;
-  document.getElementById("referrerPolicyResult").innerText = referrerPolicy;
-  document.getElementById("xUaCompatibleResult").innerText = xUaCompatible;
-
-  document.getElementById("jsonLdResult").innerText = jsonLd;
-
-  // SERP previews
-  const gTitleEl = document.getElementById("googleTitle");
-  const gUrlEl = document.getElementById("googleUrl");
-  const gDescEl = document.getElementById("googleDescription");
-  const bTitleEl = document.getElementById("bingTitle");
-  const bUrlEl = document.getElementById("bingUrl");
-  const bDescEl = document.getElementById("bingDescription");
-  const yTitleEl = document.getElementById("yahooTitle");
-  const yUrlEl = document.getElementById("yahooUrl");
-  const yDescEl = document.getElementById("yahooDescription");
-
-  if (gTitleEl) gTitleEl.innerText = title;
-  if (gUrlEl) gUrlEl.innerText = canonical === "Not found" ? "https://example.com/" : canonical;
-  if (gDescEl) gDescEl.innerText = description;
-
-  if (bTitleEl) bTitleEl.innerText = title;
-  if (bUrlEl) bUrlEl.innerText = canonical === "Not found" ? "https://example.com/" : canonical;
-  if (bDescEl) bDescEl.innerText = description;
-
-  if (yTitleEl) yTitleEl.innerText = title;
-  if (yUrlEl) yUrlEl.innerText = canonical === "Not found" ? "https://example.com/" : canonical;
-  if (yDescEl) yDescEl.innerText = description;
-
-  // Recommendations display
   const recList = document.getElementById("recommendations");
   recList.innerHTML = "";
-  recs.forEach(r => {
-    const li = document.createElement("li");
-    li.innerText = r;
-    recList.appendChild(li);
-  });
+  recs.forEach(r => { const li = document.createElement("li"); li.innerText = r; recList.appendChild(li); });
 
-  // Show results
   document.getElementById("results").style.display = "block";
 
-  // Store for export
+  // Store for CSV export
   window.__metaReport = {
     title, titleLength, description, descriptionLength, keywords, robots, canonical, viewport, author,
     duplicates: duplicates.length ? duplicates.join("; ") : "No duplicates detected",
-    headingMsg,
-    ogTitle, ogDescription, ogImage, ogUrl, ogType, ogSiteName,
+    headingMsg, ogTitle, ogDescription, ogImage, ogUrl, ogType, ogSiteName,
     twitterCard, twitterTitle, twitterDescription, twitterImage, twitterSite, twitterCreator,
-    appleTouchIcon, themeColor, favicon,
-    charset, langAttr, csp, referrerPolicy, xUaCompatible,
-    jsonLd,
-    recommendations: recs
+    appleTouchIcon, themeColor, favicon, charset, langAttr, csp, referrerPolicy, xUaCompatible,
+    jsonLd, recommendations: recs
   };
 }
 
 function downloadReport() {
   const data = window.__metaReport;
   if (!data) return alert("Analyze a page first.");
-
   const rows = [
-    ["Title", data.title],
-    ["Title Length", data.titleLength],
-    ["Meta Description", data.description],
-    ["Description Length", data.descriptionLength],
-    ["Meta Keywords", data.keywords],
-    ["Meta Robots", data.robots],
-    ["Canonical URL", data.canonical],
-    ["Viewport", data.viewport],
-    ["Author", data.author],
-    ["Duplicate Tags", data.duplicates],
-    ["Heading Structure", data.headingMsg],
-    ["OG Title", data.ogTitle],
-    ["OG Description", data.ogDescription],
-    ["OG Image", data.ogImage],
-    ["OG URL", data.ogUrl],
-    ["OG Type", data.ogType],
-    ["OG Site Name", data.ogSiteName],
-    ["Twitter Card", data.twitterCard],
-    ["Twitter Title", data.twitterTitle],
-    ["Twitter Description", data.twitterDescription],
-    ["Twitter Image", data.twitterImage],
-    ["Twitter Site", data.twitterSite],
-    ["Twitter Creator", data.twitterCreator],
-    ["Apple Touch Icon", data.appleTouchIcon],
-    ["Theme Color", data.themeColor],
-    ["Favicon", data.favicon],
-    ["Charset", data.charset],
-    ["Lang Attribute", data.langAttr],
-    ["CSP", data.csp],
-    ["Referrer Policy", data.referrerPolicy],
-    ["X-UA-Compatible", data.xUaCompatible],
-    ["JSON-LD", data.jsonLd],
-    ["Recommendations", (data.recommendations || []).join(" | ")]
+    ["Title", data.title], ["Title Length", data.titleLength],
+    ["Meta Description", data.description], ["Description Length", data.descriptionLength],
+    ["Meta Keywords", data.keywords], ["Meta Robots", data.robots],
+    ["Canonical URL", data.canonical], ["Viewport", data.viewport], ["Author", data.author],
+    ["Duplicate Tags", data.duplicates], ["Heading Structure", data.headingMsg],
+    ["OG Title", data.ogTitle], ["OG Description", data.ogDescription], ["OG Image", data.ogImage],
+    ["OG URL", data.ogUrl], ["OG Type", data.ogType], ["OG Site Name", data.ogSiteName],
+    ["Twitter Card", data.twitterCard], ["Twitter Title", data.twitterTitle],
+    ["Twitter Description", data.twitterDescription], ["Twitter Image", data.twitterImage],
+    ["Twitter Site", data.twitterSite], ["Twitter Creator", data.twitterCreator],
+    ["Apple Touch Icon", data.appleTouchIcon], ["Theme Color", data.themeColor], ["Favicon", data.favicon],
+    ["Charset", data.charset], ["Lang Attribute", data.langAttr], ["CSP", data.csp],
+    ["Referrer Policy", data.referrerPolicy], ["X-UA-Compatible", data.xUaCompatible],
+    ["JSON-LD", data.jsonLd], ["Recommendations", (data.recommendations || []).join(" | ")]
   ];
-
-  const csv = "Field,Value\n" + rows.map(r =>
-    r.map(v => {
-      const s = String(v ?? "");
-      return `"${s.replace(/"/g, '""')}"`;
-    }).join(",")
-  ).join("\n");
-
+  const csv = "Field,Value\n" + rows.map(r => r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "meta-tag-analyzer-report.csv";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: "meta-tag-analyzer-report.csv" });
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(a.href);
 }
 </script>
 
@@ -520,6 +392,7 @@ function downloadReport() {
 </footer>
 </body>
 </html>
+
 
 
 
