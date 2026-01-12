@@ -37,30 +37,59 @@
 
   <style>
     body { font-family: 'Syne', sans-serif; margin:0; background:#F4F6F8; }
-    header { background:#0A192F; color:#fff; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; }
-    header img { max-height:100px; }
-    nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:600; }
+
+    /* Header */
+    header { background:#0A192F; color:#fff; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    header img { max-height:80px; }
+    nav ul { list-style:none; margin:0; padding:0; display:flex; gap:20px; }
+    nav li { display:inline-block; }
+    nav a { color:#fff; text-decoration:none; font-weight:600; transition:color 0.3s ease; }
+    nav a:hover { color:#00BFA6; }
     nav a.active { color:#00BFA6; }
+
+    /* Hamburger Menu */
+    .menu-toggle { display:none; flex-direction:column; cursor:pointer; }
+    .menu-toggle span { height:3px; width:25px; background:#fff; margin:4px 0; border-radius:2px; }
+
+    /* Hero */
     .hero { text-align:center; padding:40px; }
+
+    /* Tool Cards */
     .container { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:30px; }
     .tool-card { background:#fff; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:25px; width:280px; text-align:center; }
     .tool-card h2 { color:#0A192F; margin-top:0; }
     .tool-card a { display:inline-block; margin-top:10px; background:#00BFA6; color:#fff; padding:8px 15px; border-radius:5px; text-decoration:none; font-weight:600; }
     .tool-card a:hover { background:#008f7a; }
+
+    /* Sections */
     .section { max-width:900px; margin:40px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
+
+    /* Footer */
     footer { background:#0A192F; color:#fff; text-align:center; padding:20px; }
     footer a { color:#00BFA6; text-decoration:none; margin:0 10px; }
-    
-     /* Mobile Optimizations */
-    @media (max-width: 600px) {
-      nav { display:block; text-align:center; }
+
+    /* Mobile Optimizations */
+    @media (max-width:768px) {
+      header { flex-direction:column; text-align:center; }
+      nav { display:none; width:100%; }
+      nav ul { flex-direction:column; text-align:center; gap:10px; padding:20px 0; }
+      .menu-toggle { display:flex; }
+      nav.active { display:block; }
+      .container { gap:15px; }
+      .tool-card { width:45%; }
+    }
+
+    @media (max-width:600px) {
       nav a { display:block; margin:10px 0; }
       .tool-card { width:100%; }
     }
-    @media (max-width: 480px) {
+
+    @media (max-width:480px) {
       .hero h1 { font-size:24px; }
       .hero p { font-size:16px; }
       .section { padding:20px; }
+      .tool-card { padding:20px; }
+    }
   </style>
 </head>
 <body>
@@ -201,6 +230,7 @@
 
 </body>
 </html>
+
 
 
 
