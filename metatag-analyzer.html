@@ -148,97 +148,6 @@
     <button onclick="downloadReport()" style="background:#007BFF; color:#fff; padding:10px 20px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Download Report (CSV)</button>
   </div>
 </div>
-<!-- Tool Section: Analyzer -->
-<div class="section">
-  <h2>Meta Tag Analyzer Tool</h2>
-  <p>Paste your HTML code below and click "Analyze" to extract and review meta tags.</p>
-  <textarea id="htmlInput" placeholder="Paste your HTML code here..." style="width:100%; height:200px; padding:10px; border:1px solid #ccc; border-radius:5px;"></textarea>
-  <button onclick="analyzeMetaTags()" style="background:#00BFA6; color:#fff; padding:12px 25px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Analyze</button>
-
-  <div id="results" style="display:none; margin-top:20px; background:#f9f9f9; padding:20px; border-radius:10px;">
-    <h3>Analysis Results</h3>
-
-    <!-- SERP Previews -->
-    <h3 style="margin-top:20px; color:#0073e6;">Search Engine Preview</h3>
-
-    <div style="margin-bottom:20px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
-      <h4 style="color:#1a0dab; margin:0;">Google Preview</h4>
-      <p id="googleTitle" style="font-size:18px; color:#1a0dab; margin:5px 0;">Example Title</p>
-      <p id="googleUrl" style="font-size:14px; color:#006621; margin:5px 0;">https://example.com/</p>
-      <p id="googleDescription" style="font-size:14px; color:#545454; margin:5px 0;">This is how your meta description may appear in Google search results.</p>
-    </div>
-
-    <div style="margin-bottom:20px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
-      <h4 style="color:#008373; margin:0;">Bing Preview</h4>
-      <p id="bingTitle" style="font-size:18px; color:#008373; margin:5px 0;">Example Title</p>
-      <p id="bingUrl" style="font-size:14px; color:#006621; margin:5px 0;">https://example.com/</p>
-      <p id="bingDescription" style="font-size:14px; color:#545454; margin:5px 0;">This is how your meta description may appear in Bing search results.</p>
-    </div>
-
-    <div style="margin-bottom:20px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
-      <h4 style="color:#600090; margin:0;">Yahoo Preview</h4>
-      <p id="yahooTitle" style="font-size:18px; color:#600090; margin:5px 0;">Example Title</p>
-      <p id="yahooUrl" style="font-size:14px; color:#006621; margin:5px 0;">https://example.com/</p>
-      <p id="yahooDescription" style="font-size:14px; color:#545454; margin:5px 0;">This is how your meta description may appear in Yahoo search results.</p>
-    </div>
-
-    <!-- SEO Basics -->
-    <div><strong>Title:</strong> <span id="titleResult"></span></div>
-    <div><strong>Title Length:</strong> <span id="titleLength"></span></div>
-    <div><strong>Meta Description:</strong> <span id="descriptionResult"></span></div>
-    <div><strong>Description Length:</strong> <span id="descriptionLength"></span></div>
-    <div><strong>Meta Keywords:</strong> <span id="keywordsResult"></span></div>
-    <div><strong>Meta Robots:</strong> <span id="robotsResult"></span></div>
-    <div><strong>Canonical URL:</strong> <span id="canonicalResult"></span></div>
-    <div><strong>Viewport:</strong> <span id="viewportResult"></span></div>
-    <div><strong>Author:</strong> <span id="authorResult"></span></div>
-    <div><strong>Duplicate Tags:</strong> <span id="duplicateResult"></span></div>
-    <div><strong>Heading Structure:</strong> <span id="headingResult"></span></div>
-
-    <!-- Open Graph -->
-    <h3>Open Graph</h3>
-    <div><strong>OG Title:</strong> <span id="ogTitleResult"></span></div>
-    <div><strong>OG Description:</strong> <span id="ogDescriptionResult"></span></div>
-    <div><strong>OG Image:</strong> <span id="ogImageResult"></span></div>
-    <div><strong>OG URL:</strong> <span id="ogUrlResult"></span></div>
-    <div><strong>OG Type:</strong> <span id="ogTypeResult"></span></div>
-    <div><strong>OG Site Name:</strong> <span id="ogSiteNameResult"></span></div>
-
-    <!-- Twitter -->
-    <h3>Twitter</h3>
-    <div><strong>Twitter Card:</strong> <span id="twitterCardResult"></span></div>
-    <div><strong>Twitter Title:</strong> <span id="twitterTitleResult"></span></div>
-    <div><strong>Twitter Description:</strong> <span id="twitterDescriptionResult"></span></div>
-    <div><strong>Twitter Image:</strong> <span id="twitterImageResult"></span></div>
-    <div><strong>Twitter Site:</strong> <span id="twitterSiteResult"></span></div>
-    <div><strong>Twitter Creator:</strong> <span id="twitterCreatorResult"></span></div>
-
-    <!-- Mobile / UX -->
-    <h3>Mobile / UX</h3>
-    <div><strong>Apple Touch Icon:</strong> <span id="appleTouchIconResult"></span></div>
-    <div><strong>Theme Color:</strong> <span id="themeColorResult"></span></div>
-    <div><strong>Favicon:</strong> <span id="faviconResult"></span></div>
-
-    <!-- Technical / Security -->
-    <h3>Technical / Security</h3>
-    <div><strong>Charset:</strong> <span id="charsetResult"></span></div>
-    <div><strong>Lang Attribute:</strong> <span id="langAttrResult"></span></div>
-    <div><strong>CSP:</strong> <span id="cspResult"></span></div>
-    <div><strong>Referrer Policy:</strong> <span id="referrerPolicyResult"></span></div>
-    <div><strong>X-UA-Compatible:</strong> <span id="xUaCompatibleResult"></span></div>
-
-    <!-- Structured Data -->
-    <h3>Structured Data</h3>
-    <div><strong>JSON-LD:</strong> <span id="jsonLdResult"></span></div>
-
-    <h3 style="margin-top:20px;">Recommendations</h3>
-    <ul id="recommendations"></ul>
-
-    <!-- Download Button -->
-    <button onclick="downloadReport()" style="background:#007BFF; color:#fff; padding:10px 20px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Download Report (CSV)</button>
-  </div>
-</div>
-
 <script>
 function analyzeMetaTags() {
   const input = document.getElementById("htmlInput").value;
@@ -568,6 +477,7 @@ function downloadReport() {
 </footer>
 </body>
 </html>
+
 
 
 
