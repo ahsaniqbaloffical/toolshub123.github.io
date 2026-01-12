@@ -150,7 +150,8 @@
 </div>
   
 <script>
-  function analyzeMetaTags() {
+  <script>
+function analyzeMetaTags() {
   const html = document.getElementById("htmlInput").value;
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
@@ -160,33 +161,45 @@
   const description = doc.querySelector("meta[name='description']") ? doc.querySelector("meta[name='description']").getAttribute("content") : "No description found";
   const canonical = doc.querySelector("link[rel='canonical']") ? doc.querySelector("link[rel='canonical']").getAttribute("href") : "https://example.com/";
 
-  // Fill existing results
+  // Fill analysis results
   document.getElementById("titleResult").innerText = title;
   document.getElementById("titleLength").innerText = title.length + " characters";
   document.getElementById("descriptionResult").innerText = description;
   document.getElementById("descriptionLength").innerText = description.length + " characters";
   document.getElementById("canonicalResult").innerText = canonical;
 
-  // --- NEW: Fill SERP Previews ---
-  // Google
+  // Fill SERP previews
   document.getElementById("googleTitle").innerText = title;
   document.getElementById("googleUrl").innerText = canonical;
   document.getElementById("googleDescription").innerText = description;
 
-  // Bing
   document.getElementById("bingTitle").innerText = title;
   document.getElementById("bingUrl").innerText = canonical;
   document.getElementById("bingDescription").innerText = description;
 
-  // Yahoo
   document.getElementById("yahooTitle").innerText = title;
   document.getElementById("yahooUrl").innerText = canonical;
   document.getElementById("yahooDescription").innerText = description;
 
-  // Show results box
+  // Recommendations
+  const recs = [];
+  if (title.length > 60) recs.push("⚠️ Title is too long. Keep under 60 characters.");
+  if (description.length < 50) recs.push("⚠️ Meta description is too short. Aim for 150–160 characters.");
+  if (description === "No description found") recs.push("❌ Missing meta description. Add one for better CTR.");
+
+  const recList = document.getElementById("recommendations");
+  recList.innerHTML = "";
+  recs.forEach(r => {
+    const li = document.createElement("li");
+    li.innerText = r;
+    recList.appendChild(li);
+  });
+
+  // Show results
   document.getElementById("results").style.display = "block";
 }
-
+</script>
+<script>
 function analyzeMetaTags() {
   const input = document.getElementById("htmlInput").value;
   const parser = new DOMParser();
@@ -527,6 +540,7 @@ function downloadReport() {
 </footer>
 </body>
 </html>
+
 
 
 
