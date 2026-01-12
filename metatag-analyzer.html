@@ -163,94 +163,186 @@ function getPixelWidth(text, font = "16px Arial") {
   return ctx.measureText(text).width;
 }
 
+function set(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.innerText = val;
+}
+
+function setHTML(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+
 function analyzeMetaTags() {
   const input = document.getElementById("htmlInput").value.trim();
   if (!input) { alert("Please paste HTML code first."); return; }
 
   const doc = new DOMParser().parseFromString(input, "text/html");
 
-  // Basics
+  // Basic SEO
   const title = doc.querySelector("title")?.innerText || "Not found";
-  const description = doc.querySelector("meta[name='description']")?.content || "Not found";
-  const keywords = doc.querySelector("meta[name='keywords']")?.content || "Not found";
-  const robots = doc.querySelector("meta[name='robots']")?.content || "Not found";
-  const canonical = doc.querySelector("link[rel='canonical']")?.href || "Not found";
-  const viewport = doc.querySelector("meta[name='viewport']")?.content || "Not found";
-  const author = doc.querySelector("meta[name='author']")?.content || "Not found";
+  const description = doc.querySelector("meta[name='description']")?.getAttribute("content") || "Not found";
+  const keywords = doc.querySelector("meta[name='keywords']")?.getAttribute("content") || "Not found";
+  const robots = doc.querySelector("meta[name='robots']")?.getAttribute("content") || "Not found";
+  const canonical = doc.querySelector("link[rel='canonical']")?.getAttribute("href") || "Not found";
+  const viewport = doc.querySelector("meta[name='viewport']")?.getAttribute("content") || "Not found";
+  const author = doc.querySelector("meta[name='author']")?.getAttribute("content") || "Not found";
 
-  // Pixel width checks
-  const titlePixelWidth = title !== "Not found" ? getPixelWidth(title, "16px Arial") : 0;
-  const descriptionPixelWidth = description !== "Not found" ? getPixelWidth(description, "13px Arial") : 0;
+  // Open Graph
+  const ogTitle = doc.querySelector("meta[property='og:title']")?.getAttribute("content") || "Not found";
+  const ogDescription = doc.querySelector("meta[property='og:description']")?.getAttribute("content") || "Not found";
+  const ogImage = doc.querySelector("meta[property='og:image']")?.getAttribute("content") || "Not found";
+  const ogUrl = doc.querySelector("meta[property='og:url']")?.getAttribute("content") || "Not found";
+  const ogType = doc.querySelector("meta[property='og:type']")?.getAttribute("content") || "Not found";
+  const ogSiteName = doc.querySelector("meta[property='og:site_name']")?.getAttribute("content") || "Not found";
 
-  // Color-coded indicator logic
-  function getColorForTitle(px) {
-    if (px === 0) return "red";
-    if (px <= 600) return "green";
-    if (px <= 650) return "orange";
-    return "red";
-  }
-  function getColorForDescription(px) {
-    if (px === 0) return "red";
-    if (px <= 920) return "green";
-    if (px <= 1000) return "orange";
-    return "red";
-  }
+  // Twitter
+  const twitterCard = doc.querySelector("meta[name='twitter:card']")?.getAttribute("content") || "Not found";
+  const twitterTitle = doc.querySelector("meta[name='twitter:title']")?.getAttribute("content") || "Not found";
+  const twitterDescription = doc.querySelector("meta[name='twitter:description']")?.getAttribute("content") || "Not found";
+  const twitterImage = doc.querySelector("meta[name='twitter:image']")?.getAttribute("content") || "Not found";
+  const twitterSite = doc.querySelector("meta[name='twitter:site']")?.getAttribute("content") || "Not found";
+  const twitterCreator = doc.querySelector("meta[name='twitter:creator']")?.getAttribute("content") || "Not found";
 
-  // Fill results with color-coded spans
-  document.getElementById("titleResult").innerText = title;
-  document.getElementById("titleLength").innerHTML =
-    `${title.length} characters (${Math.round(titlePixelWidth)}px)` +
-    ` <span style="color:${getColorForTitle(titlePixelWidth)}; font-weight:bold;">●</span>`;
+  // Mobile / UX
+  const appleTouchIcon = doc.querySelector("link[rel='apple-touch-icon']")?.getAttribute("href") || "Not found";
+  const themeColor = doc.querySelector("meta[name='theme-color']")?.getAttribute("content") || "Not found";
+  const favicon = doc.querySelector("link[rel='icon']")?.getAttribute("href") || "Not found";
 
-  document.getElementById("descriptionResult").innerText = description;
-  document.getElementById("descriptionLength").innerHTML =
-    `${description.length} characters (${Math.round(descriptionPixelWidth)}px)` +
-    ` <span style="color:${getColorForDescription(descriptionPixelWidth)}; font-weight:bold;">●</span>`;
+  // Technical / Security
+  const charset = doc.querySelector("meta[charset]")?.getAttribute("charset") || "Not found";
+  const langAttr = doc.documentElement.getAttribute("lang") || "Not found";
+  const csp = doc.querySelector("meta[http-equiv='Content-Security-Policy']")?.getAttribute("content") || "Not found";
+  const referrerPolicy = doc.querySelector("meta[name='referrer']")?.getAttribute("content") || "Not found";
+  const xUaCompatible = doc.querySelector("meta[http-equiv='X-UA-Compatible']")?.getAttribute("content") || "Not found";
 
-  document.getElementById("keywordsResult").innerText = keywords;
-  document.getElementById("robotsResult").innerText = robots;
-  document.getElementById("canonicalResult").innerText = canonical;
-  document.getElementById("viewportResult").innerText = viewport;
-  document.getElementById("authorResult").innerText = author;
+  // Structured Data
+  const jsonLd = doc.querySelector("script[type='application/ld+json']") ? "Found" : "Not found";
+
+  // Lengths
+  const titleChars = title === "Not found" ? 0 : title.length;
+  const descChars = description === "Not found" ? 0 : description.length;
+
+  // Pixel widths
+  const titlePx = title === "Not found" ? 0 : getPixelWidth(title, "16px Arial");
+  const descPx = description === "Not found" ? 0 : getPixelWidth(description, "13px Arial");
+
+  // Color dots
+  const titleDotColor = titlePx === 0 ? "red" : (titlePx <= 600 ? "green" : (titlePx <= 650 ? "orange" : "red"));
+  const descDotColor = descPx === 0 ? "red" : (descPx <= 920 ? "green" : (descPx <= 1000 ? "orange" : "red"));
+
+  // Duplicates
+  const duplicatesArr = [];
+  if (doc.querySelectorAll("title").length > 1) duplicatesArr.push("Multiple <title> tags found");
+  if (doc.querySelectorAll("meta[name='description']").length > 1) duplicatesArr.push("Multiple meta descriptions found");
+  if (doc.querySelectorAll("meta[name='keywords']").length > 1) duplicatesArr.push("Multiple meta keywords tags found");
+  const duplicates = duplicatesArr.length ? duplicatesArr.join("; ") : "No duplicates detected";
+
+  // Headings
+  const h1 = doc.querySelectorAll("h1").length;
+  const h2 = doc.querySelectorAll("h2").length;
+  const h3 = doc.querySelectorAll("h3").length;
+  const headingMsg = `H1: ${h1}, H2: ${h2}, H3: ${h3}`;
+
+  // Populate Basics
+  set("titleResult", title);
+  setHTML("titleLength", `${titleChars} characters (${Math.round(titlePx)}px) <span style="color:${titleDotColor};font-weight:bold;">●</span>`);
+  set("descriptionResult", description);
+  setHTML("descriptionLength", `${descChars} characters (${Math.round(descPx)}px) <span style="color:${descDotColor};font-weight:bold;">●</span>`);
+  set("keywordsResult", keywords);
+  set("robotsResult", robots);
+  set("canonicalResult", canonical);
+  set("viewportResult", viewport);
+  set("authorResult", author);
+  set("duplicateResult", duplicates);
+  set("headingResult", headingMsg);
+
+  // Populate OG
+  set("ogTitleResult", ogTitle);
+  set("ogDescriptionResult", ogDescription);
+  set("ogImageResult", ogImage);
+  set("ogUrlResult", ogUrl);
+  set("ogTypeResult", ogType);
+  set("ogSiteNameResult", ogSiteName);
+
+  // Populate Twitter
+  set("twitterCardResult", twitterCard);
+  set("twitterTitleResult", twitterTitle);
+  set("twitterDescriptionResult", twitterDescription);
+  set("twitterImageResult", twitterImage);
+  set("twitterSiteResult", twitterSite);
+  set("twitterCreatorResult", twitterCreator);
+
+  // Populate Mobile/UX
+  set("appleTouchIconResult", appleTouchIcon);
+  set("themeColorResult", themeColor);
+  set("faviconResult", favicon);
+
+  // Populate Technical/Security
+  set("charsetResult", charset);
+  set("langAttrResult", langAttr);
+  set("cspResult", csp);
+  set("referrerPolicyResult", referrerPolicy);
+  set("xUaCompatibleResult", xUaCompatible);
+
+  // Structured data
+  set("jsonLdResult", jsonLd);
 
   // SERP previews
   const safeCanonical = canonical === "Not found" ? "https://example.com/" : canonical;
-  document.getElementById("googleTitle").innerText = title;
-  document.getElementById("googleUrl").innerText = safeCanonical;
-  document.getElementById("googleDescription").innerText = description;
-
-  document.getElementById("bingTitle").innerText = title;
-  document.getElementById("bingUrl").innerText = safeCanonical;
-  document.getElementById("bingDescription").innerText = description;
-
-  document.getElementById("yahooTitle").innerText = title;
-  document.getElementById("yahooUrl").innerText = safeCanonical;
-  document.getElementById("yahooDescription").innerText = description;
+  set("googleTitle", title);
+  set("googleUrl", safeCanonical);
+  set("googleDescription", description);
+  set("bingTitle", title);
+  set("bingUrl", safeCanonical);
+  set("bingDescription", description);
+  set("yahooTitle", title);
+  set("yahooUrl", safeCanonical);
+  set("yahooDescription", description);
 
   // Recommendations
   const recs = [];
   if (title === "Not found") recs.push("❌ No title tag found.");
-  else if (titlePixelWidth > 600) recs.push("⚠️ Title may be truncated in Google (over 600px).");
-  else if (titlePixelWidth < 300) recs.push("⚠️ Title too short — aim for 30–60 characters.");
+  else {
+    if (titlePx > 600) recs.push("⚠️ Title may be truncated in Google (over 600px).");
+    if (titlePx < 300) recs.push("⚠️ Title likely too short — aim for 30–60 characters.");
+  }
   if (description === "Not found") recs.push("❌ No meta description found.");
-  else if (descriptionPixelWidth > 920) recs.push("⚠️ Description may be truncated in Google (over 920px).");
-  else if (descriptionPixelWidth < 400) recs.push("⚠️ Description too short — aim for 90–160 characters.");
+  else {
+    if (descPx > 920) recs.push("⚠️ Description may be truncated in Google (over 920px).");
+    if (descPx < 400) recs.push("⚠️ Description likely too short — aim for 90–160 characters.");
+  }
+  if (robots.toLowerCase().includes("noindex")) recs.push("⚠️ Robots tag set to 'noindex'.");
+  if (canonical === "Not found") recs.push("⚠️ No canonical tag found.");
+  if (viewport === "Not found") recs.push("⚠️ No viewport tag found.");
+  if (h1 === 0) recs.push("❌ No H1 tag found.");
+  if (h1 > 1) recs.push("⚠️ Multiple H1 tags detected.");
 
   const recList = document.getElementById("recommendations");
-  recList.innerHTML = "";
-  recs.forEach(r => {
-    const li = document.createElement("li");
-    li.innerText = r;
-    recList.appendChild(li);
-  });
+  if (recList) {
+    recList.innerHTML = "";
+    recs.forEach(r => {
+      const li = document.createElement("li");
+      li.innerText = r;
+      recList.appendChild(li);
+    });
+  }
 
-  document.getElementById("results").style.display = "block";
+  // Reveal results
+  const resultsBox = document.getElementById("results");
+  if (resultsBox) resultsBox.style.display = "block";
 
-  // Store for export
+  // Store for CSV export
   window.__metaReport = {
-    title, titleLength: title.length, titlePixelWidth,
-    description, descriptionLength: description.length, descriptionPixelWidth,
+    title, titleLength: titleChars, titlePixelWidth: Math.round(titlePx),
+    description, descriptionLength: descChars, descriptionPixelWidth: Math.round(descPx),
     keywords, robots, canonical, viewport, author,
+    duplicates, headingMsg,
+    ogTitle, ogDescription, ogImage, ogUrl, ogType, ogSiteName,
+    twitterCard, twitterTitle, twitterDescription, twitterImage, twitterSite, twitterCreator,
+    appleTouchIcon, themeColor, favicon,
+    charset, langAttr, csp, referrerPolicy, xUaCompatible,
+    jsonLd,
     recommendations: recs
   };
 }
@@ -261,22 +353,45 @@ function downloadReport() {
 
   const rows = [
     ["Title", data.title],
-    ["Title Length", data.titleLength + " characters"],
-    ["Title Pixel Width", data.titlePixelWidth + "px"],
+    ["Title Length", `${data.titleLength} characters`],
+    ["Title Pixel Width", `${data.titlePixelWidth}px`],
     ["Meta Description", data.description],
-    ["Description Length", data.descriptionLength + " characters"],
-    ["Description Pixel Width", data.descriptionPixelWidth + "px"],
+    ["Description Length", `${data.descriptionLength} characters`],
+    ["Description Pixel Width", `${data.descriptionPixelWidth}px`],
     ["Meta Keywords", data.keywords],
     ["Meta Robots", data.robots],
     ["Canonical URL", data.canonical],
     ["Viewport", data.viewport],
     ["Author", data.author],
+    ["Duplicate Tags", data.duplicates],
+    ["Heading Structure", data.headingMsg],
+    ["OG Title", data.ogTitle],
+    ["OG Description", data.ogDescription],
+    ["OG Image", data.ogImage],
+    ["OG URL", data.ogUrl],
+    ["OG Type", data.ogType],
+    ["OG Site Name", data.ogSiteName],
+    ["Twitter Card", data.twitterCard],
+    ["Twitter Title", data.twitterTitle],
+    ["Twitter Description", data.twitterDescription],
+    ["Twitter Image", data.twitterImage],
+    ["Twitter Site", data.twitterSite],
+    ["Twitter Creator", data.twitterCreator],
+    ["Apple Touch Icon", data.appleTouchIcon],
+    ["Theme Color", data.themeColor],
+    ["Favicon", data.favicon],
+    ["Charset", data.charset],
+    ["Lang Attribute", data.langAttr],
+    ["CSP", data.csp],
+    ["Referrer Policy", data.referrerPolicy],
+    ["X-UA-Compatible", data.xUaCompatible],
+    ["JSON-LD", data.jsonLd],
     ["Recommendations", (data.recommendations || []).join(" | ")]
   ];
 
-  const csv = "Field,Value\n" + rows.map(r =>
-    r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(",")
-  ).join("\n");
+  const csv = "Field,Value\n" + rows
+    .map(r => r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(","))
+    .join("\n");
 
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
   const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: "meta-tag-analyzer-report.csv" });
@@ -377,6 +492,7 @@ function downloadReport() {
 </footer>
 </body>
 </html>
+
 
 
 
