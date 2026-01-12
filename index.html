@@ -236,28 +236,32 @@ footer a { color:#00BFA6; text-decoration:none; margin:0 10px; }
   </div>
 
   <!-- Category Cards -->
-  <div class="cards">
-    <div class="card">
-      <h2>SEO Tools</h2>
-      <p>Boost rankings with free SEO tools.</p>
-      <a href="SEO%20tools.html">Explore SEO Tools</a>
-    </div>
-    <div class="card">
-      <h2>Finance Tools</h2>
-      <p>Simplify your finances online.</p>
-      <a href="finance%20tools.html">Explore Finance Tools</a>
-    </div>
-    <div class="card">
-      <h2>Utility Tools</h2>
-      <p>Everyday tools for productivity.</p>
-      <a href="utilitytools.html">Explore Utility Tools</a>
-    </div>
-    <div class="card">
-      <h2>Health Tools</h2>
-      <p>Track and improve your health.</p>
-      <a href="health%20tools.html">Explore Health Tools</a>
-    </div>
+<div class="cards">
+  <div class="card">
+    <h2>SEO Tools</h2>
+    <p>Boost rankings with free SEO tools.</p>
+    <a href="SEO%20tools.html" class="card-link" aria-label="Explore SEO Tools">Explore SEO Tools</a>
   </div>
+
+  <div class="card">
+    <h2>Finance Tools</h2>
+    <p>Simplify your finances online.</p>
+    <a href="finance%20tools.html" class="card-link" aria-label="Explore Finance Tools">Explore Finance Tools</a>
+  </div>
+
+  <div class="card">
+    <h2>Utility Tools</h2>
+    <p>Everyday tools for productivity.</p>
+    <a href="utilitytools.html" class="card-link" aria-label="Explore Utility Tools">Explore Utility Tools</a>
+  </div>
+
+  <div class="card">
+    <h2>Health Tools</h2>
+    <p>Track and improve your health.</p>
+    <a href="health%20tools.html" class="card-link" aria-label="Explore Health Tools">Explore Health Tools</a>
+  </div>
+</div>
+
    <!-- Disclaimer Section --> <div class="section" style="text-align:center; background:#fff3cd; border:1px solid #ffeeba; border-radius:10px; padding:20px; margin:40px auto; max-width:900px;"> <h2 style="color:#856404;">🚀 Stay Tuned!</h2> <p>We’re constantly adding new tools to Toolshub123. Check back often for updates and fresh features!</p> </div>
   
  <!-- Suggest a Tool Section -->
@@ -310,54 +314,81 @@ document.getElementById("suggestForm").addEventListener("submit", function(e) {
 });
 </script>
 
-  <!-- Features Section -->
-  <div class="section">
-    <h2>Why Choose Toolshub123?</h2>
-    <ul>
-      <li>✔ Free and easy-to-use tools</li>
-      <li>✔ No sign-up required</li>
-      <li>✔ Covers SEO, finance, utility, and health needs</li>
-      <li>✔ Clean, modern design for quick access</li>
-    </ul>
-    <div class="trust">
-      <div>100% Free</div>
-      <div>No Sign-Up</div>
-      <div>Secure & Reliable</div>
-    </div>
+ <!-- Features Section -->
+<div class="section features">
+  <h2>Why Choose Toolshub123?</h2>
+  <ul class="features-list">
+    <li><span aria-hidden="true">✔</span> Free and easy-to-use tools</li>
+    <li><span aria-hidden="true">✔</span> No sign-up required</li>
+    <li><span aria-hidden="true">✔</span> Covers SEO, finance, utility, and health needs</li>
+    <li><span aria-hidden="true">✔</span> Clean, modern design for quick access</li>
+  </ul>
+  <div class="trust">
+    <div>100% Free</div>
+    <div>No Sign-Up</div>
+    <div>Secure &amp; Reliable</div>
   </div>
+</div>
 
-  <!-- Testimonials Section -->
-  <div class="section">
-    <h2>What Users Say</h2>
-    <p>"Toolshub123 helped me analyze my website’s SEO in seconds!" — Digital Marketer</p>
-    <p>"The savings calculator keeps me motivated to reach my financial goals." — Student</p>
-    <p>"Simple, fast, and reliable tools I use every day." — Freelancer</p>
+ <!-- Testimonials Section -->
+<div class="section testimonials">
+  <h2>What Users Say</h2>
+  <div class="testimonial">
+    <blockquote>
+      "Toolshub123 helped me analyze my website’s SEO in seconds!"
+    </blockquote>
+    <cite>— Digital Marketer</cite>
   </div>
-
-  <!-- Call to Action Section -->
-  <div class="cta">
-    <h2>Start Using Free Tools Today</h2>
-    <p>No sign-up required — just click and go!</p>
-    <a href="#cards">Get Started</a>
+  <div class="testimonial">
+    <blockquote>
+      "The savings calculator keeps me motivated to reach my financial goals."
+    </blockquote>
+    <cite>— Student</cite>
   </div>
-
-  <!-- FAQ Section -->
-  <div class="section faq">
-    <h2>Frequently Asked Questions</h2>
-    <p><strong>Do I need to register?</strong> No, all tools are free and open.</p>
-    <p><strong>Are these tools safe?</strong> Yes, they run directly in your browser.</p>
-    <p><strong>Can I suggest a new tool?</strong> Absolutely — contact us via the About page.</p>
-    <p><strong>Do the tools store my data?</strong> No, everything runs client-side and we don’t save inputs.</p>
-    <p><strong>Will more tools be added?</strong> Yes, we’re actively adding new tools across SEO, finance, utility, and health.</p>
+  <div class="testimonial">
+    <blockquote>
+      "Simple, fast, and reliable tools I use every day."
+    </blockquote>
+    <cite>— Freelancer</cite>
   </div>
+</div>
+ <!-- Call to Action Section -->
+<div class="cta">
+  <h2>Start Using Free Tools Today</h2>
+  <p>No sign-up required — just click and go!</p>
+  <a href="#cards" class="cta-btn" aria-label="Get Started with Free Tools">Get Started</a>
+</div>
 
-   <!-- About Section -->
-  <div class="section">
-    <h2>About Toolshub123</h2>
-    <p>Toolshub123 is your all‑in‑one toolkit, offering free SEO, finance, utility, health tools, and much more. Our mission is to simplify everyday tasks, optimize content, manage finances, and track health with easy‑to‑use online solutions. Built for professionals, students, and individuals worldwide, Toolshub123 makes life easier, faster, and more reliable.</p>
-  </div>
-  
+ <!-- FAQ Section -->
+<div class="section faq">
+  <h2>Frequently Asked Questions</h2>
+  <dl>
+    <dt>Do I need to register?</dt>
+    <dd>No, all tools are free and open.</dd>
 
+    <dt>Are these tools safe?</dt>
+    <dd>Yes, they run directly in your browser.</dd>
+
+    <dt>Can I suggest a new tool?</dt>
+    <dd>Absolutely — contact us via the About page.</dd>
+
+    <dt>Do the tools store my data?</dt>
+    <dd>No, everything runs client-side and we don’t save inputs.</dd>
+
+    <dt>Will more tools be added?</dt>
+    <dd>Yes, we’re actively adding new tools across SEO, finance, utility, and health.</dd>
+  </dl>
+</div>
+
+  <!-- About Section -->
+<div class="section about">
+  <h2>About Toolshub123</h2>
+  <p>
+    Toolshub123 is your all‑in‑one toolkit, offering free SEO, finance, utility, health tools, and much more. 
+    Our mission is to simplify everyday tasks, optimize content, manage finances, and track health with easy‑to‑use online solutions. 
+    Built for professionals, students, and individuals worldwide, Toolshub123 makes life easier, faster, and more reliable.
+  </p>
+</div>
   <!-- Footer (exact block you want on every page) -->
 <footer>
   <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
