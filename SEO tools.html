@@ -95,23 +95,38 @@
 <body>
 
   <!-- Header with Logo + Navigation -->
+<!-- Header -->
 <header>
-  <img src="logo.png" alt="Toolshub123 Logo" class="logo">
+  <a href="https://toolshub123.com/" class="logo-link">
+    <img src="logo.png" alt="Toolshub123 – Free Online Tools" class="logo">
+  </a>
 
-  <nav class="header-nav">
-    <a href="https://toolshub123.com/">Home</a>
-    <a href="https://toolshub123.com/SEO%20tools.html">SEO Tools</a>
-    <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
-    <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
-    <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
+  <!-- Hamburger Menu -->
+  <div class="menu-toggle" onclick="document.querySelector('.header-nav').classList.toggle('active')">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="header-nav" aria-label="Main Navigation">
+    <ul>
+      <li><a href="https://toolshub123.com/" class="active">Home</a></li>
+      <li><a href="https://toolshub123.com/seo-tools.html">SEO Tools</a></li>
+      <li><a href="https://toolshub123.com/finance-tools.html">Finance Tools</a></li>
+      <li><a href="https://toolshub123.com/utilitytools.html">Utility Tools</a></li>
+      <li><a href="https://toolshub123.com/health-tools.html">Health Tools</a></li>
+    </ul>
   </nav>
 </header>
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <h1>Free SEO Tools</h1>
-    <p>Boost your website’s performance with our free and reliable SEO tools.</p>
-  </div>
+<!-- Hero Section -->
+<div class="hero">
+  <h1>Free SEO Tools</h1>
+  <p>Boost your website’s performance with our free and reliable SEO tools.</p>
+  <a href="#cards" class="hero-btn" aria-label="Get Started with Free SEO Tools">Get Started</a>
+</div>
+
 
   <!-- Tool Cards -->
   <div class="container">
@@ -230,6 +245,7 @@
 
 </body>
 </html>
+
 
 
 
