@@ -148,7 +148,45 @@
     <button onclick="downloadReport()" style="background:#007BFF; color:#fff; padding:10px 20px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Download Report (CSV)</button>
   </div>
 </div>
+  
 <script>
+  function analyzeMetaTags() {
+  const html = document.getElementById("htmlInput").value;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+
+  // Extract meta tags
+  const title = doc.querySelector("title") ? doc.querySelector("title").innerText : "No title found";
+  const description = doc.querySelector("meta[name='description']") ? doc.querySelector("meta[name='description']").getAttribute("content") : "No description found";
+  const canonical = doc.querySelector("link[rel='canonical']") ? doc.querySelector("link[rel='canonical']").getAttribute("href") : "https://example.com/";
+
+  // Fill existing results
+  document.getElementById("titleResult").innerText = title;
+  document.getElementById("titleLength").innerText = title.length + " characters";
+  document.getElementById("descriptionResult").innerText = description;
+  document.getElementById("descriptionLength").innerText = description.length + " characters";
+  document.getElementById("canonicalResult").innerText = canonical;
+
+  // --- NEW: Fill SERP Previews ---
+  // Google
+  document.getElementById("googleTitle").innerText = title;
+  document.getElementById("googleUrl").innerText = canonical;
+  document.getElementById("googleDescription").innerText = description;
+
+  // Bing
+  document.getElementById("bingTitle").innerText = title;
+  document.getElementById("bingUrl").innerText = canonical;
+  document.getElementById("bingDescription").innerText = description;
+
+  // Yahoo
+  document.getElementById("yahooTitle").innerText = title;
+  document.getElementById("yahooUrl").innerText = canonical;
+  document.getElementById("yahooDescription").innerText = description;
+
+  // Show results box
+  document.getElementById("results").style.display = "block";
+}
+
 function analyzeMetaTags() {
   const input = document.getElementById("htmlInput").value;
   const parser = new DOMParser();
@@ -165,21 +203,6 @@ function analyzeMetaTags() {
   document.getElementById("descriptionResult").innerText = description; 
   document.getElementById("descriptionLength").innerText = description.length + " characters"; 
   document.getElementById("canonicalResult").innerText = canonical;
-  // --- NEW: Fill SERP Previews --- 
-  // Google 
-  document.getElementById("googleTitle").innerText = title; 
-  document.getElementById("googleUrl").innerText = canonical; 
-  document.getElementById("googleDescription").innerText = description;
-  // Bing 
-  document.getElementById("bingTitle").innerText = title; 
-  document.getElementById("bingUrl").innerText = canonical; 
-  document.getElementById("bingDescription").innerText = description;
-  // Yahoo 
-  document.getElementById("yahooTitle").innerText = title; 
-  document.getElementById("yahooUrl").innerText = canonical; 
-  document.getElementById("yahooDescription").innerText = description;
-  // Show results box 
-  document.getElementById("results").style.display = "block";
 
   // Basic SEO tags
   const title = doc.querySelector("title") ? doc.querySelector("title").innerText : "Not found";
@@ -504,6 +527,7 @@ function downloadReport() {
 </footer>
 </body>
 </html>
+
 
 
 
