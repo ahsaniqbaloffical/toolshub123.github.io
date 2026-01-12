@@ -10,6 +10,8 @@ Disallow: /private/
 Disallow: /tmp/
 Disallow: /test/
 Disallow: /beta/
+Disallow: /index.html
 
 # Point crawlers to your sitemap for full coverage
 Sitemap: https://toolshub123.com/sitemap.xml
+
