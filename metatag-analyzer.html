@@ -67,109 +67,103 @@
   </section>
 
   <!-- Tool Container -->
-  <section id="tool" class="container">
-    <!-- Keep your existing tool logic here -->
-    <div class="tool-card">
-     <!-- Tool Section: Analyzer -->
-<div class="section" style="max-width:800px; margin:40px auto; background:#fff; padding:25px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
- 
-  <p>Paste your HTML code below and click "Analyze" to extract and review meta tags.</p>
+<section id="tool" class="container">
+  <div class="tool-card">
+    <h2>Analyze Your Meta Tags</h2>
+    <p>Paste your HTML code below and click "Analyze" to extract and review meta tags.</p>
 
-  <textarea id="htmlInput" placeholder="Paste your HTML code here..."
-    style="width:100%; height:200px; padding:10px; border:1px solid #ccc; border-radius:5px; font-family:monospace;"></textarea>
+    <!-- Input Area -->
+    <textarea id="htmlInput" placeholder="Paste your HTML code here..."
+      class="input-area"></textarea>
 
-  <button onclick="analyzeMetaTags()" style="background:#00BFA6; color:#fff; padding:12px 25px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">
-    Analyze
-  </button>
+    <button onclick="analyzeMetaTags()" class="btn-primary">Analyze</button>
 
-  <div id="results" style="display:none; margin-top:20px; background:#f9f9f9; padding:20px; border-radius:10px;">
-    <h3>Analysis Results</h3>
+    <!-- Results -->
+    <div id="results" class="results-box" style="display:none;">
+      <h3>Analysis Results</h3>
 
-    <!-- SERP Previews -->
-    <h3 style="margin-top:10px; color:#0073e6;">Search Engine Preview</h3>
+      <!-- SERP Previews -->
+      <h3 class="preview-heading">Search Engine Preview</h3>
 
-    <div style="margin-bottom:12px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
-      <h4 style="color:#1a0dab; margin:0;">Google Preview</h4>
-      <p id="googleTitle" style="font-size:18px; color:#1a0dab; margin:5px 0;">—</p>
-      <p id="googleUrl" style="font-size:14px; color:#006621; margin:5px 0;">—</p>
-      <p id="googleDescription" style="font-size:14px; color:#545454; margin:5px 0;">—</p>
+      <div class="serp-preview google">
+        <h4>Google Preview</h4>
+        <p id="googleTitle" class="serp-title">—</p>
+        <p id="googleUrl" class="serp-url">—</p>
+        <p id="googleDescription" class="serp-description">—</p>
+      </div>
+
+      <div class="serp-preview bing">
+        <h4>Bing Preview</h4>
+        <p id="bingTitle" class="serp-title">—</p>
+        <p id="bingUrl" class="serp-url">—</p>
+        <p id="bingDescription" class="serp-description">—</p>
+      </div>
+
+      <div class="serp-preview yahoo">
+        <h4>Yahoo Preview</h4>
+        <p id="yahooTitle" class="serp-title">—</p>
+        <p id="yahooUrl" class="serp-url">—</p>
+        <p id="yahooDescription" class="serp-description">—</p>
+      </div>
+
+      <!-- SEO Basics -->
+      <div><strong>Title:</strong> <span id="titleResult">—</span></div>
+      <div><strong>Title Length:</strong> <span id="titleLength">—</span></div>
+      <div><strong>Meta Description:</strong> <span id="descriptionResult">—</span></div>
+      <div><strong>Description Length:</strong> <span id="descriptionLength">—</span></div>
+      <div><strong>Meta Keywords:</strong> <span id="keywordsResult">—</span></div>
+      <div><strong>Meta Robots:</strong> <span id="robotsResult">—</span></div>
+      <div><strong>Canonical URL:</strong> <span id="canonicalResult">—</span></div>
+      <div><strong>Viewport:</strong> <span id="viewportResult">—</span></div>
+      <div><strong>Author:</strong> <span id="authorResult">—</span></div>
+      <div><strong>Duplicate Tags:</strong> <span id="duplicateResult">—</span></div>
+      <div><strong>Heading Structure:</strong> <span id="headingResult">—</span></div>
+
+      <!-- Open Graph -->
+      <h3>Open Graph</h3>
+      <div><strong>OG Title:</strong> <span id="ogTitleResult">—</span></div>
+      <div><strong>OG Description:</strong> <span id="ogDescriptionResult">—</span></div>
+      <div><strong>OG Image:</strong> <span id="ogImageResult">—</span></div>
+      <div><strong>OG URL:</strong> <span id="ogUrlResult">—</span></div>
+      <div><strong>OG Type:</strong> <span id="ogTypeResult">—</span></div>
+      <div><strong>OG Site Name:</strong> <span id="ogSiteNameResult">—</span></div>
+
+      <!-- Twitter -->
+      <h3>Twitter</h3>
+      <div><strong>Twitter Card:</strong> <span id="twitterCardResult">—</span></div>
+      <div><strong>Twitter Title:</strong> <span id="twitterTitleResult">—</span></div>
+      <div><strong>Twitter Description:</strong> <span id="twitterDescriptionResult">—</span></div>
+      <div><strong>Twitter Image:</strong> <span id="twitterImageResult">—</span></div>
+      <div><strong>Twitter Site:</strong> <span id="twitterSiteResult">—</span></div>
+      <div><strong>Twitter Creator:</strong> <span id="twitterCreatorResult">—</span></div>
+
+      <!-- Mobile / UX -->
+      <h3>Mobile / UX</h3>
+      <div><strong>Apple Touch Icon:</strong> <span id="appleTouchIconResult">—</span></div>
+      <div><strong>Theme Color:</strong> <span id="themeColorResult">—</span></div>
+      <div><strong>Favicon:</strong> <span id="faviconResult">—</span></div>
+
+      <!-- Technical / Security -->
+      <h3>Technical / Security</h3>
+      <div><strong>Charset:</strong> <span id="charsetResult">—</span></div>
+      <div><strong>Lang Attribute:</strong> <span id="langAttrResult">—</span></div>
+      <div><strong>CSP:</strong> <span id="cspResult">—</span></div>
+      <div><strong>Referrer Policy:</strong> <span id="referrerPolicyResult">—</span></div>
+      <div><strong>X-UA-Compatible:</strong> <span id="xUaCompatibleResult">—</span></div>
+
+      <!-- Structured Data -->
+      <h3>Structured Data</h3>
+      <div><strong>JSON-LD:</strong> <span id="jsonLdResult">—</span></div>
+
+      <!-- Recommendations -->
+      <h3>Recommendations</h3>
+      <ul id="recommendations"></ul>
+
+      <button onclick="downloadReport()" class="btn-secondary">Download Report (CSV)</button>
     </div>
-
-    <div style="margin-bottom:12px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
-      <h4 style="color:#008373; margin:0;">Bing Preview</h4>
-      <p id="bingTitle" style="font-size:18px; color:#008373; margin:5px 0;">—</p>
-      <p id="bingUrl" style="font-size:14px; color:#006621; margin:5px 0;">—</p>
-      <p id="bingDescription" style="font-size:14px; color:#545454; margin:5px 0;">—</p>
-    </div>
-
-    <div style="margin-bottom:12px; padding:15px; border:1px solid #ddd; border-radius:6px; background:#fff;">
-      <h4 style="color:#600090; margin:0;">Yahoo Preview</h4>
-      <p id="yahooTitle" style="font-size:18px; color:#600090; margin:5px 0;">—</p>
-      <p id="yahooUrl" style="font-size:14px; color:#006621; margin:5px 0;">—</p>
-      <p id="yahooDescription" style="font-size:14px; color:#545454; margin:5px 0;">—</p>
-    </div>
-
-    <!-- SEO Basics -->
-    <div><strong>Title:</strong> <span id="titleResult">—</span></div>
-    <div><strong>Title Length:</strong> <span id="titleLength">—</span></div>
-    <div><strong>Meta Description:</strong> <span id="descriptionResult">—</span></div>
-    <div><strong>Description Length:</strong> <span id="descriptionLength">—</span></div>
-    <div><strong>Meta Keywords:</strong> <span id="keywordsResult">—</span></div>
-    <div><strong>Meta Robots:</strong> <span id="robotsResult">—</span></div>
-    <div><strong>Canonical URL:</strong> <span id="canonicalResult">—</span></div>
-    <div><strong>Viewport:</strong> <span id="viewportResult">—</span></div>
-    <div><strong>Author:</strong> <span id="authorResult">—</span></div>
-    <div><strong>Duplicate Tags:</strong> <span id="duplicateResult">—</span></div>
-    <div><strong>Heading Structure:</strong> <span id="headingResult">—</span></div>
-
-    <!-- Open Graph -->
-    <h3>Open Graph</h3>
-    <div><strong>OG Title:</strong> <span id="ogTitleResult">—</span></div>
-    <div><strong>OG Description:</strong> <span id="ogDescriptionResult">—</span></div>
-    <div><strong>OG Image:</strong> <span id="ogImageResult">—</span></div>
-    <div><strong>OG URL:</strong> <span id="ogUrlResult">—</span></div>
-    <div><strong>OG Type:</strong> <span id="ogTypeResult">—</span></div>
-    <div><strong>OG Site Name:</strong> <span id="ogSiteNameResult">—</span></div>
-
-    <!-- Twitter -->
-    <h3>Twitter</h3>
-    <div><strong>Twitter Card:</strong> <span id="twitterCardResult">—</span></div>
-    <div><strong>Twitter Title:</strong> <span id="twitterTitleResult">—</span></div>
-    <div><strong>Twitter Description:</strong> <span id="twitterDescriptionResult">—</span></div>
-    <div><strong>Twitter Image:</strong> <span id="twitterImageResult">—</span></div>
-    <div><strong>Twitter Site:</strong> <span id="twitterSiteResult">—</span></div>
-    <div><strong>Twitter Creator:</strong> <span id="twitterCreatorResult">—</span></div>
-
-    <!-- Mobile / UX -->
-    <h3>Mobile / UX</h3>
-    <div><strong>Apple Touch Icon:</strong> <span id="appleTouchIconResult">—</span></div>
-    <div><strong>Theme Color:</strong> <span id="themeColorResult">—</span></div>
-    <div><strong>Favicon:</strong> <span id="faviconResult">—</span></div>
-
-    <!-- Technical / Security -->
-    <h3>Technical / Security</h3>
-    <div><strong>Charset:</strong> <span id="charsetResult">—</span></div>
-    <div><strong>Lang Attribute:</strong> <span id="langAttrResult">—</span></div>
-    <div><strong>CSP:</strong> <span id="cspResult">—</span></div>
-    <div><strong>Referrer Policy:</strong> <span id="referrerPolicyResult">—</span></div>
-    <div><strong>X-UA-Compatible:</strong> <span id="xUaCompatibleResult">—</span></div>
-
-    <!-- Structured Data -->
-    <h3>Structured Data</h3>
-    <div><strong>JSON-LD:</strong> <span id="jsonLdResult">—</span></div>
-
-    <h3 style="margin-top:20px;">Recommendations</h3>
-    <ul id="recommendations"></ul>
-
-    <button onclick="downloadReport()" style="background:#007BFF; color:#fff; padding:10px 20px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">
-      Download Report (CSV)
-    </button>
   </div>
-</div>
-
-      <!-- Existing form / script integration -->
-      <div id="meta-analyzer-tool">
-        <script>
+</section>
+<script>
 function getPixelWidth(text, font = "16px Arial") {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -414,17 +408,13 @@ function downloadReport() {
 </script>
 <!-- Features Section -->
 <div class="section">
-  <h2>Meta Tag Analyzer – Optimize Your Website Instantly</h2>
-  <p>
-    Want to know how search engines and social platforms interpret your site? Paste your HTML code 
-    into the box, hit <strong>Analyze</strong>, and get a complete SEO audit covering:
-  </p>
+  <h2>Features</h2>
   <ul>
-    <li>✅ <strong>SEO essentials</strong> – title, meta description, keywords, robots, canonical, headings</li>
-    <li>🌐 <strong>Social tags</strong> – Open Graph & Twitter cards for better sharing previews</li>
-    <li>📱 <strong>Mobile/UX tags</strong> – viewport, theme color, favicon, Apple touch icon</li>
-    <li>🔒 <strong>Technical & security tags</strong> – charset, CSP, referrer policy, lang attribute</li>
-    <li>🧩 <strong>Structured data</strong> – JSON‑LD schema detection for rich snippets</li>
+    <li>✅ <strong>SEO essentials</strong> title, meta description, keywords, robots, canonical, headings</li>
+    <li>🌐 <strong>Social tags</strong> Open Graph & Twitter cards for better sharing previews</li>
+    <li>📱 <strong>Mobile/UX tags</strong> viewport, theme color, favicon, Apple touch icon</li>
+    <li>🔒 <strong>Technical & security tags</strong> charset, CSP, referrer policy, lang attribute</li>
+    <li>🧩 <strong>Structured data</strong> JSON‑LD schema detection for rich snippets</li>
   </ul>
   <p>
     You’ll see all values extracted, plus actionable recommendations to fix missing or weak tags. 
@@ -435,106 +425,6 @@ function downloadReport() {
     👉 Paste your HTML, click <strong>Analyze</strong>, and start optimizing your site today!
   </p>
 </div>
-
-<!-- FAQ Section -->
-<div class="section">
-  <h2>Frequently Asked Questions (FAQs)</h2>
-
-  <div>
-    <h3>What does the Meta Tag Analyzer do?</h3>
-    <p>
-      It scans your HTML code and extracts important meta tags such as title, description,
-      keywords, robots, canonical, and headings. The tool highlights issues and provides
-      recommendations for SEO improvements.
-    </p>
-  </div>
-
-  <div>
-    <h3>Why are meta tags important for SEO?</h3>
-    <p>
-      Meta tags help search engines understand your page content. A well‑optimized title and
-      description can improve rankings and increase click‑through rates from search results.
-    </p>
-  </div>
-
-  <div>
-    <h3>Can this tool fix my meta tags automatically?</h3>
-    <p>
-      No, the tool only analyzes and provides recommendations. You’ll need to update your
-      website’s HTML code manually or through your CMS to apply the changes.
-    </p>
-  </div>
-
-  <div>
-    <h3>Does the analyzer check for duplicate tags?</h3>
-    <p>
-      Yes, it detects multiple title, description, or keyword tags and alerts you so you can
-      remove duplicates and keep your code clean.
-    </p>
-  </div>
-
-  <div>
-    <h3>Is this tool free to use?</h3>
-    <p>
-      Absolutely. The Meta Tag Analyzer is free and designed to help webmasters, SEO specialists,
-      and content creators improve their on‑page SEO quickly.
-    </p>
-  </div>
-</div>
-
-<!-- FAQ Schema for Rich Snippets -->
-<script type="application/ld+json">
-{
- "@context": "https://schema.org",
- "@type": "FAQPage",
- "mainEntity": [
-  {
-   "@type": "Question",
-   "name": "What does the Meta Tag Analyzer do?",
-   "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "It scans your HTML code and extracts important meta tags such as title, description, keywords, robots, canonical, and headings. The tool highlights issues and provides recommendations for SEO improvements."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "Why are meta tags important for SEO?",
-   "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "Meta tags help search engines understand your page content. A well‑optimized title and description can improve rankings and increase click‑through rates from search results."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "Can this tool fix my meta tags automatically?",
-   "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "No, the tool only analyzes and provides recommendations. You’ll need to update your website’s HTML code manually or through your CMS to apply the changes."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "Does the analyzer check for duplicate tags?",
-   "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "Yes, it detects multiple title, description, or keyword tags and alerts you so you can remove duplicates and keep your code clean."
-   }
-  },
-  {
-   "@type": "Question",
-   "name": "Is this tool free to use?",
-   "acceptedAnswer": {
-     "@type": "Answer",
-     "text": "Absolutely. The Meta Tag Analyzer is free and designed to help webmasters, SEO specialists, and content creators improve their on‑page SEO quickly."
-   }
-  }
- ]
-}
-</script>
-        <!-- Tool logic stays intact -->
-      </div>
-    </div>
-  </section>
 
   <!-- About Section -->
   <section class="section">
@@ -573,4 +463,5 @@ function downloadReport() {
 
 </body>
 </html>
+
 
