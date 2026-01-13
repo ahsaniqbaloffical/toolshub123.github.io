@@ -231,3 +231,106 @@ a.btn:hover {
     padding: 20px;
   }
 }
+/* Input Area */
+.input-area {
+  width: 100%;
+  height: 200px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 14px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+/* Buttons */
+.btn-primary {
+  background: #00BFA6;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s ease;
+}
+.btn-primary:hover {
+  background: #009e8a;
+}
+
+.btn-secondary {
+  background: #007BFF;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.3s ease;
+}
+.btn-secondary:hover {
+  background: #0056b3;
+}
+
+/* Results Box */
+.results-box {
+  margin-top: 25px;
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* SERP Previews */
+.serp-preview {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+}
+.serp-preview h4 {
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+.serp-title {
+  font-size: 18px;
+  margin: 5px 0;
+}
+.serp-url {
+  font-size: 14px;
+  color: #006621;
+  margin: 5px 0;
+}
+.serp-description {
+  font-size: 14px;
+  color: #545454;
+  margin: 5px 0;
+}
+
+/* Specific Colors for Engines */
+.serp-preview.google h4,
+.serp-preview.google .serp-title { color: #1a0dab; }
+.serp-preview.bing h4,
+.serp-preview.bing .serp-title { color: #008373; }
+.serp-preview.yahoo h4,
+.serp-preview.yahoo .serp-title { color: #600090; }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .input-area {
+    height: 150px;
+    font-size: 13px;
+  }
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+  .results-box {
+    padding: 15px;
+  }
+}
+
