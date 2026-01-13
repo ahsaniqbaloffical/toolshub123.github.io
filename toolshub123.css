@@ -6,39 +6,42 @@
 }
 
 /* ===== Base Styles ===== */
-body {
+html, body {
   font-family: 'Syne', sans-serif;
-  background: #F4F6F8;
+  background: #ffffff; /* RankMath uses clean white backgrounds */
   color: #333;
   line-height: 1.6;
+  font-size: 16px;
 }
 
 /* ===== Header (Preferred Setting) ===== */
 header {
-  background: #0A192F;
+  background: #0A192F; /* dark header */
   color: #fff;
-  padding: 20px 40px; /* ✅ preferred spacing */
+  padding: 20px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 header .logo {
-  max-height: 80px; /* ✅ preferred logo height */
+  max-height: 80px;
 }
 
-/* Navigation */
 .header-nav {
   display: flex;
-  gap: 25px; /* ✅ consistent spacing between links */
+  gap: 30px; /* more breathing room like RankMath */
 }
 
 .header-nav a {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  padding: 8px 12px; /* ✅ breathing room inside each link */
+  padding: 10px 14px;
   transition: color 0.3s ease;
 }
 
@@ -47,19 +50,107 @@ header .logo {
   color: #00BFA6;
 }
 
-/* ===== Hamburger Menu ===== */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
+/* ===== Hero Section ===== */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 100%);
+  color: #fff;
 }
 
-.menu-toggle span {
-  height: 3px;
-  width: 25px;
+.hero h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 1.25em;
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+}
+
+.hero .btn {
   background: #fff;
-  margin: 4px 0;
-  border-radius: 2px;
+  color: #00BFA6;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.hero .btn:hover {
+  background: #00BFA6;
+  color: #fff;
+}
+
+/* ===== Sections ===== */
+.section {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* ===== Cards ===== */
+.cards,
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+.card,
+.tool-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  padding: 30px;
+  width: 280px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover,
+.tool-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.card h2,
+.tool-card h2 {
+  color: #0A192F;
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+.card p,
+.tool-card p {
+  color: #555;
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+
+.card a,
+.tool-card a {
+  display: inline-block;
+  background: #00BFA6;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.card a:hover,
+.tool-card a:hover {
+  background: #008f7a;
 }
 
 /* ===== Footer ===== */
@@ -67,24 +158,25 @@ footer {
   background: #0A192F;
   color: #fff;
   text-align: center;
-  padding: 20px;
+  padding: 30px;
 }
 
 footer a {
   color: #00BFA6;
   text-decoration: none;
-  margin: 0 10px;
+  margin: 0 12px;
+  font-weight: 600;
 }
 
-/* ===== Buttons ===== */
+/* ===== Buttons (Universal) ===== */
 .btn,
 button,
 a.btn {
   display: inline-block;
   background: #00BFA6;
   color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 24px;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: 600;
   transition: background 0.3s ease;
@@ -98,85 +190,6 @@ a.btn:hover {
   background: #008f7a;
 }
 
-/* ===== Sections ===== */
-.section {
-  max-width: 900px;
-  margin: 40px auto;
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-/* ===== Hero ===== */
-.hero {
-  text-align: center;
-  padding: 60px 20px;
-  background: #F4F6F8;
-}
-
-.hero h1 {
-  font-size: 2.5em;
-  margin-bottom: 15px;
-  color: #0A192F;
-}
-
-.hero p {
-  font-size: 1.2em;
-  max-width: 700px;
-  margin: 0 auto 20px auto;
-  color: #555;
-}
-
-/* ===== Cards ===== */
-.cards,
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-}
-
-.card,
-.tool-card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  padding: 25px;
-  width: 250px;
-  text-align: center;
-  transition: transform 0.2s ease;
-}
-
-.card:hover,
-.tool-card:hover {
-  transform: translateY(-5px);
-}
-
-.card h2,
-.tool-card h2 {
-  color: #0A192F;
-  font-size: 1.3em;
-}
-
-.card a,
-.tool-card a {
-  display: inline-block;
-  margin-top: 10px;
-  background: #00BFA6;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.card a:hover,
-.tool-card a:hover {
-  background: #008f7a;
-}
-
 /* ===== Mobile Optimizations ===== */
 @media (max-width: 768px) {
   header {
@@ -185,34 +198,22 @@ a.btn:hover {
   }
 
   .header-nav {
-    display: none;
-    width: 100%;
     flex-direction: column;
-    gap: 15px; /* ✅ vertical spacing between stacked links */
+    gap: 15px;
     margin-top: 15px;
-    text-align: center;
   }
 
-  .menu-toggle {
-    display: flex;
-  }
-
-  .header-nav.active {
-    display: flex;
+  .hero {
+    padding: 60px 20px;
   }
 
   .card,
   .tool-card {
-    width: 45%;
+    width: 100%;
   }
 }
 
-@media (max-width: 600px) {
-  .card,
-  .tool-card {
-    width: 100%;
-  }
-
+@media (max-width: 480px) {
   .hero h1 {
     font-size: 2em;
   }
@@ -221,25 +222,8 @@ a.btn:hover {
     font-size: 1em;
   }
 
-  .btn,
-  button,
-  a.btn {
-    width: 100%;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
   .section {
     padding: 20px;
-  }
-
-  .hero h1 {
-    font-size: 1.6em;
-  }
-
-  .hero p {
-    font-size: 0.95em;
   }
 
   .card,
