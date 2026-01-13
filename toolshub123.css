@@ -391,3 +391,47 @@ a.btn:hover {
   text-align: left;
 }
 
+/* Force left alignment for the Meta Tag Analyzer page */
+#metatag-page,
+#metatag-page * {
+  text-align: left !important;
+}
+
+/* Common culprits */
+#metatag-page .tool-card,
+#metatag-page .section,
+#metatag-page .faq,
+#metatag-page .results-box {
+  text-align: left !important;
+}
+
+/* Headings and paragraphs often get globally centered */
+#metatag-page h1,
+#metatag-page h2,
+#metatag-page h3,
+#metatag-page h4,
+#metatag-page p,
+#metatag-page div,
+#metatag-page span,
+#metatag-page ul,
+#metatag-page li {
+  text-align: left !important;
+}
+
+/* Flex container shouldn’t center items */
+#metatag-page .results-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* layout for SERP previews */
+  align-items: flex-start;        /* ensure items align to top/left */
+}
+
+/* Ensure SERP preview content keeps left alignment */
+#metatag-page .serp-preview,
+#metatag-page .serp-preview h4,
+#metatag-page .serp-title,
+#metatag-page .serp-url,
+#metatag-page .serp-description {
+  text-align: left !important;
+}
+
