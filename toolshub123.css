@@ -375,3 +375,19 @@ a.btn:hover {
     margin-bottom: 15px;
   }
 }
+/* Results Box - Left Align */
+.results-box {
+  text-align: left;   /* force left alignment */
+}
+
+/* Ensure all child elements inherit left alignment */
+.results-box h3,
+.results-box h4,
+.results-box p,
+.results-box div,
+.results-box ul,
+.results-box li,
+.results-box span {
+  text-align: left;
+}
+
