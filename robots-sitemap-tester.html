@@ -33,6 +33,192 @@
     <h2 class="rs-tester-hero-title">Robots.txt & Sitemap Tester</h2>
     <p class="rs-tester-hero-subtitle">Paste your robots.txt or sitemap.xml content below or fetch directly via URL.</p>
   </section>
+  <!-- ROBOTS & SITEMAP TOOL -->
+
+<!-- URL method -->
+<div id="rs-tester-url" class="rs-tester-container">
+  <input type="text"
+         id="rs-tester-inputUrl"
+         class="rs-tester-input"
+         placeholder="Enter robots.txt or sitemap.xml URL...">
+  <div class="rs-tester-actions">
+    <button class="btn-primary" onclick="rsTesterFetchAndAnalyze()">Fetch & Analyze</button>
+  </div>
+</div>
+
+<!-- Manual paste method -->
+<div id="rs-tester-manual" class="rs-tester-container">
+  <textarea id="rs-tester-inputText"
+            class="rs-tester-textarea"
+            placeholder="Paste robots.txt or sitemap.xml here..."></textarea>
+  <div class="rs-tester-actions">
+    <button class="btn-primary" onclick="rsTesterAnalyzeInput()">Analyze</button>
+    <button class="btn-secondary" onclick="rsTesterDownloadCSV()">Download Report (CSV)</button>
+    <button class="btn-tertiary" onclick="rsTesterCopySummary()">Copy Summary</button>
+  </div>
+
+  <div id="rs-tester-results" class="rs-tester-results">
+    <div id="rs-tester-summary" class="rs-tester-summary"></div>
+    <table id="rs-tester-resultsTable" class="rs-tester-table">
+      <thead>
+        <tr>
+          <th>Entry</th>
+          <th>Type</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+async function rsTesterFetchAndAnalyze(){
+  const url = document.getElementById("rs-tester-inputUrl").value.trim();
+  if(!url){ alert("Enter a valid URL."); return; }
+  try{
+    const res = await fetch(url);
+    if(!res.ok){ alert("Failed to fetch file. Check the URL."); return; }
+    const text = await res.text();
+    document.getElementById("rs-tester-inputText").value = text; 
+    rsTesterAnalyzeInput(); 
+  }catch(err){
+    alert("Error fetching file: " + err.message);
+  }
+}
+
+function rsTesterAnalyzeInput(){
+  const text = document.getElementById("rs-tester-inputText").value.trim();
+  if(!text){ alert("Paste robots.txt or sitemap.xml content."); return; }
+  let rows = [];
+  let summary = "";
+  let metrics = {};
+  let errorsList = [];
+  let warningsList = [];
+
+  if(text.startsWith("<")){ 
+    // sitemap XML mode
+    const xml = new DOMParser().parseFromString(text,"application/xml");
+    const locs = [...xml.getElementsByTagName("loc")];
+    const lastmods = [...xml.getElementsByTagName("lastmod")];
+    const urls = locs.length;
+    let errors = 0, warnings = 0, valid = 0;
+
+    if(urls === 0){
+      errors++;
+      rows.push(["No <loc> entries","Sitemap","❌","error"]);
+      errorsList.push({msg:"Sitemap contains no <loc> entries.",fix:"Add valid <loc> tags for each page URL."});
+    } 
+    locs.forEach((loc,i)=>{
+      const url = loc.textContent.trim();
+      if(url){
+        valid++;
+        rows.push([url,"URL","Valid","valid"]);
+      } else {
+        errors++;
+        rows.push(["Empty <loc>","URL","❌","error"]);
+        errorsList.push({msg:"Empty <loc> tag found in sitemap.",fix:"Ensure each <url> has a valid <loc> with a full URL."});
+      }
+      if(!lastmods[i]){
+        warnings++;
+        warningsList.push({msg:`URL ${url} has no <lastmod> tag.`,fix:"Add <lastmod> to indicate when the page was last updated."});
+      }
+    });
+
+    const score = rsTesterSitemapScore(valid,errors,warnings,urls);
+    summary = `[Sitemap] Compliance Score: ${score}`;
+    metrics = {urls,valid,errors,warnings,score};
+
+  } else { 
+    // robots.txt mode
+    const lines = text.split(/\r?\n/);
+    let errors = 0, warnings = 0, valid = 0, directives = 0;
+    lines.forEach(line=>{
+      const l = line.trim(); if(!l) return;
+      const parts = l.split(":");
+      if(parts.length < 2){
+        warnings++;
+        rows.push([l,"Directive","Unknown","warning"]);
+        warningsList.push({msg:`Line "${l}" is not a valid directive format.`,fix:"Use proper syntax: Directive: value (e.g., Disallow: /path)."});
+        return;
+      }
+      const key = parts[0].toLowerCase();
+      directives++;
+      if(["user-agent","disallow","allow","sitemap"].includes(key)){
+        valid++;
+        rows.push([l,"Directive","Valid","valid"]);
+      } else {
+        warnings++;
+        rows.push([l,"Directive","Unknown","warning"]);
+        warningsList.push({msg:`Directive "${key}" is not recognized.`,fix:"Use only supported directives: User-agent, Disallow, Allow, Sitemap."});
+      }
+    });
+
+    const score = rsTesterRobotsScore(valid,errors,warnings,directives);
+    summary = `[Robots.txt] Compliance Score: ${score}`;
+    metrics = {directives,valid,errors,warnings,score};
+  }
+
+  // Show summary
+  document.getElementById("rs-tester-summary").innerHTML = "<h3>"+summary+"</h3>";
+
+  // Metrics table
+  let metricsHTML = "<table class='metrics-table'><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody>";
+  for(const key in metrics){
+    metricsHTML += `<tr><td>${key.charAt(0).toUpperCase()+key.slice(1)}</td><td>${metrics[key]}</td></tr>`;
+  }
+  metricsHTML += "</tbody></table>";
+
+  // Detailed errors and warnings with fixes
+  if(errorsList.length > 0){
+    metricsHTML += "<h4 class='error-title'>Errors:</h4><ul class='error-list'>";
+    errorsList.forEach(e=>{
+      metricsHTML += `<li class='error-item'>${e.msg}<br><em>Fix: ${e.fix}</em></li>`;
+    });
+    metricsHTML += "</ul>";
+  }
+  if(warningsList.length > 0){
+    metricsHTML += "<h4 class='warning-title'>Warnings:</h4><ul class='warning-list'>";
+    warningsList.forEach(w=>{
+      metricsHTML += `<li class='warning-item'>${w.msg}<br><em>Fix: ${w.fix}</em></li>`;
+    });
+    metricsHTML += "</ul>";
+  }
+
+  document.getElementById("rs-tester-summary").innerHTML += "<br>"+metricsHTML;
+
+  // Detailed rows table
+  const tbody = document.querySelector("#rs-tester-resultsTable tbody");
+  tbody.innerHTML = "";
+  rows.forEach(r=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${r[0]}</td><td>${r[1]}</td><td><span class="badge ${r[3]}">${r[2]}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById("rs-tester-results").style.display = "block";
+}
+
+function rsTesterRobotsScore(valid,errors,warnings,directives){
+  let score = 100 - errors*10 - warnings*5;
+  if(valid === 0) score -= 20;
+  if(score < 0) score = 0;
+  return score;
+}
+
+function rsTesterSitemapScore(valid,errors,warnings,urls){
+  let score = 100 - errors*10 - warnings*3;
+  if(valid === 0) score -= 30;
+  if(urls === 0) score = 0;
+  if(score < 0) score = 0;
+  return score;
+}
+
+/* Optional: implement these with unique names if needed
+function rsTesterDownloadCSV(){ ... }
+function rsTesterCopySummary(){ ... }
+*/
+</script>
+
 
   <!-- Features -->
   <section id="rs-tester-features" class="rs-tester-section rs-tester-features">
@@ -86,3 +272,4 @@
   </footer>
 </body>
 </html>
+
