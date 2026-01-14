@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Free Heading Structure Checker | Toolshub123</title>
   <meta name="description" content="Analyze and optimize your HTML heading hierarchy to improve SEO performance and accessibility for users.">
-  <meta name="keywords" content="free heading checker, heading checker,free SEO tools, SEO tool,online tools, free online tools, Toolshub123">
+  <meta name="keywords" content="free heading checker, heading checker, free SEO tools, SEO tool, online tools, free online tools, Toolshub123">
   <meta name="author" content="Ahsan Iqbal">
   <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,61 +15,43 @@
 
   <!-- Fonts & Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Syne', sans-serif; margin:0; background:#F4F6F8; }
-    header { background:#0A192F; color:#fff; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; }
-    header img { max-height:100px; }
-    nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:600; }
-    nav a.active { color:#00BFA6; }
-    .hero { text-align:center; padding:40px; }
-    .section { max-width:900px; margin:40px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
-    footer { background:#0A192F; color:#fff; text-align:center; padding:20px; }
-    footer a { color:#00BFA6; text-decoration:none; margin:0 10px; }
-      /* Mobile Optimizations */
-    @media (max-width: 600px) {
-      nav { display:block; text-align:center; }
-      nav a { display:block; margin:10px 0; }
-      .tool-card { width:100%; }
-    }
-    @media (max-width: 480px) {
-      .hero h1 { font-size:24px; }
-      .hero p { font-size:16px; }
-      .section { padding:20px; }
-  </style>
+  <link rel="stylesheet" href="toolshub123.css"> <!-- Universal CSS -->
 </head>
 <body>
 
-  <!-- Header with Logo + Navigation -->
-<header>
-  <img src="logo.png" alt="Toolshub123 Logo" class="logo">
-
-  <nav class="header-nav">
-    <a href="https://toolshub123.com/">Home</a>
-    <a href="https://toolshub123.com/SEO%20tools.html">SEO Tools</a>
-    <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
-    <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
-    <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
-  </nav>
-</header>
+  <!-- Header -->
+  <header>
+    <img src="logo.png" alt="Toolshub123 Logo" class="logo">
+    <nav class="header-nav">
+      <a href="https://toolshub123.com/">Home</a>
+      <a href="https://toolshub123.com/SEO%20tools.html" class="active">SEO Tools</a>
+      <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
+      <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
+      <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
+    </nav>
+  </header>
 
   <!-- Hero Section -->
-  <div class="hero">
+  <section class="hero">
     <h1>Heading Structure Checker</h1>
-    <p>Ensure proper heading hierarchy in your HTML.</p>
-  </div>
-  
- <!-- Tool Section: Heading Structure Checker -->
-<div class="section">
+    <p>Analyze and optimize your HTML heading hierarchy for SEO and accessibility.</p>
+    <a href="#how-it-works" class="btn">Learn How It Works</a>
+  </section>
+  <!-- Tool Section: Heading Structure Checker -->
+<div class="section heading-tool">
   <p>Paste your HTML code below and click "Check Headings" to analyze the heading hierarchy.</p>
-  <textarea id="headingInput" placeholder="Paste your HTML code here..." style="width:100%; height:200px; padding:10px; border:1px solid #ccc; border-radius:5px;"></textarea>
+  
+  <!-- Input Area -->
+  <textarea id="headingInput" class="input-area" placeholder="Paste your HTML code here..."></textarea>
   
   <!-- Keyword input -->
-  <p style="margin-top:10px;">Optional: Enter target keywords (comma separated) to check optimization:</p>
-  <input id="keywordInput" placeholder="e.g. SEO, Meta Tags, Optimization" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:5px;">
+  <p class="keyword-label">Optional: Enter target keywords (comma separated) to check optimization:</p>
+  <input id="keywordInput" class="input-field" placeholder="e.g. SEO, Meta Tags, Optimization">
   
-  <button onclick="checkHeadings()" style="background:#00BFA6; color:#fff; padding:12px 25px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Check Headings</button>
+  <button onclick="checkHeadings()" class="btn-primary">Check Headings</button>
 
-  <div id="headingResults" style="display:none; margin-top:20px; background:#f9f9f9; padding:20px; border-radius:10px;">
+  <!-- Results -->
+  <div id="headingResults" class="heading-results">
     <h3>Heading Analysis Results</h3>
     <div><strong>H1 Count:</strong> <span id="h1Count"></span></div>
     <div><strong>H2 Count:</strong> <span id="h2Count"></span></div>
@@ -78,17 +60,16 @@
     <div><strong>H5 Count:</strong> <span id="h5Count"></span></div>
     <div><strong>H6 Count:</strong> <span id="h6Count"></span></div>
 
-    <h3 style="margin-top:20px;">Heading Outline</h3>
+    <h3>Heading Outline</h3>
     <ul id="headingOutline"></ul>
 
-    <h3 style="margin-top:20px;">Recommendations</h3>
+    <h3>Recommendations</h3>
     <ul id="headingRecommendations"></ul>
 
     <!-- Download Button -->
-    <button onclick="downloadHeadingReport()" style="background:#007BFF; color:#fff; padding:10px 20px; border:none; border-radius:5px; font-weight:600; cursor:pointer; margin-top:15px;">Download Report (CSV)</button>
+    <button onclick="downloadHeadingReport()" class="btn-secondary">Download Report (CSV)</button>
   </div>
 </div>
-
 <script>
 function checkHeadings() {
   const input = document.getElementById("headingInput").value;
@@ -206,129 +187,90 @@ function downloadHeadingReport() {
 }
 </script>
 
-<!-- How It Works Section -->
-<div class="section">
-  <h2>How the Heading Structure Checker Works</h2>
-  <p>
-    The Heading Structure Checker analyzes your HTML code to review the hierarchy and quality of 
-    heading tags (<code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>). It scans your content 
-    and provides:
-  </p>
-  <ul>
-    <li>✅ Counts of all heading levels (H1–H6)</li>
-    <li>✅ A full outline showing the text of each heading in order</li>
-    <li>⚠️ Alerts for missing or multiple H1 tags</li>
-    <li>⚠️ Warnings for skipped heading levels (e.g., H2 → H4)</li>
-    <li>⚠️ Detection of empty or duplicate headings</li>
-    <li>⚠️ Checks for heading length (too short or too long)</li>
-    <li>🔑 Keyword optimization check (optional input)</li>
-    <li>📤 Export of results and recommendations to CSV</li>
-  </ul>
-  <p>
-    This ensures your headings follow SEO best practices, improve accessibility, and create a 
-    logical content hierarchy for both users and search engines.
-  </p>
-</div>
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="section">
+    <h2>How the Heading Structure Checker Works</h2>
+    <p>
+      The Heading Structure Checker reviews your HTML code to analyze the hierarchy and quality of heading tags 
+      (<code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>). It provides:
+    </p>
+    <ul>
+      <li>✅ Counts of all heading levels (H1–H6)</li>
+      <li>✅ A full outline showing the text of each heading in order</li>
+      <li>⚠️ Alerts for missing or multiple H1 tags</li>
+      <li>⚠️ Warnings for skipped heading levels (e.g., H2 → H4)</li>
+      <li>⚠️ Detection of empty or duplicate headings</li>
+      <li>⚠️ Checks for heading length (too short or too long)</li>
+      <li>🔑 Keyword optimization check (optional input)</li>
+      <li>📤 Export of results and recommendations to CSV</li>
+    </ul>
+    <p>
+      This ensures your headings follow SEO best practices, improve accessibility, and create a logical content hierarchy 
+      for both users and search engines.
+    </p>
+  </section>
 
   <!-- FAQ Section -->
-<div class="section">
-  <h2>Frequently Asked Questions (FAQs)</h2>
+  <section class="section faq">
+    <h2>Frequently Asked Questions (FAQs)</h2>
 
-  <div>
-    <h3>What does the Heading Structure Checker do?</h3>
+    <div>
+      <h3>What does the Heading Structure Checker do?</h3>
+      <p>It scans your HTML code and extracts all heading tags (H1–H6), showing the outline, counts, and highlighting issues such as missing H1, skipped levels, or duplicates.</p>
+    </div>
+
+    <div>
+      <h3>Why are headings important for SEO?</h3>
+      <p>Headings help search engines and users understand content structure. A clear hierarchy improves readability, accessibility, and keyword relevance, boosting rankings and engagement.</p>
+    </div>
+
+    <div>
+      <h3>Can this tool check if headings use keywords?</h3>
+      <p>Yes. Enter target keywords, and the tool will flag headings that don’t contain them, helping you optimize for SEO.</p>
+    </div>
+
+    <div>
+      <h3>Does the tool detect empty or duplicate headings?</h3>
+      <p>Absolutely. It alerts you if a heading tag is empty or if the same heading text appears multiple times.</p>
+    </div>
+
+    <div>
+      <h3>Can I export the results?</h3>
+      <p>Yes. After analysis, click <strong>Download Report (CSV)</strong> to save heading counts, outlines, and recommendations.</p>
+    </div>
+
+    <div>
+      <h3>Is this tool free to use?</h3>
+      <p>Definitely. The Heading Structure Checker is free and designed to help webmasters, SEO specialists, and content creators improve heading hierarchy quickly.</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section">
+    <h2>About This Tool</h2>
     <p>
-      It scans your HTML code and extracts all heading tags (H1–H6). The tool then shows the 
-      heading outline, counts, and highlights issues such as missing H1, skipped levels, or 
-      duplicate headings.
+      The Heading Structure Checker helps you review and optimize the hierarchy of heading tags 
+      (<code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>) in your HTML code. Properly structured headings improve SEO, 
+      accessibility, and user experience by making content easier to read and understand.
     </p>
-  </div>
-
-  <div>
-    <h3>Why are headings important for SEO?</h3>
     <p>
-      Headings help search engines and users understand the structure of your content. A clear 
-      hierarchy improves readability, accessibility, and keyword relevance, which can boost 
-      rankings and engagement.
+      This tool provides a detailed outline of all headings, counts each level, and highlights issues such as missing or multiple H1 tags, skipped levels, empty or duplicate headings, and headings that are too short or too long. You can also check whether your headings contain target keywords for better optimization.
     </p>
-  </div>
-
-  <div>
-    <h3>Can this tool check if headings use keywords?</h3>
     <p>
-      Yes. You can enter target keywords in the input box, and the tool will flag headings that 
-      don’t contain any of them, helping you optimize for SEO.
+      After analysis, you’ll receive actionable recommendations to fix problems and strengthen your content hierarchy. You can also export the results and recommendations as a CSV report for easy sharing or record‑keeping.
     </p>
-  </div>
-
-  <div>
-    <h3>Does the tool detect empty or duplicate headings?</h3>
-    <p>
-      Absolutely. It alerts you if a heading tag is empty or if the same heading text appears 
-      multiple times, so you can fix these issues.
-    </p>
-  </div>
-
-  <div>
-    <h3>Can I export the results?</h3>
-    <p>
-      Yes. After analysis, you can click <strong>Download Report (CSV)</strong> to save the 
-      heading counts, outline, and recommendations for easy sharing or record‑keeping.
-    </p>
-  </div>
-
-  <div>
-    <h3>Is this tool free to use?</h3>
-    <p>
-      Definitely. The Heading Structure Checker is free and designed to help webmasters, SEO 
-      specialists, and content creators improve their heading hierarchy quickly.
-    </p>
-  </div>
-</div>
-
-  
-   <!-- About Section -->
-<div class="section">
-  <h2>About This Tool</h2>
-  <p>
-    The Heading Structure Checker helps you review and optimize the hierarchy of heading tags 
-    (<code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>) in your HTML code. Properly structured 
-    headings improve SEO, accessibility, and user experience by making content easier to read and 
-    understand.
-  </p>
-  <p>
-    This tool scans your HTML and provides a detailed outline of all headings, counts each level, 
-    and highlights issues such as missing or multiple H1 tags, skipped heading levels, empty or 
-    duplicate headings, and headings that are too short or too long. You can also check whether 
-    your headings contain target keywords for better optimization.
-  </p>
-  <p>
-    After analysis, you’ll receive actionable recommendations to fix problems and strengthen your 
-    content hierarchy. You can also export the results and recommendations as a CSV report for 
-    easy sharing or record‑keeping.
-  </p>
-</div>
-
+  </section>
 
   <!-- Footer -->
- <footer>
-  <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
-  <p>
-    <a href="https://toolshub123.com/PrivacyPolicy.html">Privacy Policy</a> | 
-    <a href="https://toolshub123.com/terms%20of%20service.html">Terms of Service</a> | 
-    <a href="https://toolshub123.com/about.html">About</a> | 
-    <a href="https://toolshub123.com/contact.html">Contact Us</a>
-  </p>
-</footer>
+  <footer>
+    <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
+    <p>
+      <a href="https://toolshub123.com/PrivacyPolicy.html">Privacy Policy</a> | 
+      <a href="https://toolshub123.com/terms%20of%20service.html">Terms of Service</a> | 
+      <a href="https://toolshub123.com/about.html">About</a> | 
+      <a href="https://toolshub123.com/contact.html">Contact Us</a>
+    </p>
+  </footer>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
