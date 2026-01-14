@@ -6,91 +6,93 @@
   <meta name="description" content="Free Robots.txt & Sitemap Tester tool to validate your site's crawlability and sitemap health.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://toolshub123.com/robots-sitemap-tester.html" />
+
   <!-- Import Syne font -->
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Syne', sans-serif; margin:0; background:#F4F6F8; }
-    /* Header same as homepage */
-    header { background:#0A192F; color:#fff; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; }
-    header img { max-height:100px; }
-    nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:600; }
-    nav a.active { color:#00BFA6; }
-    
-    /* Hero section stays centered */
-    .hero { text-align:center; padding:60px 20px; }
-    .hero h2 { margin:0; color:#0A192F; font-size:32px; }
-    .hero p { color:#555; font-size:18px; }
 
-    /* Tool container */
-    .container {
-      max-width:1000px;
-      margin:30px auto;
-      background:#fff;
-      padding:30px;
-      border-radius:12px;
-      box-shadow:0 6px 16px rgba(0,0,0,0.08);
-      text-align:left;
+  <!-- Universal CSS -->
+  <link rel="stylesheet" href="toolshub123.css">
+
+  <!-- Mobile Optimization CSS -->
+  <style>
+    @media (max-width: 1024px) {
+      header { flex-direction: column; text-align: center; }
+      nav.header-nav { margin-top: 15px; }
     }
-    textarea, input[type="text"] {
-      width:100%; padding:12px; border:1px solid #ccc; border-radius:8px;
-      font-family:'Syne',sans-serif; font-size:16px;
-    }
-    textarea { height:200px; }
-    button {
-      margin:10px 6px; padding:12px 20px;
-      border:none; border-radius:8px;
-      font-weight:600; cursor:pointer;
-      font-family:'Syne',sans-serif; font-size:16px;
-    }
-    .btn-primary { background:#00BFA6; color:#fff; }
-    .btn-secondary { background:#007BFF; color:#fff; }
-    table { width:100%; border-collapse:collapse; margin-top:20px; }
-    th,td { border:1px solid #ddd; padding:10px; text-align:left; }
-    th { background:#f4f6f8; }
-    .badge { padding:4px 8px; border-radius:6px; font-size:13px; color:#fff; }
-    .valid { background:#28a745; }
-    .warning { background:#ffc107; color:#000; }
-    .error { background:#dc3545; }
-    .summary { margin-top:15px; padding:12px; background:#f9f9f9; border-radius:8px; }
-    footer { background:#0A192F; color:#fff; text-align:center; padding:25px; }
-    footer a { color:#00BFA6; text-decoration:none; margin:0 12px; font-weight:600; }
-    footer a:hover { text-decoration:underline; }
-    .container h2, .container p, .container ul, .container li { text-align:left; }
-    .container ul li { margin-bottom:10px; }
-      /* Mobile Optimizations */
-    @media (max-width: 600px) {
-      nav { display:block; text-align:center; }
-      nav a { display:block; margin:10px 0; }
-      .tool-card { width:100%; }
+    @media (max-width: 768px) {
+      .hero { padding: 30px 20px; }
+      .hero h2 { font-size: 26px; }
+      .hero p { font-size: 16px; }
+      .container { padding: 20px; margin: 20px auto; }
+      nav.header-nav a { display: inline-block; margin: 8px; }
     }
     @media (max-width: 480px) {
-      .hero h1 { font-size:24px; }
-      .hero p { font-size:16px; }
-      .section { padding:20px; }
+      header img.logo { max-height: 60px; }
+      .hero h2 { font-size: 22px; }
+      .hero p { font-size: 14px; }
+      nav.header-nav a { display: block; margin: 10px 0; }
+      footer { font-size: 14px; padding: 15px; }
+      button, input, textarea { width: 100%; box-sizing: border-box; }
+    }
   </style>
+
+  <!-- FAQ Schema JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need both robots.txt and sitemap?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, robots.txt controls crawler access, while sitemaps help search engines discover your content."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I have multiple sitemaps?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, you can use a sitemap index and multiple 'Sitemap:' lines to organize them."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why avoid blocking CSS/JS?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Search engines render pages; blocking assets like CSS or JS can negatively impact rankings."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
- <!-- Header with Logo + Navigation -->
-<header>
-  <img src="logo.png" alt="Toolshub123 Logo" class="logo">
+  <!-- Header -->
+  <header>
+    <img src="logo.png" alt="Toolshub123 Logo" class="logo">
+    <nav class="header-nav">
+      <a href="https://toolshub123.com/">Home</a>
+      <a href="https://toolshub123.com/SEO%20tools.html">SEO Tools</a>
+      <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
+      <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
+      <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
+    </nav>
+  </header>
 
-  <nav class="header-nav">
-    <a href="https://toolshub123.com/">Home</a>
-    <a href="https://toolshub123.com/SEO%20tools.html">SEO Tools</a>
-    <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
-    <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
-    <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
-  </nav>
-</header>
-
-<div class="hero">
-  <h2>Robots.txt & Sitemap Tester</h2>
-  <p>Paste your robots.txt or sitemap.xml content below or fetch directly via URL.</p>
-</div>
-
-<!-- URL method -->
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Robots.txt & Sitemap Tester</h2>
+    <p>Paste your robots.txt or sitemap.xml content below or fetch directly via URL.</p>
+  </section>
+  
+<!-- ROBOTS & SITEMAP TOOL -->
+  <!-- URL method -->
 <div class="container">
-  <input type="text" id="inputUrl" placeholder="Enter robots.txt or sitemap.xml URL...">
+  <input type="text" id="inputUrl" placeholder="Enter robots.txt or sitemap.xml URL..." class="input-field">
   <div>
     <button class="btn-primary" onclick="fetchAndAnalyze()">Fetch & Analyze</button>
   </div>
@@ -98,14 +100,14 @@
 
 <!-- Manual paste method -->
 <div class="container">
-  <textarea id="inputText" placeholder="Paste robots.txt or sitemap.xml here..."></textarea>
+  <textarea id="inputText" placeholder="Paste robots.txt or sitemap.xml here..." class="input-area"></textarea>
   <div>
     <button class="btn-primary" onclick="analyzeInput()">Analyze</button>
     <button class="btn-secondary" onclick="downloadCSV()">Download Report (CSV)</button>
-    <button onclick="copySummary()">Copy Summary</button>
+    <button class="btn-tertiary" onclick="copySummary()">Copy Summary</button>
   </div>
 
-  <div id="results" style="display:none;">
+  <div id="results" class="results-box">
     <div class="summary" id="summary"></div>
     <table id="resultsTable">
       <thead><tr><th>Entry</th><th>Type</th><th>Status</th></tr></thead>
@@ -113,52 +115,6 @@
     </table>
   </div>
 </div>
-
-<!-- features-->
-<div class="container">
-  <h2>How This Tool Works</h2>
-  <p>✔ Paste robots.txt or sitemap.xml content into the box or fetch via URL.</p>
-  <p>✔ The tool auto‑detects type and analyzes directives or URLs.</p>
-  <p>✔ Compliance score starts at 100 and deducts for errors/warnings.</p>
-  <p>✔ Results show a summary and detailed table with status badges.</p>
-  <p>✔ Export results to CSV or copy summary for quick sharing.</p>
-</div>
-
-<!-- faqs-->
-<div class="container">
-  <h2>FAQs</h2>
-  <ul>
-    <li><strong>Do I need both robots.txt and sitemap?</strong> Yes, robots.txt controls crawler access, sitemaps help discovery.</li>
-    <li><strong>Can I have multiple sitemaps?</strong> Yes, use a sitemap index and multiple “Sitemap:” lines.</li>
-    <li><strong>Why avoid blocking CSS/JS?</strong> Search engines render pages; blocking assets can hurt rankings.</li>
-  </ul>
-</div>
-
-<!-- About-->
-<div class="container">
-  <h2>About This Tool</h2>
-  <p>The Robots.txt & Sitemap Tester is designed to help webmasters, SEO specialists, and developers quickly validate two of the most important files for search engine optimization. These files guide search engines on how to crawl and index your site.</p>
-  <p>With this tool, you can:</p>
-  <ul>
-    <li>✔ Detect errors and warnings in your <code>robots.txt</code> directives.</li>
-    <li>✔ Verify that your <code>sitemap.xml</code> contains valid and accessible URLs.</li>
-    <li>✔ Instantly calculate a compliance score to measure overall health.</li>
-    <li>✔ Export results to CSV for reporting or share a quick summary with your team.</li>
-  </ul>
-  <p>By simplifying technical checks, this tool ensures your site remains crawlable, indexable, and optimized for better visibility in search engines.</p>
-</div>
-<!-- Footer -->
-<footer>
-  <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
-  <p>
-    <a href="https://toolshub123.com/PrivacyPolicy.html">Privacy Policy</a> | 
-    <a href="https://toolshub123.com/terms%20of%20service.html">Terms of Service</a> | 
-    <a href="https://toolshub123.com/about.html">About</a> | 
-    <a href="https://toolshub123.com/contact.html">Contact Us</a>
-  </p>
-</footer>
-</body>
-</html>
 
 <script>
 async function fetchAndAnalyze(){
@@ -168,8 +124,8 @@ async function fetchAndAnalyze(){
     const res=await fetch(url);
     if(!res.ok){alert("Failed to fetch file. Check the URL.");return;}
     const text=await res.text();
-    document.getElementById("inputText").value=text; // show content in textarea
-    analyzeInput(); // reuse existing logic
+    document.getElementById("inputText").value=text; 
+    analyzeInput(); 
   }catch(err){
     alert("Error fetching file: "+err.message);
   }
@@ -251,7 +207,7 @@ function analyzeInput(){
   document.getElementById("summary").innerHTML="<h3>"+summary+"</h3>";
 
   // Metrics table
-  let metricsHTML="<table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody>";
+  let metricsHTML="<table class='metrics-table'><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody>";
   for(const key in metrics){
     metricsHTML+=`<tr><td>${key.charAt(0).toUpperCase()+key.slice(1)}</td><td>${metrics[key]}</td></tr>`;
   }
@@ -259,16 +215,16 @@ function analyzeInput(){
 
   // Detailed errors and warnings with fixes
   if(errorsList.length>0){
-    metricsHTML+="<h4 style='color:#dc3545;'>Errors:</h4><ul>";
+    metricsHTML+="<h4 class='error-title'>Errors:</h4><ul class='error-list'>";
     errorsList.forEach(e=>{
-      metricsHTML+=`<li style='color:#dc3545;'>${e.msg}<br><em>Fix: ${e.fix}</em></li>`;
+      metricsHTML+=`<li class='error-item'>${e.msg}<br><em>Fix: ${e.fix}</em></li>`;
     });
     metricsHTML+="</ul>";
   }
   if(warningsList.length>0){
-    metricsHTML+="<h4 style='color:#ffc107;'>Warnings:</h4><ul>";
+    metricsHTML+="<h4 class='warning-title'>Warnings:</h4><ul class='warning-list'>";
     warningsList.forEach(w=>{
-      metricsHTML+=`<li style='color:#856404;'>${w.msg}<br><em>Fix: ${w.fix}</em></li>`;
+      metricsHTML+=`<li class='warning-item'>${w.msg}<br><em>Fix: ${w.fix}</em></li>`;
     });
     metricsHTML+="</ul>";
   }
@@ -303,13 +259,51 @@ function calculateSitemapScore(valid,errors,warnings,urls){
 </script>
 
 
+  <!-- Features -->
+  <section class="container">
+    <h2>How This Tool Works</h2>
+    <ul>
+      <li>✔ Paste robots.txt or sitemap.xml content into the box or fetch via URL.</li>
+      <li>✔ The tool auto‑detects type and analyzes directives or URLs.</li>
+      <li>✔ Compliance score starts at 100 and deducts for errors/warnings.</li>
+      <li>✔ Results show a summary and detailed table with status badges.</li>
+      <li>✔ Export results to CSV or copy summary for quick sharing.</li>
+    </ul>
+  </section>
 
+  <!-- FAQs -->
+  <section class="container">
+    <h2>FAQs</h2>
+    <ul>
+      <li><strong>Do I need both robots.txt and sitemap?</strong> Yes, robots.txt controls crawler access, sitemaps help discovery.</li>
+      <li><strong>Can I have multiple sitemaps?</strong> Yes, use a sitemap index and multiple “Sitemap:” lines.</li>
+      <li><strong>Why avoid blocking CSS/JS?</strong> Search engines render pages; blocking assets can hurt rankings.</li>
+    </ul>
+  </section>
 
+  <!-- About -->
+  <section class="container">
+    <h2>About This Tool</h2>
+    <p>The Robots.txt & Sitemap Tester is designed to help webmasters, SEO specialists, and developers quickly validate two of the most important files for search engine optimization. These files guide search engines on how to crawl and index your site.</p>
+    <p>With this tool, you can:</p>
+    <ul>
+      <li>✔ Detect errors and warnings in your <code>robots.txt</code> directives.</li>
+      <li>✔ Verify that your <code>sitemap.xml</code> contains valid and accessible URLs.</li>
+      <li>✔ Instantly calculate a compliance score to measure overall health.</li>
+      <li>✔ Export results to CSV for reporting or share a quick summary with your team.</li>
+    </ul>
+    <p>By simplifying technical checks, this tool ensures your site remains crawlable, indexable, and optimized for better visibility in search engines.</p>
+  </section>
 
-
-
-
-
-
-
-
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
+    <p>
+      <a href="https://toolshub123.com/PrivacyPolicy.html">Privacy Policy</a> | 
+      <a href="https://toolshub123.com/terms%20of%20service.html">Terms of Service</a> | 
+      <a href="https://toolshub123.com/about.html">About</a> | 
+      <a href="https://toolshub123.com/contact.html">Contact Us</a>
+    </p>
+  </footer>
+</body>
+</html>
