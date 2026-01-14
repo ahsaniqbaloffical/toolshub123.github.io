@@ -17,88 +17,90 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
   
   <!-- Universal CSS -->
-   <link rel="stylesheet" href="toolshub123.css">
-  /* General Mobile Optimizations */
-@media (max-width: 1024px) {
-  header { flex-direction: column; text-align: center; }
-  nav { margin-top: 15px; }
-}
+  <link rel="stylesheet" href="toolshub123.css">
 
-@media (max-width: 768px) {
-  .hero { padding: 20px; }
-  .hero h1 { font-size: 28px; }
-  .hero p { font-size: 16px; }
-  .section { padding: 20px; margin: 20px auto; }
-  nav a { display: inline-block; margin: 8px; }
-}
-
-@media (max-width: 480px) {
-  header img { max-height: 60px; }
-  .hero h1 { font-size: 22px; }
-  .hero p { font-size: 14px; }
-  nav a { display:block; margin:10px 0; }
-  footer { font-size: 14px; padding: 15px; }
-}
-
-<!-- FAQ Schema JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What does the Heading Structure Checker do?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It scans your HTML code and extracts all heading tags (H1–H6). The tool then shows the heading outline, counts, and highlights issues such as missing H1, skipped levels, or duplicate headings."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Why are headings important for SEO?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Headings help search engines and users understand the structure of your content. A clear hierarchy improves readability, accessibility, and keyword relevance, which can boost rankings and engagement."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can this tool check if headings use keywords?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. You can enter target keywords in the input box, and the tool will flag headings that don’t contain any of them, helping you optimize for SEO."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does the tool detect empty or duplicate headings?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Absolutely. It alerts you if a heading tag is empty or if the same heading text appears multiple times, so you can fix these issues."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I export the results?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. After analysis, you can click Download Report (CSV) to save the heading counts, outline, and recommendations for easy sharing or record‑keeping."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is this tool free to use?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Definitely. The Heading Structure Checker is free and designed to help webmasters, SEO specialists, and content creators improve their heading hierarchy quickly."
-      }
+  <!-- Mobile Optimization CSS -->
+  <style>
+    @media (max-width: 1024px) {
+      header { flex-direction: column; text-align: center; }
+      nav { margin-top: 15px; }
     }
-  ]
-}
-</script>
 
+    @media (max-width: 768px) {
+      .hero { padding: 20px; }
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 16px; }
+      .section { padding: 20px; margin: 20px auto; }
+      nav a { display: inline-block; margin: 8px; }
+    }
 
+    @media (max-width: 480px) {
+      header img { max-height: 60px; }
+      .hero h1 { font-size: 22px; }
+      .hero p { font-size: 14px; }
+      nav a { display: block; margin: 10px 0; }
+      footer { font-size: 14px; padding: 15px; }
+      button, input, textarea { width: 100%; box-sizing: border-box; }
+    }
+  </style>
+
+  <!-- FAQ Schema JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does the Heading Structure Checker do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It scans your HTML code and extracts all heading tags (H1–H6). The tool then shows the heading outline, counts, and highlights issues such as missing H1, skipped levels, or duplicate headings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why are headings important for SEO?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Headings help search engines and users understand the structure of your content. A clear hierarchy improves readability, accessibility, and keyword relevance, which can boost rankings and engagement."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can this tool check if headings use keywords?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can enter target keywords in the input box, and the tool will flag headings that don’t contain any of them, helping you optimize for SEO."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the tool detect empty or duplicate headings?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. It alerts you if a heading tag is empty or if the same heading text appears multiple times, so you can fix these issues."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I export the results?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. After analysis, you can click Download Report (CSV) to save the heading counts, outline, and recommendations for easy sharing or record‑keeping."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this tool free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Definitely. The Heading Structure Checker is free and designed to help webmasters, SEO specialists, and content creators improve their heading hierarchy quickly."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -379,6 +381,7 @@ function downloadHeadingReport() {
 
 </body>
 </html>
+
 
 
 
