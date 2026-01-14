@@ -777,7 +777,7 @@ a.btn:hover {
   background: linear-gradient(135deg, #0A192F 0%, #00BFA6 100%); /*  same as Heading Checker */
   padding: 60px 20px;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 0px;
 }
 
 .rs-tester-hero-title {
@@ -792,6 +792,7 @@ a.btn:hover {
   font-size: 18px;
   margin-top: 10px;
 }
+
 
 
 
