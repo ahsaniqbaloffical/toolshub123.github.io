@@ -13,65 +13,10 @@
   <!-- Universal CSS -->
   <link rel="stylesheet" href="toolshub123.css">
 
-  <!-- Mobile Optimization CSS -->
-  <style>
-    @media (max-width: 1024px) {
-      header { flex-direction: column; text-align: center; }
-      nav.header-nav { margin-top: 15px; }
-    }
-    @media (max-width: 768px) {
-      .hero { padding: 30px 20px; }
-      .hero h2 { font-size: 26px; }
-      .hero p { font-size: 16px; }
-      .container { padding: 20px; margin: 20px auto; }
-      nav.header-nav a { display: inline-block; margin: 8px; }
-    }
-    @media (max-width: 480px) {
-      header img.logo { max-height: 60px; }
-      .hero h2 { font-size: 22px; }
-      .hero p { font-size: 14px; }
-      nav.header-nav a { display: block; margin: 10px 0; }
-      footer { font-size: 14px; padding: 15px; }
-      button, input, textarea { width: 100%; box-sizing: border-box; }
-    }
-  </style>
-
-  <!-- FAQ Schema JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Do I need both robots.txt and sitemap?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, robots.txt controls crawler access, while sitemaps help search engines discover your content."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I have multiple sitemaps?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, you can use a sitemap index and multiple 'Sitemap:' lines to organize them."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Why avoid blocking CSS/JS?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Search engines render pages; blocking assets like CSS or JS can negatively impact rankings."
-        }
-      }
-    ]
-  }
-  </script>
+  <!-- Page-specific CSS will go in toolshub123.css using these unique classes -->
 </head>
 <body>
-  <!-- Header -->
+  <!-- Header (unchanged) -->
   <header>
     <img src="logo.png" alt="Toolshub123 Logo" class="logo">
     <nav class="header-nav">
@@ -84,228 +29,52 @@
   </header>
 
   <!-- Hero -->
-  <section class="hero">
-    <h2>Robots.txt & Sitemap Tester</h2>
-    <p>Paste your robots.txt or sitemap.xml content below or fetch directly via URL.</p>
+  <section id="rs-tester-hero" class="rs-tester-hero">
+    <h2 class="rs-tester-hero-title">Robots.txt & Sitemap Tester</h2>
+    <p class="rs-tester-hero-subtitle">Paste your robots.txt or sitemap.xml content below or fetch directly via URL.</p>
   </section>
-  
-<!-- ROBOTS & SITEMAP TOOL -->
-  <!-- URL method -->
-<div class="container" style="text-align:left;">
-  <input type="text" id="inputUrl" placeholder="Enter robots.txt or sitemap.xml URL..." class="input-field" style="text-align:left;">
-  <div style="text-align:left;">
-    <button class="btn-primary" onclick="fetchAndAnalyze()">Fetch & Analyze</button>
-  </div>
-</div>
 
-<!-- Manual paste method -->
-<div class="container" style="text-align:left;">
-  <textarea id="inputText" placeholder="Paste robots.txt or sitemap.xml here..." class="input-area" style="text-align:left;"></textarea>
-  <div style="text-align:left;">
-    <button class="btn-primary" onclick="analyzeInput()">Analyze</button>
-    <button class="btn-secondary" onclick="downloadCSV()">Download Report (CSV)</button>
-    <button class="btn-tertiary" onclick="copySummary()">Copy Summary</button>
-  </div>
+  <!-- Features -->
+  <section id="rs-tester-features" class="rs-tester-section rs-tester-features">
+    <h2 class="rs-tester-heading">How This Tool Works</h2>
+    <ul class="rs-tester-list">
+      <li class="rs-tester-list-item">✔ Paste robots.txt or sitemap.xml content into the box or fetch via URL.</li>
+      <li class="rs-tester-list-item">✔ The tool auto‑detects type and analyzes directives or URLs.</li>
+      <li class="rs-tester-list-item">✔ Compliance score starts at 100 and deducts for errors/warnings.</li>
+      <li class="rs-tester-list-item">✔ Results show a summary and detailed table with status badges.</li>
+      <li class="rs-tester-list-item">✔ Export results to CSV or copy summary for quick sharing.</li>
+    </ul>
+  </section>
 
-  <div id="results" class="results-box" style="text-align:left;">
-    <div class="summary" id="summary" style="text-align:left;"></div>
-    <table id="resultsTable" style="text-align:left; width:100%; border-collapse:collapse;">
-      <thead>
-        <tr>
-          <th style="text-align:left;">Entry</th>
-          <th style="text-align:left;">Type</th>
-          <th style="text-align:left;">Status</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-</div>
+  <!-- FAQs -->
+  <section id="rs-tester-faqs" class="rs-tester-section rs-tester-faqs">
+    <h2 class="rs-tester-heading">FAQs</h2>
+    <ul class="rs-tester-list">
+      <li class="rs-tester-list-item"><strong>Do I need both robots.txt and sitemap?</strong> Yes, robots.txt controls crawler access, sitemaps help discovery.</li>
+      <li class="rs-tester-list-item"><strong>Can I have multiple sitemaps?</strong> Yes, use a sitemap index and multiple “Sitemap:” lines.</li>
+      <li class="rs-tester-list-item"><strong>Why avoid blocking CSS/JS?</strong> Search engines render pages; blocking assets can hurt rankings.</li>
+    </ul>
+  </section>
 
-<script>
-async function fetchAndAnalyze(){
-  const url=document.getElementById("inputUrl").value.trim();
-  if(!url){alert("Enter a valid URL.");return;}
-  try{
-    const res=await fetch(url);
-    if(!res.ok){alert("Failed to fetch file. Check the URL.");return;}
-    const text=await res.text();
-    document.getElementById("inputText").value=text; 
-    analyzeInput(); 
-  }catch(err){
-    alert("Error fetching file: "+err.message);
-  }
-}
+  <!-- About -->
+  <section id="rs-tester-about" class="rs-tester-section rs-tester-about">
+    <h2 class="rs-tester-heading">About This Tool</h2>
+    <p class="rs-tester-paragraph">
+      The Robots.txt & Sitemap Tester is designed to help webmasters, SEO specialists, and developers quickly validate two of the most important files for search engine optimization. These files guide search engines on how to crawl and index your site.
+    </p>
+    <p class="rs-tester-paragraph">With this tool, you can:</p>
+    <ul class="rs-tester-list">
+      <li class="rs-tester-list-item">✔ Detect errors and warnings in your <code>robots.txt</code> directives.</li>
+      <li class="rs-tester-list-item">✔ Verify that your <code>sitemap.xml</code> contains valid and accessible URLs.</li>
+      <li class="rs-tester-list-item">✔ Instantly calculate a compliance score to measure overall health.</li>
+      <li class="rs-tester-list-item">✔ Export results to CSV for reporting or share a quick summary with your team.</li>
+    </ul>
+    <p class="rs-tester-paragraph">
+      By simplifying technical checks, this tool ensures your site remains crawlable, indexable, and optimized for better visibility in search engines.
+    </p>
+  </section>
 
-function analyzeInput(){
-  const text=document.getElementById("inputText").value.trim();
-  if(!text){alert("Paste robots.txt or sitemap.xml content.");return;}
-  let rows=[];
-  let summary="";
-  let metrics={};
-  let errorsList=[];
-  let warningsList=[];
-
-  if(text.startsWith("<")){ 
-    // sitemap XML mode
-    const xml=new DOMParser().parseFromString(text,"application/xml");
-    const locs=[...xml.getElementsByTagName("loc")];
-    const lastmods=[...xml.getElementsByTagName("lastmod")];
-    const urls=locs.length;
-    let errors=0,warnings=0,valid=0;
-
-    if(urls===0){
-      errors++;
-      rows.push(["No <loc> entries","Sitemap","❌","error"]);
-      errorsList.push({msg:"Sitemap contains no <loc> entries.",fix:"Add valid <loc> tags for each page URL."});
-    } 
-    locs.forEach((loc,i)=>{
-      const url=loc.textContent.trim();
-      if(url){
-        valid++;
-        rows.push([url,"URL","Valid","valid"]);
-      } else {
-        errors++;
-        rows.push(["Empty <loc>","URL","❌","error"]);
-        errorsList.push({msg:"Empty <loc> tag found in sitemap.",fix:"Ensure each <url> has a valid <loc> with a full URL."});
-      }
-      if(!lastmods[i]){
-        warnings++;
-        warningsList.push({msg:`URL ${url} has no <lastmod> tag.`,fix:"Add <lastmod> to indicate when the page was last updated."});
-      }
-    });
-
-    const score=calculateSitemapScore(valid,errors,warnings,urls);
-    summary=`[Sitemap] Compliance Score: ${score}`;
-    metrics={urls,valid,errors,warnings,score};
-
-  } else { 
-    // robots.txt mode
-    const lines=text.split(/\r?\n/);
-    let errors=0,warnings=0,valid=0,directives=0;
-    lines.forEach(line=>{
-      const l=line.trim(); if(!l) return;
-      const parts=l.split(":");
-      if(parts.length<2){
-        warnings++;
-        rows.push([l,"Directive","Unknown","warning"]);
-        warningsList.push({msg:`Line "${l}" is not a valid directive format.`,fix:"Use proper syntax: Directive: value (e.g., Disallow: /path)."});
-        return;
-      }
-      const key=parts[0].toLowerCase();
-      directives++;
-      if(["user-agent","disallow","allow","sitemap"].includes(key)){
-        valid++;
-        rows.push([l,"Directive","Valid","valid"]);
-      } else {
-        warnings++;
-        rows.push([l,"Directive","Unknown","warning"]);
-        warningsList.push({msg:`Directive "${key}" is not recognized.`,fix:"Use only supported directives: User-agent, Disallow, Allow, Sitemap."});
-      }
-    });
-
-    const score=calculateRobotsScore(valid,errors,warnings,directives);
-    summary=`[Robots.txt] Compliance Score: ${score}`;
-    metrics={directives,valid,errors,warnings,score};
-  }
-
-  // Show summary
-  document.getElementById("summary").innerHTML="<h3>"+summary+"</h3>";
-
-  // Metrics table
-  let metricsHTML="<table class='metrics-table'><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody>";
-  for(const key in metrics){
-    metricsHTML+=`<tr><td>${key.charAt(0).toUpperCase()+key.slice(1)}</td><td>${metrics[key]}</td></tr>`;
-  }
-  metricsHTML+="</tbody></table>";
-
-  // Detailed errors and warnings with fixes
-  if(errorsList.length>0){
-    metricsHTML+="<h4 class='error-title'>Errors:</h4><ul class='error-list'>";
-    errorsList.forEach(e=>{
-      metricsHTML+=`<li class='error-item'>${e.msg}<br><em>Fix: ${e.fix}</em></li>`;
-    });
-    metricsHTML+="</ul>";
-  }
-  if(warningsList.length>0){
-    metricsHTML+="<h4 class='warning-title'>Warnings:</h4><ul class='warning-list'>";
-    warningsList.forEach(w=>{
-      metricsHTML+=`<li class='warning-item'>${w.msg}<br><em>Fix: ${w.fix}</em></li>`;
-    });
-    metricsHTML+="</ul>";
-  }
-
-  document.getElementById("summary").innerHTML+="<br>"+metricsHTML;
-
-  // Detailed rows table
-  const tbody=document.querySelector("#resultsTable tbody");
-  tbody.innerHTML="";
-  rows.forEach(r=>{
-    const tr=document.createElement("tr");
-    tr.innerHTML=`<td>${r[0]}</td><td>${r[1]}</td><td><span class="badge ${r[3]}">${r[2]}</span></td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById("results").style.display="block";
-}
-
-function calculateRobotsScore(valid,errors,warnings,directives){
-  let score=100-errors*10-warnings*5;
-  if(valid===0) score-=20;
-  if(score<0) score=0;
-  return score;
-}
-
-function calculateSitemapScore(valid,errors,warnings,urls){
-  let score=100-errors*10-warnings*3;
-  if(valid===0) score-=30;
-  if(urls===0) score=0;
-  if(score<0) score=0;
-  return score;
-}
-</script>
-
-
- <!-- Features -->
-<section class="container" style="text-align:left;">
-  <h2 style="text-align:left; margin-top:0;">How This Tool Works</h2>
-  <ul style="text-align:left; padding-left:18px; margin:12px 0;">
-    <li style="margin-bottom:8px;">✔ Paste robots.txt or sitemap.xml content into the box or fetch via URL.</li>
-    <li style="margin-bottom:8px;">✔ The tool auto‑detects type and analyzes directives or URLs.</li>
-    <li style="margin-bottom:8px;">✔ Compliance score starts at 100 and deducts for errors/warnings.</li>
-    <li style="margin-bottom:8px;">✔ Results show a summary and detailed table with status badges.</li>
-    <li style="margin-bottom:8px;">✔ Export results to CSV or copy summary for quick sharing.</li>
-  </ul>
-</section>
-
-<!-- FAQs -->
-<section class="container" style="text-align:left;">
-  <h2 style="text-align:left; margin-top:0;">FAQs</h2>
-  <ul style="text-align:left; padding-left:18px; margin:12px 0;">
-    <li style="margin-bottom:8px;"><strong>Do I need both robots.txt and sitemap?</strong> Yes, robots.txt controls crawler access, sitemaps help discovery.</li>
-    <li style="margin-bottom:8px;"><strong>Can I have multiple sitemaps?</strong> Yes, use a sitemap index and multiple “Sitemap:” lines.</li>
-    <li style="margin-bottom:8px;"><strong>Why avoid blocking CSS/JS?</strong> Search engines render pages; blocking assets can hurt rankings.</li>
-  </ul>
-</section>
-
-<!-- About -->
-<section class="container" style="text-align:left;">
-  <h2 style="text-align:left; margin-top:0;">About This Tool</h2>
-  <p style="text-align:left; margin:10px 0;">
-    The Robots.txt & Sitemap Tester is designed to help webmasters, SEO specialists, and developers quickly validate two of the most important files for search engine optimization. These files guide search engines on how to crawl and index your site.
-  </p>
-  <p style="text-align:left; margin:10px 0;">With this tool, you can:</p>
-  <ul style="text-align:left; padding-left:18px; margin:12px 0;">
-    <li style="margin-bottom:8px;">✔ Detect errors and warnings in your <code>robots.txt</code> directives.</li>
-    <li style="margin-bottom:8px;">✔ Verify that your <code>sitemap.xml</code> contains valid and accessible URLs.</li>
-    <li style="margin-bottom:8px;">✔ Instantly calculate a compliance score to measure overall health.</li>
-    <li style="margin-bottom:8px;">✔ Export results to CSV for reporting or share a quick summary with your team.</li>
-  </ul>
-  <p style="text-align:left; margin:10px 0;">
-    By simplifying technical checks, this tool ensures your site remains crawlable, indexable, and optimized for better visibility in search engines.
-  </p>
-</section>
-
-  <!-- Footer -->
+  <!-- Footer (unchanged) -->
   <footer>
     <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
     <p>
@@ -317,5 +86,3 @@ function calculateSitemapScore(valid,errors,warnings,urls){
   </footer>
 </body>
 </html>
-
-
