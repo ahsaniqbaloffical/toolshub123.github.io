@@ -106,10 +106,12 @@ function checkHeadings() {
     if (text && text.length < 3) recs.push(`⚠️ Heading "${text}" is too short.`);
     if (text && text.length > 70) recs.push(`⚠️ Heading "${text}" is too long (${text.length} characters).`);
 
-    // Keyword optimization check
+    // Keyword optimization check (always show result)
     if (keywords.length > 0 && text) {
       const containsKeyword = keywords.some(k => text.toLowerCase().includes(k));
-      if (!containsKeyword) {
+      if (containsKeyword) {
+        recs.push(`✅ Heading "${text}" contains at least one target keyword.`);
+      } else {
         recs.push(`⚠️ Heading "${text}" does not contain any target keywords.`);
       }
     }
@@ -140,12 +142,17 @@ function checkHeadings() {
   // Display outline
   document.getElementById("headingOutline").innerHTML = outlineHTML || "<li>No headings found</li>";
 
-  // Display recommendations
+  // Display recommendations with classes
   const recList = document.getElementById("headingRecommendations");
   recList.innerHTML = "";
   recs.forEach(r => {
     const li = document.createElement("li");
     li.innerText = r;
+
+    if (r.startsWith("✅")) li.classList.add("success");
+    else if (r.startsWith("⚠️")) li.classList.add("warning");
+    else if (r.startsWith("❌")) li.classList.add("error");
+
     recList.appendChild(li);
   });
 
@@ -273,4 +280,5 @@ function downloadHeadingReport() {
 
 </body>
 </html>
+
 
