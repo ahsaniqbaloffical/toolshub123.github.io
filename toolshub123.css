@@ -774,7 +774,7 @@ a.btn:hover {
 }
 /* Hero section for Robots.txt & Sitemap Tester */
 .rs-tester-hero {
-  background: #F4F6F8; /* light gray background, same as Heading Checker */
+  background: #00BFA6; /*  same as Heading Checker */
   padding: 60px 20px;
   text-align: center;
   border-radius: 8px;
@@ -792,6 +792,7 @@ a.btn:hover {
   font-size: 18px;
   margin-top: 10px;
 }
+
 
 
 
