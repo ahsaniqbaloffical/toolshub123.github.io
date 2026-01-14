@@ -734,6 +734,18 @@ a.btn:hover {
   .input-area { font-size: 13px; }
   .summary h3 { font-size: 16px; }
 }
+/* Force all tool content to left-align */
+.container {
+  text-align: left;
+}
 
+/* Ensure headings, paragraphs, lists, and tables inside containers are left-aligned */
+.container h2,
+.container p,
+.container ul,
+.container li,
+.container table {
+  text-align: left;
+}
 
 
