@@ -76,7 +76,7 @@
     <img src="logo.png" alt="Toolshub123 Logo" class="logo">
     <nav class="header-nav">
       <a href="https://toolshub123.com/">Home</a>
-      <a href="https://toolshub123.com/SEO%20tools.html">SEO Tools</a>
+      <a href="https://toolshub123.com/SEO%20tools.html" class="active">SEO Tools</a>
       <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
       <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
       <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
@@ -91,26 +91,32 @@
   
 <!-- ROBOTS & SITEMAP TOOL -->
   <!-- URL method -->
-<div class="container">
-  <input type="text" id="inputUrl" placeholder="Enter robots.txt or sitemap.xml URL..." class="input-field">
-  <div>
+<div class="container" style="text-align:left;">
+  <input type="text" id="inputUrl" placeholder="Enter robots.txt or sitemap.xml URL..." class="input-field" style="text-align:left;">
+  <div style="text-align:left;">
     <button class="btn-primary" onclick="fetchAndAnalyze()">Fetch & Analyze</button>
   </div>
 </div>
 
 <!-- Manual paste method -->
-<div class="container">
-  <textarea id="inputText" placeholder="Paste robots.txt or sitemap.xml here..." class="input-area"></textarea>
-  <div>
+<div class="container" style="text-align:left;">
+  <textarea id="inputText" placeholder="Paste robots.txt or sitemap.xml here..." class="input-area" style="text-align:left;"></textarea>
+  <div style="text-align:left;">
     <button class="btn-primary" onclick="analyzeInput()">Analyze</button>
     <button class="btn-secondary" onclick="downloadCSV()">Download Report (CSV)</button>
     <button class="btn-tertiary" onclick="copySummary()">Copy Summary</button>
   </div>
 
-  <div id="results" class="results-box">
-    <div class="summary" id="summary"></div>
-    <table id="resultsTable">
-      <thead><tr><th>Entry</th><th>Type</th><th>Status</th></tr></thead>
+  <div id="results" class="results-box" style="text-align:left;">
+    <div class="summary" id="summary" style="text-align:left;"></div>
+    <table id="resultsTable" style="text-align:left; width:100%; border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th style="text-align:left;">Entry</th>
+          <th style="text-align:left;">Type</th>
+          <th style="text-align:left;">Status</th>
+        </tr>
+      </thead>
       <tbody></tbody>
     </table>
   </div>
@@ -307,3 +313,4 @@ function calculateSitemapScore(valid,errors,warnings,urls){
   </footer>
 </body>
 </html>
+
