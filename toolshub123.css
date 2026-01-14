@@ -559,12 +559,12 @@ a.btn:hover {
 }
 
 /* =========================
-   Robots.txt & Sitemap Tester — Unified Styles
+   Robots.txt & Sitemap Tester — Scoped Styles
    ========================= */
 
 /* Inputs */
-.input-field,
-.input-area {
+.rs-tester-input,
+.rs-tester-textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -574,10 +574,10 @@ a.btn:hover {
   margin-bottom: 15px;
   box-sizing: border-box;
 }
-.input-area { min-height: 200px; }
+.rs-tester-textarea { min-height: 200px; }
 
 /* Buttons */
-.btn-primary {
+.rs-tester-actions .btn-primary {
   background: #00BFA6;
   color: #fff;
   padding: 12px 20px;
@@ -589,9 +589,9 @@ a.btn:hover {
   font-size: 16px;
   transition: background 0.25s ease;
 }
-.btn-primary:hover { background: #009e8a; }
+.rs-tester-actions .btn-primary:hover { background: #009e8a; }
 
-.btn-secondary {
+.rs-tester-actions .btn-secondary {
   background: #007BFF;
   color: #fff;
   padding: 12px 20px;
@@ -603,9 +603,9 @@ a.btn:hover {
   font-size: 16px;
   transition: background 0.25s ease;
 }
-.btn-secondary:hover { background: #0056b3; }
+.rs-tester-actions .btn-secondary:hover { background: #0056b3; }
 
-.btn-tertiary {
+.rs-tester-actions .btn-tertiary {
   background: #0A192F;
   color: #fff;
   padding: 12px 20px;
@@ -617,116 +617,118 @@ a.btn:hover {
   font-size: 16px;
   transition: opacity 0.25s ease;
 }
-.btn-tertiary:hover { opacity: 0.9; }
+.rs-tester-actions .btn-tertiary:hover { opacity: 0.9; }
 
 /* Results container */
-.results-box {
+#rs-tester-results {
   display: none; /* shown by JS */
   margin-top: 20px;
 }
 
 /* Summary card */
-.summary {
+#rs-tester-summary {
   margin-top: 15px;
   padding: 16px 18px;
   background: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
-.summary h3 {
+#rs-tester-summary h3 {
   margin: 0 0 10px 0;
   font-weight: 700;
   color: #0A192F;
 }
 
 /* Metrics table */
-.metrics-table {
+.rs-tester-section .metrics-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
 }
-.metrics-table th,
-.metrics-table td {
+.rs-tester-section .metrics-table th,
+.rs-tester-section .metrics-table td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
   font-size: 14px;
 }
-.metrics-table th {
+.rs-tester-section .metrics-table th {
   background: #F4F6F8;
   font-weight: 600;
 }
 
 /* Errors & warnings */
-.error-title { color: #dc3545; font-weight: 700; margin-top: 18px; }
-.warning-title { color: #856404; font-weight: 700; margin-top: 18px; }
+.rs-tester-section .error-title { color: #dc3545; font-weight: 700; margin-top: 18px; }
+.rs-tester-section .warning-title { color: #856404; font-weight: 700; margin-top: 18px; }
 
-.error-list,
-.warning-list {
+.rs-tester-section .error-list,
+.rs-tester-section .warning-list {
   list-style: none;
   padding-left: 0;
   margin: 8px 0 0 0;
 }
-.error-item,
-.warning-item {
+.rs-tester-section .error-item,
+.rs-tester-section .warning-item {
   margin-bottom: 8px;
   line-height: 1.45;
   font-size: 14px;
 }
-.error-item { color: #dc3545; }
-.warning-item { color: #856404; }
+.rs-tester-section .error-item { color: #dc3545; }
+.rs-tester-section .warning-item { color: #856404; }
 
-/* Badges (existing base retained, included here for completeness) */
-.badge {
+/* Badges */
+.rs-tester-section .badge {
   padding: 4px 8px;
   border-radius: 6px;
   font-size: 13px;
   color: #fff;
   display: inline-block;
 }
-.valid { background: #28a745; }
-.warning { background: #ffc107; color: #000; }
-.error { background: #dc3545; }
+.rs-tester-section .valid { background: #28a745; }
+.rs-tester-section .warning { background: #ffc107; color: #000; }
+.rs-tester-section .error { background: #dc3545; }
 
 /* Table (resultsTable) alignment */
-#resultsTable {
+#rs-tester-resultsTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
-#resultsTable th,
-#resultsTable td {
+#rs-tester-resultsTable th,
+#rs-tester-resultsTable td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
 }
-#resultsTable th { background: #F4F6F8; }
+#rs-tester-resultsTable th { background: #F4F6F8; }
 
-/* Mobile optimizations for tool UI */
+/* Mobile optimizations for rs-tester UI */
 @media (max-width: 768px) {
-  .btn-primary,
-  .btn-secondary,
-  .btn-tertiary {
+  .rs-tester-actions .btn-primary,
+  .rs-tester-actions .btn-secondary,
+  .rs-tester-actions .btn-tertiary {
     width: 100%;
     text-align: center;
     margin-bottom: 10px;
   }
-  .summary { padding: 14px; }
-  .metrics-table th,
-  .metrics-table td,
-  #resultsTable th,
-  #resultsTable td {
+  #rs-tester-summary { padding: 14px; }
+  .rs-tester-section .metrics-table th,
+  .rs-tester-section .metrics-table td,
+  #rs-tester-resultsTable th,
+  #rs-tester-resultsTable td {
     padding: 8px;
     font-size: 13px;
   }
 }
 
 @media (max-width: 480px) {
-  .input-area { min-height: 160px; }
-  .input-field,
-  .input-area { font-size: 13px; }
-  .summary h3 { font-size: 16px; }
+  .rs-tester-textarea { min-height: 160px; }
+  .rs-tester-input,
+  .rs-tester-textarea { font-size: 13px; }
+  #rs-tester-summary h3 { font-size: 16px; }
 }
+
+
 
 
 
