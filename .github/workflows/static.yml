@@ -1,4 +1,3 @@
-# Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
 on:
@@ -24,7 +23,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: .  # Use '.' if your index.html is in the root
+          path: .   # change to ./dist or ./build if your site files are there
 
   deploy:
     runs-on: ubuntu-latest
