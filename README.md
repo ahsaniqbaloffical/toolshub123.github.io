@@ -7,23 +7,23 @@ Welcome to **Toolshub123**, a collection of free, easy‑to‑use online tools b
 
 ---
 
-## 🚀 Featured SEO Tools
+## 🚀 Featured SEO Tools: [SEO Tools](https://toolshub123.com/SEO%20tools.html)
 - **Robots.txt & Sitemap Tester** – Validate your site’s crawlability and sitemap health.
 - **Meta Tag Analyzer** – Preview how your title and description appear in search results.
 - **Heading Checker** – Ensure your H1–H6 structure is optimized for SEO.
 - **Canonical Tag Tester** – Detect duplicate content issues and confirm canonical signals.
 
-## 💰 Finance Tools
+## 💰 Finance Tools: [Finance Tools](https://toolshub123.com/finance%20tools.html)
 - **Currency Converter** – Convert currencies instantly with live exchange rates.
 - **Loan Comparison Calculator** – Compare loan options side by side.
 - **Savings Goal Calculator** – Plan and track your savings targets.
 
-## 🛠️ Utility Tools
+## 🛠️ Utility Tools: [Utility Tools](https://toolshub123.com/utilitytools.html)
 - **Case Converter** – Switch text between uppercase, lowercase, and title case.
 - **Text Cleaner** – Remove unwanted spaces, line breaks, and formatting.
 - **Password Generator** – Create strong, secure passwords instantly.
 
-## ⚕️ Health Tools
+## ⚕️ Health Tools: [Toolshub123.com](https://toolshub123.com/health%20tools.html)
 - **BMR Calculator** – Calculate your Basal Metabolic Rate.
 - **Ideal Weight Calculator** – Estimate healthy weight ranges.
 - **Water Intake Calculator** – Track daily hydration needs.
@@ -41,7 +41,12 @@ Whether you’re an SEO professional, a developer, or just someone looking for q
 ---
 
 ## 🔗 Backlink & Contribution
-Visit: [https://toolshub123.com](https://toolshub123.com)  
+Visit: [https://toolshub123.com](https://toolshub123.com) 
+[https://toolshub123.com/SEO%20tools.html](https://toolshub123.com/SEO%20tools.html)
+[https://toolshub123.com/finance%20tools.html](https://toolshub123.com/finance%20tools.html)
+[https://toolshub123.com/utilitytools.html](https://toolshub123.com/utilitytools.html)
+[https://toolshub123.com/health%20tools.html](https://toolshub123.com/health%20tools.html)
+
 Contributions, suggestions, and feedback are welcome! Feel free to open issues or submit pull requests to improve the tools.
 
 ---
