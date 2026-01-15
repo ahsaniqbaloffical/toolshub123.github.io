@@ -13,6 +13,17 @@ html, body {
   line-height: 1.6;
   font-size: 16px;
 }
+/* ===== Base Styles (dark mode css) ===== */
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #121212; 
+    color: #ffffff;            
+  }
+  
+  a, .tool-link { 
+    color: #00BFA6; 
+  }
+}
 
 /* ===== Header (Preferred Setting) ===== */
 header {
@@ -855,6 +866,7 @@ footer a:hover {
   font-size: 18px;
   margin-top: 10px;
 }
+
 
 
 
