@@ -57,6 +57,16 @@ html, body {
     color: #00BFA6 !important; 
   }
 }
+/* Fix buttons so text stays white on teal/blue backgrounds */
+  .btn, button, a.btn, .btn-primary, .btn-secondary, .card a, .tool-card a {
+    color: #ffffff !important;
+    background-color: #00BFA6; /* Keeps them teal */
+  }
+
+  /* Keep the hover effect working in dark mode */
+  .btn:hover, button:hover, .btn-primary:hover {
+    background-color: #008f7a !important;
+  }
 
 /* ===== Header (Preferred Setting) ===== */
 header {
@@ -899,6 +909,7 @@ footer a:hover {
   font-size: 18px;
   margin-top: 10px;
 }
+
 
 
 
