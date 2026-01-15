@@ -13,15 +13,48 @@ html, body {
   line-height: 1.6;
   font-size: 16px;
 }
-/* ===== Base Styles (dark mode css) ===== */
+/* ===== Fixed Dark Mode CSS ===== */
 @media (prefers-color-scheme: dark) {
   html, body {
-    background-color: #121212; 
-    color: #ffffff;            
+    background-color: #121212 !important; 
+    color: #ffffff !important;            
   }
-  
+
+  /* Fixes the "Invisible Text" by making card backgrounds dark too */
+  .section, 
+  .card, 
+  .tool-card, 
+  .results-box, 
+  .serp-preview, 
+  .heading-checker-section, 
+  .heading-tool, 
+  .faq, 
+  .rs-tester-container, 
+  .rs-tester-section,
+  .rs-tester-summary {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+    border: 1px solid #333 !important;
+  }
+
+  /* Ensure all text inside dark cards turns white */
+  .card h2, .tool-card h2, .card p, .tool-card p, 
+  .heading-checker-heading, .heading-checker-paragraph,
+  .rs-tester-hero-title, .rs-tester-hero-subtitle,
+  .serp-description, .rs-tester-paragraph, .rs-tester-list-item {
+    color: #ffffff !important;
+  }
+
+  /* Keep inputs readable in dark mode */
+  .input-area, .input-field, .rs-tester-input, .rs-tester-textarea {
+    background-color: #2b2b2b !important;
+    color: #ffffff !important;
+    border: 1px solid #444 !important;
+  }
+
   a, .tool-link { 
-    color: #00BFA6; 
+    color: #00BFA6 !important; 
   }
 }
 
@@ -866,6 +899,7 @@ footer a:hover {
   font-size: 18px;
   margin-top: 10px;
 }
+
 
 
 
