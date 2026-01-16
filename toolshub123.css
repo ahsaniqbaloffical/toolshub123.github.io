@@ -915,14 +915,15 @@ footer a:hover {
    ========================= */
 
 /* Results Layout Adjustment */
-#altResults.results-box {
-    display: none; 
+#altResults.tool-results {
+    display: none;
     flex-direction: column;
     text-align: left;
+    margin-top: 20px;
 }
 
 /* Image Preview in Table */
-.metrics-table img {
+.tool-table img.tool-preview {
     width: 60px;
     height: 60px;
     object-fit: cover;
@@ -940,6 +941,7 @@ footer a:hover {
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
+    margin-right: 6px;
     margin-bottom: 5px;
 }
 
@@ -959,26 +961,111 @@ footer a:hover {
 }
 
 /* Suggestion Text */
-.suggestion-text {
+.tool-suggestion {
     margin-top: 8px;
     font-size: 13px;
     color: #00BFA6;
     font-style: italic;
 }
 
-/* Dark Mode Overrides for Alt Checker */
-@media (prefers-color-scheme: dark) {
-    .metrics-table img {
-        border-color: #444;
-    }
-    .suggestion-text {
-        color: #00ffdd; /* Slightly brighter for dark mode visibility */
-    }
+/* Summary Box */
+.tool-summary-box {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 10px;
 }
 
+.tool-summary-box p {
+    margin: 4px 0;
+    font-size: 14px;
+}
 
+/* Table Styling */
+.tool-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
 
+.tool-table th,
+.tool-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+}
 
+.tool-table th {
+    background-color: #f1f1f1;
+    font-weight: 600;
+}
 
+/* Input Area */
+.tool-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
 
+/* Buttons */
+.tool-actions {
+    display: flex;
+    gap: 10px;
+}
 
+.btn-primary,
+.btn-secondary {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+
+/* Dark Mode Overrides for Alt Checker */
+@media (prefers-color-scheme: dark) {
+    .tool-table img.tool-preview {
+        border-color: #444;
+    }
+    .tool-suggestion {
+        color: #00ffdd; /* brighter for dark mode visibility */
+    }
+    .tool-summary-box {
+        background: #222;
+        border-color: #444;
+    }
+    .tool-table th {
+        background-color: #333;
+        color: #fff;
+    }
+    .tool-table td {
+        background-color: #222;
+        color: #ddd;
+    }
+}
