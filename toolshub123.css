@@ -1086,4 +1086,57 @@ footer a:hover {
 }
 .tool-list a:hover { text-decoration: underline; }
 
+/* PRIVACY POLICY PAGE */
+body { font-family:'Syne',sans-serif; margin:0; background:#F4F6F8; }
+
+/* Header */
+header { background:#0A192F; color:#fff; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; }
+header img { max-height:60px; }
+nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:600; }
+nav a.active { color:#00BFA6; }
+
+/* Hero Banner */
+.hero-banner {
+  width:100%;
+  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%);
+  color:#fff;
+  padding:60px 20px;
+  text-align:center;
+}
+.hero-banner .hero-content { max-width:800px; margin:0 auto; }
+.hero-banner h1 { font-size:32px; font-weight:700; margin-bottom:10px; }
+.hero-banner p { font-size:18px; font-weight:400; color:#f1f1f1; }
+
+/* Section Cards */
+.section {
+  width:85%;
+  max-width:1200px;
+  margin:30px auto;
+  background:#fff;
+  padding:30px;
+  border-radius:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.08);
+  text-align:left;
+}
+.section h2 { font-size:22px; margin-bottom:15px; color:#0A192F; }
+.section p, .section li { font-size:15px; line-height:1.6; color:#333; }
+
+/* Footer */
+footer { background:#0A192F; color:#fff; text-align:center; padding:20px; }
+footer a { color:#00BFA6; text-decoration:none; margin:0 10px; }
+
+/* Mobile */
+@media (max-width:768px) {
+  nav { display:block; text-align:center; }
+  nav a { display:block; margin:10px 0; }
+  .section { width:95%; padding:20px; }
+  .hero-banner h1 { font-size:26px; }
+  .hero-banner p { font-size:15px; }
+}
+@media (max-width:480px) {
+  .hero-banner h1 { font-size:22px; }
+  .hero-banner p { font-size:14px; }
+  .section { padding:15px; }
+}
+
 
