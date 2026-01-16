@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. GLOBAL RESET & BASE STYLES
+   1. UNIVERSAL BRAND SETTINGS (Consistency)
    ========================================================================== */
 * {
   margin: 0;
@@ -12,12 +12,9 @@ html, body {
   background: #F4F6F8;
   color: #333;
   line-height: 1.6;
-  font-size: 16px;
 }
 
-/* ==========================================================================
-   2. HEADER & FOOTER (Matches your site-wide brand)
-   ========================================================================== */
+/* Universal Brand Header */
 header {
   background: #0A192F;
   color: #fff;
@@ -29,50 +26,51 @@ header {
   top: 0;
   z-index: 1000;
 }
-
 header .logo { max-height: 80px; }
-
 .header-nav { display: flex; gap: 30px; }
-
-.header-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 10px 14px;
-  transition: 0.3s;
-}
-
+.header-nav a { color: #fff; text-decoration: none; font-weight: 600; padding: 10px 14px; transition: 0.3s; }
 .header-nav a:hover, .header-nav a.active { color: #00BFA6; }
 
+/* Universal Brand Hero (Used on ALL Pages) */
+.hero, .rs-tester-hero, .hero-banner, .heading-checker-hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 100%);
+  color: #fff;
+  width: 100%;
+}
+.hero h1, .rs-tester-hero-title, .tool-title { font-size: 3em; font-weight: 700; margin-bottom: 15px; }
+
+/* Universal Buttons */
+.btn, button, .btn-primary {
+  background: #00BFA6;
+  color: #fff !important;
+  padding: 12px 26px;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.btn:hover, button:hover { background: #008f7a; }
+
+/* Universal Footer */
 footer {
   background: #0A192F;
   color: #fff;
   text-align: center;
   padding: 30px;
-  margin-top: 40px;
+  margin-top: 50px;
 }
-
-footer a {
-  color: #00BFA6;
-  text-decoration: none;
-  margin: 0 12px;
-  font-weight: 600;
-}
+footer a { color: #00BFA6; text-decoration: none; font-weight: 600; margin: 0 10px; }
 
 /* ==========================================================================
-   3. HOME PAGE SPECIFIC (The 4-Card Grid)
+   2. HOME PAGE ENGINE (Centered Grid)
    ========================================================================== */
-.hero {
-  text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 100%);
-  color: #fff;
-}
+/* Targets pages with <body id="home-page"> */
+#home-page { text-align: center; }
 
-.hero h1 { font-size: 3em; font-weight: 700; margin-bottom: 20px; }
-
-/* This is the container for your 4 category cards on the home page */
-.cards, .container {
+#home-page .cards, #home-page .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -82,42 +80,45 @@ footer a {
   margin: 0 auto;
 }
 
-.card {
+#home-page .card {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
   padding: 30px;
-  width: 280px; /* Fixed width for the grid look */
-  text-align: center;
-  transition: transform 0.3s ease;
+  width: 280px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
 }
-
-.card:hover { transform: translateY(-8px); }
 
 /* ==========================================================================
-   4. TOOL PAGE LAYOUT (Alt Checker, Robots, etc.)
+   3. TOOL PAGE ENGINE (Left Aligned / Structured)
    ========================================================================== */
-/* Hero section for tools */
-.rs-tester-hero, .heading-checker-hero, .hero-banner {
-  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 100%);
-  padding: 60px 20px;
-  text-align: center;
-  color: #fff;
-}
+/* Targets pages with <body class="tool-page"> */
+.tool-page { text-align: left; }
 
-/* Main white card for the tool interface */
-.section, .rs-tester-container, .tool-card, .faqs-card {
-  max-width: 1000px;
+.tool-page .section, 
+.tool-page .rs-tester-container, 
+.tool-page .tool-card {
+  max-width: 1100px;
   margin: 40px auto;
   background: #fff;
-  padding: 30px;
+  padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-/* Labels and Text */
-.keyword-label { font-weight: 600; display: block; margin-bottom: 10px; }
+/* Tool Tables (Consistency for Results) */
+.metrics-table, .tool-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 25px;
+}
+.metrics-table th, .metrics-table td {
+  border: 1px solid #eee;
+  padding: 15px;
+  text-align: left; /* Always left in tables */
+}
+.metrics-table th { background: #f8f9fa; }
 
+/* Tool Input Areas */
 .rs-tester-textarea, .input-area, .tool-textarea {
   width: 100%;
   min-height: 200px;
@@ -125,81 +126,38 @@ footer a {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-family: inherit;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 /* ==========================================================================
-   5. BUTTONS & UI ELEMENTS
-   ========================================================================== */
-.btn, button, .btn-primary {
-  background: #00BFA6;
-  color: #fff !important;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  display: inline-block;
-}
-
-.btn-secondary { background: #6c757d; color: #fff !important; }
-
-.rs-tester-actions { display: flex; gap: 10px; margin-top: 10px; }
-
-/* Table styles for Alt Checker */
-.metrics-table, .tool-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.metrics-table th, .metrics-table td {
-  border: 1px solid #ddd;
-  padding: 12px;
-  text-align: left;
-}
-
-.badge {
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #fff;
-}
-.badge.error { background: #dc3545; }
-.badge.valid { background: #28a745; }
-
-/* ==========================================================================
-   6. CONSOLIDATED DARK MODE
+   4. CONSOLIDATED DARK MODE (Universal Application)
    ========================================================================== */
 @media (prefers-color-scheme: dark) {
-  body { background-color: #121212; color: #eee; }
+  body { background-color: #121212 !important; color: #eee !important; }
 
-  .card, .section, .rs-tester-container, .tool-card, .faqs-card, .rs-tester-summary {
+  /* Universal Dark Cards */
+  .card, .section, .rs-tester-container, .tool-card, .rs-tester-summary {
     background-color: #1e1e1e !important;
     border: 1px solid #333 !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
   }
 
-  h1, h2, h3, p, li, .card h2, .card p { color: #ffffff !important; }
+  /* Universal Text White-out */
+  h1, h2, h3, p, li, .card h2, .card p, .faq-question { color: #ffffff !important; }
 
-  .rs-tester-textarea, .input-area {
-    background-color: #2b2b2b !important;
-    color: #fff !important;
-    border-color: #444 !important;
-  }
-
-  .metrics-table th { background: #333 !important; }
-  .metrics-table td { border-color: #444; }
+  .rs-tester-textarea, .input-area { background-color: #2b2b2b !important; color: #fff !important; }
+  
+  .metrics-table th { background-color: #2b2b2b !important; color: #fff; }
+  .metrics-table td { border-color: #333; }
 }
 
 /* ==========================================================================
-   7. MOBILE RESPONSIVE
+   5. MOBILE RESPONSIVE ENGINE
    ========================================================================== */
 @media (max-width: 768px) {
   header { flex-direction: column; padding: 20px; }
-  .header-nav { flex-direction: column; gap: 10px; margin-top: 15px; }
-  .hero h1 { font-size: 2em; }
-  .card { width: 100%; } /* Cards stack on mobile */
-  .rs-tester-actions { flex-direction: column; }
+  .header-nav { flex-direction: column; gap: 10px; margin-top: 15px; text-align: center; }
+  .card { width: 100% !important; }
+  .section, .rs-tester-container { width: 95%; padding: 20px; }
+  .hero h1 { font-size: 2.2em; }
 }
