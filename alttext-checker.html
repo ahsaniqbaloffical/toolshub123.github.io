@@ -9,107 +9,112 @@
   <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="toolshub123.css">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- header -->
-<header>
-  <img src="logo.png" alt="Toolshub123 Logo" class="logo">
-  <nav class="header-nav">
-    <a href="https://toolshub123.com/">Home</a>
-    <a href="https://toolshub123.com/SEO%20tools.html" class="active">SEO Tools</a>
-    <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
-    <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
-    <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
-  </nav>
-</header>
-<!-- hero -->
-<div class="heading-checker-hero">
-    <h1 class="heading-checker-title">Alt Text Checker</h1>
-    <p class="heading-checker-subtitle">Verify alt text usage for images to improve SEO and accessibility.</p>
-</div>
-<!-- CTA -->
-<div class="section">
-    <h2 class="heading-checker-heading">Analyze Your Image Tags</h2>
-    <p class="heading-checker-paragraph">Paste your HTML code below to find images missing the 'alt' attribute. Missing alt text can hurt your SEO and accessibility.</p>
+  <!-- header -->
+  <header>
+    <img src="logo.png" alt="Toolshub123 Logo" class="logo">
+    <nav class="header-nav">
+      <a href="https://toolshub123.com/">Home</a>
+      <a href="https://toolshub123.com/SEO%20tools.html" class="active">SEO Tools</a>
+      <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
+      <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
+      <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
+    </nav>
+  </header>
 
-<!-- Tool section -->
-    <div class="tool-card">
-        <label class="keyword-label">Enter HTML Code:</label>
-        <textarea id="htmlInput" class="input-area" placeholder="e.g., <img src='logo.png' alt='Company Logo'>"></textarea>
-        
-        <div class="rs-tester-actions">
-            <button class="btn-primary" onclick="checkAltText()">Analyze Images</button>
-            <button class="btn-secondary" onclick="clearInput()">Clear</button>
-        </div>
+  <!-- hero -->
+  <section id="alt-hero" class="tool-hero">
+    <h1 class="tool-title">Alt Text Checker</h1>
+    <p class="tool-subtitle">Verify alt text usage for images to improve SEO and accessibility.</p>
+  </section>
+
+  <!-- CTA / Tool input -->
+  <section id="alt-input-section" class="tool-section">
+    <h2 class="tool-heading">Analyze Your Image Tags</h2>
+    <p class="tool-paragraph">Paste your HTML code below to find images missing the 'alt' attribute. Missing alt text can hurt your SEO and accessibility.</p>
+
+    <div id="alt-tool-card" class="tool-card">
+      <label for="htmlInput" class="tool-label">Enter HTML Code:</label>
+      <textarea id="htmlInput" class="tool-textarea" placeholder="e.g., &lt;img src='logo.png' alt='Company Logo'&gt;"></textarea>
+      
+      <div class="tool-actions">
+        <button class="btn-primary" onclick="checkAltText()">Analyze Images</button>
+        <button class="btn-secondary" onclick="clearInput()">Clear</button>
+      </div>
     </div>
 
-    <div id="altResults" class="results-box" style="display:none;">
-        <div id="statsSummary"></div>
-        <table id="altTable" class="metrics-table">
-            <thead>
-                <tr>
-                    <th>Preview</th>
-                    <th>Source (URL)</th>
-                    <th>Alt Status & Analysis</th>
-                </tr>
-            </thead>
-            <tbody id="altTableBody"></tbody>
-        </table>
+    <div id="altResults" class="tool-results" style="display:none;">
+      <div id="statsSummary" class="tool-summary"></div>
+      <table id="altTable" class="tool-table">
+        <thead>
+          <tr>
+            <th>Preview</th>
+            <th>Source (URL)</th>
+            <th>Alt Status &amp; Analysis</th>
+          </tr>
+        </thead>
+        <tbody id="altTableBody"></tbody>
+      </table>
     </div>
-</div>
-<!-- features & about -->
-<div class="rs-tester-section">
-    <h2 class="rs-tester-heading">How It Works</h2>
-    <ul class="rs-tester-list">
-      <li class="rs-tester-list-item">✔ Paste your HTML code or image tags into the analyzer.</li>
-      <li class="rs-tester-list-item">✔ Identify missing, empty, or non-optimized alt attributes.</li>
-      <li class="rs-tester-list-item">✔ View smart suggestions based on image filenames.</li>
-      <li class="rs-tester-list-item">✔ Ensure your tags stay under the 125-character SEO limit.</li>
+  </section>
+
+  <!-- features -->
+  <section id="alt-how-section" class="tool-info">
+    <h2 class="tool-heading">How It Works</h2>
+    <ul class="tool-list">
+      <li class="tool-list-item">✔ Paste your HTML code or image tags into the analyzer.</li>
+      <li class="tool-list-item">✔ Identify missing, empty, or non-optimized alt attributes.</li>
+      <li class="tool-list-item">✔ View smart suggestions based on image filenames.</li>
+      <li class="tool-list-item">✔ Ensure your tags stay under the 125-character SEO limit.</li>
     </ul>
-</div>
+  </section>
 
-<div class="rs-tester-section">
-    <h2 class="rs-tester-heading">Disclaimer</h2>
-    <p class="rs-tester-paragraph">We are continuously adding new features to this tool. Content is analyzed locally in your browser for privacy.</p>
-</div>
-<!-- footer -->
-<footer>
+  <!-- disclaimer -->
+  <section id="alt-disclaimer-section" class="tool-info">
+    <h2 class="tool-heading">Disclaimer</h2>
+    <p class="tool-paragraph">We are continuously adding new features to this tool. Content is analyzed locally in your browser for privacy.</p>
+  </section>
+
+  <!-- footer -->
+  <footer>
     <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
     <p>
       <a href="#">Privacy Policy</a> | 
       <a href="#">Terms of Service</a> | 
       <a href="#">About</a>
     </p>
-</footer>
-<!-- script for tool -->
-<script>
-function checkAltText() {
-    const input = document.getElementById('htmlInput').value;
-    const resBox = document.getElementById('altResults');
-    const tableBody = document.getElementById('altTableBody');
-    const statsSummary = document.getElementById('statsSummary');
+  </footer>
 
-    if (!input.trim()) {
+  <!-- script -->
+  <script>
+    function checkAltText() {
+      const input = document.getElementById('htmlInput').value;
+      const resBox = document.getElementById('altResults');
+      const tableBody = document.getElementById('altTableBody');
+      const statsSummary = document.getElementById('statsSummary');
+
+      if (!input.trim()) {
         alert("Please paste some HTML code to analyze.");
         return;
-    }
+      }
 
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(input, 'text/html');
-    const images = doc.querySelectorAll('img');
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(input, 'text/html');
+      const images = doc.querySelectorAll('img');
 
-    if (images.length === 0) {
+      if (images.length === 0) {
         alert("No <img> tags were found in the code provided.");
         return;
-    }
+      }
 
-    tableBody.innerHTML = "";
-    let missingCount = 0;
-    let longCount = 0;
+      tableBody.innerHTML = "";
+      let missingCount = 0;
+      let longCount = 0;
 
-    images.forEach((img) => {
+      images.forEach((img) => {
         const src = img.getAttribute('src') || "Unknown Source";
         const alt = img.getAttribute('alt');
         const isMissing = alt === null || alt.trim() === "";
@@ -121,48 +126,46 @@ function checkAltText() {
 
         let suggestionHTML = "";
         if (isMissing) {
-            const fileName = src.split('/').pop().split(/[?#]/)[0].split('.')[0].replace(/[-_]/g, ' ');
-            suggestionHTML = `<div class="success">💡 Suggestion: "${fileName}"</div>`;
+          const fileName = src.split('/').pop().split(/[?#]/)[0].split('.')[0].replace(/[-_]/g, ' ');
+          suggestionHTML = `<div class="tool-suggestion">💡 Suggestion: "${fileName}"</div>`;
         }
 
         const row = `
-            <tr>
-                <td>
-                    <img src="${src}" class="badge" style="width:50px; height:50px; object-fit:cover;" onerror="this.src='https://via.placeholder.com/50?text=Err'">
-                </td>
-                <td>${src}</td>
-                <td>
-                    <div>
-                        ${isMissing ? '<span class="badge error">MISSING</span>' : '<span class="badge valid">FOUND</span>'}
-                        ${isTooLong ? '<span class="badge warning">TOO LONG</span>' : ''}
-                    </div>
-                    <div class="rs-tester-paragraph"><strong>${!isMissing ? `"${alt}"` : 'No alt text'}</strong></div>
-                    <div class="rs-tester-list-item">Chars: ${charCount}</div>
-                    ${suggestionHTML}
-                </td>
-            </tr>
+          <tr>
+            <td>
+              <img src="${src}" class="tool-preview" onerror="this.src='https://via.placeholder.com/50?text=Err'">
+            </td>
+            <td>${src}</td>
+            <td>
+              <div>
+                ${isMissing ? '<span class="badge error">MISSING</span>' : '<span class="badge valid">FOUND</span>'}
+                ${isTooLong ? '<span class="badge warning">TOO LONG</span>' : ''}
+              </div>
+              <div class="tool-alt-text"><strong>${!isMissing ? `"${alt}"` : 'No alt text'}</strong></div>
+              <div class="tool-char-count">Chars: ${charCount}</div>
+              ${suggestionHTML}
+            </td>
+          </tr>
         `;
         tableBody.insertAdjacentHTML('beforeend', row);
-    });
+      });
 
-    statsSummary.innerHTML = `
-        <h3 class="heading-checker-heading">SEO Image Audit Results</h3>
-        <div class="rs-tester-summary">
-            <p>Total Images: <strong>${images.length}</strong></p>
-            <p>Missing Alt: <strong class="error">${missingCount}</strong></p>
-            <p>Optimization Issues: <strong class="warning">${longCount}</strong></p>
+      statsSummary.innerHTML = `
+        <h3 class="tool-heading">SEO Image Audit Results</h3>
+        <div class="tool-summary-box">
+          <p>Total Images: <strong>${images.length}</strong></p>
+          <p>Missing Alt: <strong class="error">${missingCount}</strong></p>
+          <p>Optimization Issues: <strong class="warning">${longCount}</strong></p>
         </div>
-    `;
+      `;
 
-    resBox.style.display = 'block';
-}
+      resBox.style.display = 'block';
+    }
 
-function clearInput() {
-    document.getElementById('htmlInput').value = "";
-    document.getElementById('altResults').style.display = 'none';
-}
-</script>
+    function clearInput() {
+      document.getElementById('htmlInput').value = "";
+      document.getElementById('altResults').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
-
-
