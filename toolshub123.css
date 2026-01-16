@@ -910,18 +910,71 @@ footer a:hover {
   margin-top: 10px;
 }
 
+/* =========================
+   Alt Text Checker Specific
+   ========================= */
 
+/* Results Layout Adjustment */
+#altResults.results-box {
+    display: none; 
+    flex-direction: column;
+    text-align: left;
+}
 
+/* Image Preview in Table */
+.metrics-table img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    display: block;
+    margin: 0 auto;
+}
 
+/* Status Badges */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
 
+.badge.valid {
+    background-color: #28a745;
+    color: #fff;
+}
 
+.badge.error {
+    background-color: #dc3545;
+    color: #fff;
+}
 
+.badge.warning {
+    background-color: #ffc107;
+    color: #000;
+}
 
+/* Suggestion Text */
+.suggestion-text {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #00BFA6;
+    font-style: italic;
+}
 
-
-
-
-
+/* Dark Mode Overrides for Alt Checker */
+@media (prefers-color-scheme: dark) {
+    .metrics-table img {
+        border-color: #444;
+    }
+    .suggestion-text {
+        color: #00ffdd; /* Slightly brighter for dark mode visibility */
+    }
+}
 
 
 
