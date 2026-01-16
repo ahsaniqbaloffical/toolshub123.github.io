@@ -1073,4 +1073,14 @@ footer a:hover {
   .tool-heading { font-size:16px; }
   .tool-paragraph { font-size:13px; }
 }
+/* Features list links */
+.tool-list a {
+  font-size: 14px;       /* smaller, consistent with body text */
+  color: #007bff;        /* brand blue */
+  text-decoration: none; /* cleaner look */
+}
+
+.tool-list a:hover {
+  text-decoration: underline; /* subtle hover cue */
+}
 
