@@ -998,15 +998,18 @@ footer a:hover {
   border: none;
   transition: background .2s ease;
 }
-.btn-primary { background:#007bff; color:#fff; }
-.btn-primary:hover { background:#0056b3; }
+.btn-primary { 
+  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%);
+  color:#fff; 
+}
+.btn-primary:hover { background: linear-gradient(135deg, #0A192F 0%, #007bff 100%); }
 .btn-secondary { background:#6c757d; color:#fff; }
 .btn-secondary:hover { background:#545b62; }
 
 /* Cards (shared) */
 .tool-card, .faqs-card {
-  width: 80%;        /* fills 80% of the screen */
-  max-width: 1200px; /* optional cap for very large monitors */
+  width: 85%;
+  max-width: 1200px;
   margin: 20px auto;
   background: #fff;
   border: 1px solid #ddd;
@@ -1031,7 +1034,7 @@ footer a:hover {
 /* Hero Banner */
 .hero-banner {
   width:100%;
-  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 100%);
+  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%);
   color:#fff;
   padding:60px 20px;
   text-align:center;
@@ -1052,7 +1055,7 @@ footer a:hover {
   .faq-question { color:#eee; }
   .faq-answer { color:#ccc; }
   .tool-faq .faq-item { border-color:#333; }
-  .hero-banner { background:#222; color:#fff; }
+  .hero-banner { background: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%); color:#fff; }
   .hero-banner .tool-subtitle { color:#ccc; }
 }
 
@@ -1073,18 +1076,12 @@ footer a:hover {
   .tool-heading { font-size:16px; }
   .tool-paragraph { font-size:13px; }
 }
+
 /* Features list links */
 .tool-list a {
-  font-size: 14px;       /* smaller, consistent with body text */
+  font-size: 14px;
   padding: 5px 4px;
-  color: #007bff;        /* brand blue */
-  text-decoration: none; /* cleaner look */
+  color: #00BFA6;
+  text-decoration: none;
 }
-
-.tool-list a:hover {
-  text-decoration: underline; /* subtle hover cue */
-}
-
-
-
-
+.tool-list a:hover { text-decoration: underline; }
