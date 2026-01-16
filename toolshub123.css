@@ -1076,7 +1076,7 @@ footer a:hover {
 /* Features list links */
 .tool-list a {
   font-size: 14px;       /* smaller, consistent with body text */
-  padding: 8px 6px;
+  padding: 5px 4px;
   color: #007bff;        /* brand blue */
   text-decoration: none; /* cleaner look */
 }
@@ -1084,5 +1084,6 @@ footer a:hover {
 .tool-list a:hover {
   text-decoration: underline; /* subtle hover cue */
 }
+
 
 
