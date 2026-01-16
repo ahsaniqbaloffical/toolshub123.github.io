@@ -13,18 +13,10 @@ html, body {
   color: #333;
   line-height: 1.6;
   font-size: 16px;
-  scroll-behavior: smooth;
-}
-
-/* Base Link Style */
-a {
-  color: #00BFA6;
-  text-decoration: none;
-  transition: 0.3s;
 }
 
 /* ==========================================================================
-   2. SHARED LAYOUT COMPONENTS (Header, Footer, Hero, Buttons)
+   2. HEADER & FOOTER (Matches your site-wide brand)
    ========================================================================== */
 header {
   background: #0A192F;
@@ -33,115 +25,129 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-header .logo { max-height: 70px; }
+header .logo { max-height: 80px; }
 
-.header-nav { display: flex; gap: 25px; }
+.header-nav { display: flex; gap: 30px; }
 
 .header-nav a {
   color: #fff;
+  text-decoration: none;
   font-weight: 600;
-  padding: 8px 12px;
+  padding: 10px 14px;
+  transition: 0.3s;
 }
 
 .header-nav a:hover, .header-nav a.active { color: #00BFA6; }
-
-/* Global Buttons */
-.btn, button, .btn-primary, .btn-secondary {
-  display: inline-block;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  text-align: center;
-  transition: 0.3s ease;
-}
-
-.btn-primary, button {
-  background: #00BFA6;
-  color: #fff !important;
-}
-
-.btn-primary:hover, button:hover { background: #008f7a; }
-
-.btn-secondary {
-  background: #007BFF;
-  color: #fff !important;
-}
-
-/* Shared Hero Banner (Used by Alt Checker, Privacy, etc.) */
-.hero-banner, .rs-tester-hero, .heading-checker-hero {
-  width: 100%;
-  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 100%);
-  color: #fff;
-  padding: 60px 20px;
-  text-align: center;
-}
-
-/* Shared Content Sections/Cards */
-.section, .rs-tester-container, .rs-tester-section, .tool-card, .faq {
-  max-width: 1000px;
-  margin: 30px auto;
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-}
 
 footer {
   background: #0A192F;
   color: #fff;
   text-align: center;
+  padding: 30px;
+  margin-top: 40px;
+}
+
+footer a {
+  color: #00BFA6;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   3. HOME PAGE SPECIFIC (The 4-Card Grid)
+   ========================================================================== */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 100%);
+  color: #fff;
+}
+
+.hero h1 { font-size: 3em; font-weight: 700; margin-bottom: 20px; }
+
+/* This is the container for your 4 category cards on the home page */
+.cards, .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
   padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* ==========================================================================
-   3. META TAG ANALYZER SPECIFIC
-   ========================================================================== */
-#metatag-page, #metatag-page * { text-align: left !important; }
-
-.serp-preview {
-  flex: 1 1 calc(33% - 20px);
-  min-width: 280px;
-  margin: 10px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+.card {
   background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  padding: 30px;
+  width: 280px; /* Fixed width for the grid look */
+  text-align: center;
+  transition: transform 0.3s ease;
 }
 
-.serp-url { color: #006621; font-size: 14px; }
-.serp-description { color: #545454; font-size: 14px; }
+.card:hover { transform: translateY(-8px); }
 
 /* ==========================================================================
-   4. ROBOTS.TXT & SITEMAP TESTER SPECIFIC
+   4. TOOL PAGE LAYOUT (Alt Checker, Robots, etc.)
    ========================================================================== */
-.rs-tester-textarea {
+/* Hero section for tools */
+.rs-tester-hero, .heading-checker-hero, .hero-banner {
+  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 100%);
+  padding: 60px 20px;
+  text-align: center;
+  color: #fff;
+}
+
+/* Main white card for the tool interface */
+.section, .rs-tester-container, .tool-card, .faqs-card {
+  max-width: 1000px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Labels and Text */
+.keyword-label { font-weight: 600; display: block; margin-bottom: 10px; }
+
+.rs-tester-textarea, .input-area, .tool-textarea {
   width: 100%;
   min-height: 200px;
-  padding: 12px;
+  padding: 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-family: inherit;
-}
-
-.rs-tester-summary {
-  margin-top: 15px;
-  padding: 16px;
-  background: #f9f9f9;
-  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 /* ==========================================================================
-   5. ALT TEXT CHECKER SPECIFIC
+   5. BUTTONS & UI ELEMENTS
    ========================================================================== */
-.metrics-table {
+.btn, button, .btn-primary {
+  background: #00BFA6;
+  color: #fff !important;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn-secondary { background: #6c757d; color: #fff !important; }
+
+.rs-tester-actions { display: flex; gap: 10px; margin-top: 10px; }
+
+/* Table styles for Alt Checker */
+.metrics-table, .tool-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
@@ -153,54 +159,47 @@ footer {
   text-align: left;
 }
 
-.metrics-table th { background: #F4F6F8; }
-
 .badge {
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: #fff;
 }
-.badge.valid { background: #28a745; }
 .badge.error { background: #dc3545; }
-.badge.warning { background: #ffc107; color: #000; }
+.badge.valid { background: #28a745; }
 
 /* ==========================================================================
-   6. UNIVERSAL DARK MODE (Consolidated)
+   6. CONSOLIDATED DARK MODE
    ========================================================================== */
 @media (prefers-color-scheme: dark) {
-  html, body { background-color: #0A192F !important; color: #ddd !important; }
+  body { background-color: #121212; color: #eee; }
 
-  .section, .rs-tester-container, .rs-tester-section, .tool-card, .faq, 
-  .serp-preview, .rs-tester-summary, .tool-table td {
-    background-color: #1A1A1A !important;
-    color: #ffffff !important;
+  .card, .section, .rs-tester-container, .tool-card, .faqs-card, .rs-tester-summary {
+    background-color: #1e1e1e !important;
     border: 1px solid #333 !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
   }
 
-  .heading-checker-heading, .rs-tester-heading { color: #00BFA6 !important; }
+  h1, h2, h3, p, li, .card h2, .card p { color: #ffffff !important; }
 
-  .rs-tester-textarea, .input-area, .input-field {
+  .rs-tester-textarea, .input-area {
     background-color: #2b2b2b !important;
-    color: #ffffff !important;
-    border: 1px solid #444 !important;
+    color: #fff !important;
+    border-color: #444 !important;
   }
 
-  .metrics-table th { background-color: #2b2b2b !important; color: #fff; }
-  .metrics-table td { border-color: #333; }
-  
-  .serp-description { color: #bbb !important; }
+  .metrics-table th { background: #333 !important; }
+  .metrics-table td { border-color: #444; }
 }
 
 /* ==========================================================================
-   7. MOBILE RESPONSIVENESS
+   7. MOBILE RESPONSIVE
    ========================================================================== */
 @media (max-width: 768px) {
-  header { padding: 20px; flex-direction: column; }
-  .header-nav { margin-top: 20px; flex-direction: column; align-items: center; gap: 10px; }
-  .section, .rs-tester-container { width: 95%; padding: 20px; }
-  .btn, button { width: 100%; }
-  .results-box { flex-direction: column; }
+  header { flex-direction: column; padding: 20px; }
+  .header-nav { flex-direction: column; gap: 10px; margin-top: 15px; }
+  .hero h1 { font-size: 2em; }
+  .card { width: 100%; } /* Cards stack on mobile */
+  .rs-tester-actions { flex-direction: column; }
 }
