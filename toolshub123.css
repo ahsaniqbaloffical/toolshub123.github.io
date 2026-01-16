@@ -1031,7 +1031,7 @@ footer a:hover {
 /* Hero Banner */
 .hero-banner {
   width:100%;
-  background:#007bff;
+  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 100%);
   color:#fff;
   padding:60px 20px;
   text-align:center;
@@ -1084,6 +1084,7 @@ footer a:hover {
 .tool-list a:hover {
   text-decoration: underline; /* subtle hover cue */
 }
+
 
 
 
