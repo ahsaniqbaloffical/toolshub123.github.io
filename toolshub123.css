@@ -1243,5 +1243,45 @@ footer a:hover {
     font-size: 13px;
   }
 }
+/* =========================
+   Alt Text Checker Hero
+   ========================= */
+
+.hero-banner {
+  width: 100%;
+  background-color: #007bff;   /* choose your brand color */
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;          /* center the block content */
+}
+
+.hero-banner .hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;          /* center headings inside */
+}
+
+.hero-banner .tool-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.hero-banner .tool-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: #f1f1f1;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .hero-banner {
+    background-color: #222;
+    color: #fff;
+  }
+  .hero-banner .tool-subtitle {
+    color: #ccc;
+  }
+}
 
 
