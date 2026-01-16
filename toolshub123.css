@@ -1192,5 +1192,27 @@ footer a { color:#00BFA6; text-decoration:none; margin:0 10px; }
   .section { padding:15px; }
 }
 
+/* DARK MODE SETTINGS FOR PRIVACY POLICY & TERMS OF SRVICE PAGE */
+@media (prefers-color-scheme: dark) {
+  body { background:#0A192F; color:#ddd; }
+
+  .section {
+    background:#1A1A1A;
+    border-color:#333;
+    box-shadow:0 2px 6px rgba(0,0,0,0.6);
+  }
+  .section h2 { color:#00BFA6; }        /* headings pop with teal */
+  .section p, .section li { color:#ddd; } /* readable body text */
+
+  footer { background:#0A192F; color:#ccc; }
+  footer a { color:#00BFA6; }
+
+  .hero-banner {
+    background: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%);
+    color:#fff;
+  }
+  .hero-banner p { color:#ccc; }
+}
+
 
 
