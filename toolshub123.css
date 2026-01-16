@@ -1005,7 +1005,8 @@ footer a:hover {
 
 /* Cards (shared) */
 .tool-card, .faqs-card {
-  max-width: 800px;
+  width: 80%;        /* fills 80% of the screen */
+  max-width: 1200px; /* optional cap for very large monitors */
   margin: 20px auto;
   background: #fff;
   border: 1px solid #ddd;
@@ -1072,3 +1073,4 @@ footer a:hover {
   .tool-heading { font-size:16px; }
   .tool-paragraph { font-size:13px; }
 }
+
