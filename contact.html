@@ -2,89 +2,120 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us | Toolshub123</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Mobile scaling -->
-  <meta name="description" content="Get in touch with Toolshub123. Contact us via email for questions, feedback, or suggestions.">
-  <meta name="author" content="Ahsan Iqbal">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="canonical" href="https://toolshub123.com/contact.html"/>
-  <style>
-    body { font-family: 'Syne', sans-serif; margin:0; background:#F4F6F8; }
-    header { background:#0A192F; color:#fff; padding:20px 40px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; }
-    header img { max-height:80px; height:auto; max-width:100%; }
-    nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:600; }
-    nav a.active { color:#00BFA6; }
-    .hero { text-align:center; padding:40px 20px; }
-    .section { max-width:900px; margin:40px auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
-    h1, h2 { color:#0A192F; }
-    form { display:flex; flex-direction:column; gap:15px; }
-    input, textarea { padding:12px; border:1px solid #ccc; border-radius:5px; font-size:16px; }
-    button { background:#00BFA6; color:#fff; padding:12px; border:none; border-radius:5px; font-weight:600; cursor:pointer; }
-    button:hover { background:#008f7a; }
-    footer { background:#0A192F; color:#fff; text-align:center; padding:20px; }
-    footer a { color:#00BFA6; text-decoration:none; margin:0 10px; }
-
-    /* Mobile Optimizations */
-    @media (max-width: 600px) {
-      nav { display:block; text-align:center; }
-      nav a { display:block; margin:10px 0; }
-      .section { padding:20px; }
-    }
-    @media (max-width: 480px) {
-      .hero h1 { font-size:24px; }
-      .hero p { font-size:16px; }
-    }
-  </style>
+  <meta name="description" content="Get in touch with Toolshub123. Whether you have a suggestion for a new tool or need support, we are here to help.">
+  
+  <link rel="stylesheet" href="contact-us.css">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo.png" type="image/png">
 </head>
-<body>
+<body id="page-body">
 
-  <!-- Header with Logo + Navigation -->
-<header>
-  <img src="logo.png" alt="Toolshub123 Logo" class="logo">
+  <header>
+    <img src="logo.png" alt="Toolshub123 Logo" class="logo">
+    <nav class="header-nav">
+      <a href="index.html">Home</a>
+      <a href="SEO%20tools.html">SEO Tools</a>
+      <a href="finance%20tools.html">Finance Tools</a>
+      <a href="utilitytools.html">Utility Tools</a>
+      <a href="health%20tools.html">Health Tools</a>
+      <button class="dark-mode-toggle" id="dark-mode-toggle">🌙 Dark Mode</button>
+    </nav>
+  </header>
 
-  <nav class="header-nav">
-    <a href="https://toolshub123.com/">Home</a>
-    <a href="https://toolshub123.com/SEO%20tools.html">SEO Tools</a>
-    <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
-    <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
-    <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
-  </nav>
-</header>
+  <section class="contact-hero">
+    <div class="hero-content">
+      <h1>Get In Touch</h1>
+      <p>Have a suggestion for a new tool? Found a bug? Or just want to say hi? We'd love to hear from you.</p>
+    </div>
+  </section>
 
-  <!-- Hero Section -->
-  <div class="hero">
-    <h1>Contact Us</h1>
-    <p>We’d love to hear from you! Send us your questions, feedback, or suggestions.</p>
-  </div>
+  <main class="contact-container">
 
-  <!-- Contact Form Section -->
-  <div class="section">
-    <h2>Get in Touch</h2>
-    <form action="mailto:ahsaniqbaloffical@gmail.com" method="post" enctype="text/plain">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-    <p style="margin-top:15px; font-size:14px; color:#555;">Your message will be sent directly to <strong>ahsaniqbaloffical@gmail.com</strong>.</p>
-  </div>
+    <div class="info-card">
+      <h2>Contact Information</h2>
+      <p>Feel free to reach out to us through the form below or via our official email address. We aim to respond within 24-48 hours.</p>
+      
+      <div class="contact-methods">
+        <div class="method">
+          <strong>Email:</strong>
+          <span>support@toolshub123.com</span>
+        </div>
+        <div class="method">
+          <strong>Location:</strong>
+          <span>Available Worldwide (Digital Office)</span>
+        </div>
+      </div>
+    </div>
 
-  <!-- Footer -->
- <footer>
-  <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
-  <p>
-    <a href="https://toolshub123.com/PrivacyPolicy.html">Privacy Policy</a> | 
-    <a href="https://toolshub123.com/terms%20of%20service.html">Terms of Service</a> | 
-    <a href="https://toolshub123.com/about.html">About</a> | 
-    <a href="https://toolshub123.com/contact.html">Contact Us</a>
-  </p>
-</footer>
+    <div class="info-card">
+      <h2>Send a Message</h2>
+      <form class="contact-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject">
+            <option value="suggestion">Tool Suggestion</option>
+            <option value="bug">Report a Bug</option>
+            <option value="business">Business Inquiry</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="How can we help you?" required></textarea>
+        </div>
+
+        <button type="submit" class="contact-btn">Send Message</button>
+      </form>
+    </div>
+
+    <div class="info-card" style="text-align: center;">
+      <h2>Quick Help</h2>
+      <p>Before messaging, you might find your answer in our frequently asked questions on the homepage.</p>
+      <div style="margin-top: 20px;">
+        <a href="index.html" class="outline-btn">Back to Home</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Toolshub123 | Developed by Ahsan</p>
+    <p style="margin-top: 15px;">
+      <a href="PrivacyPolicy.html">Privacy Policy</a> |
+      <a href="about.html">About Us</a> |
+      <a href="contact.html" class="active">Contact</a>
+    </p>
+  </footer>
+
+  <script>
+    const darkToggle = document.getElementById('dark-mode-toggle');
+    const body = document.getElementById('page-body');
+
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark-mode');
+      darkToggle.textContent = '☀️ Light Mode';
+    }
+
+    darkToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      const isDark = body.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      darkToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+  </script>
 
 </body>
 </html>
-
-
-
-
-
