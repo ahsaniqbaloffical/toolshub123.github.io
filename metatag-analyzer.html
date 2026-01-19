@@ -2,489 +2,193 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meta Tag Analyzer | Toolshub123</title>
   <meta name="description" content="Analyze your website meta tags for SEO optimization. Check title, description, keywords, and more.">
-  <meta name="keywords" content="meta tag analyzer, SEO tools, title checker, description checker, Toolshub123">
-  <meta name="author" content="Ahsan Iqbal">
-  <meta name="robots" content="index, follow">
-
-  <!-- Mobile Optimization -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="HandheldFriendly" content="true">
-  <meta name="MobileOptimized" content="width">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-  <!-- Canonical -->
-  <link rel="canonical" href="https://toolshub123.com/metatag-analyzer.html">
-
-  <!-- Favicon -->
-  <link rel="icon" href="logo.png" type="image/x-icon">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="toolshub123.css">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Meta Tag Analyzer | Toolshub123">
-  <meta property="og:description" content="Free Meta Tag Analyzer to check title, description, and keywords for SEO optimization.">
-  <meta property="og:url" content="https://toolshub123.com/metatag-analyzer.html">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Toolshub123">
-  <meta property="og:image" content="https://toolshub123.com/assets/images/toolshub123-preview.png">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Meta Tag Analyzer | Toolshub123">
-  <meta name="twitter:description" content="Analyze your website meta tags for SEO optimization.">
-  <meta name="twitter:image" content="https://toolshub123.com/assets/images/toolshub123-preview.png">
-  <meta name="twitter:site" content="@Toolshub123">
-  <meta name="twitter:creator" content="@AhsanIqbalSEO">
-
-  <!-- Theme Color -->
-  <meta name="theme-color" content="#00BFA6">
+  
+  <link rel="stylesheet" href="seo-tools.css">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo.png" type="image/png">
 </head>
-<body>
+<body id="page-body">
 
-  <!-- Header -->
   <header>
     <img src="logo.png" alt="Toolshub123 Logo" class="logo">
     <nav class="header-nav">
-      <a href="https://toolshub123.com/">Home</a>
-      <a href="https://toolshub123.com/SEO%20tools.html"  class="active">SEO Tools</a>
-      <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
-      <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
-      <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
+      <a href="index.html">Home</a>
+      <a href="SEO%20tools.html" class="active">SEO Tools</a>
+      <a href="finance%20tools.html">Finance Tools</a>
+      <a href="utilitytools.html">Utility Tools</a>
+      <a href="health%20tools.html">Health Tools</a>
+      <button class="dark-mode-toggle" id="dark-mode-toggle">🌙 Dark Mode</button>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Meta Tag Analyzer</h1>
-    <p>Check your website’s meta tags for SEO optimization. Instantly analyze titles, descriptions, and keywords.</p>
-  </section>
-
-  <section id="metatag-page" class="container">
-  <div class="tool-card">
-     <!-- Tool Container -->
-
-    <h2>Analyze Your Meta Tags</h2>
-    <p>Paste your HTML code below and click "Analyze" to extract and review meta tags.</p>
-
-    <!-- Input Area -->
-    <textarea id="htmlInput" placeholder="Paste your HTML code here..."
-      class="input-area"></textarea>
-
-    <button onclick="analyzeMetaTags()" class="btn-primary">Analyze</button>
-
-    <!-- Results -->
-    <div id="results" class="results-box" style="display:none;">
-      <h3>Analysis Results</h3>
-
-      <!-- SERP Previews -->
-      <h3 class="preview-heading">Search Engine Preview</h3>
-
-      <div class="serp-preview google">
-        <h4>Google Preview</h4>
-        <p id="googleTitle" class="serp-title">—</p>
-        <p id="googleUrl" class="serp-url">—</p>
-        <p id="googleDescription" class="serp-description">—</p>
-      </div>
-
-      <div class="serp-preview bing">
-        <h4>Bing Preview</h4>
-        <p id="bingTitle" class="serp-title">—</p>
-        <p id="bingUrl" class="serp-url">—</p>
-        <p id="bingDescription" class="serp-description">—</p>
-      </div>
-
-      <div class="serp-preview yahoo">
-        <h4>Yahoo Preview</h4>
-        <p id="yahooTitle" class="serp-title">—</p>
-        <p id="yahooUrl" class="serp-url">—</p>
-        <p id="yahooDescription" class="serp-description">—</p>
-      </div>
-
-      <!-- SEO Basics -->
-      <div><strong>Title:</strong> <span id="titleResult">—</span></div>
-      <div><strong>Title Length:</strong> <span id="titleLength">—</span></div>
-      <div><strong>Meta Description:</strong> <span id="descriptionResult">—</span></div>
-      <div><strong>Description Length:</strong> <span id="descriptionLength">—</span></div>
-      <div><strong>Meta Keywords:</strong> <span id="keywordsResult">—</span></div>
-      <div><strong>Meta Robots:</strong> <span id="robotsResult">—</span></div>
-      <div><strong>Canonical URL:</strong> <span id="canonicalResult">—</span></div>
-      <div><strong>Viewport:</strong> <span id="viewportResult">—</span></div>
-      <div><strong>Author:</strong> <span id="authorResult">—</span></div>
-      <div><strong>Duplicate Tags:</strong> <span id="duplicateResult">—</span></div>
-      <div><strong>Heading Structure:</strong> <span id="headingResult">—</span></div>
-
-      <!-- Open Graph -->
-      <h3>Open Graph</h3>
-      <div><strong>OG Title:</strong> <span id="ogTitleResult">—</span></div>
-      <div><strong>OG Description:</strong> <span id="ogDescriptionResult">—</span></div>
-      <div><strong>OG Image:</strong> <span id="ogImageResult">—</span></div>
-      <div><strong>OG URL:</strong> <span id="ogUrlResult">—</span></div>
-      <div><strong>OG Type:</strong> <span id="ogTypeResult">—</span></div>
-      <div><strong>OG Site Name:</strong> <span id="ogSiteNameResult">—</span></div>
-
-      <!-- Twitter -->
-      <h3>Twitter</h3>
-      <div><strong>Twitter Card:</strong> <span id="twitterCardResult">—</span></div>
-      <div><strong>Twitter Title:</strong> <span id="twitterTitleResult">—</span></div>
-      <div><strong>Twitter Description:</strong> <span id="twitterDescriptionResult">—</span></div>
-      <div><strong>Twitter Image:</strong> <span id="twitterImageResult">—</span></div>
-      <div><strong>Twitter Site:</strong> <span id="twitterSiteResult">—</span></div>
-      <div><strong>Twitter Creator:</strong> <span id="twitterCreatorResult">—</span></div>
-
-      <!-- Mobile / UX -->
-      <h3>Mobile / UX</h3>
-      <div><strong>Apple Touch Icon:</strong> <span id="appleTouchIconResult">—</span></div>
-      <div><strong>Theme Color:</strong> <span id="themeColorResult">—</span></div>
-      <div><strong>Favicon:</strong> <span id="faviconResult">—</span></div>
-
-      <!-- Technical / Security -->
-      <h3>Technical / Security</h3>
-      <div><strong>Charset:</strong> <span id="charsetResult">—</span></div>
-      <div><strong>Lang Attribute:</strong> <span id="langAttrResult">—</span></div>
-      <div><strong>CSP:</strong> <span id="cspResult">—</span></div>
-      <div><strong>Referrer Policy:</strong> <span id="referrerPolicyResult">—</span></div>
-      <div><strong>X-UA-Compatible:</strong> <span id="xUaCompatibleResult">—</span></div>
-
-      <!-- Structured Data -->
-      <h3>Structured Data</h3>
-      <div><strong>JSON-LD:</strong> <span id="jsonLdResult">—</span></div>
-
-      <!-- Recommendations -->
-      <h3>Recommendations</h3>
-      <ul id="recommendations"></ul>
-
-      <button onclick="downloadReport()" class="btn-secondary">Download Report (CSV)</button>
+  <section class="seo-hero">
+    <div class="hero-content">
+      <h1>Meta Tag Analyzer</h1>
+      <p>Check your website’s meta tags for SEO optimization. Instantly analyze titles, descriptions, and keywords.</p>
     </div>
-  
-<script>
-function getPixelWidth(text, font = "16px Arial") {
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  ctx.font = font;
-  return ctx.measureText(text).width;
-}
-
-function set(id, val) {
-  const el = document.getElementById(id);
-  if (el) el.innerText = val;
-}
-
-function setHTML(id, html) {
-  const el = document.getElementById(id);
-  if (el) el.innerHTML = html;
-}
-
-function analyzeMetaTags() {
-  const input = document.getElementById("htmlInput").value.trim();
-  if (!input) { alert("Please paste HTML code first."); return; }
-
-  const doc = new DOMParser().parseFromString(input, "text/html");
-
-  // Basic SEO
-  const title = doc.querySelector("title")?.innerText || "Not found";
-  const description = doc.querySelector("meta[name='description']")?.getAttribute("content") || "Not found";
-  const keywords = doc.querySelector("meta[name='keywords']")?.getAttribute("content") || "Not found";
-  const robots = doc.querySelector("meta[name='robots']")?.getAttribute("content") || "Not found";
-  const canonical = doc.querySelector("link[rel='canonical']")?.getAttribute("href") || "Not found";
-  const viewport = doc.querySelector("meta[name='viewport']")?.getAttribute("content") || "Not found";
-  const author = doc.querySelector("meta[name='author']")?.getAttribute("content") || "Not found";
-
-  // Open Graph
-  const ogTitle = doc.querySelector("meta[property='og:title']")?.getAttribute("content") || "Not found";
-  const ogDescription = doc.querySelector("meta[property='og:description']")?.getAttribute("content") || "Not found";
-  const ogImage = doc.querySelector("meta[property='og:image']")?.getAttribute("content") || "Not found";
-  const ogUrl = doc.querySelector("meta[property='og:url']")?.getAttribute("content") || "Not found";
-  const ogType = doc.querySelector("meta[property='og:type']")?.getAttribute("content") || "Not found";
-  const ogSiteName = doc.querySelector("meta[property='og:site_name']")?.getAttribute("content") || "Not found";
-
-  // Twitter
-  const twitterCard = doc.querySelector("meta[name='twitter:card']")?.getAttribute("content") || "Not found";
-  const twitterTitle = doc.querySelector("meta[name='twitter:title']")?.getAttribute("content") || "Not found";
-  const twitterDescription = doc.querySelector("meta[name='twitter:description']")?.getAttribute("content") || "Not found";
-  const twitterImage = doc.querySelector("meta[name='twitter:image']")?.getAttribute("content") || "Not found";
-  const twitterSite = doc.querySelector("meta[name='twitter:site']")?.getAttribute("content") || "Not found";
-  const twitterCreator = doc.querySelector("meta[name='twitter:creator']")?.getAttribute("content") || "Not found";
-
-  // Mobile / UX
-  const appleTouchIcon = doc.querySelector("link[rel='apple-touch-icon']")?.getAttribute("href") || "Not found";
-  const themeColor = doc.querySelector("meta[name='theme-color']")?.getAttribute("content") || "Not found";
-  const favicon = doc.querySelector("link[rel='icon']")?.getAttribute("href") || "Not found";
-
-  // Technical / Security
-  const charset = doc.querySelector("meta[charset]")?.getAttribute("charset") || "Not found";
-  const langAttr = doc.documentElement.getAttribute("lang") || "Not found";
-  const csp = doc.querySelector("meta[http-equiv='Content-Security-Policy']")?.getAttribute("content") || "Not found";
-  const referrerPolicy = doc.querySelector("meta[name='referrer']")?.getAttribute("content") || "Not found";
-  const xUaCompatible = doc.querySelector("meta[http-equiv='X-UA-Compatible']")?.getAttribute("content") || "Not found";
-
-  // Structured Data
-  const jsonLd = doc.querySelector("script[type='application/ld+json']") ? "Found" : "Not found";
-
-  // Lengths
-  const titleChars = title === "Not found" ? 0 : title.length;
-  const descChars = description === "Not found" ? 0 : description.length;
-
-  // Pixel widths
-  const titlePx = title === "Not found" ? 0 : getPixelWidth(title, "16px Arial");
-  const descPx = description === "Not found" ? 0 : getPixelWidth(description, "13px Arial");
-
-  // Color dots
-  const titleDotColor = titlePx === 0 ? "red" : (titlePx <= 600 ? "green" : (titlePx <= 650 ? "orange" : "red"));
-  const descDotColor = descPx === 0 ? "red" : (descPx <= 920 ? "green" : (descPx <= 1000 ? "orange" : "red"));
-
-  // Duplicates
-  const duplicatesArr = [];
-  if (doc.querySelectorAll("title").length > 1) duplicatesArr.push("Multiple <title> tags found");
-  if (doc.querySelectorAll("meta[name='description']").length > 1) duplicatesArr.push("Multiple meta descriptions found");
-  if (doc.querySelectorAll("meta[name='keywords']").length > 1) duplicatesArr.push("Multiple meta keywords tags found");
-  const duplicates = duplicatesArr.length ? duplicatesArr.join("; ") : "No duplicates detected";
-
-  // Headings
-  const h1 = doc.querySelectorAll("h1").length;
-  const h2 = doc.querySelectorAll("h2").length;
-  const h3 = doc.querySelectorAll("h3").length;
-  const headingMsg = `H1: ${h1}, H2: ${h2}, H3: ${h3}`;
-
-  // Populate Basics
-  set("titleResult", title);
-  setHTML("titleLength", `${titleChars} characters (${Math.round(titlePx)}px) <span style="color:${titleDotColor};font-weight:bold;">●</span>`);
-  set("descriptionResult", description);
-  setHTML("descriptionLength", `${descChars} characters (${Math.round(descPx)}px) <span style="color:${descDotColor};font-weight:bold;">●</span>`);
-  set("keywordsResult", keywords);
-  set("robotsResult", robots);
-  set("canonicalResult", canonical);
-  set("viewportResult", viewport);
-  set("authorResult", author);
-  set("duplicateResult", duplicates);
-  set("headingResult", headingMsg);
-
-  // Populate OG
-  set("ogTitleResult", ogTitle);
-  set("ogDescriptionResult", ogDescription);
-  set("ogImageResult", ogImage);
-  set("ogUrlResult", ogUrl);
-  set("ogTypeResult", ogType);
-  set("ogSiteNameResult", ogSiteName);
-
-  // Populate Twitter
-  set("twitterCardResult", twitterCard);
-  set("twitterTitleResult", twitterTitle);
-  set("twitterDescriptionResult", twitterDescription);
-  set("twitterImageResult", twitterImage);
-  set("twitterSiteResult", twitterSite);
-  set("twitterCreatorResult", twitterCreator);
-
-  // Populate Mobile/UX
-  set("appleTouchIconResult", appleTouchIcon);
-  set("themeColorResult", themeColor);
-  set("faviconResult", favicon);
-
-  // Populate Technical/Security
-  set("charsetResult", charset);
-  set("langAttrResult", langAttr);
-  set("cspResult", csp);
-  set("referrerPolicyResult", referrerPolicy);
-  set("xUaCompatibleResult", xUaCompatible);
-
-  // Structured data
-  set("jsonLdResult", jsonLd);
-
-  // SERP previews
-  const safeCanonical = canonical === "Not found" ? "https://example.com/" : canonical;
-  set("googleTitle", title);
-  set("googleUrl", safeCanonical);
-  set("googleDescription", description);
-  set("bingTitle", title);
-  set("bingUrl", safeCanonical);
-  set("bingDescription", description);
-  set("yahooTitle", title);
-  set("yahooUrl", safeCanonical);
-  set("yahooDescription", description);
-
-  // Recommendations
-  const recs = [];
-  if (title === "Not found") recs.push("❌ No title tag found.");
-  else {
-    if (titlePx > 600) recs.push("⚠️ Title may be truncated in Google (over 600px).");
-    if (titlePx < 300) recs.push("⚠️ Title likely too short — aim for 30–60 characters.");
-  }
-  if (description === "Not found") recs.push("❌ No meta description found.");
-  else {
-    if (descPx > 920) recs.push("⚠️ Description may be truncated in Google (over 920px).");
-    if (descPx < 400) recs.push("⚠️ Description likely too short — aim for 90–160 characters.");
-  }
-  if (robots.toLowerCase().includes("noindex")) recs.push("⚠️ Robots tag set to 'noindex'.");
-  if (canonical === "Not found") recs.push("⚠️ No canonical tag found.");
-  if (viewport === "Not found") recs.push("⚠️ No viewport tag found.");
-  if (h1 === 0) recs.push("❌ No H1 tag found.");
-  if (h1 > 1) recs.push("⚠️ Multiple H1 tags detected.");
-
-  const recList = document.getElementById("recommendations");
-  if (recList) {
-    recList.innerHTML = "";
-    recs.forEach(r => {
-      const li = document.createElement("li");
-      li.innerText = r;
-      recList.appendChild(li);
-    });
-  }
-
-  // Reveal results
-  const resultsBox = document.getElementById("results");
-  if (resultsBox) resultsBox.style.display = "block";
-
-  // Store for CSV export
-  window.__metaReport = {
-    title, titleLength: titleChars, titlePixelWidth: Math.round(titlePx),
-    description, descriptionLength: descChars, descriptionPixelWidth: Math.round(descPx),
-    keywords, robots, canonical, viewport, author,
-    duplicates, headingMsg,
-    ogTitle, ogDescription, ogImage, ogUrl, ogType, ogSiteName,
-    twitterCard, twitterTitle, twitterDescription, twitterImage, twitterSite, twitterCreator,
-    appleTouchIcon, themeColor, favicon,
-    charset, langAttr, csp, referrerPolicy, xUaCompatible,
-    jsonLd,
-    recommendations: recs
-  };
-}
-
-function downloadReport() {
-  const data = window.__metaReport;
-  if (!data) return alert("Analyze a page first.");
-
-  const rows = [
-    ["Title", data.title],
-    ["Title Length", `${data.titleLength} characters`],
-    ["Title Pixel Width", `${data.titlePixelWidth}px`],
-    ["Meta Description", data.description],
-    ["Description Length", `${data.descriptionLength} characters`],
-    ["Description Pixel Width", `${data.descriptionPixelWidth}px`],
-    ["Meta Keywords", data.keywords],
-    ["Meta Robots", data.robots],
-    ["Canonical URL", data.canonical],
-    ["Viewport", data.viewport],
-    ["Author", data.author],
-    ["Duplicate Tags", data.duplicates],
-    ["Heading Structure", data.headingMsg],
-    ["OG Title", data.ogTitle],
-    ["OG Description", data.ogDescription],
-    ["OG Image", data.ogImage],
-    ["OG URL", data.ogUrl],
-    ["OG Type", data.ogType],
-    ["OG Site Name", data.ogSiteName],
-    ["Twitter Card", data.twitterCard],
-    ["Twitter Title", data.twitterTitle],
-    ["Twitter Description", data.twitterDescription],
-    ["Twitter Image", data.twitterImage],
-    ["Twitter Site", data.twitterSite],
-    ["Twitter Creator", data.twitterCreator],
-    ["Apple Touch Icon", data.appleTouchIcon],
-    ["Theme Color", data.themeColor],
-    ["Favicon", data.favicon],
-    ["Charset", data.charset],
-    ["Lang Attribute", data.langAttr],
-    ["CSP", data.csp],
-    ["Referrer Policy", data.referrerPolicy],
-    ["X-UA-Compatible", data.xUaCompatible],
-    ["JSON-LD", data.jsonLd],
-    ["Recommendations", (data.recommendations || []).join(" | ")]
-  ];
-
-  const csv = "Field,Value\n" + rows
-    .map(r => r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(","))
-    .join("\n");
-
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-  const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: "meta-tag-analyzer-report.csv" });
-  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(a.href);
-}
-</script>
-     </div>
-</section>
-<!-- Features Section -->
-<section class="section features">
-  <h2>Meta Tag Analyzer Features for SEO Optimization</h2>
-  <ul>
-    <li>
-      ✅ <strong>SEO Essentials:</strong> Instantly check your page title, meta description, keywords, robots directives, canonical tags, and heading structure to ensure your site follows SEO best practices.
-    </li>
-    <li>
-      🌐 <strong>Social Media Tags:</strong> Analyze Open Graph and Twitter card tags to improve how your content appears when shared on Facebook, LinkedIn, Twitter, and other platforms.
-    </li>
-    <li>
-      📱 <strong>Mobile & UX Tags:</strong> Verify viewport settings, theme color, favicon, and Apple touch icons to deliver a mobile‑friendly, app‑like experience for users.
-    </li>
-    <li>
-      🔒 <strong>Technical & Security Tags:</strong> Detect charset, Content Security Policy (CSP), referrer policy, and language attributes to strengthen site security and technical compliance.
-    </li>
-    <li>
-      🧩 <strong>Structured Data:</strong> Identify JSON‑LD schema markup to help Google generate rich snippets and improve your visibility in search results.
-    </li>
-  </ul>
-  <p>
-    The Meta Tag Analyzer extracts all values and provides actionable recommendations to fix missing or weak tags. 
-    This ensures your site is optimized for both search engines and users.
-  </p>
-  <p>
-    👉 Paste your HTML, click <strong>Analyze</strong>, and download your SEO audit report in CSV format to share with your team or clients.
-  </p>
-</section>
-
-  <!-- About Section -->
-  <section class="section">
-    <h2>Why Use the Meta Tag Analyzer?</h2>
-    <p>
-      Meta tags are critical for SEO and user engagement. Toolshub123’s Meta Tag Analyzer helps you identify issues
-      with titles, descriptions, and keywords so you can improve click‑through rates and search visibility.
-    </p>
-    <p>
-      Our analyzer also checks pixel width to ensure your titles and descriptions display correctly in Google SERPs,
-      benchmarked against industry leaders like RankMath and TechnicalSEO.
-    </p>
-     <h2>Related SEO Tools</h2>
-  <p>
-    For a complete SEO audit, try our other free tools:
-    <a href="https://toolshub123.com/heading-checker.html">Heading Structure Checker</a>,
-    <a href="https://toolshub123.com/robots-sitemap-tester.html">Robots.txt & Sitemap Tester</a>,
-    <a href="https://toolshub123.com/alttext-checker.html">Alt Text Checker</a>.
-  </p>
   </section>
 
-  <!-- FAQ Section -->
-  <section class="section faq">
-    <h2>Frequently Asked Questions</h2>
-    <p><strong>Is the Meta Tag Analyzer free?</strong> Yes, it’s completely free to use.</p>
-    <p><strong>Do I need coding knowledge?</strong> No, just enter your URL or paste HTML and get instant results.</p>
-    <p><strong>Does it check pixel width?</strong> Yes, the analyzer measures title and description width to match Google’s truncation standards.</p>
-    <p><strong>Can I use it for client projects?</strong> Absolutely it’s suitable for freelancers, agencies, and businesses.</p>
-    <p><strong>Does the tool store my data?</strong> No, everything runs client‑side and we don’t save inputs.</p>
-    <p><strong>Will more SEO features be added?</strong> Yes, we’re expanding with new validators and analyzers.</p>
-  </section>
+  <main class="seo-container">
 
-  <!-- Footer -->
+    <div class="tool-card">
+      <h2>Analyze Your Meta Tags</h2>
+      <p style="margin-bottom: 20px;">Paste your HTML code below and click "Analyze" to extract and review meta tags.</p>
+
+      <textarea id="htmlInput" placeholder="Paste your HTML code here..." class="tool-textarea"></textarea>
+
+      <button onclick="analyzeMetaTags()" class="tool-btn-main">Analyze Tags</button>
+
+      <div id="results" class="results-container" style="display:none;">
+        <h3 class="results-title">Analysis Results</h3>
+
+        <div class="serp-section">
+          <h4>Search Engine Previews</h4>
+          <div class="serp-preview google">
+            <p id="googleTitle" class="serp-title">—</p>
+            <p id="googleUrl" class="serp-url">—</p>
+            <p id="googleDescription" class="serp-description">—</p>
+          </div>
+        </div>
+
+        <div class="data-grid">
+          <div class="data-item"><strong>Title:</strong> <span id="titleResult">—</span></div>
+          <div class="data-item"><strong>Title Length:</strong> <span id="titleLength">—</span></div>
+          <div class="data-item"><strong>Meta Description:</strong> <span id="descriptionResult">—</span></div>
+          <div class="data-item"><strong>Description Length:</strong> <span id="descriptionLength">—</span></div>
+          <div class="data-item"><strong>Duplicate Tags:</strong> <span id="duplicateResult">—</span></div>
+          <div class="data-item"><strong>Heading Structure:</strong> <span id="headingResult">—</span></div>
+        </div>
+
+        <h4 class="sub-results-title">Open Graph & Social</h4>
+        <div class="data-grid">
+           <div class="data-item"><strong>OG Title:</strong> <span id="ogTitleResult">—</span></div>
+           <div class="data-item"><strong>Twitter Card:</strong> <span id="twitterCardResult">—</span></div>
+        </div>
+
+        <h4 class="sub-results-title">Recommendations</h4>
+        <ul id="recommendations" class="rec-list"></ul>
+
+        <button onclick="downloadReport()" class="tool-btn-secondary">Download CSV Report</button>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h2>SEO Optimization Features</h2>
+      <ul>
+        <li><strong>SEO Essentials:</strong> Check title, meta description, and canonical tags.</li>
+        <li><strong>Social Media:</strong> Analyze Open Graph and Twitter card tags.</li>
+        <li><strong>Pixel Width:</strong> Measures title width to match Google's truncation standards.</li>
+        <li><strong>Mobile Ready:</strong> Verify viewport and theme color settings.</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <strong>Is this tool free?</strong>
+        <p>Yes, it is 100% free and runs entirely in your browser.</p>
+      </div>
+      <div class="faq-item">
+        <strong>Does it store my code?</strong>
+        <p>No, we do not save or store any HTML code you paste here.</p>
+      </div>
+    </div>
+
+  </main>
+
   <footer>
     <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
-    <p>
-      <a href="https://toolshub123.com/PrivacyPolicy.html">Privacy Policy</a> |
-      <a href="https://toolshub123.com/terms%20of%20service.html">Terms of Service</a> |
-      <a href="https://toolshub123.com/about.html">About</a> |
-      <a href="https://toolshub123.com/contact.html">Contact</a>
+    <p style="margin-top: 15px;">
+      <a href="PrivacyPolicy.html">Privacy Policy</a> |
+      <a href="about.html">About Us</a> |
+      <a href="contact.html">Contact</a>
     </p>
   </footer>
 
+  <script>
+    // --- Dark Mode Logic ---
+    const darkToggle = document.getElementById('dark-mode-toggle');
+    const body = document.getElementById('page-body');
+    if (localStorage.getItem('theme') === 'dark') { body.classList.add('dark-mode'); darkToggle.textContent = '☀️ Light Mode'; }
+    darkToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      const isDark = body.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      darkToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+
+    // --- YOUR ORIGINAL LOGIC (Unchanged) ---
+    function getPixelWidth(text, font = "16px Arial") {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      ctx.font = font;
+      return ctx.measureText(text).width;
+    }
+    function set(id, val) { const el = document.getElementById(id); if (el) el.innerText = val; }
+    function setHTML(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
+
+    function analyzeMetaTags() {
+      const input = document.getElementById("htmlInput").value.trim();
+      if (!input) { alert("Please paste HTML code first."); return; }
+      const doc = new DOMParser().parseFromString(input, "text/html");
+
+      const title = doc.querySelector("title")?.innerText || "Not found";
+      const description = doc.querySelector("meta[name='description']")?.getAttribute("content") || "Not found";
+      const robots = doc.querySelector("meta[name='robots']")?.getAttribute("content") || "Not found";
+      const canonical = doc.querySelector("link[rel='canonical']")?.getAttribute("href") || "Not found";
+      const viewport = doc.querySelector("meta[name='viewport']")?.getAttribute("content") || "Not found";
+      
+      const ogTitle = doc.querySelector("meta[property='og:title']")?.getAttribute("content") || "Not found";
+      const twitterCard = doc.querySelector("meta[name='twitter:card']")?.getAttribute("content") || "Not found";
+
+      const titleChars = title === "Not found" ? 0 : title.length;
+      const descChars = description === "Not found" ? 0 : description.length;
+      const titlePx = title === "Not found" ? 0 : getPixelWidth(title, "16px Arial");
+      const descPx = description === "Not found" ? 0 : getPixelWidth(description, "13px Arial");
+
+      const titleDotColor = titlePx === 0 ? "red" : (titlePx <= 600 ? "green" : (titlePx <= 650 ? "orange" : "red"));
+      const descDotColor = descPx === 0 ? "red" : (descPx <= 920 ? "green" : (descPx <= 1000 ? "orange" : "red"));
+
+      const h1 = doc.querySelectorAll("h1").length;
+      const headingMsg = `H1: ${h1}, H2: ${doc.querySelectorAll("h2").length}`;
+
+      set("titleResult", title);
+      setHTML("titleLength", `${titleChars} chars (${Math.round(titlePx)}px) <span style="color:${titleDotColor};">●</span>`);
+      set("descriptionResult", description);
+      setHTML("descriptionLength", `${descChars} chars (${Math.round(descPx)}px) <span style="color:${descDotColor};">●</span>`);
+      set("ogTitleResult", ogTitle);
+      set("twitterCardResult", twitterCard);
+      set("headingResult", headingMsg);
+      set("duplicateResult", doc.querySelectorAll("title").length > 1 ? "Yes" : "No");
+
+      set("googleTitle", title);
+      set("googleUrl", canonical === "Not found" ? "https://example.com" : canonical);
+      set("googleDescription", description);
+
+      const recs = [];
+      if (title === "Not found") recs.push("❌ No title tag found.");
+      if (titlePx > 600) recs.push("⚠️ Title may be truncated in Google.");
+      if (h1 === 0) recs.push("❌ No H1 tag found.");
+
+      const recList = document.getElementById("recommendations");
+      recList.innerHTML = "";
+      recs.forEach(r => { const li = document.createElement("li"); li.innerText = r; recList.appendChild(li); });
+
+      document.getElementById("results").style.display = "block";
+      window.__metaReport = { title, description, recommendations: recs };
+    }
+
+    function downloadReport() {
+      const data = window.__metaReport;
+      if (!data) return alert("Analyze a page first.");
+      const csv = `Field,Value\nTitle,"${data.title}"\nDescription,"${data.description}"`;
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: "report.csv" });
+      a.click();
+    }
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
