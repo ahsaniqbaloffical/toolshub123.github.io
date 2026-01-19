@@ -1,0 +1,226 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== Base Styles ===== */
+html, body {
+  font-family: 'Syne', sans-serif;
+  background: #ffffff;
+  color: #333;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* ===== Header ===== */
+header {
+  background: #0A192F;
+  color: #fff;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+header .logo { max-height: 80px; }
+
+.header-nav {
+  display: flex;
+  gap: 30px;
+}
+.header-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 10px 14px;
+  transition: color 0.3s ease;
+}
+.header-nav a:hover,
+.header-nav a.active { color: #00BFA6; }
+
+/* ===== Hamburger Menu ===== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  cursor: pointer;
+}
+.menu-toggle span {
+  display: block;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%);
+  color: #fff;
+}
+.hero h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.hero p {
+  font-size: 1.25em;
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+}
+.hero .btn {
+  background: #fff;
+  color: #00BFA6;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.hero .btn:hover {
+  background: #00BFA6;
+  color: #fff;
+}
+
+/* ===== Cards Grid ===== */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 20px;
+}
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  padding: 30px;
+  width: 280px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+.card h2 {
+  color: #0A192F;
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+.card p {
+  color: #555;
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+.card a {
+  display: inline-block;
+  background: #00BFA6;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+.card a:hover { background: #008f7a; }
+
+/* ===== Footer ===== */
+footer {
+  background: #0A192F;
+  color: #fff;
+  text-align: center;
+  padding: 30px;
+}
+footer a {
+  color:#00BFA6;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 600;
+}
+
+/* ===== Buttons (Universal) ===== */
+.btn, button, a.btn {
+  display: inline-block;
+  background: #00BFA6;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn:hover, button:hover, a.btn:hover {
+  background: #008f7a;
+}
+
+/* ===== Dark Mode Toggle (manual) ===== */
+body.dark-mode {
+  background: #121212;
+  color: #ddd;
+}
+body.dark-mode header { background: #0A192F; }
+body.dark-mode .header-nav a { color: #ccc; }
+body.dark-mode .header-nav a.active,
+body.dark-mode .header-nav a:hover { color: #00BFA6; }
+
+body.dark-mode .hero { background: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%); }
+body.dark-mode .hero p { color: #ccc; }
+body.dark-mode .hero .btn { background: #00BFA6; color: #fff; }
+body.dark-mode .hero .btn:hover { background: #008f7a; }
+
+body.dark-mode .card {
+  background: #1e1e1e;
+  color: #ddd;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+}
+body.dark-mode .card h2 { color: #00BFA6; }
+body.dark-mode .card p { color: #ccc; }
+body.dark-mode .card a { background: #00BFA6; color: #fff; }
+body.dark-mode .card a:hover { background: #008f7a; }
+
+body.dark-mode footer { background: #0A192F; color: #ccc; }
+body.dark-mode footer a { color: #00BFA6; }
+
+/* ===== Dark Mode Toggle Button ===== */
+.dark-mode-toggle {
+  background: #00BFA6;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+.dark-mode-toggle:hover { background: #008f7a; }
+
+/* ===== Mobile Optimizations ===== */
+@media (max-width: 768px) {
+  .menu-toggle { display: flex; }
+  .header-nav {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    background: #0A192F;
+    padding: 20px;
+    border-radius: 6px;
+  }
+  .header-nav.active { display: flex; }
+  .hero { padding: 60px 20px; }
+  .card { width: 100%; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2em; }
+  .hero p { font-size: 1em; }
+  .card { padding: 20px; }
+}
