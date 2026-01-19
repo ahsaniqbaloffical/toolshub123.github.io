@@ -159,13 +159,24 @@
   <!-- Header -->
   <header>
     <img src="logo.png" alt="Toolshub123 Logo" class="logo">
-    <nav class="header-nav">
+
+    <!-- Hamburger toggle (mobile only) -->
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <nav class="header-nav" id="header-nav">
       <a href="https://toolshub123.com/" class="active">Home</a>
       <a href="https://toolshub123.com/SEO%20tools.html">SEO Tools</a>
       <a href="https://toolshub123.com/finance%20tools.html">Finance Tools</a>
       <a href="https://toolshub123.com/utilitytools.html">Utility Tools</a>
       <a href="https://toolshub123.com/health%20tools.html">Health Tools</a>
     </nav>
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="dark-mode-toggle" id="dark-mode-toggle">🌙 Dark Mode</button>
   </header>
 
   <!-- Hero Section -->
@@ -201,51 +212,49 @@
     </div>
   </section>
 
- <!-- Authority Content Section -->
-<section class="section">
-  <h2>About Toolshub123</h2>
-  <p>
-    Toolshub123 is a free online toolkit designed to empower professionals, students, and everyday users with reliable
-    solutions across <strong>SEO</strong>, <strong>Finance</strong>, <strong>Utility</strong>, and <strong>Health</strong> and more.
-    Our mission is to simplify complex tasks with easy-to-use calculators, analyzers, and productivity tools that run
-    directly in your browser, no downloads, no data storage, and no hidden costs.
-  </p>
-  <p>
-    Unlike generic tool sites, Toolshub123 is built with <strong>precision and usability</strong> in mind. Each tool is
-    tested against industry standards to ensure accuracy, whether you’re analyzing meta tags for SEO, comparing loan
-    options, cleaning text for publishing, or calculating your daily water intake.
-  </p>
-</section>
+  <!-- Authority Content Section -->
+  <section class="section">
+    <h2>About Toolshub123</h2>
+    <p>
+      Toolshub123 is a free online toolkit designed to empower professionals, students, and everyday users with reliable
+      solutions across <strong>SEO</strong>, <strong>Finance</strong>, <strong>Utility</strong>, and <strong>Health</strong>.
+      Our mission is to simplify complex tasks with easy-to-use calculators, analyzers, and productivity tools that run
+      directly in your browser, no downloads, no data storage, and no hidden costs.
+    </p>
+    <p>
+      Unlike generic tool sites, Toolshub123 is built with <strong>precision and usability</strong> in mind. Each tool is
+      tested against industry standards to ensure accuracy, whether you’re analyzing meta tags for SEO, comparing loan
+      options, cleaning text for publishing, or calculating your daily water intake.
+    </p>
+  </section>
 
-<!-- Authority Content Section -->
-<section class="section">
-  <h2>Why Choose Toolshub123?</h2>
-  <ul>
-    <li><strong>Trusted Accuracy:</strong> Tools benchmarked against industry leaders like RankMath and TechnicalSEO.</li>
-    <li><strong>All-in-One Platform:</strong> Access SEO, finance, utility, and health tools in one place.</li>
-    <li><strong>Free & Accessible:</strong> No registration required, everything runs client-side for privacy and speed.</li>
-    <li><strong>Mobile Friendly:</strong> Optimized for smartphones and tablets with responsive design.</li>
-    <li><strong>Constantly Growing:</strong> New tools are added regularly to expand our toolkit and meet user needs.</li>
-  </ul>
-</section>
+  <section class="section">
+    <h2>Why Choose Toolshub123?</h2>
+    <ul>
+      <li><strong>Trusted Accuracy:</strong> Tools benchmarked against industry leaders like RankMath and TechnicalSEO.</li>
+      <li><strong>All-in-One Platform:</strong> Access SEO, finance, utility, and health tools in one place.</li>
+      <li><strong>Free & Accessible:</strong> No registration required, everything runs client-side for privacy and speed.</li>
+      <li><strong>Mobile Friendly:</strong> Optimized for smartphones and tablets with responsive design.</li>
+      <li><strong>Constantly Growing:</strong> New tools are added regularly to expand our toolkit and meet user needs.</li>
+    </ul>
+  </section>
 
-<!-- Authority Content Section -->
-<section class="section">
-  <h2>Helpful Resources</h2>
-  <p>
-    To help you get the most out of our tools, we provide guides and FAQs that explain how each calculator or analyzer
-    works. Whether you’re a digital marketer improving your site’s SEO, a student learning about finance, or someone
-    tracking health goals, Toolshub123 offers <strong>step-by-step explanations</strong> and <strong>clear outputs</strong>
-    so you can make informed decisions.
-  </p>
-  <p>
-    Explore our categories:
-    <a href="SEO%20tools.html">SEO Tools</a>,
-    <a href="finance%20tools.html">Finance Tools</a>,
-    <a href="utilitytools.html">Utility Tools</a>,
-    <a href="health%20tools.html">Health Tools</a>.
-  </p>
-</section>
+  <section class="section">
+    <h2>Helpful Resources</h2>
+    <p>
+      To help you get the most out of our tools, we provide guides and FAQs that explain how each calculator or analyzer
+      works. Whether you’re a digital marketer improving your site’s SEO, a student learning about finance, or someone
+      tracking health goals, Toolshub123 offers <strong>step-by-step explanations</strong> and <strong>clear outputs</strong>
+      so you can make informed decisions.
+    </p>
+    <p>
+      Explore our categories:
+      <a href="SEO%20tools.html">SEO Tools</a>,
+      <a href="finance%20tools.html">Finance Tools</a>,
+      <a href="utilitytools.html">Utility Tools</a>,
+      <a href="health%20tools.html">Health Tools</a>.
+    </p>
+  </section>
 
   <!-- FAQ Section -->
   <section class="section faq">
@@ -259,7 +268,7 @@
 
   <!-- Footer -->
   <footer>
-     <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
+    <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
     <p>
       <a href="https://toolshub123.com/PrivacyPolicy.html">Privacy Policy</a> |
       <a href="https://toolshub123.com/terms%20of%20service.html">Terms of Service</a> |
@@ -268,8 +277,25 @@
     </p>
   </footer>
 
+  <!-- JS for Hamburger + Dark Mode -->
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('header-nav');
+    const darkToggle = document.getElementById('dark-mode-toggle');
+
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      darkToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+  </script>
+
 </body>
 </html>
+
 
 
 
