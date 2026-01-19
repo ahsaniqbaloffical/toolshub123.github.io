@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. UNIVERSAL THEME & VARIABLES
+   1. THEME VARIABLES & PERSISTENT DARK MODE
    ========================================================================== */
 :root {
   --bg: #F4F6F8;
@@ -22,7 +22,7 @@ body.dark-mode {
 }
 
 /* ==========================================================================
-   2. GLOBAL BASE STYLES
+   2. GLOBAL RESET
    ========================================================================== */
 * {
   margin: 0;
@@ -55,13 +55,13 @@ header {
 }
 
 header .logo {
-  max-height: 60px;
+  max-height: 55px;
   width: auto;
 }
 
 .header-nav {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
 }
 
@@ -69,7 +69,7 @@ header .logo {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
   padding: 8px 12px;
   transition: 0.3s;
 }
@@ -78,22 +78,16 @@ header .logo {
   color: var(--accent);
 }
 
-/* Dark Mode Toggle Button */
 .dark-mode-toggle {
   background: var(--accent);
   color: white;
   border: none;
-  padding: 10px 18px;
-  border-radius: 25px;
+  padding: 8px 16px;
+  border-radius: 20px;
   cursor: pointer;
   font-weight: 700;
-  font-size: 13px;
-  transition: 0.3s ease;
-}
-
-.dark-mode-toggle:hover {
-  background: var(--accent-hover);
-  transform: scale(1.05);
+  font-size: 12px;
+  margin-left: 10px;
 }
 
 /* ==========================================================================
@@ -103,155 +97,106 @@ header .logo {
   background: var(--hero-grad);
   color: white;
   text-align: center;
-  padding: 120px 20px;
+  padding: 100px 20px;
   width: 100%;
 }
 
 .hero-banner h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 20px;
-  letter-spacing: -1px;
+  font-size: 3rem;
+  margin-bottom: 15px;
 }
 
 .hero-banner p {
-  font-size: 1.25rem;
-  max-width: 800px;
+  font-size: 1.2rem;
+  max-width: 700px;
   margin: 0 auto;
   opacity: 0.9;
 }
 
 /* ==========================================================================
-   5. CENTERED STACKED LAYOUT
+   5. CENTERED STACKED CONTENT
    ========================================================================== */
-.main-container {
-  max-width: 850px; /* Limits width to keep it centered and readable */
+.container {
+  max-width: 800px;
   margin: 50px auto;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 40px; /* Spacing between cards */
+  gap: 30px;
 }
 
-/* Base Card Logic */
 .card {
   background: var(--card-bg);
-  border-radius: 20px;
-  padding: 50px;
+  border-radius: 15px;
+  padding: 40px;
   border: 1px solid var(--border);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-  transition: transform 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-.card:hover {
-  transform: translateY(-5px);
-}
-
-/* TOOL CARDS: Text is centered */
+/* CATEGORY/TOOL CARDS - Centered Text */
 .tool-card {
   text-align: center;
 }
 
 .tool-card h2 {
-  font-size: 2rem;
   color: var(--accent);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
-.tool-card p {
-  color: var(--text-secondary);
-  margin-bottom: 25px;
-  font-size: 1.1rem;
-}
-
-.btn-open {
+.btn-main {
   display: inline-block;
   background: var(--accent);
   color: white;
-  padding: 14px 35px;
-  border-radius: 8px;
+  padding: 12px 30px;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: 700;
-  transition: 0.3s;
+  margin-top: 15px;
 }
 
-.btn-open:hover {
-  background: var(--accent-hover);
-  box-shadow: 0 5px 15px rgba(0,191,166,0.3);
-}
-
-/* INFO CARDS (Features/FAQs): Text is NOT centered (Left Aligned) */
+/* INFO CARDS (Features/FAQs) - Center Box, Left Text */
 .info-card {
   text-align: left;
 }
 
 .info-card h2 {
-  text-align: center; /* Heading remains centered */
-  font-size: 2rem;
-  margin-bottom: 30px;
-  position: relative;
-}
-
-.info-card h2::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 4px;
-  background: var(--accent);
-  margin: 10px auto 0;
+  text-align: center;
+  margin-bottom: 25px;
 }
 
 .info-card ul {
-  list-style: none;
-}
-
-.info-card li {
-  margin-bottom: 15px;
-  padding-left: 30px;
-  position: relative;
-  color: var(--text-secondary);
-}
-
-.info-card li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-weight: bold;
+  margin-left: 20px;
 }
 
 .faq-item {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .faq-item strong {
   display: block;
-  color: var(--text-primary);
-  font-size: 1.1rem;
   margin-bottom: 5px;
+  color: var(--accent);
 }
 
 /* ==========================================================================
-   6. FOOTER & MOBILE
+   6. FOOTER & RESPONSIVENESS
    ========================================================================== */
 footer {
   background: var(--header-bg);
   color: white;
   text-align: center;
-  padding: 60px 20px;
-  margin-top: 80px;
+  padding: 50px 20px;
+  margin-top: 60px;
 }
 
 footer a {
   color: var(--accent);
   text-decoration: none;
   margin: 0 10px;
-  font-weight: 600;
 }
 
 @media (max-width: 768px) {
-  .hero-banner { padding: 80px 20px; }
-  .hero-banner h1 { font-size: 2.2rem; }
   header { flex-direction: column; gap: 15px; }
-  .card { padding: 30px; }
+  .hero-banner h1 { font-size: 2.2rem; }
+  .card { padding: 25px; }
 }
