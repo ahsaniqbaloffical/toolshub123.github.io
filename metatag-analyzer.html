@@ -43,6 +43,8 @@
 
       <div id="results" class="results-container" style="display:none;">
         <h3 class="results-title">Analysis Results</h3>
+        <div id="social-img-preview" class="social-preview-box" style="margin: 20px 0; padding: 15px; background: rgba(0,0,0,0.03); border-radius: 8px;">
+  </div>
 
         <div class="serp-section">
           <h4>Search Engine Previews</h4>
@@ -109,87 +111,99 @@
   </footer>
 
   <script>
-    // --- Dark Mode Logic ---
-    const darkToggle = document.getElementById('dark-mode-toggle');
-    const body = document.getElementById('page-body');
-    if (localStorage.getItem('theme') === 'dark') { body.classList.add('dark-mode'); darkToggle.textContent = '☀️ Light Mode'; }
-    darkToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-      const isDark = body.classList.contains('dark-mode');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      darkToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+  // --- Dark Mode Logic ---
+  const darkToggle = document.getElementById('dark-mode-toggle');
+  const body = document.getElementById('page-body');
+  if (localStorage.getItem('theme') === 'dark') { body.classList.add('dark-mode'); darkToggle.textContent = '☀️ Light Mode'; }
+  darkToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const isDark = body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    darkToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+  });
+
+  // --- Enhanced Helper Functions ---
+  function getPixelWidth(text, font = "16px Arial") {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    ctx.font = font;
+    return ctx.measureText(text).width;
+  }
+  function set(id, val) { const el = document.getElementById(id); if (el) el.innerText = val; }
+  function setHTML(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
+
+  function analyzeMetaTags() {
+    const input = document.getElementById("htmlInput").value.trim();
+    if (!input) { alert("Please paste HTML code first."); return; }
+    
+    const doc = new DOMParser().parseFromString(input, "text/html");
+    const recs = [];
+
+    // 1. DATA EXTRACTION
+    const title = doc.querySelector("title")?.innerText || "Not found";
+    const description = doc.querySelector("meta[name='description']")?.getAttribute("content") || "Not found";
+    const h1Text = doc.querySelector("h1")?.innerText || "";
+    const ogImage = doc.querySelector("meta[property='og:image']")?.getAttribute("content") || "";
+    const twitterImage = doc.querySelector("meta[name='twitter:image']")?.getAttribute("content") || "";
+    const canonical = doc.querySelector("link[rel='canonical']")?.getAttribute("href") || "Not found";
+
+    // 2. PIXEL & CHAR CALCULATIONS
+    const titlePx = title === "Not found" ? 0 : getPixelWidth(title, "600 18px Arial");
+    const descPx = description === "Not found" ? 0 : getPixelWidth(description, "400 14px Arial");
+    
+    // 3. SOCIAL IMAGE PREVIEW LOGIC
+    const previewImg = ogImage || twitterImage;
+    const socialPreviewDiv = document.getElementById("social-img-preview");
+    if(previewImg) {
+        setHTML("social-img-preview", `<h4>Social Sharing Thumbnail</h4><img src="${previewImg}" style="max-width:100%; border-radius:8px; margin-top:10px; border:1px solid #ddd;">`);
+    } else {
+        setHTML("social-img-preview", `<p style="color:orange;">⚠️ No Social Image (OG/Twitter) detected.</p>`);
+    }
+
+    // 4. KEYWORD CONSISTENCY CHECK (Title vs H1)
+    if (title !== "Not found" && h1Text !== "") {
+        const titleWords = title.toLowerCase().split(/\s+/);
+        const match = titleWords.some(word => word.length > 3 && h1Text.toLowerCase().includes(word));
+        if (!match) recs.push({type: 'warn', msg: "⚠️ Title and H1 do not share main keywords. Consider aligning them for better SEO."});
+    }
+
+    // 5. COLOR-CODED RECOMMENDATIONS LOGIC
+    if (title === "Not found") recs.push({type: 'err', msg: "❌ Missing Title Tag."});
+    else {
+        if (titlePx > 600) recs.push({type: 'err', msg: `❌ Title is too long (${Math.round(titlePx)}px). It will be cut off in Google.`});
+        if (title.length < 30) recs.push({type: 'warn', msg: "⚠️ Title is very short. Use 50-60 characters for best results."});
+    }
+
+    if (description === "Not found") recs.push({type: 'err', msg: "❌ Missing Meta Description."});
+    else if (descPx > 920) recs.push({type: 'warn', msg: "⚠️ Meta Description exceeds 920px and may be truncated."});
+
+    if (doc.querySelectorAll("h1").length > 1) recs.push({type: 'err', msg: "❌ Multiple H1 tags detected. Use only one per page."});
+    if (canonical === "Not found") recs.push({type: 'warn', msg: "⚠️ Missing Canonical tag."});
+
+    // 6. UPDATE UI
+    set("titleResult", title);
+    setHTML("titleLength", `${title.length} chars (${Math.round(titlePx)}px)`);
+    set("descriptionResult", description);
+    set("googleTitle", title);
+    set("googleDescription", description);
+    set("googleUrl", canonical === "Not found" ? "https://your-site.com" : canonical);
+
+    // Render Recommendations with Colors
+    const recList = document.getElementById("recommendations");
+    recList.innerHTML = "";
+    recs.forEach(r => {
+      const li = document.createElement("li");
+      li.innerText = r.msg;
+      li.style.color = r.type === 'err' ? '#ff4d4d' : '#ffa500';
+      li.style.fontWeight = '600';
+      li.style.marginBottom = '5px';
+      recList.appendChild(li);
     });
 
-    // --- YOUR ORIGINAL LOGIC (Unchanged) ---
-    function getPixelWidth(text, font = "16px Arial") {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      ctx.font = font;
-      return ctx.measureText(text).width;
-    }
-    function set(id, val) { const el = document.getElementById(id); if (el) el.innerText = val; }
-    function setHTML(id, html) { const el = document.getElementById(id); if (el) el.innerHTML = html; }
-
-    function analyzeMetaTags() {
-      const input = document.getElementById("htmlInput").value.trim();
-      if (!input) { alert("Please paste HTML code first."); return; }
-      const doc = new DOMParser().parseFromString(input, "text/html");
-
-      const title = doc.querySelector("title")?.innerText || "Not found";
-      const description = doc.querySelector("meta[name='description']")?.getAttribute("content") || "Not found";
-      const robots = doc.querySelector("meta[name='robots']")?.getAttribute("content") || "Not found";
-      const canonical = doc.querySelector("link[rel='canonical']")?.getAttribute("href") || "Not found";
-      const viewport = doc.querySelector("meta[name='viewport']")?.getAttribute("content") || "Not found";
-      
-      const ogTitle = doc.querySelector("meta[property='og:title']")?.getAttribute("content") || "Not found";
-      const twitterCard = doc.querySelector("meta[name='twitter:card']")?.getAttribute("content") || "Not found";
-
-      const titleChars = title === "Not found" ? 0 : title.length;
-      const descChars = description === "Not found" ? 0 : description.length;
-      const titlePx = title === "Not found" ? 0 : getPixelWidth(title, "16px Arial");
-      const descPx = description === "Not found" ? 0 : getPixelWidth(description, "13px Arial");
-
-      const titleDotColor = titlePx === 0 ? "red" : (titlePx <= 600 ? "green" : (titlePx <= 650 ? "orange" : "red"));
-      const descDotColor = descPx === 0 ? "red" : (descPx <= 920 ? "green" : (descPx <= 1000 ? "orange" : "red"));
-
-      const h1 = doc.querySelectorAll("h1").length;
-      const headingMsg = `H1: ${h1}, H2: ${doc.querySelectorAll("h2").length}`;
-
-      set("titleResult", title);
-      setHTML("titleLength", `${titleChars} chars (${Math.round(titlePx)}px) <span style="color:${titleDotColor};">●</span>`);
-      set("descriptionResult", description);
-      setHTML("descriptionLength", `${descChars} chars (${Math.round(descPx)}px) <span style="color:${descDotColor};">●</span>`);
-      set("ogTitleResult", ogTitle);
-      set("twitterCardResult", twitterCard);
-      set("headingResult", headingMsg);
-      set("duplicateResult", doc.querySelectorAll("title").length > 1 ? "Yes" : "No");
-
-      set("googleTitle", title);
-      set("googleUrl", canonical === "Not found" ? "https://example.com" : canonical);
-      set("googleDescription", description);
-
-      const recs = [];
-      if (title === "Not found") recs.push("❌ No title tag found.");
-      if (titlePx > 600) recs.push("⚠️ Title may be truncated in Google.");
-      if (h1 === 0) recs.push("❌ No H1 tag found.");
-
-      const recList = document.getElementById("recommendations");
-      recList.innerHTML = "";
-      recs.forEach(r => { const li = document.createElement("li"); li.innerText = r; recList.appendChild(li); });
-
-      document.getElementById("results").style.display = "block";
-      window.__metaReport = { title, description, recommendations: recs };
-    }
-
-    function downloadReport() {
-      const data = window.__metaReport;
-      if (!data) return alert("Analyze a page first.");
-      const csv = `Field,Value\nTitle,"${data.title}"\nDescription,"${data.description}"`;
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-      const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: "report.csv" });
-      a.click();
-    }
-  </script>
+    document.getElementById("results").style.display = "block";
+  }
+</script>
 </body>
 </html>
+
 
