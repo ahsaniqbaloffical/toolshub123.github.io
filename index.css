@@ -1,242 +1,257 @@
-/* ===== Global Reset ===== */
+/* ==========================================================================
+   1. UNIVERSAL THEME & VARIABLES
+   ========================================================================== */
+:root {
+  --bg: #F4F6F8;
+  --card-bg: #ffffff;
+  --text-primary: #0A192F;
+  --text-secondary: #555555;
+  --header-bg: #0A192F;
+  --accent: #00BFA6;
+  --accent-hover: #008f7a;
+  --hero-grad: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%);
+  --border: #e0e0e0;
+}
+
+body.dark-mode {
+  --bg: #050d1a;
+  --card-bg: #112240;
+  --text-primary: #ffffff;
+  --text-secondary: #a8b2d1;
+  --border: #233554;
+}
+
+/* ==========================================================================
+   2. GLOBAL BASE STYLES
+   ========================================================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* ===== Base Styles ===== */
-html, body {
+body {
   font-family: 'Syne', sans-serif;
-  background: #ffffff;
-  color: #333;
+  background-color: var(--bg);
+  color: var(--text-primary);
   line-height: 1.6;
-  font-size: 16px;
+  transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
 }
 
-/* ===== Header ===== */
+/* ==========================================================================
+   3. HEADER & NAVIGATION
+   ========================================================================== */
 header {
-  background: #0A192F;
-  color: #fff;
-  padding: 20px 40px;
+  background: var(--header-bg);
+  padding: 15px 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
-header .logo { max-height: 80px; }
+
+header .logo {
+  max-height: 60px;
+  width: auto;
+}
 
 .header-nav {
   display: flex;
-  gap: 30px;
+  gap: 20px;
+  align-items: center;
 }
+
 .header-nav a {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  padding: 10px 14px;
-  transition: color 0.3s ease;
+  font-size: 15px;
+  padding: 8px 12px;
+  transition: 0.3s;
 }
-.header-nav a:hover,
-.header-nav a.active { color: #00BFA6; }
 
-/* ===== Hamburger Menu ===== */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 22px;
+.header-nav a:hover, .header-nav a.active {
+  color: var(--accent);
+}
+
+/* Dark Mode Toggle Button */
+.dark-mode-toggle {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 25px;
   cursor: pointer;
-}
-.menu-toggle span {
-  display: block;
-  height: 3px;
-  background: #fff;
-  border-radius: 2px;
-}
-
-/* ===== Hero Section ===== */
-.hero {
-  text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%);
-  color: #fff;
-}
-.hero h1 {
-  font-size: 3em;
-  margin-bottom: 20px;
   font-weight: 700;
-}
-.hero p {
-  font-size: 1.25em;
-  max-width: 700px;
-  margin: 0 auto 30px auto;
-}
-.hero .btn {
-  background: #fff;
-  color: #00BFA6;
-  padding: 12px 28px;
-  border-radius: 6px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-.hero .btn:hover {
-  background: #00BFA6;
-  color: #fff;
+  font-size: 13px;
+  transition: 0.3s ease;
 }
 
-/* ===== Cards Grid ===== */
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  padding: 40px 20px;
+.dark-mode-toggle:hover {
+  background: var(--accent-hover);
+  transform: scale(1.05);
 }
-.card {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-  padding: 30px;
-  width: 280px;
+
+/* ==========================================================================
+   4. HERO BANNER
+   ========================================================================== */
+.hero-banner {
+  background: var(--hero-grad);
+  color: white;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 120px 20px;
+  width: 100%;
 }
+
+.hero-banner h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.hero-banner p {
+  font-size: 1.25rem;
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   5. CENTERED STACKED LAYOUT
+   ========================================================================== */
+.main-container {
+  max-width: 850px; /* Limits width to keep it centered and readable */
+  margin: 50px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Spacing between cards */
+}
+
+/* Base Card Logic */
+.card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 50px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+  transition: transform 0.3s ease;
+}
+
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  transform: translateY(-5px);
 }
-.card h2 {
-  color: #0A192F;
-  font-size: 1.4em;
-  margin-bottom: 10px;
+
+/* TOOL CARDS: Text is centered */
+.tool-card {
+  text-align: center;
 }
-.card p {
-  color: #555;
-  font-size: 1em;
+
+.tool-card h2 {
+  font-size: 2rem;
+  color: var(--accent);
   margin-bottom: 15px;
 }
-.card a {
-  display: inline-block;
-  background: #00BFA6;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s ease;
-}
-.card a:hover { background: #008f7a; }
 
-/* ===== Footer ===== */
+.tool-card p {
+  color: var(--text-secondary);
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+}
+
+.btn-open {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 14px 35px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.btn-open:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 5px 15px rgba(0,191,166,0.3);
+}
+
+/* INFO CARDS (Features/FAQs): Text is NOT centered (Left Aligned) */
+.info-card {
+  text-align: left;
+}
+
+.info-card h2 {
+  text-align: center; /* Heading remains centered */
+  font-size: 2rem;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.info-card h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--accent);
+  margin: 10px auto 0;
+}
+
+.info-card ul {
+  list-style: none;
+}
+
+.info-card li {
+  margin-bottom: 15px;
+  padding-left: 30px;
+  position: relative;
+  color: var(--text-secondary);
+}
+
+.info-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.faq-item {
+  margin-bottom: 25px;
+}
+
+.faq-item strong {
+  display: block;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+/* ==========================================================================
+   6. FOOTER & MOBILE
+   ========================================================================== */
 footer {
-  background: #0A192F;
-  color: #fff;
+  background: var(--header-bg);
+  color: white;
   text-align: center;
-  padding: 30px;
+  padding: 60px 20px;
+  margin-top: 80px;
 }
+
 footer a {
-  color:#00BFA6;
+  color: var(--accent);
   text-decoration: none;
-  margin: 0 12px;
+  margin: 0 10px;
   font-weight: 600;
 }
 
-/* ===== Buttons (Universal) ===== */
-.btn, button, a.btn {
-  display: inline-block;
-  background: #00BFA6;
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s ease;
-  border: none;
-  cursor: pointer;
-}
-.btn:hover, button:hover, a.btn:hover {
-  background: #008f7a;
-}
-
-/* ===== Dark Mode Toggle (manual) ===== */
-body.dark-mode {
-  background: #121212;
-  color: #ddd;
-}
-body.dark-mode header { background: #0A192F; }
-body.dark-mode .header-nav a { color: #ccc; }
-body.dark-mode .header-nav a.active,
-body.dark-mode .header-nav a:hover { color: #00BFA6; }
-
-body.dark-mode .hero { background: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%); }
-body.dark-mode .hero p { color: #ccc; }
-body.dark-mode .hero .btn { background: #00BFA6; color: #fff; }
-body.dark-mode .hero .btn:hover { background: #008f7a; }
-
-body.dark-mode .card {
-  background: #1e1e1e;
-  color: #ddd;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
-}
-body.dark-mode .card h2 { color: #00BFA6; }
-body.dark-mode .card p { color: #ccc; }
-body.dark-mode .card a { background: #00BFA6; color: #fff; }
-body.dark-mode .card a:hover { background: #008f7a; }
-
-body.dark-mode footer { background: #0A192F; color: #ccc; }
-body.dark-mode footer a { color: #00BFA6; }
-
-/* ===== Dark Mode Toggle Button ===== */
-.dark-mode-toggle {
-  background: #00BFA6;
-  color: #fff;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease;
-}
-.dark-mode-toggle:hover { background: #008f7a; }
-
-/* ===== Mobile Optimizations ===== */
 @media (max-width: 768px) {
-  .menu-toggle { display: flex; }
-  .header-nav {
-    display: none;
-    flex-direction: column;
-    gap: 15px;
-    background: #0A192F;
-    padding: 20px;
-    border-radius: 6px;
-  }
-  .header-nav.active { display: flex; }
-  .hero { padding: 60px 20px; }
-  .card { width: 100%; }
+  .hero-banner { padding: 80px 20px; }
+  .hero-banner h1 { font-size: 2.2rem; }
+  header { flex-direction: column; gap: 15px; }
+  .card { padding: 30px; }
 }
-@media (max-width: 480px) {
-  .hero h1 { font-size: 2em; }
-  .hero p { font-size: 1em; }
-  .card { padding: 20px; }
-}
-/* Center and stack tool cards */
-.cards {
-  display: flex;
-  flex-direction: column;   /* stack vertically */
-  align-items: center;      /* center horizontally */
-  gap: 30px;                /* spacing between cards */
-  padding: 40px 20px;
-}
-
-.card {
-  max-width: 600px;         /* keep cards centered and not too wide */
-  width: 100%;
-  text-align: center;       /* center text inside each card */
-}
-
-
