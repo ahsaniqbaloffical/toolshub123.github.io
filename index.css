@@ -1,88 +1,196 @@
-/* --- PAGE CONTENT STYLES --- */
-.hero-banner { background: var(--hero-grad); color: white; text-align: center; padding: 100px 20px; }
+/* --- RESET & VARIABLES --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-.container { 
-  max-width: 900px; 
-  margin: 40px auto; 
-  padding: 0 20px; 
-  display: flex; 
-  flex-direction: column; 
-  gap: 30px; 
-  align-items: center; /* Centers cards horizontally on the page */
+:root {
+  --bg: #F4F6F8;
+  --card-bg: #ffffff;
+  --text-primary: #0A192F;
+  --header-bg: #0A192F;
+  --accent: #00BFA6;
+  --hero-grad: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%);
 }
 
-/* Base Card Logic */
-.card, .info-card { 
-  background: var(--card-bg); 
-  border-radius: 15px; 
-  padding: 40px; 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-  width: 100%;
+body.dark-mode {
+  --bg: #050d1a;
+  --card-bg: #112240;
+  --text-primary: #ffffff;
+}
+
+body {
+  font-family: 'Syne', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  transition: 0.3s;
+  line-height: 1.6;
+}
+
+/* --- HEADER & NAVIGATION --- */
+header {
+  background: var(--header-bg);
+  padding: 15px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .logo { max-height: 50px; }
+
+.header-nav { display: flex; gap: 10px; align-items: center; }
+
+.header-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 15px;
+  transition: 0.3s;
+}
+
+.header-nav a:hover, .header-nav a.active { color: var(--accent); }
+
+.dark-mode-toggle {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* --- HAMBURGER MENU --- */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+@media (max-width: 900px) {
+  .menu-toggle { display: flex; }
+  
+  .header-nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--header-bg);
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    gap: 15px;
+  }
+
+  .header-nav.active { display: flex; }
+}
+
+/* Hamburger Animation */
+.menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+.menu-toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* --- HERO SECTION --- */
+.hero-banner {
+  background: var(--hero-grad);
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.hero-banner h1 { font-size: 2.8rem; margin-bottom: 15px; }
+
+/* --- CARD LAYOUT --- */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
-  /* Default internal alignment */
-  align-items: flex-start; 
+  gap: 30px;
 }
 
-/* Specific centering for Tool Cards */
-.tool-card {
-  align-items: center;
+.card, .info-card {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  width: 100%;
+}
+
+/* Tool Cards: Everything Centered */
+.tool-card { text-align: center; }
+
+/* Info Cards: Block Centered, Text Left */
+.info-card { text-align: left; }
+
+h2 {
   text-align: center;
-}
-
-/* HEADINGS: Force Centering */
-.card h2, .info-card h2, .sub-results-title { 
-  text-align: center !important; 
-  color: var(--accent); 
+  color: var(--accent);
   margin-bottom: 25px;
-  width: 100%;
+  font-size: 1.8rem;
+}
+
+p, ul { margin-bottom: 15px; }
+
+ul { padding-left: 20px; }
+
+/* --- BUTTON STYLING --- */
+.btn-main {
   display: block;
-}
-
-/* BODY TEXT: Force Left Alignment */
-.info-card p, .info-card ul, .faq-item, .feature-list, .info-card div {
-  text-align: left !important;
-  width: 100%;
-  align-self: flex-start;
-  margin-bottom: 15px;
-}
-
-/* List spacing */
-.info-card ul {
-  padding-left: 20px;
-}
-
-/* BUTTONS: Force Centering regardless of card type */
-.btn-main, .tool-btn-main { 
-  display: inline-block; 
-  background: var(--accent); 
-  color: white !important; 
-  padding: 14px 35px; 
-  border-radius: 8px; 
-  text-decoration: none; 
-  font-weight: 700; 
-  margin: 25px auto 0 auto !important; /* Centers button horizontally */
+  width: fit-content;
+  margin: 25px auto 0 auto; /* Always centered */
+  background: var(--accent);
+  color: white !important;
+  padding: 14px 35px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
   transition: 0.3s;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 191, 166, 0.3);
-  align-self: center; 
+  text-align: center;
 }
 
 .btn-main:hover {
   background: #008f7a;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 191, 166, 0.4);
+  box-shadow: 0 5px 15px rgba(0,191,166,0.3);
 }
 
-/* FAQ Items */
-.faq-item strong { 
-  display: block; 
-  margin-bottom: 5px; 
-  color: var(--accent); 
-  text-align: left !important;
+/* --- FAQ SECTION --- */
+.faq-item { margin-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 15px; }
+body.dark-mode .faq-item { border-bottom-color: rgba(255,255,255,0.1); }
+
+.faq-item strong {
+  display: block;
+  color: var(--accent);
+  margin-bottom: 5px;
 }
 
-/* Footer Fix */
-footer { background: var(--header-bg); color: white; text-align: center; padding: 40px 20px; margin-top: 50px; width: 100%; }
-footer a { color: var(--accent); text-decoration: none; margin: 0 10px; font-size: 0.9rem; }
+/* --- FOOTER --- */
+footer {
+  background: var(--header-bg);
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+  margin-top: 60px;
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+  margin: 0 10px;
+}
