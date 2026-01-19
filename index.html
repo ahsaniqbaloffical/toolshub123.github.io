@@ -17,7 +17,7 @@
         <span class="bar"></span>
         <span class="bar"></span>
     </div>
-    <nav class="header-nav">
+    <nav class="header-nav" id="nav-list">
       <a href="index.html" class="active">Home</a>
       <a href="SEO%20tools.html">SEO Tools</a>
       <a href="finance%20tools.html">Finance Tools</a>
@@ -52,7 +52,7 @@
         <li><strong>Fully Responsive:</strong> Works perfectly on all mobile devices.</li>
         <li><strong>Free Forever:</strong> No sign-ups or hidden costs.</li>
       </ul>
-    </div>
+      </div>
 
     <div class="card info-card">
       <h2>Frequently Asked Questions</h2>
@@ -65,18 +65,17 @@
 
   <footer>
     <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
-    <p style="margin-top: 15px;">
+    <div style="margin-top: 15px;">
       <a href="PrivacyPolicy.html">Privacy Policy</a> | <a href="terms%20of%20service.html">Terms Of Service</a> |
       <a href="about.html">About</a> | 
       <a href="contact.html">Contact</a>
-    </p>
+    </div>
   </footer>
 
 <script>
   // --- 1. Dark Mode Logic ---
   const darkToggle = document.getElementById('dark-mode-toggle');
   
-  // Check for saved theme on page load
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
     if(darkToggle) darkToggle.textContent = '☀️ Light Mode';
@@ -91,19 +90,16 @@
     });
   }
 
-  // --- 2. Mobile Menu Toggle (Separate from Dark Mode) ---
+  // --- 2. Mobile Menu Toggle ---
   const menuToggle = document.getElementById('mobile-menu');
   const navList = document.getElementById('nav-list');
 
   if (menuToggle && navList) {
     menuToggle.addEventListener('click', () => {
       navList.classList.toggle('active');
-      menuToggle.classList.toggle('is-active'); // This triggers the X animation
+      menuToggle.classList.toggle('is-active'); 
     });
   }
 </script>
 </body>
 </html>
-
-
-
