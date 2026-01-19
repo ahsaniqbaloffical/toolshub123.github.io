@@ -1,17 +1,3 @@
-/* --- Keep all your existing code at the top as is (Header, Nav, Hamburger) --- */
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --bg: #F4F6F8; --card-bg: #ffffff; --text-primary: #0A192F;
-  --header-bg: #0A192F; --accent: #00BFA6;
-  --hero-grad: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%);
-}
-body.dark-mode { --bg: #050d1a; --card-bg: #112240; --text-primary: #ffffff; }
-
-body { font-family: 'Syne', sans-serif; background-color: var(--bg); color: var(--text-primary); transition: 0.3s; line-height: 1.6; }
-
-/* ... (Header, Nav, and Hamburger styles) ... */
-
 /* --- PAGE CONTENT STYLES --- */
 .hero-banner { background: var(--hero-grad); color: white; text-align: center; padding: 100px 20px; }
 
@@ -22,10 +8,10 @@ body { font-family: 'Syne', sans-serif; background-color: var(--bg); color: var(
   display: flex; 
   flex-direction: column; 
   gap: 30px; 
-  align-items: center; /* Centers the cards in the container */
+  align-items: center; /* Centers cards horizontally on the page */
 }
 
-/* Base Card Style */
+/* Base Card Logic */
 .card, .info-card { 
   background: var(--card-bg); 
   border-radius: 15px; 
@@ -34,31 +20,40 @@ body { font-family: 'Syne', sans-serif; background-color: var(--bg); color: var(
   width: 100%;
   display: flex;
   flex-direction: column;
+  /* Default internal alignment */
+  align-items: flex-start; 
 }
 
-/* Tool Cards (Centered Text) */
+/* Specific centering for Tool Cards */
 .tool-card {
-  text-align: center;
   align-items: center;
+  text-align: center;
 }
 
-/* Headings (Always Centered) */
+/* HEADINGS: Force Centering */
 .card h2, .info-card h2, .sub-results-title { 
-  text-align: center; 
+  text-align: center !important; 
   color: var(--accent); 
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   width: 100%;
+  display: block;
 }
 
-/* Text Content (Features, FAQ, Descriptions) - Left Aligned */
-.info-card p, .info-card ul, .faq-item, .feature-list {
-  text-align: left;
+/* BODY TEXT: Force Left Alignment */
+.info-card p, .info-card ul, .faq-item, .feature-list, .info-card div {
+  text-align: left !important;
   width: 100%;
   align-self: flex-start;
+  margin-bottom: 15px;
 }
 
-/* Button Styling (Always Centered) */
-.btn-main { 
+/* List spacing */
+.info-card ul {
+  padding-left: 20px;
+}
+
+/* BUTTONS: Force Centering regardless of card type */
+.btn-main, .tool-btn-main { 
   display: inline-block; 
   background: var(--accent); 
   color: white !important; 
@@ -66,12 +61,12 @@ body { font-family: 'Syne', sans-serif; background-color: var(--bg); color: var(
   border-radius: 8px; 
   text-decoration: none; 
   font-weight: 700; 
-  margin-top: 25px; 
+  margin: 25px auto 0 auto !important; /* Centers button horizontally */
   transition: 0.3s;
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0, 191, 166, 0.3);
-  align-self: center; /* Forces button to center */
+  align-self: center; 
 }
 
 .btn-main:hover {
@@ -80,17 +75,14 @@ body { font-family: 'Syne', sans-serif; background-color: var(--bg); color: var(
   box-shadow: 0 6px 20px rgba(0, 191, 166, 0.4);
 }
 
-/* Specific FAQ Alignment */
-.faq-item { 
-  margin-bottom: 20px; 
-}
+/* FAQ Items */
 .faq-item strong { 
   display: block; 
   margin-bottom: 5px; 
   color: var(--accent); 
-  text-align: left;
+  text-align: left !important;
 }
 
-/* Footer Styling */
-footer { background: var(--header-bg); color: white; text-align: center; padding: 40px 20px; margin-top: 50px; }
+/* Footer Fix */
+footer { background: var(--header-bg); color: white; text-align: center; padding: 40px 20px; margin-top: 50px; width: 100%; }
 footer a { color: var(--accent); text-decoration: none; margin: 0 10px; font-size: 0.9rem; }
