@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toolshub123 | Free Online Toolkit</title>
+  <title>Toolshub123 | Free SEO, Finance, Utility & Health Tools</title>
   <link rel="stylesheet" href="index.css">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="logo.png" type="image/png">
 </head>
 <body>
@@ -28,10 +28,9 @@
   </section>
 
   <main class="container">
-
     <div class="card tool-card">
       <h2>Free SEO Tools</h2>
-      <p>Analyze meta tags, check image alt text, and audit your heading structures.</p>
+      <p>Analyze meta tags, check heading structure, and audit your website SEO.</p>
       <a href="SEO%20tools.html" class="btn-main">Open SEO Tools</a>
     </div>
 
@@ -41,44 +40,22 @@
       <a href="finance%20tools.html" class="btn-main">Open Finance Tools</a>
     </div>
 
-    <div class="card tool-card">
-      <h2>Free Utility Tools</h2>
-      <p>Everyday productivity tools to make your tasks faster and easier.</p>
-      <a href="utilitytools.html" class="btn-main">Open Utility Tools</a>
-    </div>
-
-    <div class="card tool-card">
-      <h2>Free Health Tools</h2>
-      <p>Track your wellness with BMR, BMI, and water intake calculators.</p>
-      <a href="health%20tools.html" class="btn-main">Open Health Tools</a>
-    </div>
-
     <div class="card info-card">
       <h2>Why Use Toolshub123?</h2>
       <ul>
-        <li><strong>Privacy First:</strong> Calculations happen in your browser; we don't store your data.</li>
-        <li><strong>Fully Responsive:</strong> Optimized for mobile, tablet, and desktop views.</li>
-        <li><strong>Dark Mode Enabled:</strong> Toggle between light and dark themes for better comfort.</li>
-        <li><strong>Reliable & Fast:</strong> Built for performance and accuracy.</li>
+        <li><strong>Privacy First:</strong> Calculations happen in your browser.</li>
+        <li><strong>Fully Responsive:</strong> Works perfectly on all mobile devices.</li>
+        <li><strong>Free Forever:</strong> No sign-ups or hidden costs.</li>
       </ul>
     </div>
 
     <div class="card info-card">
       <h2>Frequently Asked Questions</h2>
       <div class="faq-item">
-        <strong>Are these tools really free?</strong>
-        <p>Yes, all tools on Toolshub123 are completely free with no hidden charges.</p>
-      </div>
-      <div class="faq-item">
-        <strong>Do I need to sign up?</strong>
-        <p>No registration is required. You can start using any tool immediately.</p>
-      </div>
-      <div class="faq-item">
-        <strong>How safe is my data?</strong>
-        <p>Our tools are client-side, meaning your information stays on your device.</p>
+        <strong>Are these tools safe?</strong>
+        <p>Yes, all tools run client-side, meaning your data stays on your computer.</p>
       </div>
     </div>
-
   </main>
 
   <footer>
@@ -92,22 +69,16 @@
 
   <script>
     const darkToggle = document.getElementById('dark-mode-toggle');
-    const body = document.body;
-
-    // Persist user preference
     if (localStorage.getItem('theme') === 'dark') {
-      body.classList.add('dark-mode');
+      document.body.classList.add('dark-mode');
       darkToggle.textContent = '☀️ Light Mode';
     }
-
     darkToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-      const isDark = body.classList.contains('dark-mode');
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
       darkToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
     });
   </script>
-
 </body>
 </html>
-
