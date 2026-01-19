@@ -1,4 +1,4 @@
-/* --- Keep all your existing code at the top as is --- */
+/* --- Keep all your existing code at the top as is (Header, Nav, Hamburger) --- */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -10,76 +10,9 @@ body.dark-mode { --bg: #050d1a; --card-bg: #112240; --text-primary: #ffffff; }
 
 body { font-family: 'Syne', sans-serif; background-color: var(--bg); color: var(--text-primary); transition: 0.3s; line-height: 1.6; }
 
-/* ... (Keep Header, Nav, and Hamburger styles exactly as you have them) ... */
+/* ... (Header, Nav, and Hamburger styles) ... */
 
-header {
-  background: var(--header-bg);
-  padding: 15px 5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky; top: 0; z-index: 1000;
-}
-header .logo { max-height: 50px; }
-
-.header-nav { display: flex; gap: 10px; align-items: center; }
-.header-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  padding: 8px 15px;
-  transition: 0.3s;
-}
-.header-nav a:hover, .header-nav a.active { color: var(--accent); }
-
-.dark-mode-toggle {
-  background: var(--accent); color: white; border: none;
-  padding: 8px 16px; border-radius: 20px; cursor: pointer;
-  font-weight: 700; font-size: 13px; margin-left: 10px;
-}
-
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-
-.bar {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  transition: all 0.3s ease-in-out;
-  border-radius: 2px;
-}
-
-@media (max-width: 900px) {
-  .menu-toggle { display: flex; }
-  .header-nav {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: var(--header-bg);
-    padding: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    gap: 15px;
-    text-align: center;
-  }
-  .header-nav.active { display: flex; }
-  .dark-mode-toggle { margin-left: 0; margin-top: 10px; width: fit-content; }
-  .hero-banner h1 { font-size: 2.2rem; }
-}
-
-.menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
-.menu-toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-.menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-/* --- FIXED BUTTONS & CENTERED CARD STYLES --- */
-
+/* --- PAGE CONTENT STYLES --- */
 .hero-banner { background: var(--hero-grad); color: white; text-align: center; padding: 100px 20px; }
 
 .container { 
@@ -89,46 +22,56 @@ header .logo { max-height: 50px; }
   display: flex; 
   flex-direction: column; 
   gap: 30px; 
+  align-items: center; /* Centers the cards in the container */
 }
 
-/* Updated Card to center content */
-.card { 
+/* Base Card Style */
+.card, .info-card { 
   background: var(--card-bg); 
   border-radius: 15px; 
   padding: 40px; 
   box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-  text-align: center; /* Centers all text */
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers the button */
-  justify-content: center;
 }
 
-/* Centered info cards */
-.info-card { 
+/* Tool Cards (Centered Text) */
+.tool-card {
+  text-align: center;
+  align-items: center;
+}
+
+/* Headings (Always Centered) */
+.card h2, .info-card h2, .sub-results-title { 
   text-align: center; 
-}
-
-.info-card h2 { 
   color: var(--accent); 
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
   width: 100%;
 }
 
-/* Button Styling Fix */
+/* Text Content (Features, FAQ, Descriptions) - Left Aligned */
+.info-card p, .info-card ul, .faq-item, .feature-list {
+  text-align: left;
+  width: 100%;
+  align-self: flex-start;
+}
+
+/* Button Styling (Always Centered) */
 .btn-main { 
   display: inline-block; 
   background: var(--accent); 
-  color: white !important; /* Forces white text */
+  color: white !important; 
   padding: 14px 35px; 
   border-radius: 8px; 
   text-decoration: none; 
   font-weight: 700; 
-  margin-top: 20px; 
+  margin-top: 25px; 
   transition: 0.3s;
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(0, 191, 166, 0.3);
+  align-self: center; /* Forces button to center */
 }
 
 .btn-main:hover {
@@ -137,8 +80,17 @@ header .logo { max-height: 50px; }
   box-shadow: 0 6px 20px rgba(0, 191, 166, 0.4);
 }
 
-.faq-item { margin-bottom: 15px; text-align: left; width: 100%; }
-.faq-item strong { display: block; margin-bottom: 5px; color: var(--accent); }
+/* Specific FAQ Alignment */
+.faq-item { 
+  margin-bottom: 20px; 
+}
+.faq-item strong { 
+  display: block; 
+  margin-bottom: 5px; 
+  color: var(--accent); 
+  text-align: left;
+}
 
+/* Footer Styling */
 footer { background: var(--header-bg); color: white; text-align: center; padding: 40px 20px; margin-top: 50px; }
 footer a { color: var(--accent); text-decoration: none; margin: 0 10px; font-size: 0.9rem; }
