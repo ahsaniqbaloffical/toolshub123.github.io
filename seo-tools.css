@@ -1,0 +1,168 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #F4F6F8;
+  --card-bg: #ffffff;
+  --text-main: #0A192F;
+  --text-sub: #555;
+  --header-dark: #0A192F;
+  --green: #00BFA6;
+  --green-hover: #008f7a;
+  --hero-gradient: linear-gradient(135deg, #0A192F 0%, #00BFA6 60%, #38EF7D 100%);
+}
+
+/* Dark Mode Overrides */
+body.dark-mode {
+  --bg: #050d1a;
+  --card-bg: #112240;
+  --text-main: #ffffff;
+  --text-sub: #a8b2d1;
+}
+
+body {
+  font-family: 'Syne', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-main);
+  line-height: 1.6;
+  transition: 0.3s ease;
+}
+
+/* ===== Header & Nav ===== */
+header {
+  background: var(--header-dark);
+  padding: 20px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header .logo { max-height: 60px; }
+
+.header-nav { display: flex; gap: 20px; align-items: center; }
+
+.header-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.header-nav a:hover, .header-nav a.active { color: var(--green); }
+
+.dark-mode-toggle {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* ===== Hero Banner (Centered) ===== */
+.seo-hero {
+  background: var(--hero-gradient);
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ===== Centered Stack Container ===== */
+.seo-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Base Card Style */
+.tool-card, .info-card {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Tool Cards: Centered Text */
+.tool-card {
+  text-align: center;
+}
+
+.tool-card h2 {
+  color: var(--green);
+  margin-bottom: 15px;
+}
+
+.seo-btn {
+  display: inline-block;
+  background: var(--green);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.seo-btn:hover { background: var(--green-hover); }
+
+/* Info Cards (Features/FAQ): Left Aligned Text */
+.info-card {
+  text-align: left;
+}
+
+.info-card h2 {
+  text-align: center; /* Title stays centered */
+  margin-bottom: 25px;
+}
+
+.info-card ul { margin-left: 20px; }
+
+.faq-item { margin-bottom: 20px; }
+
+.faq-item strong {
+  display: block;
+  color: var(--green);
+  margin-bottom: 5px;
+}
+
+/* ===== Footer ===== */
+footer {
+  background: var(--header-dark);
+  color: white;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+footer a { color: var(--green); text-decoration: none; margin: 0 10px; }
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2.2rem; }
+  header { flex-direction: column; gap: 15px; }
+  .tool-card, .info-card { padding: 25px; }
+}
