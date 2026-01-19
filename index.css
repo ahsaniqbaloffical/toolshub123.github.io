@@ -55,3 +55,19 @@ footer a { color: var(--accent); text-decoration: none; margin: 0 10px; }
   header { flex-direction: column; gap: 15px; }
   .header-nav { flex-wrap: wrap; justify-content: center; }
 }
+/* Animation: Transforming Hamburger to X */
+.menu-toggle.is-active .bar:nth-child(2) {
+  opacity: 0; /* Hide middle bar */
+}
+
+.menu-toggle.is-active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg); /* Move top bar down and rotate */
+}
+
+.menu-toggle.is-active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg); /* Move bottom bar up and rotate */
+}
+
+.bar {
+  transition: all 0.3s ease-in-out; /* Makes the movement smooth */
+}
