@@ -1,3 +1,5 @@
+/* --- Keep all your existing code at the top as is --- */
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --bg: #F4F6F8; --card-bg: #ffffff; --text-primary: #0A192F;
@@ -8,7 +10,8 @@ body.dark-mode { --bg: #050d1a; --card-bg: #112240; --text-primary: #ffffff; }
 
 body { font-family: 'Syne', sans-serif; background-color: var(--bg); color: var(--text-primary); transition: 0.3s; line-height: 1.6; }
 
-/* --- HEADER STYLES --- */
+/* ... (Keep Header, Nav, and Hamburger styles exactly as you have them) ... */
+
 header {
   background: var(--header-bg);
   padding: 15px 5%;
@@ -19,7 +22,6 @@ header {
 }
 header .logo { max-height: 50px; }
 
-/* --- NAV STYLES --- */
 .header-nav { display: flex; gap: 10px; align-items: center; }
 .header-nav a {
   color: #fff;
@@ -37,9 +39,8 @@ header .logo { max-height: 50px; }
   font-weight: 700; font-size: 13px; margin-left: 10px;
 }
 
-/* --- HAMBURGER MENU BUTTON --- */
 .menu-toggle {
-  display: none; /* Hidden on Desktop */
+  display: none;
   flex-direction: column;
   cursor: pointer;
   gap: 5px;
@@ -48,22 +49,18 @@ header .logo { max-height: 50px; }
 .bar {
   width: 25px;
   height: 3px;
-  background-color: white; /* Ensure visible on dark header */
+  background-color: white;
   transition: all 0.3s ease-in-out;
   border-radius: 2px;
 }
 
-/* --- MOBILE RESPONSIVE LOGIC --- */
 @media (max-width: 900px) {
-  .menu-toggle {
-    display: flex; /* Show hamburger button */
-  }
-
+  .menu-toggle { display: flex; }
   .header-nav {
-    display: none; /* Hide menu by default */
+    display: none;
     flex-direction: column;
     position: absolute;
-    top: 100%; /* Sits exactly below header */
+    top: 100%;
     left: 0;
     width: 100%;
     background: var(--header-bg);
@@ -72,32 +69,76 @@ header .logo { max-height: 50px; }
     gap: 15px;
     text-align: center;
   }
-
-  /* Show menu when .active is added via JS */
-  .header-nav.active {
-    display: flex;
-  }
-
-  .dark-mode-toggle {
-    margin-left: 0;
-    margin-top: 10px;
-    width: fit-content;
-  }
-
+  .header-nav.active { display: flex; }
+  .dark-mode-toggle { margin-left: 0; margin-top: 10px; width: fit-content; }
   .hero-banner h1 { font-size: 2.2rem; }
 }
 
-/* --- HAMBURGER TO X ANIMATION --- */
 .menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
 .menu-toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-/* --- PAGE CONTENT STYLES --- */
+/* --- FIXED BUTTONS & CENTERED CARD STYLES --- */
+
 .hero-banner { background: var(--hero-grad); color: white; text-align: center; padding: 100px 20px; }
-.container { max-width: 900px; margin: 40px auto; padding: 0 20px; display: flex; flex-direction: column; gap: 30px; }
-.card { background: var(--card-bg); border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-.info-card h2 { color: var(--accent); margin-bottom: 20px; }
-.faq-item { margin-bottom: 15px; }
+
+.container { 
+  max-width: 900px; 
+  margin: 40px auto; 
+  padding: 0 20px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 30px; 
+}
+
+/* Updated Card to center content */
+.card { 
+  background: var(--card-bg); 
+  border-radius: 15px; 
+  padding: 40px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+  text-align: center; /* Centers all text */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the button */
+  justify-content: center;
+}
+
+/* Centered info cards */
+.info-card { 
+  text-align: center; 
+}
+
+.info-card h2 { 
+  color: var(--accent); 
+  margin-bottom: 20px; 
+  width: 100%;
+}
+
+/* Button Styling Fix */
+.btn-main { 
+  display: inline-block; 
+  background: var(--accent); 
+  color: white !important; /* Forces white text */
+  padding: 14px 35px; 
+  border-radius: 8px; 
+  text-decoration: none; 
+  font-weight: 700; 
+  margin-top: 20px; 
+  transition: 0.3s;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 191, 166, 0.3);
+}
+
+.btn-main:hover {
+  background: #008f7a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 191, 166, 0.4);
+}
+
+.faq-item { margin-bottom: 15px; text-align: left; width: 100%; }
+.faq-item strong { display: block; margin-bottom: 5px; color: var(--accent); }
 
 footer { background: var(--header-bg); color: white; text-align: center; padding: 40px 20px; margin-top: 50px; }
 footer a { color: var(--accent); text-decoration: none; margin: 0 10px; font-size: 0.9rem; }
