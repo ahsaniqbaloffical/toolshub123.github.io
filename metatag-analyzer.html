@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meta Tag Analyzer | Toolshub123</title>
-  <meta name="description" content="Analyze your website meta tags for SEO optimization. Check title, description, keywords, and more.">
+  <meta name="description" content="Free Meta Tag Analyzer tool to check your website's SEO health. Analyze titles, meta descriptions, Open Graph tags, and SERP pixel widths instantly.">
   <link rel="stylesheet" href="meta-tag-tool.css">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="logo.png" type="image/png">
@@ -26,18 +26,18 @@
   <section class="seo-hero">
     <div class="hero-content">
       <h1>Meta Tag Analyzer</h1>
-      <p>Check your website’s meta tags for SEO optimization. Instantly analyze titles, descriptions, and keywords.</p>
+      <p>Analyze your website’s meta tags for professional SEO optimization. Check pixel widths for Google, Bing, and Social Media sharing.</p>
     </div>
   </section>
 
   <main class="seo-container">
     <div class="tool-card">
       <h2>Analyze Your Meta Tags</h2>
-      <p style="margin-bottom: 20px;">Paste your HTML code below and click "Analyze" to extract and review meta tags.</p>
+      <p style="margin-bottom: 20px;">Paste your HTML source code below (everything between &lt;head&gt; and &lt;/head&gt;) and click Analyze.</p>
 
       <textarea id="htmlInput" placeholder="Paste your HTML code here..." class="tool-textarea"></textarea>
 
-      <button onclick="analyzeMetaTags()" class="tool-btn-main">Analyze Tags</button>
+      <button onclick="analyzeMetaTags()" class="tool-btn-main">Analyze Meta Data</button>
 
       <div id="results" class="results-container" style="display:none;">
         <h3 class="results-title">Analysis Results</h3>
@@ -45,7 +45,7 @@
         <div id="social-img-preview" class="social-preview-box" style="margin: 20px 0; padding: 15px; background: rgba(0,0,0,0.03); border-radius: 8px;"></div>
 
         <div class="serp-section">
-          <h4>Search Engine Previews</h4>
+          <h4>Google Search Preview</h4>
           <div class="serp-preview google">
             <p id="googleTitle" class="serp-title">—</p>
             <p id="googleUrl" class="serp-url">—</p>
@@ -68,14 +68,57 @@
            <div class="data-item"><strong>Twitter Card:</strong> <span id="twitterCardResult">—</span></div>
         </div>
 
-        <h4 class="sub-results-title">Recommendations</h4>
+        <h4 class="sub-results-title">SEO Recommendations</h4>
         <ul id="recommendations" class="rec-list" style="list-style: none; padding: 0;"></ul>
 
-        <button onclick="downloadReport()" class="tool-btn-secondary" style="margin-top:20px;">Download CSV Report</button>
+        <button onclick="downloadReport()" class="tool-btn-secondary" style="margin-top:20px;">Download SEO Audit (CSV)</button>
       </div>
     </div>
 
-    </main>
+    <div class="info-card">
+        <h2>Why Meta Tag Analysis Matters for SEO</h2>
+        <p>Meta tags are the first point of contact between your website and search engine crawlers. Our **Meta Tag Analyzer** provides a deep dive into your site's header data, ensuring that your content is not only crawlable but also enticing to users in the search results.</p>
+        <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <h4>Google Pixel Width</h4>
+                <p>Google truncates titles at 600px. Our tool uses a high-precision canvas-based measurement to tell you exactly if your title will be cut off.</p>
+            </div>
+            <div>
+                <h4>Social Sharing Optimization</h4>
+                <p>Open Graph (OG) and Twitter Cards determine how your site looks on Facebook and X. We verify your thumbnails and titles for maximum CTR.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+      <h2>Key Features of our Analyzer</h2>
+      <ul class="feature-list" style="padding-left: 20px; line-height: 2;">
+        <li>✅ <strong>Real-time SERP Preview:</strong> See your Google snippet before you publish.</li>
+        <li>✅ <strong>Character & Pixel Counting:</strong> Accurate width detection for titles and descriptions.</li>
+        <li>✅ <strong>Heading Consistency:</strong> Check if your Title matches your H1 for semantic SEO.</li>
+        <li>✅ <strong>OG Image Validator:</strong> Visual preview of your social media share images.</li>
+        <li>✅ <strong>CSV Export:</strong> Save your results for client reports or future audits.</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h2>Frequently Asked Questions</h2>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div>
+          <strong>1. What are the best lengths for Meta Tags?</strong>
+          <p>For best results, keep titles between 50-60 characters (under 600px) and descriptions between 120-158 characters (under 920px).</p>
+        </div>
+        <div>
+          <strong>2. Does this tool store my HTML code?</strong>
+          <p>No. Our Meta Tag Analyzer runs entirely on the client-side (your browser). Your data is never sent to our servers.</p>
+        </div>
+        <div>
+          <strong>3. Why is my OG image not showing?</strong>
+          <p>Ensure your `og:image` tag contains a full absolute URL (starting with https://) rather than a relative path.</p>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <footer>
     <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
@@ -99,7 +142,7 @@
   });
 
   // --- Helper Functions ---
-  function getPixelWidth(text, font = "16px Arial") {
+  function getPixelWidth(text, font = "18px Arial") {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
     ctx.font = font;
@@ -132,37 +175,46 @@
     // 3. SOCIAL IMAGE PREVIEW
     const previewImg = ogImage || twitterImage;
     if(previewImg) {
-        setHTML("social-img-preview", `<h4>Social Sharing Thumbnail</h4><img src="${previewImg}" style="max-width:100%; max-height:300px; border-radius:8px; margin-top:10px; border:1px solid #ddd;">`);
+        setHTML("social-img-preview", `<h4>Social Sharing Thumbnail</h4><img src="${previewImg}" style="max-width:100%; max-height:250px; border-radius:8px; margin-top:10px; border:1px solid #ddd; display:block;">`);
     } else {
-        setHTML("social-img-preview", `<p style="color:orange;">⚠️ No Social Image (OG/Twitter) detected.</p>`);
+        setHTML("social-img-preview", `<p style="color:#ffa500; font-weight:600;">⚠️ No Social Image (OG/Twitter) detected.</p>`);
     }
 
-    // 4. RECOMMENDATIONS & CHECKS
+    // 4. RECOMMENDATIONS
     if (title !== "Not found" && h1Text !== "") {
         const titleWords = title.toLowerCase().split(/\s+/);
         const match = titleWords.some(word => word.length > 3 && h1Text.toLowerCase().includes(word));
-        if (!match) recs.push({type: 'warn', msg: "⚠️ Title and H1 do not share main keywords."});
+        if (!match) recs.push({type: 'warn', msg: "⚠️ SEO Alert: Title and H1 do not share main keywords."});
     }
 
     if (title === "Not found") recs.push({type: 'err', msg: "❌ Missing Title Tag."});
     else if (titlePx > 600) recs.push({type: 'err', msg: `❌ Title is too long (${Math.round(titlePx)}px).`});
 
     if (description === "Not found") recs.push({type: 'err', msg: "❌ Missing Meta Description."});
-    if (doc.querySelectorAll("h1").length > 1) recs.push({type: 'err', msg: "❌ Multiple H1 tags detected."});
+    else if (descPx > 920) recs.push({type: 'warn', msg: `⚠️ Description is too long (${Math.round(descPx)}px).`});
 
-    // 5. UPDATE UI
+    if (doc.querySelectorAll("h1").length > 1) recs.push({type: 'err', msg: "❌ Multiple H1 tags detected (SEO penalty)."});
+
+    // 5. UPDATE UI (FIXED DESCRIPTION LENGTH)
+    const titleColor = (titlePx > 0 && titlePx <= 600) ? 'green' : (titlePx > 600 ? 'red' : 'gray');
+    const descColor = (descPx > 0 && descPx <= 920) ? 'green' : (descPx > 920 ? 'orange' : 'gray');
+
     set("titleResult", title);
-    setHTML("titleLength", `${title.length} chars (${Math.round(titlePx)}px)`);
+    setHTML("titleLength", `${title.length} chars (${Math.round(titlePx)}px) <span style="color:${titleColor}">●</span>`);
+    
     set("descriptionResult", description);
+    setHTML("descriptionLength", `${description.length} chars (${Math.round(descPx)}px) <span style="color:${descColor}">●</span>`);
+    
     set("ogTitleResult", ogTitle);
     set("twitterCardResult", twitterCard);
-    set("duplicateResult", doc.querySelectorAll("title").length > 1 ? "Yes" : "No");
+    set("duplicateResult", doc.querySelectorAll("title").length > 1 ? "Yes (Action Required)" : "No");
     set("headingResult", `H1: ${doc.querySelectorAll("h1").length}, H2: ${doc.querySelectorAll("h2").length}`);
     
     set("googleTitle", title);
     set("googleDescription", description);
     set("googleUrl", canonical === "Not found" ? "https://your-site.com" : canonical);
 
+    // Update Recommendations List
     const recList = document.getElementById("recommendations");
     recList.innerHTML = "";
     recs.forEach(r => {
@@ -170,27 +222,26 @@
       li.innerText = r.msg;
       li.style.color = r.type === 'err' ? '#ff4d4d' : '#ffa500';
       li.style.fontWeight = '600';
+      li.style.marginBottom = "8px";
       recList.appendChild(li);
     });
 
     document.getElementById("results").style.display = "block";
-    
-    // Global data for CSV
     window.__metaReport = { title, description, canonical, recommendations: recs.map(r => r.msg).join(" | ") };
   }
 
-  // FIXED: Added missing Download Function
   function downloadReport() {
     const data = window.__metaReport;
     if (!data) return alert("Analyze a page first.");
     const csvContent = "data:text/csv;charset=utf-8,Field,Value\n" 
-      + `Title,"${data.title}"\nDescription,"${data.description}"\nRecommendations,"${data.recommendations}"`;
+      + `Title,"${data.title}"\nDescription,"${data.description}"\nCanonical,"${data.canonical}"\nRecommendations,"${data.recommendations}"`;
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "seo_report.csv");
+    link.setAttribute("download", "seo_audit_toolshub123.csv");
     document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
   }
 </script>
 </body>
