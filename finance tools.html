@@ -14,7 +14,12 @@
 
   <header>
     <img src="logo.png" alt="Toolshub123 Logo" class="logo">
-    <nav class="header-nav">
+    <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <nav class="header-nav" id="nav-list">
       <a href="index.html">Home</a>
       <a href="SEO%20tools.html">SEO Tools</a>
       <a href="finance%20tools.html" class="active">Finance Tools</a>
@@ -85,30 +90,42 @@
 
   <footer>
     <p>&copy; 2026 Toolshub123 | Built with ❤️ by Ahsan</p>
-    <p style="margin-top: 15px;">
+    <div style="margin-top: 15px;">
       <a href="PrivacyPolicy.html">Privacy Policy</a> |
       <a href="about.html">About Us</a> |
       <a href="contact.html">Contact</a>
-    </p>
+    </div>
   </footer>
 
   <script>
     const darkToggle = document.getElementById('dark-mode-toggle');
     const body = document.getElementById('page-body');
+    const menuToggle = document.getElementById('mobile-menu');
+    const navList = document.getElementById('nav-list');
 
+    // --- 1. Dark Mode Logic ---
     if (localStorage.getItem('theme') === 'dark') {
       body.classList.add('dark-mode');
-      darkToggle.textContent = '☀️ Light Mode';
+      if(darkToggle) darkToggle.textContent = '☀️ Light Mode';
     }
 
-    darkToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-      const isDark = body.classList.contains('dark-mode');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      darkToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
-    });
+    if (darkToggle) {
+      darkToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        darkToggle.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+      });
+    }
+
+    // --- 2. Mobile Menu Logic ---
+    if (menuToggle && navList) {
+      menuToggle.addEventListener('click', () => {
+        navList.classList.toggle('active');
+        menuToggle.classList.toggle('is-active');
+      });
+    }
   </script>
 
 </body>
 </html>
-
