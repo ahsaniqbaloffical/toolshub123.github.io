@@ -6,8 +6,9 @@
 }
 body.dark-mode { --bg: #050d1a; --card-bg: #112240; --text-primary: #ffffff; }
 
-body { font-family: 'Syne', sans-serif; background-color: var(--bg); color: var(--text-primary); transition: 0.3s; }
+body { font-family: 'Syne', sans-serif; background-color: var(--bg); color: var(--text-primary); transition: 0.3s; line-height: 1.6; }
 
+/* --- HEADER STYLES --- */
 header {
   background: var(--header-bg);
   padding: 15px 5%;
@@ -18,14 +19,14 @@ header {
 }
 header .logo { max-height: 50px; }
 
-/* FIXED NAV STYLES */
+/* --- NAV STYLES --- */
 .header-nav { display: flex; gap: 10px; align-items: center; }
 .header-nav a {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  font-size: 15px; /* Uniform Size */
-  padding: 8px 15px; /* Uniform Spacing */
+  font-size: 15px;
+  padding: 8px 15px;
   transition: 0.3s;
 }
 .header-nav a:hover, .header-nav a.active { color: var(--accent); }
@@ -36,38 +37,67 @@ header .logo { max-height: 50px; }
   font-weight: 700; font-size: 13px; margin-left: 10px;
 }
 
-.hero-banner { background: var(--hero-grad); color: white; text-align: center; padding: 100px 20px; }
-.hero-banner h1 { font-size: 3rem; margin-bottom: 15px; }
-
-.container { max-width: 800px; margin: 40px auto; padding: 0 20px; display: flex; flex-direction: column; gap: 30px; }
-.card { background: var(--card-bg); border-radius: 15px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-.tool-card { text-align: center; }
-.tool-card h2 { color: var(--accent); margin-bottom: 10px; }
-.btn-main { display: inline-block; background: var(--accent); color: white; padding: 12px 30px; border-radius: 6px; text-decoration: none; font-weight: 700; margin-top: 15px; }
-.info-card { text-align: left; }
-.info-card h2 { text-align: center; margin-bottom: 25px; }
-.faq-item strong { display: block; margin-bottom: 5px; color: var(--accent); }
-
-footer { background: var(--header-bg); color: white; text-align: center; padding: 50px 20px; }
-footer a { color: var(--accent); text-decoration: none; margin: 0 10px; }
-
-@media (max-width: 900px) {
-  header { flex-direction: column; gap: 15px; }
-  .header-nav { flex-wrap: wrap; justify-content: center; }
-}
-/* Animation: Transforming Hamburger to X */
-.menu-toggle.is-active .bar:nth-child(2) {
-  opacity: 0; /* Hide middle bar */
-}
-
-.menu-toggle.is-active .bar:nth-child(1) {
-  transform: translateY(8px) rotate(45deg); /* Move top bar down and rotate */
-}
-
-.menu-toggle.is-active .bar:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg); /* Move bottom bar up and rotate */
+/* --- HAMBURGER MENU BUTTON --- */
+.menu-toggle {
+  display: none; /* Hidden on Desktop */
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
 }
 
 .bar {
-  transition: all 0.3s ease-in-out; /* Makes the movement smooth */
+  width: 25px;
+  height: 3px;
+  background-color: white; /* Ensure visible on dark header */
+  transition: all 0.3s ease-in-out;
+  border-radius: 2px;
 }
+
+/* --- MOBILE RESPONSIVE LOGIC --- */
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: flex; /* Show hamburger button */
+  }
+
+  .header-nav {
+    display: none; /* Hide menu by default */
+    flex-direction: column;
+    position: absolute;
+    top: 100%; /* Sits exactly below header */
+    left: 0;
+    width: 100%;
+    background: var(--header-bg);
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    gap: 15px;
+    text-align: center;
+  }
+
+  /* Show menu when .active is added via JS */
+  .header-nav.active {
+    display: flex;
+  }
+
+  .dark-mode-toggle {
+    margin-left: 0;
+    margin-top: 10px;
+    width: fit-content;
+  }
+
+  .hero-banner h1 { font-size: 2.2rem; }
+}
+
+/* --- HAMBURGER TO X ANIMATION --- */
+.menu-toggle.is-active .bar:nth-child(2) { opacity: 0; }
+.menu-toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* --- PAGE CONTENT STYLES --- */
+.hero-banner { background: var(--hero-grad); color: white; text-align: center; padding: 100px 20px; }
+.container { max-width: 900px; margin: 40px auto; padding: 0 20px; display: flex; flex-direction: column; gap: 30px; }
+.card { background: var(--card-bg); border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+.info-card h2 { color: var(--accent); margin-bottom: 20px; }
+.faq-item { margin-bottom: 15px; }
+
+footer { background: var(--header-bg); color: white; text-align: center; padding: 40px 20px; margin-top: 50px; }
+footer a { color: var(--accent); text-decoration: none; margin: 0 10px; font-size: 0.9rem; }
