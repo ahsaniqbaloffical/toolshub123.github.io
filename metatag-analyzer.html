@@ -30,7 +30,7 @@
     </div>
   </section>
 
- <main class="seo-container">
+<main class="seo-container">
     <div class="tool-card">
         <h2>Analyze Your Meta Tags</h2>
         <p style="margin-bottom: 20px;">Paste your HTML source code below (everything between &lt;head&gt; and &lt;/head&gt;) and click Analyze.</p>
@@ -81,6 +81,51 @@
             <ul id="recommendations" class="rec-list" style="list-style: none; padding: 0;"></ul>
 
             <button onclick="downloadReport()" class="tool-btn-secondary" style="margin-top:20px;">Download SEO Audit (CSV)</button>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <h2>Professional SEO Analysis Features</h2>
+        <p>Our Meta Tag Analyzer is designed for webmasters and SEO specialists who need technical precision. Unlike basic counters, we simulate search engine rendering.</p>
+        <ul class="feature-list" style="padding-left: 20px; line-height: 1.8; margin-top: 15px;">
+            <li><strong>Pixel-Perfect Accuracy:</strong> We measure title width in pixels (600px limit) to match Google’s modern desktop display.</li>
+            <li><strong>Social Media Validation:</strong> Instantly check your Open Graph (OG) and Twitter Card data for Facebook and X.</li>
+            <li><strong>Header Consistency:</strong> Automatically compares your Title tag against your H1 tag to ensure keyword relevancy.</li>
+            <li><strong>Duplicate Detection:</strong> Identifies if you accidentally have multiple titles or descriptions which can confuse crawlers.</li>
+            <li><strong>Privacy First:</strong> Your code is processed entirely in your browser. We never store or see your website data.</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h2>What are Meta Tags and Why Do They Matter?</h2>
+        <p>Meta tags are snippets of text that describe a page's content; they don't appear on the page itself, but only in the page's source code. They are essentially little content descriptors that help tell search engines what a web page is about.</p>
+        <div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <h4>Search Engine Optimization</h4>
+                <p>The Meta Title and Description are your "sales pitch" in search results. If they are too long, they get cut off. If they are missing, Google might pick random text from your page.</p>
+            </div>
+            <div>
+                <h4>Click-Through Rate (CTR)</h4>
+                <p>Well-optimized meta tags lead to higher CTR. By using our tool to preview your SERP appearance, you can craft messages that drive more traffic.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <h2>Frequently Asked Questions</h2>
+        <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 15px;">
+            <div class="faq-item">
+                <strong style="color: var(--primary-color);">Q: What is the ideal Meta Title length?</strong>
+                <p>A: While character counts matter (usually 50-60), Google actually measures by pixels. Stay under 600 pixels to ensure your title is fully visible.</p>
+            </div>
+            <div class="faq-item">
+                <strong style="color: var(--primary-color);">Q: Why does the tool say "Parameter Not Found"?</strong>
+                <p>A: This means the specific tag (like a Canonical or OG Image) is missing from the code you pasted. This is often an error that needs fixing for better SEO.</p>
+            </div>
+            <div class="faq-item">
+                <strong style="color: var(--primary-color);">Q: Is an H1 tag part of Meta Tags?</strong>
+                <p>A: Technically no, it's on-page HTML. However, search engines compare the H1 to the Meta Title for consistency, which is why our analyzer checks both.</p>
+            </div>
         </div>
     </div>
 </main>
@@ -237,4 +282,5 @@
 </script>
 </body>
 </html>
+
 
