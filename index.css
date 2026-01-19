@@ -224,3 +224,19 @@ body.dark-mode footer a { color: #00BFA6; }
   .hero p { font-size: 1em; }
   .card { padding: 20px; }
 }
+/* Center and stack tool cards */
+.cards {
+  display: flex;
+  flex-direction: column;   /* stack vertically */
+  align-items: center;      /* center horizontally */
+  gap: 30px;                /* spacing between cards */
+  padding: 40px 20px;
+}
+
+.card {
+  max-width: 600px;         /* keep cards centered and not too wide */
+  width: 100%;
+  text-align: center;       /* center text inside each card */
+}
+
+
